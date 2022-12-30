@@ -1,15 +1,10 @@
 .button {
 
-    -fx-graphic: url("images/imagejeu/startvr.png");
+    -fx-graphic: url("images/imagejeu/retour.png");
      border: none;
 
 
 
 }
 
-.button:hover {
 
-    -fx-graphic: url("images/tokens/token-3-laurel-points.png");
-    border: none;
-
-}

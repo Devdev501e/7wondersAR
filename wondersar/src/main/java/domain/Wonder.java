@@ -46,4 +46,8 @@ public enum Wonder {
 	public String getEffectDescription() {
 		return effectDescription;
 	}
+
+	public String frenchName() {
+		return frenchName;
+	}
 }

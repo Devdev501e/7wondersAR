@@ -8,21 +8,36 @@ import java.util.Scanner;
 public class Actions {
     Scanner sc = new Scanner(System.in);
 
-    public ArrayList<Player> createPlayers(int nbPlayer, ChoiceBox choiceBox, TextField textField, ArrayList<Player> players,ArrayList<String> choicestring) {
-        ArrayList<Card> card=new ArrayList<>();
+    public ArrayList<Player> createPlayers1(int nbPlayer, ChoiceBox choiceBox, TextField textField, ArrayList<Player> players,ArrayList<String> choicestring) {
+      Hand hand = null;
 
-        if (players.size()< nbPlayer) {
-            Wonder wonder = Wonder.valueOf((String) choiceBox.getValue());
-            choicestring.remove( choiceBox.getValue());
+      ArrayList<Card> card=new ArrayList<>();
+      if(players.size()< nbPlayer){
+          Wonder wonder = Wonder.valueOf((String) choiceBox.getValue());
+          choicestring.remove( choiceBox.getValue());
 
-            Player player = new Player(textField.getText(),wonder, new Hand(new ArrayList<>(), new ArrayList<>()),false,card);
-            players.add(player);
+         Player player=new Player(textField.getText(),wonder,hand,false,card);
+          players.add(player);
+         return players;
+      }
+      else{
+       return players;}
 
-            return players;
+    }
+    public ArrayList<Player> createPlayers() {
+        ArrayList<Player> players = new ArrayList<>();
+        int nbPlayers = sc.nextInt();
+
+        for (int i = 0; i < nbPlayers; i++) {
+            System.out.println("Name: ");
+            String name = sc.nextLine();
+
+            System.out.println("Wonder: ");
+            Wonder wonder = Wonder.valueOf(sc.nextLine());
+
+           // players.add(new Player(name,wonder, new ArrayList<>(), false, 0, 0));
         }
-        else {
-            return players;
-        }
+        return players;
     }
 
     public ArrayList<CardDecks> createPlayerDecks(ArrayList<Player> players) {
@@ -53,20 +68,19 @@ public class Actions {
         return cardDecksOptions;
     }
 
-    public Card cardChoice(ArrayList<CardDecks> options, CardDecks mainDeck) {
+    public Card cardChoice(ArrayList<CardDecks> options) {
         int count = 1;
 
         for (CardDecks i : options) {
             System.out.print("[" + count + "] " + i.getCard(0).getFront().cardDisplayName + " ");
             count ++;
         }
+
         System.out.println("[" + count + "] " + "Main");
         int choice = sc.nextInt();
-
-        CardDecks deckChoice;
-        if (choice == 3) { deckChoice = mainDeck; }
-        else { deckChoice = options.get(choice-1); }
-
+        CardDecks deckChoice = null;
+       // if (choice == 3) {deckChoice = mainDeck;}
+        //else {deckChoice = options.get(choice-1);}
         return deckChoice.chooseCard();
     }
 
@@ -86,17 +100,8 @@ public class Actions {
             return canBuild;
         }
         else {
-            int differentPieces = 0;
-            for (int i : player.getHand().getMaterials()) {
-                if ( i != 0) {
-                    differentPieces++;
-                }
-            }
+            int differentPieces = player.getHand().getMaterials().size();
             return differentPieces >= nbResources;
         }
-    }
-
-    public void buildPiece(ConstructionPiece piece, Player player, ArrayList<Card> cardToUse) {
-
     }
 }
