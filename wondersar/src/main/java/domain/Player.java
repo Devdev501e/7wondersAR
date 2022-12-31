@@ -1,5 +1,6 @@
 package domain;
 
+
 import java.util.ArrayList;
 
 public class Player {
@@ -47,6 +48,7 @@ public class Player {
     public ArrayList<Card> getAllPlayerCards() {
         return allPlayerCards;
     }
+
     public void addCard(Card card, ArrayList<Boolean> conflict) {
         allPlayerCards.add(card);
 
@@ -107,5 +109,4 @@ public class Player {
     }
 
 }
-
 
