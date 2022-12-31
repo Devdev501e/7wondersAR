@@ -43,36 +43,39 @@ public class ChoixpersoControleur implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         valider.setVisible(false);
-       retour.setGraphic(icon);
+        retour.setGraphic(icon);
         myChoiceBox.getItems().addAll(NP);//chose box
         myChoiceBox.setOnAction(this::getNumber);
-    valider.setGraphic(icon2);}
+        valider.setGraphic(icon2);
+    }
 
-    public void getNumber(Event event){
-      if(myChoiceBox.getValue()!=null){
-          valider.setVisible(true);
-          number=myChoiceBox.getValue();
-           nombre= Integer.parseInt(number);
-          System.out.println(nombre);
-      }
+    public void getNumber(Event event) {
+        if (myChoiceBox.getValue()!=null) {
+            valider.setVisible(true);
+
+            number = myChoiceBox.getValue();
+            nombre = Integer.parseInt(number);
+        }
     }
 
 
     public void switchScene(Event event)throws IOException{
-        System.out.println(number);
-        if(myChoiceBox.getValue()!=null){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Scene1.fxml"));
-        root=loader.load();
-        Scene1Controleur scene1Controleur=loader.getController();
-        scene1Controleur.number(nombre);
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();}
+        if (myChoiceBox.getValue() != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Scene1.fxml"));
+            root = loader.load();
+
+            Scene1Controleur scene1Controleur=loader.getController();
+            scene1Controleur.number(nombre);
+
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
         }
+    }
 
 
-    public void retour (Event event)throws  IOException{
+    public void retour (Event event) throws  IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
