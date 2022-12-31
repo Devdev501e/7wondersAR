@@ -95,4 +95,8 @@ public class Actions {
             return differentPieces >= nbResources;
         }
     }
+
+    public void buildPiece(ConstructionPiece piece, Player player, ArrayList<Card> cardToUse) {
+
+    }
 }

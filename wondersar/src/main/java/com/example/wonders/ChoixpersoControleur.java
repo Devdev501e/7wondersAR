@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 public class ChoixpersoControleur implements Initializable {
 
    @FXML
-    Button retour;
+   Button retour;
    @FXML
    Button valider;
 
@@ -34,14 +34,14 @@ public class ChoixpersoControleur implements Initializable {
 
     final Image image2 = new Image(getClass().getResourceAsStream("images/imagejeu/valider1.png"));
     final ImageView icon2 = new ImageView(image2);
-    Parent root;
-    String number;
-    int nombre;
+    private Parent root;
+    private String number;
+    private int nombre;
 
 
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize (URL url, ResourceBundle resourceBundle) {
         valider.setVisible(false);
         retour.setGraphic(icon);
         myChoiceBox.getItems().addAll(NP);//chose box
