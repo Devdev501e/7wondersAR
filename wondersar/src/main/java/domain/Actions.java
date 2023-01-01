@@ -8,38 +8,6 @@ import java.util.Scanner;
 public class Actions {
     Scanner sc = new Scanner(System.in);
 
-    public ArrayList<Player> createPlayers1(int nbPlayer, ChoiceBox choiceBox, TextField textField, ArrayList<Player> players,ArrayList<String> choicestring) {
-      Hand hand = null;
-
-      ArrayList<Card> card=new ArrayList<>();
-      if(players.size()< nbPlayer){
-          Wonder wonder = Wonder.valueOf((String) choiceBox.getValue());
-          choicestring.remove( choiceBox.getValue());
-
-         Player player=new Player(textField.getText(),wonder,hand,false,card);
-          players.add(player);
-         return players;
-      }
-      else{
-       return players;}
-
-    }
-    public ArrayList<Player> createPlayers() {
-        ArrayList<Player> players = new ArrayList<>();
-        int nbPlayers = sc.nextInt();
-
-        for (int i = 0; i < nbPlayers; i++) {
-            System.out.println("Name: ");
-            String name = sc.nextLine();
-
-            System.out.println("Wonder: ");
-            Wonder wonder = Wonder.valueOf(sc.nextLine());
-
-           // players.add(new Player(name,wonder, new ArrayList<>(), false, 0, 0));
-        }
-        return players;
-    }
-
     public ArrayList<CardDecks> createPlayerDecks(ArrayList<Player> players) {
         ArrayList<CardDecks> playerDecks = new ArrayList<>();
         for (Player i : players) {
@@ -68,6 +36,30 @@ public class Actions {
         return cardDecksOptions;
     }
 
+    public Material getMaterialType(int number) {
+        Material material = null;
+
+        switch (number) {
+            case 0:
+                material = Material.Wood;
+                break;
+            case 1:
+                material = Material.Paper;
+                break;
+            case 2:
+                material = Material.Brick;
+                break;
+            case 3:
+                material = Material.Stone;
+                break;
+            case 4:
+                material = Material.Glass;
+                break;
+        }
+
+        return material;
+    }
+
     public Card cardChoice(ArrayList<CardDecks> options) {
         int count = 1;
 
@@ -90,7 +82,7 @@ public class Actions {
 
         if (isEqual) {
             boolean canBuild = false;
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 5; i++) {
                 int samePieces = player.getHand().getMaterials().get(i) + player.getHand().getMaterials().get(5);
                 if (samePieces >= nbResources) {
                     canBuild = true;
@@ -100,8 +92,88 @@ public class Actions {
             return canBuild;
         }
         else {
-            int differentPieces = player.getHand().getMaterials().size();
+            int differentPieces = 0;
+            for (int i = 0; i < 5; i++) {
+                differentPieces = (player.getHand().getMaterials().get(i) != 0)? differentPieces++:differentPieces;
+            }
+            differentPieces += player.getHand().getMaterials().get(5);
             return differentPieces >= nbResources;
         }
+    }
+
+    public void buildPiece(ConstructionPiece piece, Player player) {
+        piece.setComplete(true);
+
+        int nbResources = piece.getNbPieces();
+        boolean isEqual = piece.isEqual();
+
+        ArrayList<Card> cardsToRemove = new ArrayList<>();
+
+        if (isEqual) {
+            int max = 0;
+            int intMaterial = 0;
+            Material material;
+
+            for (int i = 0; i < 5; i++) {
+                if (max < player.getHand().getMaterials().get(i)) {
+                    max = player.getHand().getMaterials().get(i);
+                    intMaterial = i;
+                }
+            }
+
+            int nbGold = nbResources - max;
+            player.getHand().getMaterials().add(5, player.getHand().getMaterials().get(5)-nbGold);
+
+            material = getMaterialType(intMaterial);
+            player.getHand().getMaterials().add(intMaterial, 0);
+
+            int j = 0;
+            for (Card i : player.getAllPlayerCards()) {
+                if (i.getFront().material == material) {
+                    cardsToRemove.add(i);
+                }
+                if (j < nbGold) {
+                    if (i.getFront().material == Material.Gold) {
+                        cardsToRemove.add(i);
+                        j++;
+                    }
+                }
+            }
+            player.getAllPlayerCards().removeAll(cardsToRemove);
+        }
+        else {
+            ArrayList<Integer> intMaterialToRemove = new ArrayList<>();
+            ArrayList<Material> materialToRemove = new ArrayList<>();
+
+            for (int i = 0; i < 5; i++) {
+                if (player.getHand().getMaterials().get(i) != 0) {
+                    intMaterialToRemove.add(i);
+                    player.getHand().getMaterials().add(i, player.getHand().getMaterials().get(i)-1);
+                }
+            }
+            int nbGold = nbResources - intMaterialToRemove.size();
+            player.getHand().getMaterials().add(5, player.getHand().getMaterials().get(5)-nbGold);
+
+            for (int i : intMaterialToRemove) {
+                materialToRemove.add(getMaterialType(i));
+            }
+
+            int j = 0;
+            for (Card i : player.getAllPlayerCards()) {
+                if (materialToRemove.contains(i.getFront().material)) {
+                    cardsToRemove.add(i);
+                    materialToRemove.remove(i.getFront().material);
+                }
+                if (j < nbGold) {
+                    if (i.getFront().material == Material.Gold) {
+                        cardsToRemove.add(i);
+                        j++;
+                    }
+                }
+            }
+            player.getAllPlayerCards().removeAll(cardsToRemove);
+
+        }
+
     }
 }

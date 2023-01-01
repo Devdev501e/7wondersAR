@@ -1,10 +1,10 @@
 package domain;
 
 public enum Material {
-	Wood, //
-	Paper, //
-	Brick, //
-	Stone, // 
-	Glass, //
-	Gold; //
+	Wood, //0
+	Paper, //1
+	Brick, //2
+	Stone, // 3
+	Glass, //4
+	Gold; //5
 }
