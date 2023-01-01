@@ -21,25 +21,22 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MenuControleur implements Initializable {
-   @FXML
-    Button button;
     @FXML
-    ImageView imageView;
+    private Button button;
     @FXML
-    Label label;
-
-    Image myimage;
+    private ImageView imageView;
     @FXML
-    Button instruction;
-    Scene scene;
-    Stage stage;
-    final Image image = new Image(getClass().getResourceAsStream("images/imagejeu/startvr.png"));
-    final Image image2 = new Image(getClass().getResourceAsStream("images/imagejeu/instruction.png"));
-    final ImageView start = new ImageView(image);
-    final ImageView intruction = new ImageView(image2);
+    private Label label;
 
-
-
+    private Image myimage;
+    @FXML
+    private Button instruction;
+    private Scene scene;
+    private Stage stage;
+    private final Image image = new Image(getClass().getResourceAsStream("images/imagejeu/startvr.png"));
+    private final Image image2 = new Image(getClass().getResourceAsStream("images/imagejeu/instruction.png"));
+    private final ImageView start = new ImageView(image);
+    private final ImageView intruction = new ImageView(image2);
 
     public void button(Event event) throws IOException {
      Parent root = FXMLLoader.load(getClass().getResource("ChoixPerso.fxml"));

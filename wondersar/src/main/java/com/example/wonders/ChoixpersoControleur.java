@@ -18,22 +18,21 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ChoixpersoControleur implements Initializable {
-
-   @FXML
-   Button retour;
-   @FXML
-   Button valider;
+    @FXML
+    private Button retour;
+    @FXML
+    private Button valider;
 
     @FXML
     public ChoiceBox<String> myChoiceBox;
     public String[] NP ={"2","3","4","5","6","7"};
-    Stage stage;
-    Scene scene;
-    final Image image = new Image(getClass().getResourceAsStream("images/imagejeu/retour.png"));
-    final ImageView icon = new ImageView(image);
+    private Stage stage;
+    private Scene scene;
+    private final Image image = new Image(getClass().getResourceAsStream("images/imagejeu/retour.png"));
+    private final ImageView icon = new ImageView(image);
 
-    final Image image2 = new Image(getClass().getResourceAsStream("images/imagejeu/valider1.png"));
-    final ImageView icon2 = new ImageView(image2);
+    private final Image image2 = new Image(getClass().getResourceAsStream("images/imagejeu/valider1.png"));
+    private final ImageView icon2 = new ImageView(image2);
     private Parent root;
     private String number;
     private int nombre;
@@ -44,9 +43,10 @@ public class ChoixpersoControleur implements Initializable {
     public void initialize (URL url, ResourceBundle resourceBundle) {
         valider.setVisible(false);
         retour.setGraphic(icon);
+        valider.setGraphic(icon2);
+
         myChoiceBox.getItems().addAll(NP);//chose box
         myChoiceBox.setOnAction(this::getNumber);
-        valider.setGraphic(icon2);
     }
 
     public void getNumber(Event event) {
