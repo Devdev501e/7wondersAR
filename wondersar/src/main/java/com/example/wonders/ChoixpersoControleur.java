@@ -19,12 +19,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class ChoixpersoControleur implements Initializable {
     @FXML
     private Button retour;
     @FXML
     private Button valider;
+    @FXML
+    private Button startGame;
 
     @FXML
     public ChoiceBox<String> myChoiceBox;
@@ -51,6 +54,7 @@ public class ChoixpersoControleur implements Initializable {
     @Override
     public void initialize (URL url, ResourceBundle resourceBundle) {
         nameTextField.setVisible(false);
+        startGame.setVisible(false);
         retour.setGraphic(icon);
         valider.setGraphic(icon2);
 
@@ -77,26 +81,44 @@ public class ChoixpersoControleur implements Initializable {
         System.out.println(wonderChoice);
     }
 
-    public void onConfirmButton(Event event) throws IOException{
+    public void onConfirmButton() {
         String name = nameTextField.getText();
         players.add(new Player(name, wonderChoice, new Hand(new ArrayList<>(), new ArrayList<>()),false, new ArrayList<>()));
+        myChoiceBox.getItems().remove(wonderChoice.displayName);
         System.out.println(players);
+
+        nameTextField.setText("");
+
         if (players.size() == nombre) {
-            //user proofing
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Scene2.fxml"));
-            root = loader.load();
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            valider.setVisible(false);
+            startGame.setVisible(true);
         }
 
     }
 
-    public void switchScene(Event event)throws IOException{
-
+    public void switchScene()throws IOException{
         if (myChoiceBox.getValue() != null) {
+            //initialize game
+            Actions actions = new Actions();
 
+            CardDecks mainDeck = new CardDecks("Main");
+            mainDeck.shuffleDeck();
+
+            ProgressTokens progressTokens = new ProgressTokens();
+
+            Conflict conflict = new Conflict(players.size());
+
+            ArrayList<CardDecks> playerDecks = actions.createPlayerDecks(players);
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("..."));//"game.fxml"
+            Stage stage = (Stage) valider.getScene().getWindow();
+            Scene scene = new Scene(loader.load());
+
+            GameController gameController = loader.getController();
+            gameController.startTurn(players, mainDeck, playerDecks, conflict, progressTokens, 0);
+
+            stage.setScene(scene);
+            stage.show();
         }
     }
 
