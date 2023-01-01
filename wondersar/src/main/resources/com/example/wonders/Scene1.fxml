@@ -32,11 +32,11 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <ChoiceBox prefWidth="150.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <ChoiceBox fx:id="wonderChoiceBox" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets top="-100.0" />
          </GridPane.margin>
       </ChoiceBox>
-      <TextField maxHeight="-Infinity" maxWidth="-Infinity" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+      <TextField fx:id="nameTextField" maxHeight="-Infinity" maxWidth="-Infinity" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
    </children>
 </GridPane>

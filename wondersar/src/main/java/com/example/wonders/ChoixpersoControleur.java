@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -26,6 +27,13 @@ public class ChoixpersoControleur implements Initializable {
     @FXML
     public ChoiceBox<String> myChoiceBox;
     public String[] NP ={"2","3","4","5","6","7"};
+
+    @FXML
+    private TextField nameTextField;
+    @FXML
+    private ChoiceBox<String> wonderChoiceBox;
+    String[] wonderNames = {"Alexandrie", "Halicarnasse", "Ephese", "Olympie", "Babylone", "Rhodes", "Gizeh"};
+
     private Stage stage;
     private Scene scene;
     private final Image image = new Image(getClass().getResourceAsStream("images/imagejeu/retour.png"));
@@ -47,6 +55,9 @@ public class ChoixpersoControleur implements Initializable {
 
         myChoiceBox.getItems().addAll(NP);//chose box
         myChoiceBox.setOnAction(this::getNumber);
+
+        wonderChoiceBox.getItems().addAll(wonderNames);
+
     }
 
     public void getNumber(Event event) {
