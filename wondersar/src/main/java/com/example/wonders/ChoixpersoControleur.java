@@ -1,5 +1,6 @@
 package com.example.wonders;
 
+import domain.*;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ChoixpersoControleur implements Initializable {
@@ -30,8 +32,6 @@ public class ChoixpersoControleur implements Initializable {
 
     @FXML
     private TextField nameTextField;
-    @FXML
-    private ChoiceBox<String> wonderChoiceBox;
     String[] wonderNames = {"Alexandrie", "Halicarnasse", "Ephese", "Olympie", "Babylone", "Rhodes", "Gizeh"};
 
     private Stage stage;
@@ -42,33 +42,51 @@ public class ChoixpersoControleur implements Initializable {
     private final Image image2 = new Image(getClass().getResourceAsStream("images/imagejeu/valider1.png"));
     private final ImageView icon2 = new ImageView(image2);
     private Parent root;
-    private String number;
     private int nombre;
+    private Wonder wonderChoice;
+    private ArrayList<Player> players = new ArrayList<>();
 
 
 
     @Override
     public void initialize (URL url, ResourceBundle resourceBundle) {
         valider.setVisible(false);
+        nameTextField.setVisible(false);
         retour.setGraphic(icon);
         valider.setGraphic(icon2);
 
         myChoiceBox.getItems().addAll(NP);//chose box
         myChoiceBox.setOnAction(this::getNumber);
 
-        wonderChoiceBox.getItems().addAll(wonderNames);
-
     }
 
     public void getNumber(Event event) {
         if (myChoiceBox.getValue()!=null) {
-            valider.setVisible(true);
+            nombre = Integer.parseInt(myChoiceBox.getValue());
 
-            number = myChoiceBox.getValue();
-            nombre = Integer.parseInt(number);
+            nameTextField.setVisible(true);
+            myChoiceBox.setValue(null);
+            myChoiceBox.getItems().removeAll(NP);
+            myChoiceBox.getItems().addAll(wonderNames);
+
+            myChoiceBox.setOnAction(this::getWonderChoice);
         }
     }
 
+    public void getWonderChoice(Event event) {
+        wonderChoice = Wonder.valueOf(myChoiceBox.getValue());
+        System.out.println(wonderChoice);
+    }
+
+    public void onConfirmButton() {
+        String name = nameTextField.getText();
+        players.add(new Player(name, wonderChoice, new Hand(new ArrayList<>(), new ArrayList<>()),false, new ArrayList<>()));
+
+        if (players.size() == nombre) {
+            //user proofing
+        }
+
+    }
 
     public void switchScene(Event event)throws IOException{
         if (myChoiceBox.getValue() != null) {

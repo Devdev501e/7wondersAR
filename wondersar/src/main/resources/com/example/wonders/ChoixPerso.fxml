@@ -23,8 +23,7 @@
             <Image url="@images/imagejeu/fond5.png" />
          </image>
       </ImageView>
-      <ChoiceBox fx:id="myChoiceBox" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-      <ChoiceBox fx:id="wonderChoiceBox" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <ChoiceBox fx:id="myChoiceBox" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
           <GridPane.margin>
               <Insets top="-100.0" />
           </GridPane.margin>
