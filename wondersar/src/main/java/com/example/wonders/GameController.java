@@ -13,7 +13,7 @@ public class GameController {
         player = players.get(turn);
 
         ArrayList<CardDecks> options = actions.cardDecksOption(allPlayerDecks, turn);
-        Card newCard = actions.cardChoice(options);
+        Card newCard = actions.cardChoice(player, options, mainDeck);
         player.addCard(newCard, conflict.getAllConflicts());
     }
 }

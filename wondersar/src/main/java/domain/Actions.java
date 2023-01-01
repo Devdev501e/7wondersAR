@@ -60,7 +60,7 @@ public class Actions {
         return material;
     }
 
-    public Card cardChoice(ArrayList<CardDecks> options) {
+    public Card cardChoice(Player player, ArrayList<CardDecks> options, CardDecks mainDeck) {
         int count = 1;
 
         for (CardDecks i : options) {
@@ -68,11 +68,17 @@ public class Actions {
             count ++;
         }
 
-        System.out.println("[" + count + "] " + "Main");
+        if (player.getChat()) {
+            System.out.println("[" + count + "] " + mainDeck.getCard(0).getFront().cardDisplayName);
+        }
+        else {
+            System.out.println("[" + count + "] " + "Main");
+        }
+
         int choice = sc.nextInt();
         CardDecks deckChoice = null;
-       // if (choice == 3) {deckChoice = mainDeck;}
-        //else {deckChoice = options.get(choice-1);}
+        if (choice == 3) {deckChoice = mainDeck;}
+        else {deckChoice = options.get(choice-1);}
         return deckChoice.chooseCard();
     }
 
