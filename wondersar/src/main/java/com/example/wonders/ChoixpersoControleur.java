@@ -50,7 +50,6 @@ public class ChoixpersoControleur implements Initializable {
 
     @Override
     public void initialize (URL url, ResourceBundle resourceBundle) {
-        valider.setVisible(false);
         nameTextField.setVisible(false);
         retour.setGraphic(icon);
         valider.setGraphic(icon2);
@@ -78,28 +77,26 @@ public class ChoixpersoControleur implements Initializable {
         System.out.println(wonderChoice);
     }
 
-    public void onConfirmButton() {
+    public void onConfirmButton(Event event) throws IOException{
         String name = nameTextField.getText();
         players.add(new Player(name, wonderChoice, new Hand(new ArrayList<>(), new ArrayList<>()),false, new ArrayList<>()));
-
+        System.out.println(players);
         if (players.size() == nombre) {
             //user proofing
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Scene2.fxml"));
+            root = loader.load();
+            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
         }
 
     }
 
     public void switchScene(Event event)throws IOException{
+
         if (myChoiceBox.getValue() != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Scene1.fxml"));
-            root = loader.load();
 
-            Scene1Controleur scene1Controleur=loader.getController();
-            scene1Controleur.number(nombre);
-
-            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
         }
     }
 
