@@ -104,6 +104,7 @@ public class Player {
                 break;
         }
     }
+
     public void useCard(Card card) {
         allPlayerCards.remove(card);
     }

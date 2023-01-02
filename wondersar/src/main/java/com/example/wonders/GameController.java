@@ -15,34 +15,43 @@ public class GameController {
     private Button buttonLeftDeck;
     @FXML
     private Button buttonRightDeck;
+    Card leftDeckCard;
     private ImageView leftDeckCardImage = new ImageView();
+    Card rightDeckCard;
     private ImageView rightDeckCardImage = new ImageView();
+    Card mainDeckCard;
     private ImageView mainDeckImage = new ImageView();
 
     private Player player;
     private Actions actions = new Actions();
+    Conflict conflict;
+    ArrayList<CardDecks> allAvailablePlayerDecks;
+    CardDecks mainCardDeck;
 
 
     public void startTurn(ArrayList<Player> players, CardDecks mainDeck, ArrayList<CardDecks> allPlayerDecks,
-                          Conflict conflict, ProgressTokens res, int turn) {
+                          Conflict conflictTokens, ProgressTokens res, int turn) {
         player = players.get(turn);
+        conflict = conflictTokens;
+        allAvailablePlayerDecks.addAll(allPlayerDecks);
+        mainCardDeck = mainDeck;
 
         ArrayList<CardDecks> options = actions.cardDecksOption(allPlayerDecks, turn);
 
         //Card choice info
-        CardType leftDeckCard = options.get(0).getCard(0).front;
-        Image leftDeckCardPNG = new Image(getClass().getResourceAsStream(leftDeckCard.imageResource));
+        leftDeckCard = options.get(0).getCard(0);
+        Image leftDeckCardPNG = new Image(getClass().getResourceAsStream(leftDeckCard.front.imageResource));
 
         leftDeckCardImage.setImage(leftDeckCardPNG);
         buttonLeftDeck.setGraphic(leftDeckCardImage);
 
-        CardType rightDeckCard = options.get(1).getCard(0).front;
-        Image rightDeckCardPNG = new Image(getClass().getResourceAsStream(rightDeckCard.imageResource));
+        rightDeckCard = options.get(1).getCard(0);
+        Image rightDeckCardPNG = new Image(getClass().getResourceAsStream(rightDeckCard.front.imageResource));
 
         rightDeckCardImage.setImage(rightDeckCardPNG);
         buttonRightDeck.setGraphic(rightDeckCardImage);
 
-        Card mainDeckCard = mainDeck.getCard(0);
+        mainDeckCard = mainDeck.getCard(0);
         Image mainDeckFrontPNG = new Image(getClass().getResourceAsStream(mainDeckCard.front.imageResource));
         Image mainDeckBackPNG = new Image(getClass().getResourceAsStream(mainDeckCard.back.imageResource));
 
@@ -59,14 +68,17 @@ public class GameController {
     }
 
     public void onButtonLeftDeck() {
-
+        player.addCard(leftDeckCard, conflict.getAllConflicts());
+        allAvailablePlayerDecks.get(0).chooseCard();
     }
 
     public void onButtonRightDeck() {
-
+        player.addCard(rightDeckCard, conflict.getAllConflicts());
+        allAvailablePlayerDecks.get(1).chooseCard();
     }
 
     public void onButtonMainDeck() {
-
+        player.addCard(mainDeckCard, conflict.getAllConflicts());
+        mainCardDeck.chooseCard();
     }
 }
