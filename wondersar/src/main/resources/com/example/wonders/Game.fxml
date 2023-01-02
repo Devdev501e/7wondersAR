@@ -6,22 +6,10 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wonders.GameController">
    <children>
-      <ImageView fitHeight="578.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/imagejeu/gamescreen.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="133.0" fitWidth="78.0" layoutX="351.0" layoutY="139.0" onDragDetected="#onButtonMainDeck" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/cards/card-back/card-back-question.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="133.0" fitWidth="78.0" layoutX="48.0" layoutY="345.0" onDragDetected="#onButtonLeftDeck" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/cards/card-back/card-back-question.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="133.0" fitWidth="78.0" layoutX="683.0" layoutY="345.0" onDragDetected="#onButtonRightDeck" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="578.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true"/>
+      <ImageView fitHeight="133.0" fitWidth="78.0" layoutX="351.0" layoutY="139.0" onMouseClicked="#onButtonMainDeck" pickOnBounds="true" preserveRatio="true"/>
+      <ImageView fitHeight="133.0" fitWidth="78.0" layoutX="48.0" layoutY="345.0" onMouseClicked="#onButtonLeftDeck" pickOnBounds="true" preserveRatio="true"/>
+      <ImageView fitHeight="133.0" fitWidth="78.0" layoutX="683.0" layoutY="345.0" onMouseClicked="#onButtonRightDeck" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/cards/card-back/card-back-question.png" />
          </image>

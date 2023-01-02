@@ -36,7 +36,7 @@ public class ChoixpersoControleur implements Initializable {
 
     @FXML
     private TextField nameTextField;
-
+    String[] wonderNames = {"Alexandrie", "Halicarnasse", "Ephese", "Olympie", "Babylone", "Rhodes", "Gizeh"};
     ArrayList<String> wonderName=new ArrayList<>();
 
     private Stage stage;
@@ -112,13 +112,16 @@ public class ChoixpersoControleur implements Initializable {
         CardDecks mainDeck = new CardDecks("Main");
         mainDeck.shuffleDeck();
 
-        ProgressTokens progressTokens = new ProgressTokens();
-        Conflict conflict = new Conflict(players.size());
+        ArrayList<CardDecks> playerDecks = new ArrayList<>();
 
-        ArrayList<CardDecks> allDecks=new ArrayList<>();
-        allDecks.add(mainDeck);
+        for (Player i : players) {
+            String wonder = i.getWonder().getDisplayName();
 
-        ArrayList<CardDecks> playerDecks = actions.createPlayerDecks(players,allDecks);
+            CardDecks cardDecks = new CardDecks(wonder);
+            cardDecks.shuffleDeck();
+
+            playerDecks.add(cardDecks);
+        }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Game.fxml"));
         root=loader.load();
@@ -127,7 +130,7 @@ public class ChoixpersoControleur implements Initializable {
 
 
         GameController gameController = new GameController();
-        gameController.startTurn(players,playerDecks, conflict, progressTokens, 0);
+        gameController.startTurn(players, mainDeck, playerDecks, 0);
 
         stage.setScene(scene);
         stage.show();

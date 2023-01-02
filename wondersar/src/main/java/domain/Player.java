@@ -50,7 +50,7 @@ public class Player {
     }
 
     public void addCard(Card card, ArrayList<Boolean> conflict) {
-        allPlayerCards.add(card);
+        this.allPlayerCards.add(card);
 
         switch (card.getFront().getCardCategory()) {
             case WarCard:

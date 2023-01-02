@@ -20,6 +20,6 @@ public enum CardBack {
 	private CardBack(Wonder wonderDeck, String imageResource) {
 		this.centralDeck = (wonderDeck == null);
 		this.wonderDeck = wonderDeck;
-		this.imageResource = "images/cards/" + imageResource;
+		this.imageResource = imageResource;
 	}
 }

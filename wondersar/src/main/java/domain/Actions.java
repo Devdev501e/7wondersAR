@@ -6,21 +6,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Actions {
-    Scanner sc = new Scanner(System.in);
-
-    public ArrayList<CardDecks> createPlayerDecks(ArrayList<Player> players, ArrayList<CardDecks>playerDecks) {
-
-        for (Player i : players) {
-            String wonder = i.getWonder().getDisplayName();
-
-            CardDecks cardDecks = new CardDecks(wonder);
-            cardDecks.shuffleDeck();
-
-            playerDecks.add(cardDecks);
-        }
-
-        return playerDecks;
-    }
 
     public ArrayList<CardDecks> cardDecksOption(ArrayList<CardDecks> playerDecks, int playerPosition) {
         ArrayList<CardDecks> cardDecksOptions = new ArrayList<>();
@@ -58,28 +43,6 @@ public class Actions {
         }
 
         return material;
-    }
-
-    public Card cardChoice(Player player, ArrayList<CardDecks> options, CardDecks mainDeck) {
-        int count = 1;
-
-        for (CardDecks i : options) {
-            System.out.print("[" + count + "] " + i.getCard(0).getFront().cardDisplayName + " ");
-            count ++;
-        }
-
-        if (player.getChat()) {
-            System.out.println("[" + count + "] " + mainDeck.getCard(0).getFront().cardDisplayName);
-        }
-        else {
-            System.out.println("[" + count + "] " + "Main");
-        }
-
-        int choice = sc.nextInt();
-        CardDecks deckChoice;
-        if (choice == 3) {deckChoice = mainDeck;}
-        else {deckChoice = options.get(choice-1);}
-        return deckChoice.chooseCard();
     }
 
     public boolean canBuildPiece(ConstructionPiece piece, Player player) {
