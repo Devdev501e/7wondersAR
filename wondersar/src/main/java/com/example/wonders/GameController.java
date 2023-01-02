@@ -16,14 +16,14 @@ public class GameController {
     @FXML
     private Button buttonRightDeck;
     Card leftDeckCard;
-    private ImageView leftDeckCardImage = new ImageView();
+    private final ImageView leftDeckCardImage = new ImageView();
     Card rightDeckCard;
-    private ImageView rightDeckCardImage = new ImageView();
+    private final ImageView rightDeckCardImage = new ImageView();
     Card mainDeckCard;
-    private ImageView mainDeckImage = new ImageView();
+    private final ImageView mainDeckImage = new ImageView();
 
     private Player player;
-    private Actions actions = new Actions();
+    private final Actions actions = new Actions();
     Conflict conflict;
     ArrayList<CardDecks> allAvailablePlayerDecks;
     CardDecks mainCardDeck;
