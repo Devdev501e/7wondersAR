@@ -8,8 +8,8 @@ import java.util.Scanner;
 public class Actions {
     Scanner sc = new Scanner(System.in);
 
-    public ArrayList<CardDecks> createPlayerDecks(ArrayList<Player> players) {
-        ArrayList<CardDecks> playerDecks = new ArrayList<>();
+    public ArrayList<CardDecks> createPlayerDecks(ArrayList<Player> players, ArrayList<CardDecks>playerDecks) {
+
         for (Player i : players) {
             String wonder = i.getWonder().getDisplayName();
 
