@@ -108,26 +108,26 @@ public class ChoixpersoControleur implements Initializable {
     }
 
     public void switchScene(Event event)throws IOException{
+        //initialize game
+        CardDecks mainDeck = new CardDecks("Main");
+        mainDeck.shuffleDeck();
 
+        ProgressTokens progressTokens = new ProgressTokens();
+        Conflict conflict = new Conflict(players.size());
 
-            //initialize game
+        ArrayList<CardDecks> playerDecks = actions.createPlayerDecks(players);
 
-
-            CardDecks mainDeck = new CardDecks("Main");
-            mainDeck.shuffleDeck();ProgressTokens progressTokens = new ProgressTokens();
-            Conflict conflict = new Conflict(players.size());
-
-            ArrayList<CardDecks> playerDecks = actions.createPlayerDecks(players);
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Game.fxml"));
-            root=loader.load();
-            GameController gameController = loader.getController();
-            gameController.startTurn(players, mainDeck, playerDecks, conflict, progressTokens, 0);
-
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Game.fxml"));
+        root=loader.load();
         stage = (javafx.stage.Stage) ((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+        scene = new Scene(root);
 
+
+        GameController gameController = loader.getController();
+        gameController.startTurn(players, mainDeck, playerDecks, conflict, progressTokens, 0);
+
+        stage.setScene(scene);
+        stage.show();
         }
 
 

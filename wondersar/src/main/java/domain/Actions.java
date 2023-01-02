@@ -76,7 +76,7 @@ public class Actions {
         }
 
         int choice = sc.nextInt();
-        CardDecks deckChoice = null;
+        CardDecks deckChoice;
         if (choice == 3) {deckChoice = mainDeck;}
         else {deckChoice = options.get(choice-1);}
         return deckChoice.chooseCard();
