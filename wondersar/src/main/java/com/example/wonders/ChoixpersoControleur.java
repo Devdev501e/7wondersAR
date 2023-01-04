@@ -111,6 +111,7 @@ public class ChoixpersoControleur implements Initializable {
         //initialize game
         CardDecks mainDeck = new CardDecks("Main");
         mainDeck.shuffleDeck();
+        Conflict conflict = new Conflict(players.size());
 
         ArrayList<CardDecks> playerDecks = new ArrayList<>();
 
@@ -130,7 +131,7 @@ public class ChoixpersoControleur implements Initializable {
 
 
         GameController gameController = loader.getController();
-        gameController.startTurn(players, mainDeck, playerDecks, 0);
+        gameController.startTurn(players, mainDeck, playerDecks, conflict, 0);
 
         stage.setScene(scene);
         stage.show();

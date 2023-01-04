@@ -15,17 +15,19 @@ public class GameController {
     Card rightDeckCard;
     Card mainDeckCard;
     @FXML
-    ImageView mainDeckImage = new ImageView();
+    private ImageView mainDeckImage = new ImageView();
     @FXML
-    ImageView leftDeckCardImage = new ImageView();
+    private ImageView leftDeckCardImage = new ImageView();
     @FXML
-    ImageView rightDeckCardImage = new ImageView();
+    private ImageView rightDeckCardImage = new ImageView();
     @FXML
     private Label cardCountMain;
     @FXML
     private Label cardCountLeft;
     @FXML
     private Label cardCountRight;
+    @FXML
+    private Label playerName;
 
     private final Image mainDeckBackPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/cards/card-back/card-back-question.png")));
 
@@ -36,11 +38,12 @@ public class GameController {
     CardDecks mainDeck;
 
 
-    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<CardDecks> allPlayerDecks, int turn) {
+    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<CardDecks> allPlayerDecks, Conflict conflictList, int turn) {
         //initialize game
         player = players.get(turn);
-        System.out.println(player.getName());
+        playerName.setText(player.getName());
 
+        conflict = conflictList;
         mainDeck = mainCardDeck;
 
         playerDecks.addAll(allPlayerDecks);
