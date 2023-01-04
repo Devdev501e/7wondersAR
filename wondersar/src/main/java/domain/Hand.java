@@ -3,8 +3,8 @@ package domain;
 import java.util.ArrayList;
 
 public class Hand {
-    private ArrayList<Integer> science = new ArrayList<>();
-    private ArrayList<Integer> materials = new ArrayList<>();
+    private ArrayList<Integer> science;
+    private ArrayList<Integer> materials;
     private int pointVictoire;
     private int shieldWar;
 

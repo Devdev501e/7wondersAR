@@ -36,7 +36,6 @@ public class ChoixpersoControleur implements Initializable {
 
     @FXML
     private TextField nameTextField;
-    String[] wonderNames = {"Alexandrie", "Halicarnasse", "Ephese", "Olympie", "Babylone", "Rhodes", "Gizeh"};
     ArrayList<String> wonderName=new ArrayList<>();
 
     private Stage stage;
@@ -51,9 +50,8 @@ public class ChoixpersoControleur implements Initializable {
     private final ImageView icon3 = new ImageView(image3);
     private Parent root;
     private int nombre;
-    private Wonder wonderChoice;
+    private String wonderChoice;
     private ArrayList<Player> players = new ArrayList<>();
-    Actions actions = new Actions();
 
 
 
@@ -85,19 +83,18 @@ public class ChoixpersoControleur implements Initializable {
     }
 
     public void getWonderChoice(Event event) {
-        wonderChoice = Wonder.valueOf(myChoiceBox.getValue());
-        System.out.println(wonderChoice);
+        wonderChoice = myChoiceBox.getValue();
     }
 
     public void onConfirmButton() {
         String name = nameTextField.getText();
-        players.add(new Player(name, wonderChoice, new Hand(new ArrayList<>(), new ArrayList<>()),false, new ArrayList<>()));
+        players.add(new Player(name, Wonder.valueOf(wonderChoice), new Hand(new ArrayList<>(3), new ArrayList<>(6)),false, new ArrayList<>()));
 
 
-        myChoiceBox.getItems().remove(wonderChoice.displayName);
-        System.out.println(players);
+        myChoiceBox.getItems().remove(wonderChoice);
 
         nameTextField.setText("");
+        myChoiceBox.setValue("");
 
         if (players.size() == nombre) {
             startGame.setGraphic(icon3);
