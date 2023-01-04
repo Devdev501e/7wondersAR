@@ -129,7 +129,7 @@ public class ChoixpersoControleur implements Initializable {
         scene = new Scene(root);
 
 
-        GameController gameController = new GameController();
+        GameController gameController = loader.getController();
         gameController.startTurn(players, mainDeck, playerDecks, 0);
 
         stage.setScene(scene);

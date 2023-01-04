@@ -3,6 +3,7 @@ package com.example.wonders;
 import domain.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -19,6 +20,12 @@ public class GameController {
     ImageView leftDeckCardImage = new ImageView();
     @FXML
     ImageView rightDeckCardImage = new ImageView();
+    @FXML
+    private Label cardCountMain;
+    @FXML
+    private Label cardCountLeft;
+    @FXML
+    private Label cardCountRight;
 
     private final Image mainDeckBackPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/cards/card-back/card-back-question.png")));
 
@@ -44,23 +51,24 @@ public class GameController {
         leftDeckCard = options.get(0).getCard(0);
         Image leftDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(leftDeckCard.front.imageResource)));
         leftDeckCardImage.setImage(leftDeckCardPNG);
+        cardCountLeft.setText("Cards: "+options.get(0).cardDeckSize());
 
 
         rightDeckCard = options.get(1).getCard(0);
         Image rightDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(rightDeckCard.front.imageResource)));
         rightDeckCardImage.setImage(rightDeckCardPNG);
+        cardCountRight.setText("Cards: "+options.get(1).cardDeckSize());
 
         mainDeckCard = mainDeck.getCard(0);
         Image mainDeckFrontPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(mainDeckCard.front.imageResource)));
 
-        System.out.println(player.getChat());
         if (player.getChat()) {
             mainDeckImage.setImage(mainDeckFrontPNG);
         }
         else {
-            System.out.println("you are here");
             mainDeckImage.setImage(mainDeckBackPNG);
         }
+        cardCountMain.setText("Cards: "+mainDeck.cardDeckSize());
     }
 
     public void onButtonLeftDeck() {
