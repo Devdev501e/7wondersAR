@@ -4,6 +4,7 @@ import domain.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -14,6 +15,8 @@ public class GameController {
     Card leftDeckCard;
     Card rightDeckCard;
     Card mainDeckCard;
+    @FXML
+    private Tab tab2 = new Tab();
     @FXML
     private ImageView mainDeckImage = new ImageView();
     @FXML
@@ -34,7 +37,7 @@ public class GameController {
     private Player player;
     private final Actions actions = new Actions();
     Conflict conflict;
-    ArrayList<CardDecks> playerDecks = new ArrayList<>();
+    ArrayList<CardDecks> options = new ArrayList<>();
     CardDecks mainDeck;
 
 
@@ -42,13 +45,12 @@ public class GameController {
         //initialize game
         player = players.get(turn);
         playerName.setText(player.getName());
+        tab2.setText(player.getName());
 
         conflict = conflictList;
         mainDeck = mainCardDeck;
 
-        playerDecks.addAll(allPlayerDecks);
-
-        ArrayList<CardDecks> options = actions.cardDecksOption(playerDecks, turn);
+        options = actions.cardDecksOption(allPlayerDecks, turn);
 
         //Card choice info
         leftDeckCard = options.get(0).getCard(0);
@@ -75,20 +77,33 @@ public class GameController {
     }
 
     public void onButtonLeftDeck() {
-        System.out.println("left");
         player.addCard(leftDeckCard, conflict.getAllConflicts());
-        playerDecks.get(0).chooseCard();
+        options.get(0).chooseCard();
+
+        cardCountLeft.setText("Cards: "+options.get(0).cardDeckSize());
+        for (Card i : player.getAllPlayerCards()) {
+            System.out.println(i.front.cardDisplayName);
+        }
     }
 
     public void onButtonRightDeck() {
         System.out.println("right");
-        //player.addCard(rightDeckCard, conflict.getAllConflicts());
-        playerDecks.get(1).chooseCard();
+        player.addCard(rightDeckCard, conflict.getAllConflicts());
+        options.get(1).chooseCard();
+
+        cardCountRight.setText("Cards: "+options.get(1).cardDeckSize());
+        for (Card i : player.getAllPlayerCards()) {
+            System.out.println(i.front.cardDisplayName);
+        }
     }
 
     public void onButtonMainDeck() {
         player.getAllPlayerCards().add(mainDeckCard);
         mainDeck.chooseCard();
-        System.out.println("main");
+
+        cardCountMain.setText("Cards: "+mainDeck.cardDeckSize());
+        for (Card i : player.getAllPlayerCards()) {
+            System.out.println(i.front.cardDisplayName);
+        }
     }
 }

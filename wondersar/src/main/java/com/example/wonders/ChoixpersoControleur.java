@@ -124,7 +124,7 @@ public class ChoixpersoControleur implements Initializable {
             playerDecks.add(cardDecks);
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Game.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gameView.fxml"));
         root=loader.load();
         stage = (javafx.stage.Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

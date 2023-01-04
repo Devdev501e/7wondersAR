@@ -11,35 +11,35 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wonders.GameController">
   <tabs>
-    <Tab text="La table">
+    <Tab fx:id="tab1" text="La table">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="800.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="591.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="playerRightImage" fitHeight="150.0" fitWidth="200.0" layoutX="591.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/imagejeu/silhouette.png" />
                      </image>
                   </ImageView>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c67409" height="285.0" layoutY="235.0" stroke="TRANSPARENT" strokeType="INSIDE" width="800.0" />
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="59.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="playerLeftImage" fitHeight="150.0" fitWidth="200.0" layoutX="59.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/imagejeu/silhouette.png" />
                      </image>
                   </ImageView>
                   <Ellipse fill="#c67409" layoutX="400.0" layoutY="230.0" radiusX="400.0" radiusY="150.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                  <ImageView fitHeight="128.0" fitWidth="99.0" layoutX="599.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="rightDeckCardImage" fitHeight="128.0" fitWidth="99.0" layoutX="599.0" layoutY="316.0" onMouseClicked="#onButtonRightDeck" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-back/card-back-question.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="combat3" fitHeight="19.0" fitWidth="21.0" layoutX="469.0" layoutY="251.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="combat3" fitHeight="19.0" fitWidth="21.0" layoutX="469.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/tokens/token-conflict-peace.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="combat2" fitHeight="19.0" fitWidth="21.0" layoutX="442.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="combat2" fitHeight="19.0" fitWidth="21.0" layoutX="442.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/tokens/token-conflict-peace.png" />
                      </image>
@@ -49,12 +49,12 @@
                         <Image url="@images/tokens/token-conflict-peace.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="combat4" fitHeight="19.0" fitWidth="21.0" layoutX="442.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="combat4" fitHeight="19.0" fitWidth="21.0" layoutX="442.0" layoutY="291.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/tokens/token-conflict-peace.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="combat6" fitHeight="19.0" fitWidth="21.0" layoutX="442.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="combat6" fitHeight="19.0" fitWidth="21.0" layoutX="442.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/tokens/token-conflict-peace.png" />
                      </image>
@@ -64,43 +64,46 @@
                         <Image url="@images/tokens/token-conflict-peace.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="359.0" layoutY="461.0" text="Player">
+                  <Label fx:id="playerName" layoutX="359.0" layoutY="461.0" text="Player">
                      <font>
                         <Font size="31.0" />
                      </font>
                   </Label>
-                  <Label layoutX="125.0" layoutY="120.0" text="Player">
+                  <Label fx:id="playerLeftName" layoutX="125.0" layoutY="120.0" text="Player">
                      <font>
                         <Font size="28.0" />
                      </font>
                   </Label>
-                  <Label layoutX="591.0" layoutY="120.0" text="Player">
+                  <Label fx:id="playerRightName" layoutX="591.0" layoutY="120.0" text="Player">
                      <font>
                         <Font size="28.0" />
                      </font>
                   </Label>
-                  <Label layoutX="72.0" layoutY="156.0" prefHeight="17.0" prefWidth="66.0" text="Material: " />
-                  <Label layoutX="170.0" layoutY="156.0" prefHeight="17.0" prefWidth="83.0" text="Science: " />
-                  <Label layoutX="92.0" layoutY="173.0" prefHeight="17.0" prefWidth="104.0" text="Shields: " />
-                  <Label layoutX="543.0" layoutY="165.0" prefHeight="17.0" prefWidth="66.0" text="Material: " />
-                  <Label layoutX="655.0" layoutY="165.0" prefHeight="17.0" prefWidth="83.0" text="Science: " />
-                  <Label layoutX="591.0" layoutY="187.0" prefHeight="17.0" prefWidth="104.0" text="Shields: " />
-                  <ImageView fitHeight="128.0" fitWidth="99.0" layoutX="118.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
+                  <Label fx:id="playerLeftMaterial" layoutX="72.0" layoutY="156.0" prefHeight="17.0" prefWidth="66.0" text="Material: " />
+                  <Label fx:id="playerLeftScience" layoutX="170.0" layoutY="156.0" prefHeight="17.0" prefWidth="83.0" text="Science: " />
+                  <Label fx:id="playerLeftShields" layoutX="92.0" layoutY="173.0" prefHeight="17.0" prefWidth="104.0" text="Shields: " />
+                  <Label fx:id="playerRightMaterial" layoutX="543.0" layoutY="165.0" prefHeight="17.0" prefWidth="66.0" text="Material: " />
+                  <Label fx:id="playerRightScience" layoutX="655.0" layoutY="165.0" prefHeight="17.0" prefWidth="83.0" text="Science: " />
+                  <Label fx:id="playerRightShields" layoutX="591.0" layoutY="187.0" prefHeight="17.0" prefWidth="104.0" text="Shields: " />
+                  <ImageView fx:id="leftDeckCardImage" fitHeight="128.0" fitWidth="99.0" layoutX="118.0" layoutY="316.0" onMouseClicked="#onButtonLeftDeck" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-back/card-back-question.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="128.0" fitWidth="99.0" layoutX="339.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="mainDeckImage" fitHeight="128.0" fitWidth="99.0" layoutX="339.0" layoutY="226.0" onMouseClicked="#onButtonMainDeck" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-back/card-back-question.png" />
                      </image>
                   </ImageView>
+                  <Label fx:id="cardCountLeft" layoutX="192.0" layoutY="444.0" text="Label" />
+                  <Label fx:id="cardCountMain" layoutX="413.0" layoutY="354.0" text="Label" />
+                  <Label fx:id="cardCountRight" layoutX="673.0" layoutY="444.0" text="Label" />
                </children></AnchorPane>
       </content>
     </Tab>
-    <Tab>
+    <Tab fx:id="tab2">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <AnchorPane fx:id="field2" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="209.0" layoutX="-2.0" layoutY="314.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
                   <Label layoutX="12.0" layoutY="321.0" text="Player Hand">
@@ -108,147 +111,144 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="91.0" fitWidth="67.0" layoutX="723.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="paperImage" fitHeight="91.0" fitWidth="67.0" layoutX="723.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-material-brick-women.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="91.0" fitWidth="67.0" layoutX="723.0" layoutY="321.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="brickImage" fitHeight="91.0" fitWidth="67.0" layoutX="723.0" layoutY="321.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-material-brick-women.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="91.0" fitWidth="67.0" layoutX="652.0" layoutY="321.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="glassImage" fitHeight="91.0" fitWidth="67.0" layoutX="652.0" layoutY="321.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-material-brick-women.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="91.0" fitWidth="67.0" layoutX="578.0" layoutY="321.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="stoneImage" fitHeight="91.0" fitWidth="67.0" layoutX="578.0" layoutY="321.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-material-brick-women.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="91.0" fitWidth="67.0" layoutX="652.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="woodImage" fitHeight="91.0" fitWidth="67.0" layoutX="652.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-material-brick-women.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="91.0" fitWidth="67.0" layoutX="578.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="goldImage" fitHeight="91.0" fitWidth="67.0" layoutX="578.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-material-brick-women.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="91.0" fitWidth="67.0" layoutX="479.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="lawImage" fitHeight="91.0" fitWidth="67.0" layoutX="479.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-material-brick-women.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="91.0" fitWidth="67.0" layoutX="409.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="mechanicImage" fitHeight="91.0" fitWidth="67.0" layoutX="409.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-material-brick-women.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="91.0" fitWidth="67.0" layoutX="338.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="architectImage" fitHeight="91.0" fitWidth="67.0" layoutX="338.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-material-brick-women.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="91.0" fitWidth="67.0" layoutX="217.0" layoutY="321.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="emperorImage" fitHeight="91.0" fitWidth="67.0" layoutX="217.0" layoutY="321.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-material-brick-women.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="91.0" fitWidth="67.0" layoutX="142.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="womanImage" fitHeight="91.0" fitWidth="67.0" layoutX="142.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-material-brick-women.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="91.0" fitWidth="67.0" layoutX="255.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="archerImage" fitHeight="91.0" fitWidth="67.0" layoutX="255.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-material-brick-women.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="91.0" fitWidth="67.0" layoutX="186.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="barbarionImage" fitHeight="91.0" fitWidth="67.0" layoutX="186.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-material-brick-women.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="91.0" fitWidth="67.0" layoutX="118.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="centurionImage" fitHeight="91.0" fitWidth="67.0" layoutX="118.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-material-brick-women.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="32.0" fitWidth="34.0" layoutX="89.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="militaryImage" fitHeight="32.0" fitWidth="34.0" layoutX="89.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/tokens/token-3-laurel-points.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="145.0" fitWidth="66.0" layoutX="28.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="catImage" fitHeight="145.0" fitWidth="66.0" layoutX="28.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/tokens/token-cat.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="186.0" layoutY="354.0" text="15" />
-                  <Label layoutX="266.0" layoutY="354.0" text="15" />
-                  <Label layoutX="166.0" layoutY="456.0" text="15" />
-                  <Label layoutX="235.0" layoutY="456.0" text="15" />
-                  <Label layoutX="304.0" layoutY="456.0" text="15" />
-                  <Label layoutX="385.0" layoutY="354.0" text="15" />
-                  <Label layoutX="458.0" layoutY="354.0" text="15" />
-                  <Label layoutX="528.0" layoutY="354.0" text="15" />
-                  <Label layoutX="623.0" layoutY="354.0" text="15" />
-                  <Label layoutX="701.0" layoutY="354.0" text="15" />
-                  <Label layoutX="765.0" layoutY="355.0" text="15" />
-                  <Label layoutX="623.0" layoutY="456.0" text="15" />
-                  <Label layoutX="701.0" layoutY="456.0" text="15" />
-                  <Label layoutX="765.0" layoutY="456.0" text="15" />
-                  <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="335.0" layoutY="431.0" pickOnBounds="true" preserveRatio="true">
+                  <Label fx:id="womanCount" layoutX="186.0" layoutY="354.0" />
+                  <Label fx:id="emperorCount" layoutX="266.0" layoutY="354.0" />
+                  <Label fx:id="centurionCount" layoutX="166.0" layoutY="456.0" />
+                  <Label fx:id="barbarionCount" layoutX="235.0" layoutY="456.0" />
+                  <Label fx:id="archerCount" layoutX="304.0" layoutY="456.0" />
+                  <Label fx:id="stoneCount" layoutX="623.0" layoutY="354.0" />
+                  <Label fx:id="glassCount" layoutX="701.0" layoutY="354.0" />
+                  <Label fx:id="brickCount" layoutX="765.0" layoutY="355.0" />
+                  <Label fx:id="goldCount" layoutX="623.0" layoutY="456.0" />
+                  <Label fx:id="woodCount" layoutX="701.0" layoutY="456.0" />
+                  <Label fx:id="paperCount" layoutX="765.0" layoutY="456.0" />
+                  <ImageView fx:id="token1" fitHeight="35.0" fitWidth="34.0" layoutX="335.0" layoutY="431.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/tokens-progress/token-architecture.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="381.0" layoutY="431.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="token2" fitHeight="35.0" fitWidth="34.0" layoutX="381.0" layoutY="431.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/tokens-progress/token-architecture.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="431.0" layoutY="431.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="token3" fitHeight="35.0" fitWidth="34.0" layoutX="431.0" layoutY="431.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/tokens-progress/token-architecture.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="479.0" layoutY="431.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="token4" fitHeight="35.0" fitWidth="34.0" layoutX="479.0" layoutY="431.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/tokens-progress/token-architecture.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="524.0" layoutY="431.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="token5" fitHeight="35.0" fitWidth="34.0" layoutX="524.0" layoutY="431.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/tokens-progress/token-architecture.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="358.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="token6" fitHeight="35.0" fitWidth="34.0" layoutX="358.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/tokens-progress/token-architecture.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="406.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="token7" fitHeight="35.0" fitWidth="34.0" layoutX="406.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/tokens-progress/token-architecture.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="454.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="token8" fitHeight="35.0" fitWidth="34.0" layoutX="454.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/tokens-progress/token-architecture.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="35.0" fitWidth="34.0" layoutX="501.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="token9" fitHeight="35.0" fitWidth="34.0" layoutX="501.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/tokens-progress/token-architecture.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="114.0" layoutY="359.0" text="15" />
-                  <Button layoutX="708.0" layoutY="282.0" mnemonicParsing="false" text="End of Turn" />
+                  <Label fx:id="militaryCount" layoutX="114.0" layoutY="359.0" />
+                  <Button fx:id="buttonEnd" layoutX="708.0" layoutY="282.0" mnemonicParsing="false" text="End of Turn" />
                </children></AnchorPane>
       </content>
     </Tab>
