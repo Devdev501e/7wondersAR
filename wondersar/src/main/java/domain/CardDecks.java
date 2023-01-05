@@ -63,11 +63,9 @@ public class CardDecks {
 		return cardDeck.get(position);
 	}
 
-	public Card chooseCard() {
-		Card card = cardDeck.get(0);
-		cardDeck.remove(card);
-		cardDeck.trimToSize();
-		return card;
+	public void chooseCard() {
+		Card card = this.cardDeck.get(0);
+		this.cardDeck.remove(card);
 	}
 
 	public static class CardTypeQuantity {

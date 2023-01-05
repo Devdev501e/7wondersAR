@@ -28,13 +28,13 @@ public class GameController {
     @FXML
     private Label cardCountMain;
     @FXML
-    private Label cardCountLeft;
+    Label cardCountLeft;
     @FXML
     private Label cardCountRight;
     @FXML
     private Label playerName;
     @FXML
-    private ChoiceBox<String> allPlayers;
+    private ChoiceBox<String> allPlayerNames;
     private final Image mainDeckBackPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/cards/card-back/card-back-question.png")));
 
     // --------------------------------------------player view
@@ -130,6 +130,8 @@ public class GameController {
     ArrayList<CardDecks> options = new ArrayList<>();
     CardDecks mainDeck;
 
+    ArrayList<Player> allPlayers = new ArrayList<>();
+
 
 
 
@@ -138,8 +140,8 @@ public class GameController {
         for (Player i : players) {
             playerNames.add(i.getName());
         }
-        allPlayers.getItems().addAll(playerNames);
-
+        allPlayerNames.getItems().addAll(playerNames);
+        allPlayers.addAll(players);
         player = players.get(turn);
         playerName.setText(player.getName());
 
@@ -176,9 +178,23 @@ public class GameController {
         playerNameTab.setText("No one selected yet ! Please use the choice box");
     }
 
+    public void onPlayerNames() {
+        String name = allPlayerNames.getValue();
+        Player playerView = null;
+        for (Player i : allPlayers) {
+            if (i.getName().equals(name)) {
+                playerView  = i;
+                break;
+            }
+        }
+
+        playerNameTab.setText(playerView.getName());
+        tab2.setText(playerView.getName());
+    }
+
     public void onButtonLeftDeck() {
         player.addCard(leftDeckCard, conflict.getAllConflicts());
-        options.get(0).chooseCard();
+        options.get(0).cardDeckSize();
 
         cardCountLeft.setText("Cards: "+options.get(0).cardDeckSize());
         for (Card i : player.getAllPlayerCards()) {

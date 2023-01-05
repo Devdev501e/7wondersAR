@@ -99,7 +99,7 @@
                   <Label fx:id="cardCountLeft" layoutX="192.0" layoutY="444.0" text="Label" />
                   <Label fx:id="cardCountMain" layoutX="413.0" layoutY="354.0" text="Label" />
                   <Label fx:id="cardCountRight" layoutX="673.0" layoutY="444.0" text="Label" />
-                  <ChoiceBox fx:id="allPlayers" layoutX="636.0" layoutY="484.0" prefWidth="150.0" />
+                  <ChoiceBox fx:id="allPlayerNames" layoutX="636.0" layoutY="484.0" prefWidth="150.0" />
                </children></AnchorPane>
       </content>
     </Tab>
