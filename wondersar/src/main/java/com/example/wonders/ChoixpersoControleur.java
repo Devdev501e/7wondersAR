@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -36,6 +37,11 @@ public class ChoixpersoControleur implements Initializable {
 
     @FXML
     private TextField nameTextField;
+    @FXML
+    Label labelBox;
+    @FXML
+    Label labelTextefield;
+    @FXML
     ArrayList<String> wonderName=new ArrayList<>();
 
     private Stage stage;
@@ -55,6 +61,7 @@ public class ChoixpersoControleur implements Initializable {
 
 
 
+
     @Override
     public void initialize (URL url, ResourceBundle resourceBundle) {
         nameTextField.setVisible(false);
@@ -70,6 +77,7 @@ public class ChoixpersoControleur implements Initializable {
     public void getNumber(Event event) {
         if (myChoiceBox.getValue()!=null) {
             nombre = Integer.parseInt(myChoiceBox.getValue());
+            labelBox.setText("Vous avez choisi "+nombre+" joueur ");
             for (Wonder wonders:Wonder.values()){
                 wonderName.add(wonders.getDisplayName());
             }
@@ -83,14 +91,18 @@ public class ChoixpersoControleur implements Initializable {
     }
 
     public void getWonderChoice(Event event) {
+
         wonderChoice = myChoiceBox.getValue();
+
     }
 
     public void onConfirmButton() {
         String name = nameTextField.getText();
         players.add(new Player(name, Wonder.valueOf(wonderChoice), new Hand(new ArrayList<>(3), new ArrayList<>(6)),false, new ArrayList<>()));
 
-
+        for(int i=0;i< players.size();i++){
+            labelTextefield.setText(players.get(i).getName()+ "  "+players.get(i).getWonder());
+        }
         myChoiceBox.getItems().remove(wonderChoice);
 
         nameTextField.setText("");

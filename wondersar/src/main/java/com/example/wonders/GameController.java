@@ -193,6 +193,7 @@ public class GameController {
     }
 
     public void onButtonLeftDeck() {
+        System.out.println(options.get(1));
         player.addCard(leftDeckCard, conflict.getAllConflicts());
         options.get(0).cardDeckSize();
 

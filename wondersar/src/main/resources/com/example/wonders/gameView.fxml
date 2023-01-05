@@ -256,6 +256,36 @@
                         <Font size="29.0" />
                      </font>
                   </Label>
+                  <ImageView fitHeight="53.0" fitWidth="200.0" layoutX="307.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/wonders/babylon/piece-back-babylon-3.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="38.0" fitWidth="163.0" layoutX="328.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/wonders/babylon/piece-back-babylon-4.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="46.0" fitWidth="200.0" layoutX="309.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/wonders/babylon/piece-back-babylon-1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="43.0" fitWidth="188.0" layoutX="312.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/wonders/babylon/piece-back-babylon-2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="71.0" fitWidth="64.0" layoutX="343.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/wonders/babylon/piece-back-babylon-5.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="40.0" fitWidth="93.0" layoutX="400.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/wonders/babylon/piece-back-babylon-6.png" />
+                     </image>
+                  </ImageView>
                </children></AnchorPane>
       </content>
     </Tab>
