@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wonders.GameController">
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wonders.GameController">
   <tabs>
     <Tab fx:id="tab1" text="La table">
       <content>
@@ -98,6 +99,7 @@
                   <Label fx:id="cardCountLeft" layoutX="192.0" layoutY="444.0" text="Label" />
                   <Label fx:id="cardCountMain" layoutX="413.0" layoutY="354.0" text="Label" />
                   <Label fx:id="cardCountRight" layoutX="673.0" layoutY="444.0" text="Label" />
+                  <ChoiceBox fx:id="allPlayers" layoutX="636.0" layoutY="484.0" prefWidth="150.0" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -105,8 +107,8 @@
       <content>
         <AnchorPane fx:id="field2" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="209.0" layoutX="-2.0" layoutY="314.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
-                  <Label layoutX="12.0" layoutY="321.0" text="Player Hand">
+                  <Rectangle fx:id="playerHandOutline" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="209.0" layoutX="-2.0" layoutY="314.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
+                  <Label fx:id="playerHand" layoutX="12.0" layoutY="321.0" text="Player Hand">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -171,7 +173,7 @@
                         <Image url="@images/cards/card-material-brick-women.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="barbarionImage" fitHeight="91.0" fitWidth="67.0" layoutX="186.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="barbarianImage" fitHeight="91.0" fitWidth="67.0" layoutX="186.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-material-brick-women.png" />
                      </image>
@@ -194,7 +196,7 @@
                   <Label fx:id="womanCount" layoutX="186.0" layoutY="354.0" />
                   <Label fx:id="emperorCount" layoutX="266.0" layoutY="354.0" />
                   <Label fx:id="centurionCount" layoutX="166.0" layoutY="456.0" />
-                  <Label fx:id="barbarionCount" layoutX="235.0" layoutY="456.0" />
+                  <Label fx:id="barbarianCount" layoutX="235.0" layoutY="456.0" />
                   <Label fx:id="archerCount" layoutX="304.0" layoutY="456.0" />
                   <Label fx:id="stoneCount" layoutX="623.0" layoutY="354.0" />
                   <Label fx:id="glassCount" layoutX="701.0" layoutY="354.0" />
@@ -249,6 +251,11 @@
                   </ImageView>
                   <Label fx:id="militaryCount" layoutX="114.0" layoutY="359.0" />
                   <Button fx:id="buttonEnd" layoutX="708.0" layoutY="282.0" mnemonicParsing="false" text="End of Turn" />
+                  <Label fx:id="playerNameTab" alignment="CENTER" layoutY="6.0" prefHeight="17.0" prefWidth="800.0" text="Label">
+                     <font>
+                        <Font size="29.0" />
+                     </font>
+                  </Label>
                </children></AnchorPane>
       </content>
     </Tab>
