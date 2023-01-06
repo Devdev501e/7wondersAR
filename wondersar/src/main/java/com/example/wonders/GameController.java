@@ -319,7 +319,6 @@ public class GameController {
     }
 
     public void onButtonLeftDeck() {
-        System.out.println(options.get(1));
         player.addCard(leftDeckCard, conflict.getAllConflicts());
         options.get(0).chooseCard();
 
@@ -331,7 +330,6 @@ public class GameController {
     }
 
     public void onButtonRightDeck() {
-        System.out.println("right");
         player.addCard(rightDeckCard, conflict.getAllConflicts());
         options.get(1).chooseCard();
 
