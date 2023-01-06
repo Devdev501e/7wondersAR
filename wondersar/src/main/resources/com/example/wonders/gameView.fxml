@@ -133,11 +133,7 @@
                         <Image url="@images/wonders/babylon/piece-back-babylon-4.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="construction1" fitHeight="46.0" fitWidth="200.0" layoutX="309.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/wonders/babylon/piece-back-babylon-1.png" />
-                     </image>
-                  </ImageView>
+                  <ImageView fx:id="construction1" fitHeight="46.0" fitWidth="200.0" layoutX="309.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="construction2" fitHeight="43.0" fitWidth="188.0" layoutX="312.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/wonders/babylon/piece-back-babylon-2.png" />

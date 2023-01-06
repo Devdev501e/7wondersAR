@@ -26,6 +26,8 @@ public class GameController {
     @FXML
     private ImageView mainDeckImage = new ImageView();
     @FXML
+    private ImageView construction1;
+    @FXML
     private ImageView leftDeckCardImage = new ImageView();
     @FXML
     private ImageView rightDeckCardImage = new ImageView();
@@ -331,6 +333,22 @@ public class GameController {
         playerHandOutline.setVisible(true);
         playerHand.setText(playerView.getName()+"'s Hand");
         //for cat image
+        switch (playerView.getWonder()){
+            case Alexandrie:
+                ConstImage constImage = ConstImage.AlexandrieBack;
+                System.out.println(constImage.getCons1());
+                Image cons1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getCons1())));
+
+                construction1.setImage(cons1);
+
+                break;
+            case Babylone:
+            case Rhodes:
+            case Halicarnasse:
+            case Gizeh:
+            case Olympie:
+            case Ephese:
+        }
         if (playerView.getChat()) {
             catImage.setImage(catPNG);
         }
