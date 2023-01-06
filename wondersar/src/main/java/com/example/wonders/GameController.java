@@ -25,8 +25,12 @@ public class GameController {
     // --------------------------------------------table view
     @FXML
     private ImageView mainDeckImage = new ImageView();
-    @FXML
-    private ImageView construction1;
+    @FXML private ImageView construction1;
+    @FXML private ImageView construction2;
+    @FXML private ImageView construction3;
+    @FXML private ImageView construction4;
+    @FXML private ImageView construction5;
+
     @FXML
     private ImageView leftDeckCardImage = new ImageView();
     @FXML
@@ -367,13 +371,179 @@ public class GameController {
                 ConstImage constImage = ConstImage.AlexandrieBack;
                 System.out.println(constImage.getCons1());
                 Image cons1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getCons1())));
-
                 construction1.setImage(cons1);
+                construction1.setLayoutX(309);
+                construction1.setLayoutY(270);
+                construction1.setFitWidth(200);
+                construction1.setFitHeight(46);
+                construction1.setX(0);
+                construction1.setY(0);
 
+                System.out.println(constImage.getCons2());
+                Image cons2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getCons2())));
+                construction2.setImage(cons2);
+                construction2.setLayoutX(363);
+                construction2.setLayoutY(226);
+                construction2.setFitWidth(92);
+                construction2.setFitHeight(52);
+                construction2.setX(0);
+                construction2.setY(0);
+
+                System.out.println(constImage.getCons3());
+                Image cons3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getCons3())));
+                construction3.setImage(cons3);
+                construction3.setLayoutX(362);
+                construction3.setLayoutY(172);
+                construction3.setFitWidth(96);
+                construction3.setFitHeight(54);
+                construction3.setX(0);
+                construction3.setY(0);
+
+                System.out.println(constImage.getCons4());
+                Image cons4 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getCons4())));
+                construction4.setImage(cons4);
+                construction4.setLayoutX(376);
+                construction4.setLayoutY(118);
+                construction4.setFitWidth(84);
+                construction4.setFitHeight(56);
+                construction4.setX(0);
+                construction4.setY(0);
+
+                System.out.println(constImage.getCons5());
+                Image cons5 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getCons5())));
+                construction5.setImage(cons5);
+                construction5.setLayoutX(386);
+                construction5.setLayoutY(46);
+                construction5.setFitWidth(206);
+                construction5.setFitHeight(80);
+                construction5.setX(0);
+                construction5.setY(0);
                 break;
             case Babylone:
+                ConstImage constImageB = ConstImage.BabylonBack;
+                System.out.println(constImageB.getCons1());
+                Image cons1B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getCons1())));
+                construction1.setImage(cons1B);
+                construction1.setLayoutX(310);
+                construction1.setLayoutY(225);
+                construction1.setFitWidth(206);
+                construction1.setFitHeight(38);
+                construction1.setX(0);
+                construction1.setY(0);
+                construction1.setScaleX(1);
+                construction1.setScaleY(1);
+                construction1.setScaleZ(1);
+                construction1.setPreserveRatio(true);
+
+                System.out.println(constImageB.getCons2());
+                Image cons2B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getCons2())));
+                construction2.setImage(cons2B);
+                construction2.setLayoutX(312);
+                construction2.setLayoutY(184);
+                construction2.setFitWidth(188);
+                construction2.setFitHeight(43);
+                construction2.setX(0);
+                construction2.setY(0);
+                construction2.setScaleX(1);
+                construction2.setScaleY(1);
+                construction2.setScaleZ(1);
+                construction2.setPreserveRatio(true);
+
+                System.out.println(constImageB.getCons3());
+                Image cons3B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getCons3())));
+                construction3.setImage(cons3B);
+                construction3.setLayoutX(328);
+                construction3.setLayoutY(148);
+
+                construction3.setFitWidth(163);
+                construction3.setFitHeight(38);
+                construction3.setX(0);
+                construction3.setY(0);
+                construction3.setScaleX(1);
+                construction3.setScaleY(1);
+                construction3.setScaleZ(1);
+                construction3.setPreserveRatio(true);
+
+                System.out.println(constImageB.getCons4());
+                Image cons4B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getCons4())));
+                construction4.setImage(cons4B);
+                construction4.setLayoutX(420);
+                construction4.setLayoutY(100);
+                construction4.setFitWidth(100);
+                construction4.setFitHeight(60);
+                construction4.setX(0);
+                construction4.setY(0);
+                construction4.setScaleX(1);
+                construction4.setScaleY(1);
+                construction4.setScaleZ(1);
+                construction4.setPreserveRatio(true);
+
+                System.out.println(constImageB.getCons5());
+                Image cons5B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getCons5())));
+                construction5.setImage(cons5B);
+                construction5.setLayoutX(343);
+                construction5.setLayoutY(80);
+                construction5.setFitWidth(64);
+                construction5.setFitHeight(71);
+                construction5.setX(0);
+                construction5.setY(0);
+                construction5.setScaleX(1);
+                construction5.setScaleY(1);
+                construction5.setScaleZ(1);
+                construction5.setPreserveRatio(true);
             case Rhodes:
             case Halicarnasse:
+                ConstImage constImageH = ConstImage.Halicarnasse;
+                System.out.println(constImageH.getCons1());
+                Image cons1H = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageH.getCons1())));
+                construction1.setImage(cons1H);
+                construction1.setLayoutX(284);
+                construction1.setLayoutY(281);
+                construction1.setFitWidth(229);
+                construction1.setFitHeight(27);
+                construction1.setX(0);
+                construction1.setY(0);
+
+                System.out.println(constImageH.getCons2());
+                Image cons2H = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageH.getCons2())));
+                construction2.setImage(cons2H);
+                construction2.setLayoutX(290);
+                construction2.setLayoutY(221);
+                construction2.setFitWidth(182);
+                construction2.setFitHeight(61);
+                construction2.setX(0);
+                construction2.setY(0);
+
+                System.out.println(constImageH.getCons3());
+                Image cons3H = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageH.getCons3())));
+                construction3.setImage(cons3H);
+                construction3.setLayoutX(284);
+                construction3.setLayoutY(158);
+                construction3.setFitWidth(83);
+                construction3.setFitHeight(81);
+                construction3.setX(0);
+                construction3.setY(0);
+
+                System.out.println(constImageH.getCons4());
+                Image cons4H = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageH.getCons4())));
+                construction4.setImage(cons4H);
+                construction4.setLayoutX(398);
+                construction4.setLayoutY(158);
+                construction4.setFitWidth(83);
+                construction4.setFitHeight(81);
+                construction4.setX(0);
+                construction4.setY(0);
+
+                System.out.println(constImageH.getCons5());
+                Image cons5H = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageH.getCons5())));
+                construction5.setImage(cons5H);
+                construction5.setLayoutX(298);
+                construction5.setLayoutY(60);
+                construction5.setFitWidth(169);
+                construction5.setFitHeight(98);
+                construction5.setX(0);
+                construction5.setY(0);
+                break;
             case Gizeh:
             case Olympie:
             case Ephese:
