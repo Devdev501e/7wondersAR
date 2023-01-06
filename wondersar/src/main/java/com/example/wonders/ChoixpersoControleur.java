@@ -42,6 +42,10 @@ public class ChoixpersoControleur implements Initializable {
     @FXML
     Label labelTextefield;
     @FXML
+    Label labelinfo;
+    @FXML
+    Label labelinfo2;
+    @FXML
     ArrayList<String> wonderName=new ArrayList<>();
 
     private Stage stage;
@@ -75,7 +79,10 @@ public class ChoixpersoControleur implements Initializable {
     }
 
     public void getNumber(Event event) {
+        labelinfo.setText("Wonders :");
+        labelinfo2.setText("Name : ");
         if (myChoiceBox.getValue()!=null) {
+
             nombre = Integer.parseInt(myChoiceBox.getValue());
             labelBox.setText("Vous avez choisi "+nombre+" joueur ");
             for (Wonder wonders:Wonder.values()){
@@ -97,11 +104,12 @@ public class ChoixpersoControleur implements Initializable {
     }
 
     public void onConfirmButton() {
+
         String name = nameTextField.getText();
         players.add(new Player(name, Wonder.valueOf(wonderChoice), new Hand(new ArrayList<>(3), new ArrayList<>(6)),false, new ArrayList<>()));
 
         for(int i=0;i< players.size();i++){
-            labelTextefield.setText(players.get(i).getName()+ "  "+players.get(i).getWonder());
+            labelTextefield.setText(players.get(i).getName()+ " \n"+players.get(i).getWonder());
         }
         myChoiceBox.getItems().remove(wonderChoice);
 
