@@ -31,36 +31,12 @@
                         <Image url="@images/cards/card-back/card-back-question.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="combat3" fitHeight="19.0" fitWidth="21.0" layoutX="469.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/tokens/token-conflict-peace.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="combat2" fitHeight="19.0" fitWidth="21.0" layoutX="442.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/tokens/token-conflict-peace.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="combat1" fitHeight="19.0" fitWidth="21.0" layoutX="442.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/tokens/token-conflict-peace.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="combat4" fitHeight="19.0" fitWidth="21.0" layoutX="442.0" layoutY="291.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/tokens/token-conflict-peace.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="combat6" fitHeight="19.0" fitWidth="21.0" layoutX="442.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/tokens/token-conflict-peace.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="combat5" fitHeight="19.0" fitWidth="21.0" layoutX="469.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/tokens/token-conflict-peace.png" />
-                     </image>
-                  </ImageView>
+                  <ImageView fx:id="combat3" fitHeight="19.0" fitWidth="21.0" layoutX="469.0" layoutY="252.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="combat2" fitHeight="19.0" fitWidth="21.0" layoutX="442.0" layoutY="261.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="combat1" fitHeight="19.0" fitWidth="21.0" layoutX="442.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="combat4" fitHeight="19.0" fitWidth="21.0" layoutX="442.0" layoutY="291.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="combat6" fitHeight="19.0" fitWidth="21.0" layoutX="442.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="combat5" fitHeight="19.0" fitWidth="21.0" layoutX="469.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true" />
                   <Label fx:id="playerName" layoutX="359.0" layoutY="461.0" text="Player">
                      <font>
                         <Font size="31.0" />
