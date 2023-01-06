@@ -8,12 +8,14 @@ public class Hand {
     private int[] materials = new int[6];
     private int pointVictoire;
     private int shieldWar;
+    private int militaryPoints;
 
     public Hand () {
         Arrays.fill(materials, 0);
         Arrays.fill(science, 0);
         this.pointVictoire = 0;
         this.shieldWar = 0;
+        this.militaryPoints = 0;
     }
 
     public void setShieldWar(int shieldWar) {
@@ -28,6 +30,13 @@ public class Hand {
     }
     public void setPointVictoire(int pointVictoire) {
         this.pointVictoire = pointVictoire;
+    }
+
+    public int getMilitaryPoints() {
+        return militaryPoints;
+    }
+    public void setMilitaryPoints(int militaryPoints) {
+        this.militaryPoints = militaryPoints;
     }
 
     public int[] getMaterials() {

@@ -1,6 +1,7 @@
 package com.example.wonders;
 
 import domain.*;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -48,8 +49,10 @@ public class GameController {
     private Label playerHand;
     @FXML
     private ImageView catImage = new ImageView();
+    private Image catPNG = new Image(getClass().getResourceAsStream("images/tokens/token-cat.png"));
     @FXML
     private ImageView militaryImage = new ImageView();
+    private Image militaryPNG = new Image(getClass().getResourceAsStream("images/tokens/token-3-laurel-points.png"));
     @FXML
     private Label militaryCount;
     @FXML
@@ -96,6 +99,7 @@ public class GameController {
     private ImageView token8 = new ImageView();
     @FXML
     private ImageView token9 = new ImageView();
+    ImageView[] tokenImages = {token1, token2, token3, token4, token5, token6, token7, token8, token9};
     @FXML
     private ImageView stoneImage = new ImageView();
     @FXML
@@ -120,6 +124,8 @@ public class GameController {
     private ImageView brickImage = new ImageView();
     @FXML
     private Label brickCount;
+    ImageView[] materialImages = {woodImage, paperImage, brickImage, stoneImage, glassImage, goldImage};
+    Label[] materialLabels = {woodCount, paperCount, brickCount, stoneCount, glassCount, goldCount};
 
     //-------------------------------------------needed variables
 
@@ -131,8 +137,6 @@ public class GameController {
     CardDecks mainDeck;
 
     ArrayList<Player> allPlayers = new ArrayList<>();
-
-
 
 
     public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<CardDecks> allPlayerDecks, Conflict conflictList, int turn) {
@@ -149,6 +153,8 @@ public class GameController {
         mainDeck = mainCardDeck;
 
         options = actions.cardDecksOption(allPlayerDecks, turn);
+
+        allPlayerNames.setOnAction(this::onPlayerNames);
 
         //Card choice info
         leftDeckCard = options.get(0).getCard(0);
@@ -178,7 +184,7 @@ public class GameController {
         playerNameTab.setText("No one selected yet ! Please use the choice box");
     }
 
-    public void onPlayerNames() {
+    public void onPlayerNames(Event event) {
         String name = allPlayerNames.getValue();
         Player playerView = null;
         for (Player i : allPlayers) {
@@ -190,13 +196,57 @@ public class GameController {
 
         playerNameTab.setText(playerView.getName());
         tab2.setText(playerView.getName());
+        playerHandOutline.setVisible(true);
+        playerHand.setText(playerView.getName()+"'s Hand");
+        //for cat image
+        if (playerView.getChat()) {
+            catImage.setImage(catPNG);
+        }
+        //for tokens image
+        for (int i = 0; i < playerView.getAllTokens().size(); i++) {
+            tokenImages[i].setImage(new Image(getClass().getResourceAsStream(playerView.getAllTokens().get(i).imageResource)));
+        }
+        //for military image
+        if (playerView.getHand().getMilitaryPoints() != 0) {
+            militaryImage.setImage(militaryPNG);
+            if (playerView.getHand().getMilitaryPoints() > 1) {
+                militaryCount.setText("x"+playerView.getHand().getMilitaryPoints()/3);
+            }
+        }
+        //for material cards image
+        for (int i = 0; i < 6; i++) {
+            if (playerView.getHand().getMaterials()[i] != 0) {
+                String imageLocation = "images/cards/card-material-";
+                switch (i) {
+                    case 0:
+                        materialImages[0].setImage( new Image(getClass().getResourceAsStream(imageLocation+"wood.png")));
+                        break;
+                    case 1:
+                        materialImages[1].setImage( new Image(getClass().getResourceAsStream(imageLocation+"paper.png")));
+                        break;
+                    case 2:
+                        materialImages[2].setImage( new Image(getClass().getResourceAsStream(imageLocation+"brick.png")));
+                        break;
+                    case 3:
+                        materialImages[3].setImage( new Image(getClass().getResourceAsStream(imageLocation+"stone.png")));
+                        break;
+                    case 4:
+                        materialImages[4].setImage( new Image(getClass().getResourceAsStream(imageLocation+"glass.png")));
+                        break;
+                    case 5:
+                        materialImages[5].setImage( new Image(getClass().getResourceAsStream(imageLocation+"gold.png")));
+                        break;
+                }
+                materialLabels[i].setText("x"+playerView.getHand().getMaterials()[i]);
+            }
+        }
     }
 
     public void onButtonLeftDeck() {
         System.out.println(options.get(1));
         player.addCard(leftDeckCard, conflict.getAllConflicts());
-        options.get(0).cardDeckSize();
-
+        options.get(0).chooseCard();
+        leftDeckCard = options.get(0).getCard(0);
         cardCountLeft.setText("Cards: "+options.get(0).cardDeckSize());
         for (Card i : player.getAllPlayerCards()) {
             System.out.println(i.front.cardDisplayName);

@@ -8,17 +8,18 @@ public class Player {
     private final  Wonder wonder;
     private final Construction wonderContruction;
     private ArrayList<Card> allPlayerCards;
+    private ArrayList<ProgressToken> allTokens;
     private Hand hand;
     private Boolean chat;
 
 
-    public Player(String name,Wonder wonder, Hand hand,Boolean chat, ArrayList<Card> allPlayerCards){
+    public Player(String name,Wonder wonder, Hand hand,Boolean chat, ArrayList<Card> allPlayerCards, ArrayList<ProgressToken> allTokens){
         this.name=name;
         this.wonder=wonder;
         this.hand = hand;
         this.chat=chat;
         this.allPlayerCards = allPlayerCards;
-
+        this.allTokens = allTokens;
         this.wonderContruction = new Construction(wonder);
     }
 
@@ -43,6 +44,10 @@ public class Player {
 
     public Hand getHand() {
         return hand;
+    }
+
+    public ArrayList<ProgressToken> getAllTokens() {
+        return allTokens;
     }
 
     public ArrayList<Card> getAllPlayerCards() {
