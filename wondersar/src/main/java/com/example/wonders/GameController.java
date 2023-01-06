@@ -72,7 +72,7 @@ public class GameController {
     private ImageView combat5 = new ImageView();
     @FXML
     private ImageView combat6 = new ImageView();
-    private ImageView[] combats = {combat1, combat2, combat3, combat4, combat5, combat6};
+    private ArrayList<ImageView> combats = new ArrayList<>();
     // --------------------------------------------player view
     @FXML
     private Tab tab2 = new Tab();
@@ -134,7 +134,7 @@ public class GameController {
     private ImageView token8 = new ImageView();
     @FXML
     private ImageView token9 = new ImageView();
-    private ImageView[] tokenImages = {token1, token2, token3, token4, token5, token6, token7, token8, token9};
+    private ArrayList<ImageView> tokenImages = new ArrayList<>();
     @FXML
     private ImageView stoneImage = new ImageView();
     @FXML
@@ -173,6 +173,9 @@ public class GameController {
     CardDecks mainDeck;
     private int playerTurn;
 
+    Image tokenPeace = new Image(getClass().getResourceAsStream("images/tokens/token-conflict-peace.png"));
+    Image tokenWar = new Image(getClass().getResourceAsStream("images/tokens/token-conflict-war.png"));
+
     ArrayList<Player> allPlayers = new ArrayList<>();
 
     public void cardDisable(boolean disable) {
@@ -181,20 +184,56 @@ public class GameController {
         mainDeckImage.setDisable(disable);
     }
 
+    public void resetTokens() {
+        switch (allPlayers.size()) {
+            case 2:
+            case 3:
+                combat1.setImage(tokenPeace);
+                combat2.setImage(tokenPeace);
+                combat3.setImage(tokenPeace);
+                combats.add(combat1);
+                combats.add(combat2);
+                combats.add(combat3);
+                break;
+            case 4:
+                combat4.setImage(tokenPeace);
+                combats.add(combat4);
+                break;
+            case 5:
+                combat5.setImage(tokenPeace);
+                combats.add(combat5);
+                break;
+            case 6:
+            case 7:
+                combat6.setImage(tokenPeace);
+                combats.add(combat6);
+                break;
+        }
+    }
 
-    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<CardDecks> allPlayerDecks, Conflict conflictList, int turn, boolean beg) {
+    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<CardDecks> allPlayerDecks, Conflict conflictList, int turn, boolean beggining) {
         //initialize table game
         for (Player i : players) {
             playerNames.add(i.getName());
         }
         endButton.setDisable(true);
         cardDisable(false);
-        if (beg) {
+        if (beggining) {
             allPlayerNames.getItems().addAll(playerNames);
             allPlayers.addAll(players);
             allDecks.addAll(allPlayerDecks);
-        }
+            resetTokens();
 
+            tokenImages.add(token1);
+            tokenImages.add(token2);
+            tokenImages.add(token3);
+            tokenImages.add(token4);
+            tokenImages.add(token5);
+            tokenImages.add(token6);
+            tokenImages.add(token7);
+            tokenImages.add(token8);
+            tokenImages.add(token9);
+        }
 
         player = players.get(turn);
         playerTurn = turn;
@@ -206,16 +245,6 @@ public class GameController {
         options = actions.cardDecksOption(allPlayerDecks, turn);
 
         allPlayerNames.setOnAction(this::onPlayerNames);
-
-        for (int i = 0; i < conflictList.getAllConflicts().size(); i++) {
-            if (conflictList.getAllConflicts().get(i)) {
-                combats[i].setImage(new Image(getClass().getResourceAsStream("images/tokens/token-conflict-peace.png")));
-            }
-            else {
-                combats[i].setImage(new Image(getClass().getResourceAsStream("images/tokens/token-conflict-war.png")));
-            }
-        }
-
         Player playerLeft;
         if (turn == 0) {
             playerLeft = players.get(players.size()-1);
@@ -354,7 +383,7 @@ public class GameController {
         }
         //for tokens image
         for (int i = 0; i < playerView.getAllTokens().size(); i++) {
-            tokenImages[i].setImage(new Image(getClass().getResourceAsStream(playerView.getAllTokens().get(i).imageResource)));
+            tokenImages.get(i).setImage(new Image(getClass().getResourceAsStream(playerView.getAllTokens().get(i).imageResource)));
         }
         //for military image
         if (playerView.getHand().getMilitaryPoints() != 0) {
