@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class GameController {
@@ -77,15 +78,10 @@ public class GameController {
     private Label archerCount;
     @FXML
     private ImageView lawImage = new ImageView();
-    private Image lawPNG = new Image(getClass().getResourceAsStream("images/cards/card-progress-law.png"));
     @FXML
     private ImageView architectImage = new ImageView();
-    private Image architectPNG = new Image(getClass().getResourceAsStream("images/cards/card-progress-architect.png"));
     @FXML
     private ImageView mechanicImage = new ImageView();
-    private Image mechanicPNG = new Image(getClass().getResourceAsStream("images/cards/card-progress-mechanic.png"));
-    private ImageView[] scienceImages = {lawImage, mechanicImage, architectImage};
-    private Image[] sciencePNG = {lawPNG, mechanicPNG, architectPNG};
     @FXML
     private ImageView token1 = new ImageView();
     @FXML
@@ -104,40 +100,31 @@ public class GameController {
     private ImageView token8 = new ImageView();
     @FXML
     private ImageView token9 = new ImageView();
-    ImageView[] tokenImages = {token1, token2, token3, token4, token5, token6, token7, token8, token9};
+    private ImageView[] tokenImages = {token1, token2, token3, token4, token5, token6, token7, token8, token9};
     @FXML
     private ImageView stoneImage = new ImageView();
-    private Image stonePNG = new Image(getClass().getResourceAsStream("images/cards/card-material-stone-stonecutter.png"));
     @FXML
     private Label stoneCount;
     @FXML
     private ImageView goldImage = new ImageView();
-    private Image goldPNG = new Image(getClass().getResourceAsStream("images/cards/card-material-gold-vizir.png"));
     @FXML
     private Label goldCount;
     @FXML
     private ImageView paperImage = new ImageView();
-    private Image paperPNG = new Image(getClass().getResourceAsStream("images/cards/card-material-paper-women.png"));
     @FXML
     private Label paperCount;
     @FXML
     private ImageView woodImage = new ImageView();
-    private Image woodPNG = new Image(getClass().getResourceAsStream("images/cards/card-material-wood-lumberjack.png"));
     @FXML
     private Label woodCount;
     @FXML
     private ImageView glassImage = new ImageView();
-    private Image glassPNG = new Image(getClass().getResourceAsStream("images/cards/card-material-glass-women.png"));
     @FXML
     private Label glassCount;
     @FXML
     private ImageView brickImage = new ImageView();
-    private Image brickPNG = new Image(getClass().getResourceAsStream("images/cards/card-material-brick-women.png"));
     @FXML
     private Label brickCount;
-    ImageView[] materialImages = {woodImage, paperImage, brickImage, stoneImage, glassImage, goldImage};
-    Image[] materialPNG = {woodPNG, paperPNG, brickPNG, stonePNG, glassPNG, goldPNG};
-    Label[] materialLabels = {woodCount, paperCount, brickCount, stoneCount, glassCount, goldCount};
 
     //-------------------------------------------needed variables
 
@@ -198,6 +185,14 @@ public class GameController {
 
     public void onPlayerNames(Event event) {
         String name = allPlayerNames.getValue();
+
+        centurionImage.setImage(null);
+        archerImage.setImage(null);
+        barbarianImage.setImage(null);
+
+        womanImage.setImage(null);
+        emperorImage.setImage(null);
+
         Player playerView = null;
         for (Player i : allPlayers) {
             if (i.getName().equals(name)) {
@@ -225,49 +220,75 @@ public class GameController {
                 militaryCount.setText("x"+playerView.getHand().getMilitaryPoints()/3);
             }
         }
-        //for material cards image
-        for (int i = 0; i < 6; i++) {
-            if (playerView.getHand().getMaterials()[i] != 0) {
-                materialImages[i].setImage(materialPNG[i]);
-                //materialLabels[i].setText("x"+playerView.getHand().getMaterials()[i]);
-            }
-        }
-
-        //for science cards image
-        for (int i = 0; i < 3; i++) {
-            String imageLocation = "images/cards/card-progress-";
-            if (playerView.getHand().getScience()[i] != 0) {
-                scienceImages[i].setImage(sciencePNG[i]);
-            }
-        }
-        int empCount = 0;
-        int womCount = 0;
-        int barbCount = 0;
-        int centCount = 0;
-        int archCount = 0;
+        //for cards
+        int[] counts = new int[11];
+        Arrays.fill(counts, 0);
         for (Card i : playerView.getAllPlayerCards()) {
-            if (i.front.cardDisplayName.equals("politic:emperor")) {
-                empCount++;
-                emperorImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                emperorCount.setText("x"+empCount);
-            }
-            else if (i.front.cardDisplayName.equals("politic:cat")) {
-                womCount++;
-                womanImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                womanCount.setText("x"+womCount);
-            }
-            else if (i.front.cardDisplayName.equals("war:barbarian")) {
-                barbCount++;
-                barbarianImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                barbarianCount.setText("x"+barbCount);
-            } else if (i.front.cardDisplayName.equals("war:centurion")) {
-                centCount++;
-                centurionImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                centurionCount.setText("x"+centCount);
-            } else if (i.front.cardDisplayName.equals("war:archer")) {
-                archCount++;
-                architectImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                archerCount.setText("x"+archCount);
+            switch (i.front.cardDisplayName) {
+                case "material:wood":
+                    counts[0]++;
+                    woodImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
+                    woodCount.setText("x"+counts[0]);
+                    break;
+                case "material:paper":
+                    counts[1]++;
+                    paperImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
+                    paperCount.setText("x"+counts[1]);
+                    break;
+                case "material:brick":
+                    counts[2]++;
+                    brickImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
+                    brickCount.setText("x"+counts[2]);
+                    break;
+                case "material:stone":
+                    counts[3]++;
+                    stoneImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
+                    stoneCount.setText("x"+counts[3]);
+                    break;
+                case "material:glass":
+                    counts[4]++;
+                    glassImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
+                    glassCount.setText("x"+counts[4]);
+                    break;
+                case "material:gold":
+                    counts[5]++;
+                    goldImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
+                    goldCount.setText("x"+counts[5]);
+                    break;
+                case "science:law":
+                    lawImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
+                    break;
+                case "science:mechanic":
+                    mechanicImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
+                    break;
+                case "science:architect":
+                    architectImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
+                    break;
+                case "politic:emperor":
+                    counts[6]++;
+                    emperorImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
+                    emperorCount.setText("x"+counts[6]);
+                    break;
+                case "politic:cat":
+                    counts[7]++;
+                    womanImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
+                    womanCount.setText("x"+counts[7]);
+                    break;
+                case "war:barbarion":
+                    counts[8]++;
+                    barbarianImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
+                    barbarianCount.setText("x"+counts[8]);
+                    break;
+                case "war:centurion":
+                    counts[9]++;
+                    centurionImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
+                    centurionCount.setText("x"+counts[9]);
+                    break;
+                case "war:archer":
+                    counts[10]++;
+                    architectImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
+                    archerCount.setText("x"+counts[10]);
+                    break;
             }
         }
 
@@ -277,11 +298,12 @@ public class GameController {
         System.out.println(options.get(1));
         player.addCard(leftDeckCard, conflict.getAllConflicts());
         options.get(0).chooseCard();
+
         leftDeckCard = options.get(0).getCard(0);
+        Image leftDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(leftDeckCard.front.imageResource)));
+        leftDeckCardImage.setImage(leftDeckCardPNG);
         cardCountLeft.setText("Cards: "+options.get(0).cardDeckSize());
-        for (Card i : player.getAllPlayerCards()) {
-            System.out.println(i.front.cardDisplayName);
-        }
+
     }
 
     public void onButtonRightDeck() {
@@ -289,19 +311,24 @@ public class GameController {
         player.addCard(rightDeckCard, conflict.getAllConflicts());
         options.get(1).chooseCard();
 
+        rightDeckCard = options.get(1).getCard(0);
+        Image rightDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(leftDeckCard.front.imageResource)));
+        leftDeckCardImage.setImage(rightDeckCardPNG);
         cardCountRight.setText("Cards: "+options.get(1).cardDeckSize());
-        for (Card i : player.getAllPlayerCards()) {
-            System.out.println(i.front.cardDisplayName);
-        }
     }
 
     public void onButtonMainDeck() {
         player.getAllPlayerCards().add(mainDeckCard);
         mainDeck.chooseCard();
 
-        cardCountMain.setText("Cards: "+mainDeck.cardDeckSize());
-        for (Card i : player.getAllPlayerCards()) {
-            System.out.println(i.front.cardDisplayName);
+        mainDeckCard = mainDeck.getCard(0);
+        Image mainDeckFrontPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(mainDeckCard.front.imageResource)));
+        if (player.getChat()) {
+            mainDeckImage.setImage(mainDeckFrontPNG);
         }
+        else {
+            mainDeckImage.setImage(mainDeckBackPNG);
+        }
+        cardCountMain.setText("Cards: "+mainDeck.cardDeckSize());
     }
 }
