@@ -106,7 +106,7 @@ public class ChoixpersoControleur implements Initializable {
     public void onConfirmButton() {
 
         String name = nameTextField.getText();
-        players.add(new Player(name, Wonder.valueOf(wonderChoice), new Hand(new ArrayList<>(3), new ArrayList<>(6)),false, new ArrayList<>()));
+        players.add(new Player(name, Wonder.valueOf(wonderChoice), new Hand(),false, new ArrayList<>()));
 
         for(int i=0;i< players.size();i++){
             labelTextefield.setText(players.get(i).getName()+ " \n"+players.get(i).getWonder());
