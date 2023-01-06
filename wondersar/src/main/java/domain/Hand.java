@@ -1,16 +1,17 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Hand {
-    private ArrayList<Integer> science;
-    private ArrayList<Integer> materials;
+    private int[] science = new int[3];
+    private int[] materials = new int[6];
     private int pointVictoire;
     private int shieldWar;
 
-    public Hand (ArrayList<Integer> science, ArrayList<Integer> materials) {
-        this.science = science;
-        this.materials = materials;
+    public Hand () {
+        Arrays.fill(materials, 0);
+        Arrays.fill(science, 0);
         this.pointVictoire = 0;
         this.shieldWar = 0;
     }
@@ -29,25 +30,23 @@ public class Hand {
         this.pointVictoire = pointVictoire;
     }
 
-    public ArrayList<Integer> getMaterials() {
+    public int[] getMaterials() {
         return materials;
     }
     public void addMaterials(int materialNb) {
-        materials.add(materialNb, 1);
+        materials[materialNb] = materials[materialNb]+1;
     }
     public void removeMaterials(int materialNb) {
-        int previousQuantity = materials.get(materialNb);
-        materials.add(materialNb, Math.max(previousQuantity-1, 0));
+        materials[materialNb] = materials[materialNb]-1;
     }
 
-    public ArrayList<Integer> getScience() {
+    public int[] getScience() {
         return science;
     }
     public void addScience(int scienceNb) {
-        science.add(scienceNb, 1);
+        science[scienceNb] = science[scienceNb]+1;
     }
     public void removeScience(int scienceNb) {
-        int previousQuantity = science.get(scienceNb);
-        science.add(scienceNb, Math.max(previousQuantity-1, 0));
+        science[scienceNb] = science[scienceNb]-1;
     }
 }

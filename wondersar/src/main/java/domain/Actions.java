@@ -52,7 +52,7 @@ public class Actions {
         if (isEqual) {
             boolean canBuild = false;
             for (int i = 0; i < 5; i++) {
-                int samePieces = player.getHand().getMaterials().get(i) + player.getHand().getMaterials().get(5);
+                int samePieces = player.getHand().getMaterials()[i] + player.getHand().getMaterials()[5];
                 if (samePieces >= nbResources) {
                     canBuild = true;
                     break;
@@ -63,9 +63,9 @@ public class Actions {
         else {
             int differentPieces = 0;
             for (int i = 0; i < 5; i++) {
-                differentPieces = (player.getHand().getMaterials().get(i) != 0)? differentPieces++:differentPieces;
+                differentPieces = (player.getHand().getMaterials()[i] != 0)? differentPieces++:differentPieces;
             }
-            differentPieces += player.getHand().getMaterials().get(5);
+            differentPieces += player.getHand().getMaterials()[5];
             return differentPieces >= nbResources;
         }
     }
@@ -84,17 +84,17 @@ public class Actions {
             Material material;
 
             for (int i = 0; i < 5; i++) {
-                if (max < player.getHand().getMaterials().get(i)) {
-                    max = player.getHand().getMaterials().get(i);
+                if (max < player.getHand().getMaterials()[i]) {
+                    max = player.getHand().getMaterials()[i];
                     intMaterial = i;
                 }
             }
 
             int nbGold = nbResources - max;
-            player.getHand().getMaterials().add(5, player.getHand().getMaterials().get(5)-nbGold);
+            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]-nbGold;
 
             material = getMaterialType(intMaterial);
-            player.getHand().getMaterials().add(intMaterial, 0);
+            player.getHand().getMaterials()[intMaterial] = 0;
 
             int j = 0;
             for (Card i : player.getAllPlayerCards()) {
@@ -115,13 +115,13 @@ public class Actions {
             ArrayList<Material> materialToRemove = new ArrayList<>();
 
             for (int i = 0; i < 5; i++) {
-                if (player.getHand().getMaterials().get(i) != 0) {
+                if (player.getHand().getMaterials()[i] != 0) {
                     intMaterialToRemove.add(i);
-                    player.getHand().getMaterials().add(i, player.getHand().getMaterials().get(i)-1);
+                    player.getHand().removeMaterials(i);
                 }
             }
             int nbGold = nbResources - intMaterialToRemove.size();
-            player.getHand().getMaterials().add(5, player.getHand().getMaterials().get(5)-nbGold);
+            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]-nbGold;
 
             for (int i : intMaterialToRemove) {
                 materialToRemove.add(getMaterialType(i));
