@@ -18,11 +18,7 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="800.0">
                <children>
-                  <ImageView fx:id="playerRightImage" fitHeight="150.0" fitWidth="200.0" layoutX="591.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/imagejeu/silhouette.png" />
-                     </image>
-                  </ImageView>
+                  <ImageView fx:id="playerRightImage" fitHeight="150.0" fitWidth="200.0" layoutX="591.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" />
                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c67409" height="285.0" layoutY="235.0" stroke="TRANSPARENT" strokeType="INSIDE" width="800.0" />
                   <ImageView fx:id="playerLeftImage" fitHeight="150.0" fitWidth="200.0" layoutX="59.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -75,7 +71,7 @@
                         <Font size="28.0" />
                      </font>
                   </Label>
-                  <Label fx:id="playerRightName" layoutX="591.0" layoutY="120.0" text="Player">
+                  <Label fx:id="playerRightName" layoutX="591.0" layoutY="120.0">
                      <font>
                         <Font size="28.0" />
                      </font>
@@ -83,9 +79,9 @@
                   <Label fx:id="playerLeftMaterial" layoutX="72.0" layoutY="156.0" prefHeight="17.0" prefWidth="66.0" text="Material: " />
                   <Label fx:id="playerLeftScience" layoutX="170.0" layoutY="156.0" prefHeight="17.0" prefWidth="83.0" text="Science: " />
                   <Label fx:id="playerLeftShields" layoutX="92.0" layoutY="173.0" prefHeight="17.0" prefWidth="104.0" text="Shields: " />
-                  <Label fx:id="playerRightMaterial" layoutX="543.0" layoutY="165.0" prefHeight="17.0" prefWidth="66.0" text="Material: " />
-                  <Label fx:id="playerRightScience" layoutX="655.0" layoutY="165.0" prefHeight="17.0" prefWidth="83.0" text="Science: " />
-                  <Label fx:id="playerRightShields" layoutX="591.0" layoutY="187.0" prefHeight="17.0" prefWidth="104.0" text="Shields: " />
+                  <Label fx:id="playerRightMaterial" layoutX="543.0" layoutY="165.0" prefHeight="17.0" prefWidth="66.0" />
+                  <Label fx:id="playerRightScience" layoutX="655.0" layoutY="165.0" prefHeight="17.0" prefWidth="83.0" />
+                  <Label fx:id="playerRightShields" layoutX="591.0" layoutY="187.0" prefHeight="17.0" prefWidth="104.0" />
                   <ImageView fx:id="leftDeckCardImage" fitHeight="128.0" fitWidth="99.0" layoutX="118.0" layoutY="316.0" onMouseClicked="#onButtonLeftDeck" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-back/card-back-question.png" />
@@ -100,6 +96,7 @@
                   <Label fx:id="cardCountMain" layoutX="413.0" layoutY="354.0" text="Label" />
                   <Label fx:id="cardCountRight" layoutX="673.0" layoutY="444.0" text="Label" />
                   <ChoiceBox fx:id="allPlayerNames" layoutX="636.0" layoutY="484.0" prefWidth="150.0" />
+                  <Button fx:id="buttonEnd" layoutX="724.0" layoutY="449.0" mnemonicParsing="false" onAction="#onButtonEnd" text="End turn" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -150,38 +147,32 @@
                   <ImageView fx:id="token8" fitHeight="35.0" fitWidth="34.0" layoutX="454.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="token9" fitHeight="35.0" fitWidth="34.0" layoutX="501.0" layoutY="473.0" pickOnBounds="true" preserveRatio="true" />
                   <Label fx:id="militaryCount" layoutX="114.0" layoutY="359.0" />
-                  <Button fx:id="buttonEnd" layoutX="708.0" layoutY="282.0" mnemonicParsing="false" text="End of Turn" />
                   <Label fx:id="playerNameTab" alignment="CENTER" layoutY="6.0" prefHeight="17.0" prefWidth="800.0" text="Label">
                      <font>
                         <Font size="29.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="53.0" fitWidth="200.0" layoutX="307.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/wonders/babylon/piece-back-babylon-3.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="38.0" fitWidth="163.0" layoutX="328.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="construction3" fitHeight="38.0" fitWidth="163.0" layoutX="328.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/wonders/babylon/piece-back-babylon-4.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="46.0" fitWidth="200.0" layoutX="309.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="construction1" fitHeight="46.0" fitWidth="200.0" layoutX="309.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/wonders/babylon/piece-back-babylon-1.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="43.0" fitWidth="188.0" layoutX="312.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="construction2" fitHeight="43.0" fitWidth="188.0" layoutX="312.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/wonders/babylon/piece-back-babylon-2.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="71.0" fitWidth="64.0" layoutX="343.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="construction4" fitHeight="71.0" fitWidth="64.0" layoutX="343.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/wonders/babylon/piece-back-babylon-5.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="40.0" fitWidth="93.0" layoutX="400.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="construction5" fitHeight="40.0" fitWidth="93.0" layoutX="400.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/wonders/babylon/piece-back-babylon-6.png" />
                      </image>

@@ -40,7 +40,24 @@ public class GameController {
     @FXML
     private ChoiceBox<String> allPlayerNames;
     private final Image mainDeckBackPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/cards/card-back/card-back-question.png")));
-
+    @FXML
+    private Label playerLeftName;
+    @FXML
+    private Label playerLeftMaterial;
+    @FXML
+    private Label playerLeftScience;
+    @FXML
+    private Label playerLeftShields;
+    @FXML
+    private ImageView playerRightImage;
+    @FXML
+    private Label playerRightName;
+    @FXML
+    private Label playerRightMaterial;
+    @FXML
+    private Label playerRightScience;
+    @FXML
+    private Label playerRightShields;
     // --------------------------------------------player view
     @FXML
     private Tab tab2 = new Tab();
@@ -135,19 +152,26 @@ public class GameController {
     private final Actions actions = new Actions();
     Conflict conflict;
     ArrayList<CardDecks> options = new ArrayList<>();
+    ArrayList<CardDecks> allDecks = new ArrayList<>();
     CardDecks mainDeck;
+    private int playerTurn;
 
     ArrayList<Player> allPlayers = new ArrayList<>();
 
 
-    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<CardDecks> allPlayerDecks, Conflict conflictList, int turn) {
+    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<CardDecks> allPlayerDecks, Conflict conflictList, int turn, boolean beg) {
         //initialize table game
         for (Player i : players) {
             playerNames.add(i.getName());
         }
-        allPlayerNames.getItems().addAll(playerNames);
-        allPlayers.addAll(players);
+        if (beg) {
+            allPlayerNames.getItems().addAll(playerNames);
+            allPlayers.addAll(players);
+            allDecks.addAll(allPlayerDecks);
+        }
+
         player = players.get(turn);
+        playerTurn = turn;
         playerName.setText(player.getName());
 
         conflict = conflictList;
@@ -156,6 +180,49 @@ public class GameController {
         options = actions.cardDecksOption(allPlayerDecks, turn);
 
         allPlayerNames.setOnAction(this::onPlayerNames);
+
+        Player playerLeft;
+        if (turn == 0) {
+            playerLeft = players.get(players.size()-1);
+        }
+        else {
+            playerLeft = players.get(turn-1);
+        }
+        playerLeftName.setText(""+playerLeft.getName());
+        int totalMaterial = 0;
+        for (int i : playerLeft.getHand().getMaterials()) {
+            totalMaterial += i;
+        }
+        playerLeftMaterial.setText("Materials: "+totalMaterial);
+        int totalScience = 0;
+        for (int i : playerLeft.getHand().getScience()) {
+            totalScience +=i;
+        }
+        playerLeftScience.setText("Science: "+totalScience);
+        playerLeftShields.setText("Shields: "+playerLeft.getHand().getShieldWar());
+
+        if (players.size() > 2) {
+            Player playerRight;
+            if (turn == players.size()-1) {
+                playerRight = players.get(0);
+            }
+            else {
+                playerRight = players.get(turn+1);
+            }
+            playerRightImage.setImage(new Image(getClass().getResourceAsStream("images/imagejeu/silhouette.png")));
+            playerRightName.setText(""+playerRight.getName());
+            totalMaterial = 0;
+            for (int i : playerRight.getHand().getMaterials()) {
+                totalMaterial += i;
+            }
+            playerRightMaterial.setText("Materials: "+totalMaterial);
+            totalScience = 0;
+            for (int i : playerRight.getHand().getScience()) {
+                totalScience +=i;
+            }
+            playerRightScience.setText("Science: "+totalScience);
+            playerRightShields.setText("Shields: "+playerRight.getHand().getShieldWar());
+        }
 
         //Card choice info
         leftDeckCard = options.get(0).getCard(0);
@@ -354,5 +421,15 @@ public class GameController {
             mainDeckImage.setImage(mainDeckBackPNG);
         }
         cardCountMain.setText("Cards: "+mainDeck.cardDeckSize());
+    }
+
+    public void onButtonEnd() {
+        if (playerTurn == allPlayers.size()-1) {
+            playerTurn = 0;
+        }
+        else {
+            playerTurn++;
+        }
+        startTurn(allPlayers, mainDeck, allDecks, conflict, playerTurn, false);
     }
 }
