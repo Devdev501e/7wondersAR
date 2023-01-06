@@ -120,6 +120,8 @@ public class ChoixpersoControleur implements Initializable {
             startGame.setGraphic(icon3);
             valider.setVisible(false);
             startGame.setVisible(true);
+            myChoiceBox.setDisable(true);
+            nameTextField.setDisable(true);
         }
 
     }
