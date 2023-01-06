@@ -58,6 +58,19 @@ public class GameController {
     private Label playerRightScience;
     @FXML
     private Label playerRightShields;
+    @FXML
+    private ImageView combat1 = new ImageView();
+    @FXML
+    private ImageView combat2 = new ImageView();
+    @FXML
+    private ImageView combat3 = new ImageView();
+    @FXML
+    private ImageView combat4 = new ImageView();
+    @FXML
+    private ImageView combat5 = new ImageView();
+    @FXML
+    private ImageView combat6 = new ImageView();
+    private ImageView[] combats = {combat1, combat2, combat3, combat4, combat5, combat6};
     // --------------------------------------------player view
     @FXML
     private Tab tab2 = new Tab();
@@ -144,6 +157,8 @@ public class GameController {
     private ImageView brickImage = new ImageView();
     @FXML
     private Label brickCount;
+    @FXML
+    private Button endButton;
 
     //-------------------------------------------needed variables
 
@@ -158,17 +173,26 @@ public class GameController {
 
     ArrayList<Player> allPlayers = new ArrayList<>();
 
+    public void cardDisable(boolean disable) {
+        leftDeckCardImage.setDisable(disable);
+        rightDeckCardImage.setDisable(disable);
+        mainDeckImage.setDisable(disable);
+    }
+
 
     public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<CardDecks> allPlayerDecks, Conflict conflictList, int turn, boolean beg) {
         //initialize table game
         for (Player i : players) {
             playerNames.add(i.getName());
         }
+        endButton.setDisable(true);
+        cardDisable(false);
         if (beg) {
             allPlayerNames.getItems().addAll(playerNames);
             allPlayers.addAll(players);
             allDecks.addAll(allPlayerDecks);
         }
+
 
         player = players.get(turn);
         playerTurn = turn;
@@ -180,6 +204,15 @@ public class GameController {
         options = actions.cardDecksOption(allPlayerDecks, turn);
 
         allPlayerNames.setOnAction(this::onPlayerNames);
+
+        for (int i = 0; i < conflictList.getAllConflicts().size(); i++) {
+            if (conflictList.getAllConflicts().get(i)) {
+                combats[i].setImage(new Image(getClass().getResourceAsStream("images/tokens/token-conflict-peace.png")));
+            }
+            else {
+                combats[i].setImage(new Image(getClass().getResourceAsStream("images/tokens/token-conflict-war.png")));
+            }
+        }
 
         Player playerLeft;
         if (turn == 0) {
@@ -396,6 +429,8 @@ public class GameController {
         leftDeckCardImage.setImage(leftDeckCardPNG);
         cardCountLeft.setText("Cards: "+options.get(0).cardDeckSize());
 
+        cardDisable(true);
+        endButton.setDisable(false);
     }
 
     public void onButtonRightDeck() {
@@ -406,6 +441,9 @@ public class GameController {
         Image rightDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(rightDeckCard.front.imageResource)));
         rightDeckCardImage.setImage(rightDeckCardPNG);
         cardCountRight.setText("Cards: "+options.get(1).cardDeckSize());
+
+        cardDisable(true);
+        endButton.setDisable(false);
     }
 
     public void onButtonMainDeck() {
@@ -421,6 +459,9 @@ public class GameController {
             mainDeckImage.setImage(mainDeckBackPNG);
         }
         cardCountMain.setText("Cards: "+mainDeck.cardDeckSize());
+
+        cardDisable(true);
+        endButton.setDisable(false);
     }
 
     public void onButtonEnd() {
