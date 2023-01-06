@@ -1,9 +1,6 @@
 package domain;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Actions {
 
@@ -141,6 +138,40 @@ public class Actions {
                 }
             }
             player.getAllPlayerCards().removeAll(cardsToRemove);
+
+        }
+
+    }
+
+    public void effect(Wonder wonder , CardDecks deckschoisi, Player player, ArrayList<Boolean> conflict ,Card card){
+        switch (wonder){
+            case Olympie:
+            case Alexandrie:
+
+            case Ephese:
+                player.addCard(deckschoisi.getCard(0),conflict);
+                deckschoisi.chooseCard();
+                break;
+
+
+            case Babylone:
+
+
+            // ajouts des jetons
+
+            case Halicarnasse:
+
+              player.addCard(card,conflict);
+              break;
+
+            case Rhodes:
+                player.getHand().setShieldWar(1);
+                break;
+
+            case Gizeh:
+                break;
+
+
 
         }
 
