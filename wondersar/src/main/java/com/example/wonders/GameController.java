@@ -187,11 +187,33 @@ public class GameController {
         String name = allPlayerNames.getValue();
 
         centurionImage.setImage(null);
+        centurionCount.setText("");
         archerImage.setImage(null);
+        archerCount.setText("");
         barbarianImage.setImage(null);
+        barbarianCount.setText("");
 
         womanImage.setImage(null);
+        womanCount.setText("");
         emperorImage.setImage(null);
+        emperorCount.setText("");
+
+        lawImage.setImage(null);
+        architectImage.setImage(null);
+        mechanicImage.setImage(null);
+
+        woodImage.setImage(null);
+        woodCount.setText("");
+        paperImage.setImage(null);
+        paperCount.setText("");
+        brickImage.setImage(null);
+        brickCount.setText("");
+        stoneImage.setImage(null);
+        stoneCount.setText("");
+        glassImage.setImage(null);
+        glassCount.setText("");
+        goldImage.setImage(null);
+        goldCount.setText("");
 
         Player playerView = null;
         for (Player i : allPlayers) {
@@ -312,8 +334,8 @@ public class GameController {
         options.get(1).chooseCard();
 
         rightDeckCard = options.get(1).getCard(0);
-        Image rightDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(leftDeckCard.front.imageResource)));
-        leftDeckCardImage.setImage(rightDeckCardPNG);
+        Image rightDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(rightDeckCard.front.imageResource)));
+        rightDeckCardImage.setImage(rightDeckCardPNG);
         cardCountRight.setText("Cards: "+options.get(1).cardDeckSize());
     }
 
