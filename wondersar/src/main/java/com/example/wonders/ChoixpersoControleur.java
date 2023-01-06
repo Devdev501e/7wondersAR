@@ -104,7 +104,8 @@ public class ChoixpersoControleur implements Initializable {
     }
 
     public void onConfirmButton() {
-
+        String word =nameTextField.getText();
+      if(word!=null && !word.equals("") && !myChoiceBox.getItems().equals("")&& myChoiceBox != null){
         String name = nameTextField.getText();
         players.add(new Player(name, Wonder.valueOf(wonderChoice), new Hand(),false, new ArrayList<>(), new ArrayList<>()));
 
@@ -122,7 +123,10 @@ public class ChoixpersoControleur implements Initializable {
             startGame.setVisible(true);
             myChoiceBox.setDisable(true);
             nameTextField.setDisable(true);
-        }
+        }}
+      else{
+          labelTextefield.setText("écris un nom valide!!");
+      }
 
     }
 
