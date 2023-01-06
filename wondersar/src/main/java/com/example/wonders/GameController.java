@@ -194,6 +194,7 @@ public class GameController {
         barbarianCount.setText("");
 
         womanImage.setImage(null);
+        catImage.setImage(null);
         womanCount.setText("");
         emperorImage.setImage(null);
         emperorCount.setText("");
@@ -294,6 +295,7 @@ public class GameController {
                 case "politic:cat":
                     counts[7]++;
                     womanImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
+                    catImage.setImage(catPNG);
                     womanCount.setText("x"+counts[7]);
                     break;
                 case "war:barbarion":
