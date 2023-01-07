@@ -74,6 +74,17 @@ public class GameController {
     @FXML
     private ImageView combat6 = new ImageView();
     private ArrayList<ImageView> combats = new ArrayList<>();
+
+    @FXML
+    private ImageView progress0 = new ImageView();
+    @FXML
+    private ImageView progress1 = new ImageView();
+    @FXML
+    private ImageView progress2 = new ImageView();
+    @FXML
+    private ImageView progressBack = new ImageView();
+    private ArrayList<ImageView> progressImages = new ArrayList<>();
+
     // --------------------------------------------player view
     @FXML
     private Tab tab2 = new Tab();
@@ -178,106 +189,9 @@ public class GameController {
     Image tokenWar = new Image(getClass().getResourceAsStream("images/tokens/token-conflict-war.png"));
 
     ArrayList<Player> allPlayers = new ArrayList<>();
+    ArrayList<ProgressToken> res;
 
-    public void cardDisable(boolean disable) {
-        leftDeckCardImage.setDisable(disable);
-        rightDeckCardImage.setDisable(disable);
-        mainDeckImage.setDisable(disable);
-    }
-
-    public void resetTokens() {
-        switch (allPlayers.size()) {
-            case 2:
-            case 3:
-                combat1.setImage(tokenPeace);
-                combat2.setImage(tokenPeace);
-                combat3.setImage(tokenPeace);
-                combats.add(combat1);
-                combats.add(combat2);
-                combats.add(combat3);
-                break;
-            case 4:
-                combat4.setImage(tokenPeace);
-                combats.add(combat4);
-                break;
-            case 5:
-                combat5.setImage(tokenPeace);
-                combats.add(combat5);
-                break;
-            case 6:
-            case 7:
-                combat6.setImage(tokenPeace);
-                combats.add(combat6);
-                break;
-        }
-    }
-
-    public void checkCardCorn(CardType card) {
-        if (card.cardCategory == CardCategory.WarCard) {
-            int count = 0;
-            for (int i = 0; i < combats.size(); i++) {
-                if (combats.get(i).getImage() == tokenPeace) {
-                    combats.get(i).setImage(tokenWar);
-                    count++;
-                    if (i == combats.size()-1) {
-                        battle();
-                        resetTokens();
-                        break;
-                    }
-                }
-                if (count == card.cornCount) {
-                    break;
-                }
-            }
-        }
-    }
-
-    public void battle() {
-        if (allPlayers.size() == 2) {
-            if (allPlayers.get(0).getHand().getShieldWar() > allPlayers.get(1).getHand().getShieldWar()) {
-                if (allPlayers.get(0).getHand().getShieldWar() > 2*allPlayers.get(1).getHand().getShieldWar()) {
-                    allPlayers.get(0).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+6);
-                }
-                else {
-                    allPlayers.get(0).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+3);
-                }
-            }
-            else if (allPlayers.get(1).getHand().getShieldWar() > allPlayers.get(0).getHand().getShieldWar()) {
-                if (allPlayers.get(1).getHand().getShieldWar() > 2*allPlayers.get(0).getHand().getShieldWar()) {
-                    allPlayers.get(1).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+6);
-                }
-                else {
-                    allPlayers.get(1).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+3);
-                }
-            }
-        }
-        else {
-            for (int i = 0; i < allPlayers.size(); i++) {
-                Player playerLeft = (i==0)? allPlayers.get(allPlayers.size()-1):allPlayers.get(i-1);
-                Player interestingPlayer = allPlayers.get(i);
-                Player playerRight = (i == allPlayers.size()-1)? allPlayers.get(0):allPlayers.get(i+1);
-
-                if (interestingPlayer.getHand().getShieldWar() > playerLeft.getHand().getShieldWar()) {
-                    interestingPlayer.getHand().setMilitaryPoints(interestingPlayer.getHand().getMilitaryPoints()+3);
-                }
-                if (interestingPlayer.getHand().getShieldWar() > playerRight.getHand().getShieldWar()) {
-                    interestingPlayer.getHand().setMilitaryPoints(interestingPlayer.getHand().getMilitaryPoints()+3);
-                }
-            }
-        }
-
-        for (int j = 0; j < allPlayers.size(); j++) {
-            ArrayList<Card> toRemove = new ArrayList<>();
-            for (Card i : allPlayers.get(j).getAllPlayerCards()) {
-                if ((i.front.cardDisplayName.equals("war:barbarian")) || (i.front.cardDisplayName.equals("war:archer"))) {
-                    toRemove.add(i);
-                }
-            }
-            allPlayers.get(j).getAllPlayerCards().removeAll(toRemove);
-        }
-    }
-
-    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<CardDecks> allPlayerDecks, Conflict conflictList, int turn, boolean beggining) {
+    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<CardDecks> allPlayerDecks, Conflict conflictList,ArrayList<ProgressToken> progressTokens, int turn, boolean beggining) {
         //initialize table game
         for (Player i : players) {
             playerNames.add(i.getName());
@@ -290,6 +204,7 @@ public class GameController {
             allPlayers.addAll(players);
             allDecks.addAll(allPlayerDecks);
             resetTokens();
+            res = progressTokens;
 
             tokenImages.add(token1);
             tokenImages.add(token2);
@@ -300,6 +215,10 @@ public class GameController {
             tokenImages.add(token7);
             tokenImages.add(token8);
             tokenImages.add(token9);
+
+            progressImages.add(progress0);
+            progressImages.add(progress1);
+            progressImages.add(progress2);
         }
 
         player = players.get(turn);
@@ -312,6 +231,12 @@ public class GameController {
         options = actions.cardDecksOption(allPlayerDecks, turn);
 
         allPlayerNames.setOnAction(this::onPlayerNames);
+
+        for (int i = 0; i < progressImages.size(); i++) {
+            Image resImage = new Image(getClass().getResourceAsStream(res.get(i).imageResource));
+            progressImages.get(i).setImage(resImage);
+        }
+
         Player playerLeft;
         if (turn == 0) {
             playerLeft = players.get(players.size()-1);
@@ -399,7 +324,6 @@ public class GameController {
         tab2.setText(playerView.getName());
         playerHandOutline.setVisible(true);
         playerHand.setText(playerView.getName()+"'s Hand");
-        //for cat image
         switch (playerView.getWonder()){
             case Alexandrie:
                 ConstImage constImage = ConstImage.AlexandrieBack;
@@ -582,6 +506,8 @@ public class GameController {
             case Olympie:
             case Ephese:
         }
+
+        //for cat image
         if (playerView.getChat()) {
             catImage.setImage(catPNG);
         }
@@ -759,6 +685,104 @@ public class GameController {
         else {
             playerTurn++;
         }
-        startTurn(allPlayers, mainDeck, allDecks, conflict, playerTurn, false);
+        startTurn(allPlayers, mainDeck, allDecks, conflict, res, playerTurn, false);
+    }
+
+    public void cardDisable(boolean disable) {
+        leftDeckCardImage.setDisable(disable);
+        rightDeckCardImage.setDisable(disable);
+        mainDeckImage.setDisable(disable);
+    }
+
+    public void resetTokens() {
+        switch (allPlayers.size()) {
+            case 2:
+            case 3:
+                combat1.setImage(tokenPeace);
+                combat2.setImage(tokenPeace);
+                combat3.setImage(tokenPeace);
+                combats.add(combat1);
+                combats.add(combat2);
+                combats.add(combat3);
+                break;
+            case 4:
+                combat4.setImage(tokenPeace);
+                combats.add(combat4);
+                break;
+            case 5:
+                combat5.setImage(tokenPeace);
+                combats.add(combat5);
+                break;
+            case 6:
+            case 7:
+                combat6.setImage(tokenPeace);
+                combats.add(combat6);
+                break;
+        }
+    }
+
+    public void checkCardCorn(CardType card) {
+        if (card.cardCategory == CardCategory.WarCard) {
+            int count = 0;
+            for (int i = 0; i < combats.size(); i++) {
+                if (combats.get(i).getImage() == tokenPeace) {
+                    combats.get(i).setImage(tokenWar);
+                    count++;
+                    if (i == combats.size()-1) {
+                        battle();
+                        resetTokens();
+                        break;
+                    }
+                }
+                if (count == card.cornCount) {
+                    break;
+                }
+            }
+        }
+    }
+
+    public void battle() {
+        if (allPlayers.size() == 2) {
+            if (allPlayers.get(0).getHand().getShieldWar() > allPlayers.get(1).getHand().getShieldWar()) {
+                if (allPlayers.get(0).getHand().getShieldWar() > 2*allPlayers.get(1).getHand().getShieldWar()) {
+                    allPlayers.get(0).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+6);
+                }
+                else {
+                    allPlayers.get(0).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+3);
+                }
+            }
+            else if (allPlayers.get(1).getHand().getShieldWar() > allPlayers.get(0).getHand().getShieldWar()) {
+                if (allPlayers.get(1).getHand().getShieldWar() > 2*allPlayers.get(0).getHand().getShieldWar()) {
+                    allPlayers.get(1).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+6);
+                }
+                else {
+                    allPlayers.get(1).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+3);
+                }
+            }
+        }
+        else {
+            for (int i = 0; i < allPlayers.size(); i++) {
+                Player playerLeft = (i==0)? allPlayers.get(allPlayers.size()-1):allPlayers.get(i-1);
+                Player interestingPlayer = allPlayers.get(i);
+                Player playerRight = (i == allPlayers.size()-1)? allPlayers.get(0):allPlayers.get(i+1);
+
+                if (interestingPlayer.getHand().getShieldWar() > playerLeft.getHand().getShieldWar()) {
+                    interestingPlayer.getHand().setMilitaryPoints(interestingPlayer.getHand().getMilitaryPoints()+3);
+                }
+                if (interestingPlayer.getHand().getShieldWar() > playerRight.getHand().getShieldWar()) {
+                    interestingPlayer.getHand().setMilitaryPoints(interestingPlayer.getHand().getMilitaryPoints()+3);
+                }
+            }
+        }
+
+        for (int j = 0; j < allPlayers.size(); j++) {
+            ArrayList<Card> toRemove = new ArrayList<>();
+            for (Card i : allPlayers.get(j).getAllPlayerCards()) {
+                if ((i.front.cardDisplayName.equals("war:barbarian")) || (i.front.cardDisplayName.equals("war:archer"))) {
+                    toRemove.add(i);
+                }
+            }
+            allPlayers.get(j).getAllPlayerCards().removeAll(toRemove);
+        }
     }
 }

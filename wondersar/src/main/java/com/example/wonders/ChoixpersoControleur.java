@@ -19,9 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 
 public class ChoixpersoControleur implements Initializable {
     @FXML
@@ -138,6 +136,11 @@ public class ChoixpersoControleur implements Initializable {
 
         ArrayList<CardDecks> playerDecks = new ArrayList<>();
 
+        ArrayList<ProgressToken> res = new ArrayList<>();
+        ProgressTokens progressTokens = new ProgressTokens();
+        res.addAll(progressTokens.TOKENS);
+        Collections.shuffle(res);
+
         for (Player i : players) {
             String wonder = i.getWonder().getDisplayName();
 
@@ -154,7 +157,7 @@ public class ChoixpersoControleur implements Initializable {
 
 
         GameController gameController = loader.getController();
-        gameController.startTurn(players, mainDeck, playerDecks, conflict, 0, true);
+        gameController.startTurn(players, mainDeck, playerDecks, conflict, res, 0, true);
 
         stage.setScene(scene);
         stage.show();
