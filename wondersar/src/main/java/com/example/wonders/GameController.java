@@ -215,6 +215,73 @@ public class GameController {
         }
     }
 
+    public void checkCardCorn(CardType card) {
+        if (card.cardCategory == CardCategory.WarCard) {
+            int count = 0;
+            for (int i = 0; i < combats.size(); i++) {
+                if (combats.get(i).getImage() == tokenPeace) {
+                    combats.get(i).setImage(tokenWar);
+                    count++;
+                }
+                if (count == card.cornCount) {
+                    break;
+                }
+            }
+            boolean battle = true;
+            for (ImageView i : combats) {
+                if (i.getImage() == tokenPeace) {
+                    battle = false;
+                    break;
+                }
+            }
+            if (battle) {
+                //call battle function
+                resetTokens();
+            }
+        }
+    }
+
+    public void battle() {
+        if (allPlayers.size() == 2) {
+            if (allPlayers.get(0).getHand().getShieldWar() > 2*allPlayers.get(1).getHand().getShieldWar()) {
+                allPlayers.get(0).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+6);
+            }
+            else if (allPlayers.get(0).getHand().getShieldWar() > allPlayers.get(1).getHand().getShieldWar()) {
+                allPlayers.get(0).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+3);
+            }
+            else if (allPlayers.get(1).getHand().getShieldWar() > 2*allPlayers.get(0).getHand().getShieldWar()) {
+                allPlayers.get(0).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+6);
+            }
+            else if (allPlayers.get(1).getHand().getShieldWar() > allPlayers.get(0).getHand().getShieldWar()) {
+                allPlayers.get(0).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+3);
+            }
+        }
+        else {
+            for (int i = 0; i < allPlayers.size(); i++) {
+                Player playerLeft = (i==0)? allPlayers.get(allPlayers.size()-1):allPlayers.get(i-1);
+                Player interestingPlayer = allPlayers.get(i);
+                Player playerRight = (i == allPlayers.size()-1)? allPlayers.get(0):allPlayers.get(i+1);
+
+                if (interestingPlayer.getHand().getShieldWar() > playerLeft.getHand().getShieldWar()) {
+                    interestingPlayer.getHand().setMilitaryPoints(interestingPlayer.getHand().getMilitaryPoints()+3);
+                }
+                if (interestingPlayer.getHand().getShieldWar() > playerRight.getHand().getShieldWar()) {
+                    interestingPlayer.getHand().setMilitaryPoints(interestingPlayer.getHand().getMilitaryPoints()+3);
+                }
+            }
+        }
+
+        for (int j = 0; j < allPlayers.size(); j++) {
+            ArrayList<Card> toRemove = new ArrayList<>();
+            for (Card i : allPlayers.get(j).getAllPlayerCards()) {
+                if ((i.front.cardDisplayName.equals("war:barbarian")) || (i.front.cardDisplayName.equals("war:archer"))) {
+                    toRemove.add(i);
+                }
+            }
+            allPlayers.get(j).getAllPlayerCards().removeAll(toRemove);
+        }
+    }
+
     public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<CardDecks> allPlayerDecks, Conflict conflictList, int turn, boolean beggining) {
         //initialize table game
         for (Player i : players) {
@@ -222,6 +289,7 @@ public class GameController {
         }
         endButton.setDisable(true);
         cardDisable(false);
+
         if (beggining) {
             allPlayerNames.getItems().addAll(playerNames);
             allPlayers.addAll(players);
@@ -322,36 +390,7 @@ public class GameController {
 
     public void onPlayerNames(Event event) {
         String name = allPlayerNames.getValue();
-
-        centurionImage.setImage(null);
-        centurionCount.setText("");
-        archerImage.setImage(null);
-        archerCount.setText("");
-        barbarianImage.setImage(null);
-        barbarianCount.setText("");
-
-        womanImage.setImage(null);
-        catImage.setImage(null);
-        womanCount.setText("");
-        emperorImage.setImage(null);
-        emperorCount.setText("");
-
-        lawImage.setImage(null);
-        architectImage.setImage(null);
-        mechanicImage.setImage(null);
-
-        woodImage.setImage(null);
-        woodCount.setText("");
-        paperImage.setImage(null);
-        paperCount.setText("");
-        brickImage.setImage(null);
-        brickCount.setText("");
-        stoneImage.setImage(null);
-        stoneCount.setText("");
-        glassImage.setImage(null);
-        glassCount.setText("");
-        goldImage.setImage(null);
-        goldCount.setText("");
+        resetPlayerViewBlank();
 
         Player playerView = null;
         for (Player i : allPlayers) {
@@ -640,6 +679,7 @@ public class GameController {
     public void onButtonLeftDeck() {
         player.addCard(leftDeckCard, conflict.getAllConflicts());
         options.get(0).chooseCard();
+        checkCardCorn(leftDeckCard.front);
 
         leftDeckCard = options.get(0).getCard(0);
         Image leftDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(leftDeckCard.front.imageResource)));
@@ -653,6 +693,7 @@ public class GameController {
     public void onButtonRightDeck() {
         player.addCard(rightDeckCard, conflict.getAllConflicts());
         options.get(1).chooseCard();
+        checkCardCorn(rightDeckCard.front);
 
         rightDeckCard = options.get(1).getCard(0);
         Image rightDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(rightDeckCard.front.imageResource)));
@@ -666,6 +707,7 @@ public class GameController {
     public void onButtonMainDeck() {
         player.getAllPlayerCards().add(mainDeckCard);
         mainDeck.chooseCard();
+        checkCardCorn(mainDeckCard.front);
 
         mainDeckCard = mainDeck.getCard(0);
         Image mainDeckFrontPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(mainDeckCard.front.imageResource)));
@@ -679,6 +721,38 @@ public class GameController {
 
         cardDisable(true);
         endButton.setDisable(false);
+    }
+
+    public void resetPlayerViewBlank() {
+        centurionImage.setImage(null);
+        centurionCount.setText("");
+        archerImage.setImage(null);
+        archerCount.setText("");
+        barbarianImage.setImage(null);
+        barbarianCount.setText("");
+
+        womanImage.setImage(null);
+        catImage.setImage(null);
+        womanCount.setText("");
+        emperorImage.setImage(null);
+        emperorCount.setText("");
+
+        lawImage.setImage(null);
+        architectImage.setImage(null);
+        mechanicImage.setImage(null);
+
+        woodImage.setImage(null);
+        woodCount.setText("");
+        paperImage.setImage(null);
+        paperCount.setText("");
+        brickImage.setImage(null);
+        brickCount.setText("");
+        stoneImage.setImage(null);
+        stoneCount.setText("");
+        glassImage.setImage(null);
+        glassCount.setText("");
+        goldImage.setImage(null);
+        goldCount.setText("");
     }
 
     public void onButtonEnd() {
