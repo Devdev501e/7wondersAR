@@ -85,6 +85,11 @@ public class GameController {
     private ImageView progressBack = new ImageView();
     private ArrayList<ImageView> progressImages = new ArrayList<>();
 
+    @FXML
+    private Rectangle infoBoxOutline;
+    @FXML
+    private Label infoBoxLabel;
+
     // --------------------------------------------player view
     @FXML
     private Tab tab2 = new Tab();
@@ -197,6 +202,8 @@ public class GameController {
             playerNames.add(i.getName());
         }
         endButton.setDisable(true);
+        infoBoxOutline.setVisible(false);
+        infoBoxLabel.setText("");
         cardDisable(false);
 
         if (beggining) {
@@ -644,6 +651,16 @@ public class GameController {
         endButton.setDisable(false);
     }
 
+    public void onButtonEnd() {
+        if (playerTurn == allPlayers.size()-1) {
+            playerTurn = 0;
+        }
+        else {
+            playerTurn++;
+        }
+        startTurn(allPlayers, mainDeck, allDecks, conflict, res, playerTurn, false);
+    }
+
     public void resetPlayerViewBlank() {
         centurionImage.setImage(null);
         centurionCount.setText("");
@@ -676,16 +693,6 @@ public class GameController {
         glassCount.setText("");
         goldImage.setImage(null);
         goldCount.setText("");
-    }
-
-    public void onButtonEnd() {
-        if (playerTurn == allPlayers.size()-1) {
-            playerTurn = 0;
-        }
-        else {
-            playerTurn++;
-        }
-        startTurn(allPlayers, mainDeck, allDecks, conflict, res, playerTurn, false);
     }
 
     public void cardDisable(boolean disable) {
@@ -728,15 +735,23 @@ public class GameController {
                 if (combats.get(i).getImage() == tokenPeace) {
                     combats.get(i).setImage(tokenWar);
                     count++;
-                    if (i == combats.size()-1) {
-                        battle();
-                        resetTokens();
-                        break;
-                    }
                 }
                 if (count == card.cornCount) {
                     break;
                 }
+            }
+            boolean warTime = true;
+            for (ImageView i : combats) {
+                if (i.getImage() == tokenPeace) {
+                    warTime = false;
+                    break;
+                }
+            }
+            if(warTime) {
+                infoBoxOutline.setVisible(true);
+                infoBoxLabel.setText("Bataille ! ");
+                battle();
+                resetTokens();
             }
         }
     }
@@ -744,6 +759,7 @@ public class GameController {
     public void battle() {
         if (allPlayers.size() == 2) {
             if (allPlayers.get(0).getHand().getShieldWar() > allPlayers.get(1).getHand().getShieldWar()) {
+                infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+allPlayers.get(0).getName()+" est le gagnant");
                 if (allPlayers.get(0).getHand().getShieldWar() > 2*allPlayers.get(1).getHand().getShieldWar()) {
                     allPlayers.get(0).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+6);
                 }
@@ -752,6 +768,7 @@ public class GameController {
                 }
             }
             else if (allPlayers.get(1).getHand().getShieldWar() > allPlayers.get(0).getHand().getShieldWar()) {
+                infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+allPlayers.get(1).getName()+" est le gagnant");
                 if (allPlayers.get(1).getHand().getShieldWar() > 2*allPlayers.get(0).getHand().getShieldWar()) {
                     allPlayers.get(1).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+6);
                 }
@@ -772,6 +789,9 @@ public class GameController {
                 if (interestingPlayer.getHand().getShieldWar() > playerRight.getHand().getShieldWar()) {
                     interestingPlayer.getHand().setMilitaryPoints(interestingPlayer.getHand().getMilitaryPoints()+3);
                 }
+                if ((interestingPlayer.getHand().getShieldWar() > playerLeft.getHand().getShieldWar()) || (interestingPlayer.getHand().getShieldWar() > playerRight.getHand().getShieldWar())) {
+                    infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+interestingPlayer.getName()+" est le gagnant");
+                }
             }
         }
 
@@ -783,6 +803,7 @@ public class GameController {
                 }
             }
             allPlayers.get(j).getAllPlayerCards().removeAll(toRemove);
+            allPlayers.get(j).getHand().setShieldWar(allPlayers.get(j).getHand().getShieldWar()-toRemove.size());
         }
     }
 }

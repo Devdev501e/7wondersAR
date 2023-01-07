@@ -93,6 +93,12 @@
                         <Image url="@images/tokens-progress/back/token-back.png" />
                      </image>
                   </ImageView>
+                  <Rectangle fx:id="infoBoxOutline" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="109.0" layoutX="259.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="311.0" />
+                  <Label fx:id="infoBoxLabel" alignment="TOP_CENTER" layoutX="259.0" layoutY="14.0" prefHeight="109.0" prefWidth="311.0" wrapText="true">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
                </children></AnchorPane>
       </content>
     </Tab>
