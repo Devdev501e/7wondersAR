@@ -319,6 +319,7 @@ public class GameController {
     public void onPlayerNames(Event event) {
         String name = allPlayerNames.getValue();
         resetPlayerViewBlank();
+        allPlayerNames.setValue("");
 
         Player playerView = null;
         for (Player i : allPlayers) {
@@ -773,13 +774,14 @@ public class GameController {
         if (card.cardCategory == CardCategory.WarCard) {
             int count = 0;
             for (int i = 0; i < combats.size(); i++) {
+                if (count == card.cornCount) {
+                    break;
+                }
                 if (combats.get(i).getImage() == tokenPeace) {
                     combats.get(i).setImage(tokenWar);
                     count++;
                 }
-                if (count == card.cornCount) {
-                    break;
-                }
+
             }
             boolean warTime = true;
             for (ImageView i : combats) {
