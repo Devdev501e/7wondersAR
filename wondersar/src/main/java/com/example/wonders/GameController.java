@@ -5,10 +5,7 @@ package com.example.wonders;
 import domain.*;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
@@ -222,38 +219,36 @@ public class GameController {
                 if (combats.get(i).getImage() == tokenPeace) {
                     combats.get(i).setImage(tokenWar);
                     count++;
+                    if (i == combats.size()-1) {
+                        battle();
+                        resetTokens();
+                        break;
+                    }
                 }
                 if (count == card.cornCount) {
                     break;
                 }
-            }
-            boolean battle = true;
-            for (ImageView i : combats) {
-                if (i.getImage() == tokenPeace) {
-                    battle = false;
-                    break;
-                }
-            }
-            if (battle) {
-                //call battle function
-                resetTokens();
             }
         }
     }
 
     public void battle() {
         if (allPlayers.size() == 2) {
-            if (allPlayers.get(0).getHand().getShieldWar() > 2*allPlayers.get(1).getHand().getShieldWar()) {
-                allPlayers.get(0).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+6);
-            }
-            else if (allPlayers.get(0).getHand().getShieldWar() > allPlayers.get(1).getHand().getShieldWar()) {
-                allPlayers.get(0).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+3);
-            }
-            else if (allPlayers.get(1).getHand().getShieldWar() > 2*allPlayers.get(0).getHand().getShieldWar()) {
-                allPlayers.get(0).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+6);
+            if (allPlayers.get(0).getHand().getShieldWar() > allPlayers.get(1).getHand().getShieldWar()) {
+                if (allPlayers.get(0).getHand().getShieldWar() > 2*allPlayers.get(1).getHand().getShieldWar()) {
+                    allPlayers.get(0).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+6);
+                }
+                else {
+                    allPlayers.get(0).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+3);
+                }
             }
             else if (allPlayers.get(1).getHand().getShieldWar() > allPlayers.get(0).getHand().getShieldWar()) {
-                allPlayers.get(0).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+3);
+                if (allPlayers.get(1).getHand().getShieldWar() > 2*allPlayers.get(0).getHand().getShieldWar()) {
+                    allPlayers.get(1).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+6);
+                }
+                else {
+                    allPlayers.get(1).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+3);
+                }
             }
         }
         else {
@@ -730,6 +725,8 @@ public class GameController {
         archerCount.setText("");
         barbarianImage.setImage(null);
         barbarianCount.setText("");
+        militaryImage.setImage(null);
+        militaryCount.setText("");
 
         womanImage.setImage(null);
         catImage.setImage(null);
