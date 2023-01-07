@@ -73,22 +73,22 @@
                   <Label fx:id="cardCountRight" layoutX="673.0" layoutY="444.0" text="Label" />
                   <ChoiceBox fx:id="allPlayerNames" layoutX="636.0" layoutY="484.0" prefWidth="150.0" />
                   <Button fx:id="endButton" layoutX="724.0" layoutY="449.0" mnemonicParsing="false" onAction="#onButtonEnd" text="End turn" />
-                  <ImageView fx:id="progressBack" fitHeight="29.0" fitWidth="34.0" layoutX="295.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="progressBack" fitHeight="29.0" fitWidth="34.0" layoutX="295.0" layoutY="230.0" onMouseClicked="#onProgress3" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/tokens-progress/back/token-back.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="progress2" fitHeight="29.0" fitWidth="34.0" layoutX="295.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="progress2" fitHeight="29.0" fitWidth="34.0" layoutX="295.0" layoutY="267.0" onMouseClicked="#onProgress2" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/tokens-progress/back/token-back.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="progress1" fitHeight="29.0" fitWidth="34.0" layoutX="295.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="progress1" fitHeight="29.0" fitWidth="34.0" layoutX="295.0" layoutY="302.0" onMouseClicked="#onProgress1" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/tokens-progress/back/token-back.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="progress0" fitHeight="29.0" fitWidth="34.0" layoutX="295.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="progress0" fitHeight="29.0" fitWidth="34.0" layoutX="295.0" layoutY="340.0" onMouseClicked="#onProgress0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/tokens-progress/back/token-back.png" />
                      </image>

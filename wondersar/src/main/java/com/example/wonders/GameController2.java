@@ -412,7 +412,7 @@ public class GameController2 {
     }
 
     public void onButtonLeftDeck() {
-        player.addCard(leftDeckCard, conflict.getAllConflicts());
+        player.addCard(leftDeckCard, conflict.getAllConflicts(), allPlayers);
         options.get(0).chooseCard();
 
         leftDeckCard = options.get(0).getCard(0);
@@ -423,7 +423,7 @@ public class GameController2 {
     }
 
     public void onButtonRightDeck() {
-        player.addCard(rightDeckCard, conflict.getAllConflicts());
+        player.addCard(rightDeckCard, conflict.getAllConflicts(), allPlayers);
         options.get(1).chooseCard();
 
         rightDeckCard = options.get(1).getCard(0);

@@ -143,13 +143,13 @@ public class Actions {
 
     }
 
-    public void effect(Wonder wonder , CardDecks deckschoisi, Player player, ArrayList<Boolean> conflict ,Card card){
+    public void effect(Wonder wonder , CardDecks deckschoisi, Player player, ArrayList<Boolean> conflict ,Card card, ArrayList<Player> players){
         switch (wonder){
             case Olympie:
             case Alexandrie:
 
             case Ephese:
-                player.addCard(deckschoisi.getCard(0),conflict);
+                player.addCard(deckschoisi.getCard(0),conflict, players);
                 deckschoisi.chooseCard();
                 break;
 
@@ -161,7 +161,7 @@ public class Actions {
 
             case Halicarnasse:
 
-              player.addCard(card,conflict);
+              player.addCard(card,conflict, players);
               break;
 
             case Rhodes:

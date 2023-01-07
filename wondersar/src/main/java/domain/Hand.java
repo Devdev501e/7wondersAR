@@ -53,9 +53,6 @@ public class Hand {
         return science;
     }
     public void addScience(int scienceNb) {
-        science[scienceNb] = science[scienceNb]+1;
-    }
-    public void removeScience(int scienceNb) {
-        science[scienceNb] = science[scienceNb]-1;
+        science[scienceNb] += 1;
     }
 }

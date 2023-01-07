@@ -242,6 +242,7 @@ public class GameController {
         for (int i = 0; i < progressImages.size(); i++) {
             Image resImage = new Image(getClass().getResourceAsStream(res.get(i).imageResource));
             progressImages.get(i).setImage(resImage);
+            progressImages.get(i).setDisable(true);
         }
 
         Player playerLeft;
@@ -605,9 +606,10 @@ public class GameController {
     }
 
     public void onButtonLeftDeck() {
-        player.addCard(leftDeckCard, conflict.getAllConflicts());
+        player.addCard(leftDeckCard, conflict.getAllConflicts(), allPlayers);
         options.get(0).chooseCard();
         checkCardCorn(leftDeckCard.front);
+        canGetToken();
 
         leftDeckCard = options.get(0).getCard(0);
         Image leftDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(leftDeckCard.front.imageResource)));
@@ -619,9 +621,10 @@ public class GameController {
     }
 
     public void onButtonRightDeck() {
-        player.addCard(rightDeckCard, conflict.getAllConflicts());
+        player.addCard(rightDeckCard, conflict.getAllConflicts(), allPlayers);
         options.get(1).chooseCard();
         checkCardCorn(rightDeckCard.front);
+        canGetToken();
 
         rightDeckCard = options.get(1).getCard(0);
         Image rightDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(rightDeckCard.front.imageResource)));
@@ -633,11 +636,16 @@ public class GameController {
     }
 
     public void onButtonMainDeck() {
-        player.getAllPlayerCards().add(mainDeckCard);
-        mainDeck.chooseCard();
-        checkCardCorn(mainDeckCard.front);
+        player.addCard(mainDeckCard, conflict.getAllConflicts(), allPlayers);
+        infoBoxLabel.setText("Card Picked : "+mainDeckCard.front.cardDisplayName);
 
+        checkCardCorn(mainDeckCard.front);
+        canGetToken();
+
+        mainDeck.chooseCard();
         mainDeckCard = mainDeck.getCard(0);
+        cardCountMain.setText("Cards: "+mainDeck.cardDeckSize());
+
         Image mainDeckFrontPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(mainDeckCard.front.imageResource)));
         if (player.getChat()) {
             mainDeckImage.setImage(mainDeckFrontPNG);
@@ -645,10 +653,39 @@ public class GameController {
         else {
             mainDeckImage.setImage(mainDeckBackPNG);
         }
-        cardCountMain.setText("Cards: "+mainDeck.cardDeckSize());
 
         cardDisable(true);
         endButton.setDisable(false);
+    }
+
+    public void onProgress0() {
+        player.getAllTokens().add(res.get(0));
+        res.remove(0);
+        Image resImage = new Image(getClass().getResourceAsStream(res.get(3).imageResource));
+        progressImages.get(0).setImage(resImage);
+        disableProgressChoice(true);
+    }
+
+    public void onProgress1() {
+        player.getAllTokens().add(res.get(1));
+        res.remove(1);
+        Image resImage = new Image(getClass().getResourceAsStream(res.get(3).imageResource));
+        progressImages.get(1).setImage(resImage);
+        disableProgressChoice(true);
+    }
+
+    public void onProgress2() {
+        player.getAllTokens().add(res.get(2));
+        res.remove(2);
+        Image resImage = new Image(getClass().getResourceAsStream(res.get(3).imageResource));
+        progressImages.get(2).setImage(resImage);
+        disableProgressChoice(true);
+    }
+
+    public void onProgress3() {
+        player.getAllTokens().add(res.get(3));
+        res.remove(3);
+        disableProgressChoice(true);
     }
 
     public void onButtonEnd() {
@@ -693,6 +730,10 @@ public class GameController {
         glassCount.setText("");
         goldImage.setImage(null);
         goldCount.setText("");
+
+        for (ImageView i : tokenImages) {
+            i.setImage(null);
+        }
     }
 
     public void cardDisable(boolean disable) {
@@ -756,6 +797,12 @@ public class GameController {
         }
     }
 
+    public void disableProgressChoice(boolean disable) {
+        for (int j = 0; j < progressImages.size(); j++) {
+            progressImages.get(j).setDisable(disable);
+        }
+    }
+
     public void battle() {
         if (allPlayers.size() == 2) {
             if (allPlayers.get(0).getHand().getShieldWar() > allPlayers.get(1).getHand().getShieldWar()) {
@@ -804,6 +851,32 @@ public class GameController {
             }
             allPlayers.get(j).getAllPlayerCards().removeAll(toRemove);
             allPlayers.get(j).getHand().setShieldWar(allPlayers.get(j).getHand().getShieldWar()-toRemove.size());
+        }
+    }
+
+    public void canGetToken() {
+        int count = 0;
+        for (int i = 0; i < player.getHand().getScience().length; i++) {
+            System.out.println("science: "+player.getHand().getScience()[i]);
+        }
+        for (int i = 0; i < player.getHand().getScience().length; i++) {
+            if (player.getHand().getScience()[i] == 2) {
+                player.getHand().getScience()[i] = 0;
+                System.out.println("yes");
+                infoBoxLabel.setText("Tu peux choisir un jeton progres");
+                disableProgressChoice(false);
+                break;
+            }
+            if (player.getHand().getScience()[i] == 1) {
+                count++;
+            }
+        }
+        if (count >= 3) {
+            for (int i = 0; i < player.getHand().getScience().length; i++) {
+                player.getHand().getScience()[i] -= 1;
+                disableProgressChoice(false);
+            }
+            infoBoxLabel.setText("Tu peux choisir un jeton progres");
         }
     }
 }

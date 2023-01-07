@@ -54,7 +54,7 @@ public class Player {
         return allPlayerCards;
     }
 
-    public void addCard(Card card, ArrayList<Boolean> conflict) {
+    public void addCard(Card card, ArrayList<Boolean> conflict, ArrayList<Player> players) {
         this.allPlayerCards.add(card);
 
         switch (card.getFront().getCardCategory()) {
@@ -70,7 +70,12 @@ public class Player {
                 break;
             case PoliticCard:
                 this.getHand().setPointVictoire(this.getHand().getPointVictoire()+card.getFront().laurelCount);
-                this.setChat(card.getFront().cat);
+                if (card.front.cat) {
+                    for (Player i : players) {
+                        i.chat = false;
+                    }
+                    this.chat = true;
+                }
                 break;
             case MaterialCard:
                 switch (card.front.getMaterial()) {
