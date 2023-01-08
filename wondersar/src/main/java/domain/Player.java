@@ -64,19 +64,12 @@ public class Player {
         return allPlayerCards;
     }
 
-    public void addCard(Card card, ArrayList<Boolean> conflict, ArrayList<Player> players) {
+    public void addCard(Card card, ArrayList<Player> players) {
         this.allPlayerCards.add(card);
 
         switch (card.getFront().getCardCategory()) {
             case WarCard:
                 this.getHand().setShieldWar(this.getHand().getShieldWar()+card.getFront().shieldCount);
-                for (int i = 0; i < card.getFront().cornCount; i++) {
-                    int count = 0;
-                    while (!conflict.get(count)) {
-                        count ++;
-                    }
-                    conflict.add(count, false);
-                }
                 break;
             case PoliticCard:
                 this.getHand().setPointVictoire(this.getHand().getPointVictoire()+card.getFront().laurelCount);

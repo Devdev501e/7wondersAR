@@ -179,12 +179,32 @@ public class GameController {
     @FXML
     private Button endButton;
 
+    private ArrayList<Image> alexandrieBack = new ArrayList<>();
+    private ArrayList<Image> alexandrieFront = new ArrayList<>();
+
+    private ArrayList<Image> halicarnasseBack = new ArrayList<>();
+    private ArrayList<Image> halicarnasseFront = new ArrayList<>();
+
+    private ArrayList<Image> epheseBack = new ArrayList<>();
+    private ArrayList<Image> epheseFront = new ArrayList<>();
+
+    private ArrayList<Image> olympieBack = new ArrayList<>();
+    private ArrayList<Image> olympieFront = new ArrayList<>();
+
+    private ArrayList<Image> babyloneBack = new ArrayList<>();
+    private ArrayList<Image> babyloneFront = new ArrayList<>();
+
+    private ArrayList<Image> rhodesBack = new ArrayList<>();
+    private ArrayList<Image> rhodesFront = new ArrayList<>();
+
+    private ArrayList<Image> gizehBack = new ArrayList<>();
+    private ArrayList<Image> gizehFront = new ArrayList<>();
+
     //-------------------------------------------needed variables
 
     private Player player;
     private ArrayList<String> playerNames = new ArrayList<>();
     private final Actions actions = new Actions();
-    Conflict conflict;
     ArrayList<CardDecks> options = new ArrayList<>();
     ArrayList<CardDecks> allDecks = new ArrayList<>();
     CardDecks mainDeck;
@@ -196,7 +216,7 @@ public class GameController {
     ArrayList<Player> allPlayers = new ArrayList<>();
     ArrayList<ProgressToken> res;
 
-    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<CardDecks> allPlayerDecks, Conflict conflictList,ArrayList<ProgressToken> progressTokens, int turn, boolean beggining) {
+    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<CardDecks> allPlayerDecks,ArrayList<ProgressToken> progressTokens, int turn, boolean beggining) {
         //initialize table game
         for (Player i : players) {
             playerNames.add(i.getName());
@@ -232,7 +252,6 @@ public class GameController {
         playerTurn = turn;
         playerName.setText(player.getName());
 
-        conflict = conflictList;
         mainDeck = mainCardDeck;
 
         options = actions.cardDecksOption(allPlayerDecks, turn);
@@ -717,7 +736,7 @@ public class GameController {
     }
 
     public void onButtonLeftDeck() {
-        player.addCard(leftDeckCard, conflict.getAllConflicts(), allPlayers);
+        player.addCard(leftDeckCard, allPlayers);
         for (ProgressToken i : player.getAllTokens()) {
             getScienceEffectDuringGame(i, player, leftDeckCard);
         }
@@ -735,7 +754,7 @@ public class GameController {
     }
 
     public void onButtonRightDeck() {
-        player.addCard(rightDeckCard, conflict.getAllConflicts(), allPlayers);
+        player.addCard(rightDeckCard, allPlayers);
         for (ProgressToken i : player.getAllTokens()) {
             getScienceEffectDuringGame(i, player, rightDeckCard);
         }
@@ -753,7 +772,7 @@ public class GameController {
     }
 
     public void onButtonMainDeck() {
-        player.addCard(mainDeckCard, conflict.getAllConflicts(), allPlayers);
+        player.addCard(mainDeckCard, allPlayers);
         if (!player.getChat()) {
             infoBoxLabel.setText("Card Picked : "+mainDeckCard.front.cardDisplayName);
         }
@@ -817,7 +836,7 @@ public class GameController {
         else {
             playerTurn++;
         }
-        startTurn(allPlayers, mainDeck, allDecks, conflict, res, playerTurn, false);
+        startTurn(allPlayers, mainDeck, allDecks, res, playerTurn, false);
     }
 
     public void resetPlayerViewBlank() {
@@ -979,9 +998,6 @@ public class GameController {
 
     public void canGetToken() {
         int count = 0;
-        for (int i = 0; i < player.getHand().getScience().length; i++) {
-            System.out.println("science: "+player.getHand().getScience()[i]);
-        }
         for (int i = 0; i < player.getHand().getScience().length; i++) {
             if (player.getHand().getScience()[i] == 2) {
                 player.getHand().getScience()[i] = 0;

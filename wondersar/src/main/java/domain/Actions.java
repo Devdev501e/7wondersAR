@@ -149,7 +149,7 @@ public class Actions {
             case Alexandrie:
 
             case Ephese:
-                player.addCard(deckschoisi.getCard(0),conflict, players);
+                player.addCard(deckschoisi.getCard(0), players);
                 deckschoisi.chooseCard();
                 break;
 
@@ -161,7 +161,7 @@ public class Actions {
 
             case Halicarnasse:
 
-              player.addCard(card,conflict, players);
+              player.addCard(card, players);
               break;
 
             case Rhodes:
