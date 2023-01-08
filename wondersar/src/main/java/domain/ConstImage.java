@@ -5,10 +5,10 @@ public enum ConstImage {
     AlexandrieBack("alexandrie/piece-back-alexandrie-1.png","alexandrie/piece-back-alexandrie-4.png","alexandrie/piece-back-alexandrie-2.png","alexandrie/piece-back-alexandrie-3.png","alexandrie/piece-back-alexandrie-6.png"),
     BabylonBack("babylon/piece-back-babylon-1.png","babylon/piece-back-babylon-2.png","babylon/piece-back-babylon-4.png","babylon/piece-back-babylon-5.png","babylon/piece-back-babylon-6.png"),
     Ephese("ephese/piece-back-ephese-5.png","ephese/piece-back-ephese-2.png","ephese/piece-back-ephese-4.png","ephese/piece-back-ephese-3.png","ephese/piece-back-ephese-6.png"),
-    Giseh("?","giseh/piece-back-giseh-1.png","giseh/piece-back-giseh-2.png","giseh/piece-back-giseh-3.png","giseh/piece-back-giseh-4.png"),
+    Giseh("giseh/piece-back-giseh-1.png","giseh/piece-back-giseh-1.png","giseh/piece-back-giseh-2.png","giseh/piece-back-giseh-3.png","giseh/piece-back-giseh-4.png"),
     Halicarnasse("halicarnasse/piece-back-halicarnasse-1.png","halicarnasse/piece-back-halicarnasse-2.png","halicarnasse/piece-back-halicarnasse-4.png","halicarnasse/piece-back-halicarnasse-3.png","halicarnasse/piece-back-halicarnasse-5.png"),
     Olympie("","","","",""),
-    Rhodes("rhodes/piece-back-rhodes-2.png","rhodes/piece-back-rhodes-1.png","rhodes/piece-back-rhodes-3.png","rhodes/piece-back-rhodes-3","rhodes/piece-back-rhodes-4.png");
+    Rhodes("rhodes/piece-back-rhodes-2.png","rhodes/piece-back-rhodes-1.png","rhodes/piece-back-rhodes-3.png","rhodes/piece-back-rhodes-4.png","rhodes/piece-back-rhodes-5.png");
 
     public  String  construction1;
     public String construction2;

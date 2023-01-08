@@ -154,23 +154,26 @@
                         <Font size="29.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="construction3" fitHeight="38.0" fitWidth="163.0" layoutX="328.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="construction1" fitHeight="42.0" fitWidth="204.0" layoutX="309.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@images/wonders/babylon/piece-back-babylon-4.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="construction1" fitHeight="46.0" fitWidth="200.0" layoutX="309.0" layoutY="266.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="construction2" fitHeight="43.0" fitWidth="188.0" layoutX="312.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@images/wonders/babylon/piece-back-babylon-1.png" />
+                     </image></ImageView>
+                  <ImageView fx:id="construction2" fitHeight="47.0" fitWidth="194.0" layoutX="312.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/wonders/babylon/piece-back-babylon-2.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="construction4" fitHeight="71.0" fitWidth="64.0" layoutX="343.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="construction3" fitHeight="47.0" fitWidth="173.0" layoutX="325.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/wonders/babylon/piece-back-babylon-4.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="construction5" fitHeight="61.0" fitWidth="74.0" layoutX="346.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/wonders/babylon/piece-back-babylon-5.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="construction5" fitHeight="40.0" fitWidth="93.0" layoutX="400.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="construction4" fitHeight="44.0" fitWidth="79.0" layoutX="408.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/wonders/babylon/piece-back-babylon-6.png" />
                      </image>

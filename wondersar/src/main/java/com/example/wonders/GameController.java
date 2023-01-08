@@ -319,7 +319,7 @@ public class GameController {
     public void onPlayerNames(Event event) {
         String name = allPlayerNames.getValue();
         resetPlayerViewBlank();
-        allPlayerNames.setValue("");
+
 
         Player playerView = null;
         for (Player i : allPlayers) {
@@ -339,62 +339,56 @@ public class GameController {
                 System.out.println(constImage.getCons1());
                 Image cons1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getCons1())));
                 construction1.setImage(cons1);
-                construction1.setLayoutX(309);
-                construction1.setLayoutY(270);
-                construction1.setFitWidth(200);
-                construction1.setFitHeight(46);
-                construction1.setX(0);
-                construction1.setY(0);
+                construction1.setLayoutX(330);
+                construction1.setLayoutY(272);
+                construction1.setFitWidth(190);
+                construction1.setFitHeight(35);
+
 
                 System.out.println(constImage.getCons2());
                 Image cons2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getCons2())));
                 construction2.setImage(cons2);
-                construction2.setLayoutX(363);
-                construction2.setLayoutY(226);
-                construction2.setFitWidth(92);
-                construction2.setFitHeight(52);
-                construction2.setX(0);
-                construction2.setY(0);
+                construction2.setLayoutX(373);
+                construction2.setLayoutY(230);
+                construction2.setFitWidth(95);
+                construction2.setFitHeight(44);
+
 
                 System.out.println(constImage.getCons3());
                 Image cons3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getCons3())));
                 construction3.setImage(cons3);
-                construction3.setLayoutX(362);
-                construction3.setLayoutY(172);
-                construction3.setFitWidth(96);
-                construction3.setFitHeight(54);
-                construction3.setX(0);
-                construction3.setY(0);
+                construction3.setLayoutX(375);
+                construction3.setLayoutY(186);
+                construction3.setFitWidth(81);
+                construction3.setFitHeight(45);
+
 
                 System.out.println(constImage.getCons4());
                 Image cons4 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getCons4())));
                 construction4.setImage(cons4);
-                construction4.setLayoutX(376);
-                construction4.setLayoutY(118);
-                construction4.setFitWidth(84);
-                construction4.setFitHeight(56);
-                construction4.setX(0);
-                construction4.setY(0);
+                construction4.setLayoutX(386);
+                construction4.setLayoutY(136);
+                construction4.setFitWidth(59);
+                construction4.setFitHeight(51);
 
                 System.out.println(constImage.getCons5());
                 Image cons5 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getCons5())));
                 construction5.setImage(cons5);
-                construction5.setLayoutX(386);
-                construction5.setLayoutY(46);
-                construction5.setFitWidth(206);
-                construction5.setFitHeight(80);
-                construction5.setX(0);
-                construction5.setY(0);
+                construction5.setLayoutX(394);
+                construction5.setLayoutY(71);
+                construction5.setFitWidth(64);
+                construction5.setFitHeight(71);
+
                 break;
             case Babylone:
                 ConstImage constImageB = ConstImage.BabylonBack;
                 System.out.println(constImageB.getCons1());
                 Image cons1B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getCons1())));
                 construction1.setImage(cons1B);
-                construction1.setLayoutX(310);
-                construction1.setLayoutY(225);
-                construction1.setFitWidth(206);
-                construction1.setFitHeight(38);
+                construction1.setLayoutX(309);
+                construction1.setLayoutY(259);
+                construction1.setFitWidth(204);
+                construction1.setFitHeight(42);
                 construction1.setX(0);
                 construction1.setY(0);
                 construction1.setScaleX(1);
@@ -406,59 +400,84 @@ public class GameController {
                 Image cons2B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getCons2())));
                 construction2.setImage(cons2B);
                 construction2.setLayoutX(312);
-                construction2.setLayoutY(184);
-                construction2.setFitWidth(188);
-                construction2.setFitHeight(43);
-                construction2.setX(0);
-                construction2.setY(0);
-                construction2.setScaleX(1);
-                construction2.setScaleY(1);
-                construction2.setScaleZ(1);
-                construction2.setPreserveRatio(true);
+                construction2.setLayoutY(218);
+                construction2.setFitWidth(194);
+                construction2.setFitHeight(47);
+
 
                 System.out.println(constImageB.getCons3());
                 Image cons3B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getCons3())));
                 construction3.setImage(cons3B);
-                construction3.setLayoutX(328);
-                construction3.setLayoutY(148);
+                construction3.setLayoutX(325);
+                construction3.setLayoutY(180);
+                construction3.setFitWidth(173);
+                construction3.setFitHeight(47);
 
-                construction3.setFitWidth(163);
-                construction3.setFitHeight(38);
-                construction3.setX(0);
-                construction3.setY(0);
-                construction3.setScaleX(1);
-                construction3.setScaleY(1);
-                construction3.setScaleZ(1);
-                construction3.setPreserveRatio(true);
 
                 System.out.println(constImageB.getCons4());
                 Image cons4B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getCons4())));
                 construction4.setImage(cons4B);
-                construction4.setLayoutX(420);
-                construction4.setLayoutY(100);
-                construction4.setFitWidth(100);
-                construction4.setFitHeight(60);
-                construction4.setX(0);
-                construction4.setY(0);
-                construction4.setScaleX(1);
-                construction4.setScaleY(1);
-                construction4.setScaleZ(1);
-                construction4.setPreserveRatio(true);
+                construction4.setLayoutX(346);
+                construction4.setLayoutY(119);
+                construction4.setFitWidth(74);
+                construction4.setFitHeight(61);
+
 
                 System.out.println(constImageB.getCons5());
                 Image cons5B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getCons5())));
                 construction5.setImage(cons5B);
-                construction5.setLayoutX(343);
-                construction5.setLayoutY(80);
-                construction5.setFitWidth(64);
-                construction5.setFitHeight(71);
-                construction5.setX(0);
-                construction5.setY(0);
-                construction5.setScaleX(1);
-                construction5.setScaleY(1);
-                construction5.setScaleZ(1);
-                construction5.setPreserveRatio(true);
+                construction5.setLayoutX(408);
+                construction5.setLayoutY(140);
+                construction5.setFitWidth(79);
+                construction5.setFitHeight(44);
+
+                break;
             case Rhodes:
+                ConstImage constImageR = ConstImage.Rhodes;
+                System.out.println(constImageR.getCons1());
+                Image cons1R = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageR.getCons1())));
+                construction1.setImage(cons1R);
+                construction1.setLayoutX(291);
+                construction1.setLayoutY(280);
+                construction1.setFitWidth(94);
+                construction1.setFitHeight(33);
+
+
+                System.out.println(constImageR.getCons2());
+                Image cons2R = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageR.getCons2())));
+                construction2.setImage(cons2R);
+                construction2.setLayoutX(395);
+                construction2.setLayoutY(279);
+                construction2.setFitWidth(94);
+                construction2.setFitHeight(33);
+
+
+                System.out.println(constImageR.getCons3());
+                Image cons3R = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageR.getCons3())));
+                construction3.setImage(cons3R);
+                construction3.setLayoutX(334);
+                construction3.setLayoutY(203);
+                construction3.setFitWidth(117);
+                construction3.setFitHeight(77);
+
+
+                System.out.println(constImageR.getCons4());
+                Image cons4R = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageR.getCons4())));
+                construction4.setImage(cons4R);
+                construction4.setLayoutX(327);
+                construction4.setLayoutY(134);
+                construction4.setFitWidth(131);
+                construction4.setFitHeight(70);
+
+                System.out.println(constImageR.getCons5());
+                Image cons5R = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageR.getCons5())));
+                construction5.setImage(cons5R);
+                construction5.setLayoutX(333);
+                construction5.setLayoutY(52);
+                construction5.setFitWidth(255);
+                construction5.setFitHeight(82);
+
+                break;
             case Halicarnasse:
                 ConstImage constImageH = ConstImage.Halicarnasse;
                 System.out.println(constImageH.getCons1());
@@ -512,8 +531,99 @@ public class GameController {
                 construction5.setY(0);
                 break;
             case Gizeh:
+                ConstImage constImageG = ConstImage.Giseh;
+                System.out.println(constImageG.getCons1());
+                Image cons1G = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageG.getCons1())));
+                construction1.setImage(cons1G);
+                construction1.setLayoutX(330);
+                construction1.setLayoutY(272);
+                construction1.setFitWidth(190);
+                construction1.setFitHeight(35);
+
+
+                System.out.println(constImageG.getCons2());
+                Image cons2G = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageG.getCons2())));
+                construction2.setImage(cons2G);
+                construction2.setLayoutX(292);
+                construction2.setLayoutY(230);
+                construction2.setFitWidth(213);
+                construction2.setFitHeight(40);
+
+
+                System.out.println(constImageG.getCons3());
+                Image cons3G = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageG.getCons3())));
+                construction3.setImage(cons3G);
+                construction3.setLayoutX(316);
+                construction3.setLayoutY(191);
+                construction3.setFitWidth(157);
+                construction3.setFitHeight(43);
+
+
+                System.out.println(constImageG.getCons4());
+                Image cons4G = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageG.getCons4())));
+                construction4.setImage(cons4G);
+                construction4.setLayoutX(340);
+                construction4.setLayoutY(152);
+                construction4.setFitWidth(111);
+                construction4.setFitHeight(42);
+
+                System.out.println(constImageG.getCons5());
+                Image cons5G = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageG.getCons5())));
+                construction5.setImage(cons5G);
+                construction5.setLayoutX(360);
+                construction5.setLayoutY(94);
+                construction5.setFitWidth(70);
+                construction5.setFitHeight(57);
+
+                break;
             case Olympie:
+                break;
             case Ephese:
+                ConstImage constImageE = ConstImage.Ephese;
+                System.out.println(constImageE.getCons1());
+                Image cons1E = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageE.getCons1())));
+                construction1.setImage(cons1E);
+                construction1.setLayoutX(277);
+                construction1.setLayoutY(261);
+                construction1.setFitWidth(230);
+                construction1.setFitHeight(45);
+
+
+                System.out.println(constImageE.getCons2());
+                Image cons2E = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageE.getCons2())));
+                construction2.setImage(cons2E);
+                construction2.setLayoutX(289);
+                construction2.setLayoutY(174);
+                construction2.setFitWidth(46);
+                construction2.setFitHeight(88);
+
+
+                System.out.println(constImageE.getCons3());
+                Image cons3E = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageE.getCons3())));
+                construction3.setImage(cons3E);
+                construction3.setLayoutX(369);
+                construction3.setLayoutY(174);
+                construction3.setFitWidth(46);
+                construction3.setFitHeight(86);
+
+
+                System.out.println(constImageE.getCons4());
+                Image cons4E = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageE.getCons4())));
+                construction4.setImage(cons4E);
+                construction4.setLayoutX(442);
+                construction4.setLayoutY(174);
+                construction4.setFitWidth(46);
+                construction4.setFitHeight(86);
+
+                System.out.println(constImageE.getCons5());
+                Image cons5E = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageE.getCons5())));
+                construction5.setImage(cons5E);
+                construction5.setLayoutX(280);
+                construction5.setLayoutY(92);
+                construction5.setFitWidth(255);
+                construction5.setFitHeight(82);
+
+                break;
         }
 
         //for cat image
