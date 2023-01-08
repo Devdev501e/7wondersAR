@@ -27,7 +27,7 @@ public enum ProgressToken {
 			+ "choisissez 1 carte supplémentaire parmi les 3 disponibles et posez-la devant vous", //
 			"token-propaganda.png"),
 	
-	Architecture("architecture", "architecture", // 
+	Architecture("architecture", "architecture", // still do
 			"Lorsque vous construisez un étape, " // 
 			+ "choisissez 1 carte parmi les 3 disponibles et posez-la devant vous", //
 			"token-architecture.png"),
@@ -36,7 +36,7 @@ public enum ProgressToken {
 			"1 carte jaune en votre possession vous offre 2 pièces au lieu d'une seule", //
 			"token-economy.png"), 
 	
-	Ingeniery("ingeniery", "ingénierie", //
+	Ingeniery("ingeniery", "ingénierie", // still do
 			"Lorsque vous construisez un étape, " 
 			+ "vous pouvez utiliser n'importe quelle ressource sans tenir compte de la restriction 'identique' ou 'différente'", //
 			"token-ingeniery.png"),
@@ -45,23 +45,23 @@ public enum ProgressToken {
 			"Ajoutez 2 Boucliers à votre total de Boucliers", //
 			"token-tactic.png"),
 
-	Decoration("decoration", "décoration", //
+	Decoration("decoration", "décoration", // still do
 			"A la fin de la partie, " // 
 			+ "gagnez 4 Points de victoire si votre Merveille est encore en construction, " //
 			+ "ou 6 Points de victoire si vous avez terminé sa construction", //
 			"token-decoration.png"),
 	
-	Politic("politic", "politique", //
+	Politic("politic", "politique", // still do
 			"A la fin de la partie, " // 
 			+ "gagnez 1 Point de victoire par îcone 'chat', présente sur vos cartes bleues", //
 			"token-politic.png"),
 
-	Strategy("strategy", "stratégie", //
+	Strategy("strategy", "stratégie", // still do
 			"A la fin de la partie, " //
 			+ "gagnez 1 Point de victoire par jeton militaire en votre possession", //
 			"token-strategy.png"),
 	
-	Education("education", "éducation", //
+	Education("education", "éducation", // still do
 			"A la fin de la partie, " // 
 			+ "gagnez 2 Points de victoire par jeton de Progrès en votre possession (celui-ci y compris)", //
 			"token-education.png"),
@@ -88,9 +88,5 @@ public enum ProgressToken {
 		this.frenchName = frenchName;
 		this.effectDescription = effectDescription;
 		this.imageResource = "images/tokens-progress/" + imageResource;
-	}
-
-	public String getEffectDescription() {
-		return effectDescription;
 	}
 }

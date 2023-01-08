@@ -11,6 +11,7 @@ public class Player {
     private ArrayList<ProgressToken> allTokens;
     private Hand hand;
     private Boolean chat;
+    private int cultureTokens;
 
 
     public Player(String name,Wonder wonder, Hand hand,Boolean chat, ArrayList<Card> allPlayerCards, ArrayList<ProgressToken> allTokens){
@@ -21,6 +22,7 @@ public class Player {
         this.allPlayerCards = allPlayerCards;
         this.allTokens = allTokens;
         this.wonderContruction = new Construction(wonder);
+        this.cultureTokens = 0;
     }
 
     public String getName() {
@@ -48,6 +50,14 @@ public class Player {
 
     public ArrayList<ProgressToken> getAllTokens() {
         return allTokens;
+    }
+
+    public int getCultureTokens() {
+        return cultureTokens;
+    }
+
+    public void setCultureTokens(int cultureTokens) {
+        this.cultureTokens = cultureTokens;
     }
 
     public ArrayList<Card> getAllPlayerCards() {

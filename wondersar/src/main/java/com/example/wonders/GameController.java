@@ -718,6 +718,9 @@ public class GameController {
 
     public void onButtonLeftDeck() {
         player.addCard(leftDeckCard, conflict.getAllConflicts(), allPlayers);
+        for (ProgressToken i : player.getAllTokens()) {
+            getScienceEffectDuringGame(i, player, leftDeckCard);
+        }
         options.get(0).chooseCard();
         checkCardCorn(leftDeckCard.front);
         canGetToken();
@@ -733,6 +736,9 @@ public class GameController {
 
     public void onButtonRightDeck() {
         player.addCard(rightDeckCard, conflict.getAllConflicts(), allPlayers);
+        for (ProgressToken i : player.getAllTokens()) {
+            getScienceEffectDuringGame(i, player, rightDeckCard);
+        }
         options.get(1).chooseCard();
         checkCardCorn(rightDeckCard.front);
         canGetToken();
@@ -748,7 +754,12 @@ public class GameController {
 
     public void onButtonMainDeck() {
         player.addCard(mainDeckCard, conflict.getAllConflicts(), allPlayers);
-        infoBoxLabel.setText("Card Picked : "+mainDeckCard.front.cardDisplayName);
+        if (!player.getChat()) {
+            infoBoxLabel.setText("Card Picked : "+mainDeckCard.front.cardDisplayName);
+        }
+        for (ProgressToken i : player.getAllTokens()) {
+            getScienceEffectDuringGame(i, player, mainDeckCard);
+        }
 
         checkCardCorn(mainDeckCard.front);
         canGetToken();
@@ -989,6 +1000,50 @@ public class GameController {
                 disableProgressChoice(false);
             }
             infoBoxLabel.setText("Tu peux choisir un jeton progres");
+        }
+    }
+
+    public void getScienceEffectDuringGame(ProgressToken progressToken, Player player, Card cardChosen) {
+        switch (progressToken) {
+            case Tactic:
+                player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
+                break;
+            case Culture:
+                player.setCultureTokens(player.getCultureTokens()+1);
+                break;
+            case Economy:
+                player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
+                break;
+            case Science:
+                if (cardChosen.front.cardCategory == CardCategory.ProgressCard) {
+                    cardDisable(false);
+                    infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+progressToken.effectDescription);
+                }
+                break;
+            case Jewelry:
+                if ((cardChosen.front.material == Material.Stone) || (cardChosen.front.material == Material.Gold)) {
+                    cardDisable(false);
+                    infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+progressToken.effectDescription);
+                }
+                break;
+            case Urbanism:
+                if ((cardChosen.front.material == Material.Wood) || (cardChosen.front.material == Material.Brick)) {
+                    cardDisable(false);
+                    infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+progressToken.effectDescription);
+                }
+                break;
+            case Propaganda:
+                if (cardChosen.front.cornCount != 0) {
+                    cardDisable(false);
+                    infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+progressToken.effectDescription);
+                }
+                break;
+            case ArtsAndCrafts:
+                if ((cardChosen.front.material == Material.Paper) || (cardChosen.front.material == Material.Glass)) {
+                    cardDisable(false);
+                    infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+progressToken.effectDescription);
+                }
+                break;
         }
     }
 }
