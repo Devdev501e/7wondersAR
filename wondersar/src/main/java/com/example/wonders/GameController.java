@@ -1050,4 +1050,64 @@ public class GameController {
                 break;
         }
     }
+
+    public void calculateFinalPoints() {
+        for (Player i : allPlayers) {
+            int cultureCount = 0;
+
+            //points vennant de jetons scientifique
+            for (ProgressToken j : i.getAllTokens()) {
+                switch (j) {
+                    case Decoration:
+                        boolean totalCompletion = true;
+                        for (ConstructionPiece k : player.getWonderContruction().getAllPieces()) {
+                            if (!k.isComplete()) {
+                                totalCompletion = false;
+                                break;
+                            }
+                        }
+
+                        if (totalCompletion) {
+                            i.getHand().setPointVictoire(i.getHand().getPointVictoire()+6);
+                        } else {
+                            i.getHand().setPointVictoire(i.getHand().getPointVictoire()+4);
+                        }
+                        break;
+                    case Politic:
+                        for (Card k : player.getAllPlayerCards()) {
+                            if (k.front.cat) {
+                                i.getHand().setPointVictoire(i.getHand().getPointVictoire()+1);
+                            }
+                        }
+                        break;
+                    case Strategy:
+                        int nbMilitaryTokens = player.getHand().getMilitaryPoints()/3;
+                        for (int k = 0; k < nbMilitaryTokens; k++) {
+                            i.getHand().setPointVictoire(i.getHand().getPointVictoire()+1);
+                        }
+                        break;
+                    case Education:
+                        for (int k = 0; k < player.getAllTokens().size(); k++) {
+                            i.getHand().setPointVictoire(i.getHand().getPointVictoire()+1);
+                        }
+                        break;
+                    case Culture:
+                        cultureCount++;
+                        break;
+                }
+            }
+            if (cultureCount == 1) {
+                i.getHand().setPointVictoire(i.getHand().getPointVictoire()+4);
+            }
+            else if (cultureCount == 2) {
+                i.getHand().setPointVictoire(i.getHand().getPointVictoire()+12);
+            }
+
+            //points vennant de construction
+
+            //points vennant de guerre
+
+            //points vennant de carte bleu
+        }
+    }
 }
