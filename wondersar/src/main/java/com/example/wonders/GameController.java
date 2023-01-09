@@ -179,27 +179,6 @@ public class GameController {
     @FXML
     private Button endButton;
 
-    private ArrayList<Image> alexandrieBack = new ArrayList<>();
-    private ArrayList<Image> alexandrieFront = new ArrayList<>();
-
-    private ArrayList<Image> halicarnasseBack = new ArrayList<>();
-    private ArrayList<Image> halicarnasseFront = new ArrayList<>();
-
-    private ArrayList<Image> epheseBack = new ArrayList<>();
-    private ArrayList<Image> epheseFront = new ArrayList<>();
-
-    private ArrayList<Image> olympieBack = new ArrayList<>();
-    private ArrayList<Image> olympieFront = new ArrayList<>();
-
-    private ArrayList<Image> babyloneBack = new ArrayList<>();
-    private ArrayList<Image> babyloneFront = new ArrayList<>();
-
-    private ArrayList<Image> rhodesBack = new ArrayList<>();
-    private ArrayList<Image> rhodesFront = new ArrayList<>();
-
-    private ArrayList<Image> gizehBack = new ArrayList<>();
-    private ArrayList<Image> gizehFront = new ArrayList<>();
-
     //-------------------------------------------needed variables
 
     private Player player;
@@ -801,6 +780,11 @@ public class GameController {
 
     public void onProgress0() {
         player.getAllTokens().add(res.get(0));
+
+        if (res.get(0) == ProgressToken.Economy) {
+            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
+        }
+
         res.remove(0);
         Image resImage = new Image(getClass().getResourceAsStream(res.get(3).imageResource));
         progressImages.get(0).setImage(resImage);
@@ -809,7 +793,11 @@ public class GameController {
 
     public void onProgress1() {
         player.getAllTokens().add(res.get(1));
+        if (res.get(1) == ProgressToken.Economy) {
+            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
+        }
         res.remove(1);
+
         Image resImage = new Image(getClass().getResourceAsStream(res.get(3).imageResource));
         progressImages.get(1).setImage(resImage);
         disableProgressChoice(true);
@@ -817,6 +805,9 @@ public class GameController {
 
     public void onProgress2() {
         player.getAllTokens().add(res.get(2));
+        if (res.get(2) == ProgressToken.Economy) {
+            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
+        }
         res.remove(2);
         Image resImage = new Image(getClass().getResourceAsStream(res.get(3).imageResource));
         progressImages.get(2).setImage(resImage);
@@ -825,6 +816,9 @@ public class GameController {
 
     public void onProgress3() {
         player.getAllTokens().add(res.get(3));
+        if (res.get(3) == ProgressToken.Economy) {
+            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
+        }
         res.remove(3);
         disableProgressChoice(true);
     }
@@ -1023,12 +1017,6 @@ public class GameController {
         switch (progressToken) {
             case Tactic:
                 player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
-                break;
-            case Culture:
-                player.setCultureTokens(player.getCultureTokens()+1);
-                break;
-            case Economy:
-                player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
                 break;
             case Science:
                 if (cardChosen.front.cardCategory == CardCategory.ProgressCard) {

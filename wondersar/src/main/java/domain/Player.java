@@ -11,7 +11,6 @@ public class Player {
     private ArrayList<ProgressToken> allTokens;
     private Hand hand;
     private Boolean chat;
-    private int cultureTokens;
 
 
     public Player(String name,Wonder wonder, Hand hand,Boolean chat, ArrayList<Card> allPlayerCards, ArrayList<ProgressToken> allTokens){
@@ -22,7 +21,6 @@ public class Player {
         this.allPlayerCards = allPlayerCards;
         this.allTokens = allTokens;
         this.wonderContruction = new Construction(wonder);
-        this.cultureTokens = 0;
     }
 
     public String getName() {
@@ -52,14 +50,6 @@ public class Player {
         return allTokens;
     }
 
-    public int getCultureTokens() {
-        return cultureTokens;
-    }
-
-    public void setCultureTokens(int cultureTokens) {
-        this.cultureTokens = cultureTokens;
-    }
-
     public ArrayList<Card> getAllPlayerCards() {
         return allPlayerCards;
     }
@@ -84,6 +74,9 @@ public class Player {
                 switch (card.front.getMaterial()) {
                     case Gold:
                         this.getHand().addMaterials(5);
+                        if (this.getAllTokens().contains(ProgressToken.Economy)) {
+                            this.getHand().addMaterials(5);
+                        }
                         break;
                     case Wood:
                         this.getHand().addMaterials(0);
@@ -117,10 +110,5 @@ public class Player {
                 break;
         }
     }
-
-    public void useCard(Card card) {
-        allPlayerCards.remove(card);
-    }
-
 }
 
