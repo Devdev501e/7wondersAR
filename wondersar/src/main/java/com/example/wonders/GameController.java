@@ -194,14 +194,11 @@ public class GameController {
 
     ArrayList<Player> allPlayers = new ArrayList<>();
     ArrayList<ProgressToken> res;
-    ArrayList<ProgressToken> resLeft;
     private int countCards;
     private int countDraw;
 
     public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<CardDecks> allPlayerDecks,ArrayList<ProgressToken> progressTokens, int turn, boolean beggining) {
         //initialize table game
-        resLeft = new ArrayList<>();
-        resLeft.addAll(progressTokens);
         countCards = 0;
         countDraw = 1;
         for (Player i : players) {
@@ -237,6 +234,8 @@ public class GameController {
         player = players.get(turn);
         playerTurn = turn;
         playerName.setText(player.getName());
+
+        System.out.println(player.getAllTokens());
 
         mainDeck = mainCardDeck;
 
@@ -725,14 +724,22 @@ public class GameController {
 
     public void onButtonLeftDeck() {
         player.addCard(leftDeckCard, allPlayers);
+        ArrayList<Integer> tokenIgnore = new ArrayList<>();
         countCards++;
 
         if (player.getAllTokens().size() == 0) {
             cardDisable(true);
         }
         else {
-            for (ProgressToken i : player.getAllTokens()) {
-                getScienceEffectDuringGame(i, leftDeckCard);
+            for (int i = 0; i < player.getAllTokens().size(); i++) {
+                ProgressToken pt = player.getAllTokens().get(i);
+                if (!tokenIgnore.contains(i)) {
+                    boolean found = getScienceEffectDuringGame(pt, leftDeckCard);
+                    if (found) {
+                        tokenIgnore.add(i);
+                        break;
+                    }
+                }
             }
         }
 
@@ -762,7 +769,10 @@ public class GameController {
         }
         else {
             for (ProgressToken i : player.getAllTokens()) {
-                getScienceEffectDuringGame(i, rightDeckCard);
+                boolean found = getScienceEffectDuringGame(i, rightDeckCard);
+                if (found) {
+                    break;
+                }
             }
         }
 
@@ -775,6 +785,7 @@ public class GameController {
         rightDeckCardImage.setImage(rightDeckCardPNG);
         cardCountRight.setText("Cards: "+options.get(1).cardDeckSize());
 
+
         if (countDraw == countCards) {
             cardDisable(true);
         }
@@ -786,16 +797,18 @@ public class GameController {
         player.addCard(mainDeckCard, allPlayers);
         countCards++;
 
-        if (countCards >= 1) {
-            if (player.getAllTokens().size() == 0) {
-                cardDisable(true);
-            }
-            else {
-                for (ProgressToken i : player.getAllTokens()) {
-                    getScienceEffectDuringGame(i, mainDeckCard);
+        if (player.getAllTokens().size() == 0) {
+            cardDisable(true);
+        }
+        else {
+            for (ProgressToken i : player.getAllTokens()) {
+                boolean found = getScienceEffectDuringGame(i, mainDeckCard);
+                if (found) {
+                    break;
                 }
             }
         }
+
         if (!player.getChat()) {
             infoBoxLabel.setText("Card Picked : "+mainDeckCard.front.cardDisplayName);
         }
@@ -1067,41 +1080,47 @@ public class GameController {
         }
     }
 
-    public void getScienceEffectDuringGame(ProgressToken progressToken, Card cardChosen) {
+    public boolean getScienceEffectDuringGame(ProgressToken progressToken, Card cardChosen) {
+        boolean found = false;
+
         switch (progressToken) {
             case Science:
                 if (cardChosen.front.cardCategory == CardCategory.ProgressCard) {
                     countDraw++;
+                    found = true;
                     infoBoxLabel.setText("choose another card");
                 }
                 break;
             case Jewelry:
                 if ((cardChosen.front.material == Material.Stone) || (cardChosen.front.material == Material.Gold)) {
                     countDraw++;
+                    found = true;
                     infoBoxLabel.setText("choose another card");
                 }
                 break;
             case Urbanism:
                 if ((cardChosen.front.material == Material.Wood) || (cardChosen.front.material == Material.Brick)) {
                     countDraw++;
+                    found = true;
                     infoBoxLabel.setText("choose another card");
                 }
                 break;
             case Propaganda:
                 if (cardChosen.front.cornCount != 0) {
                     countDraw++;
+                    found = true;
                     infoBoxLabel.setText("choose another card");
                 }
                 break;
             case ArtsAndCrafts:
                 if ((cardChosen.front.material == Material.Paper) || (cardChosen.front.material == Material.Glass)) {
                     countDraw++;
+                    found = true;
                     infoBoxLabel.setText("choose another card");
                 }
                 break;
-            default:
-                break;
         }
+        return found;
     }
 
     public void calculateFinalPoints() {
