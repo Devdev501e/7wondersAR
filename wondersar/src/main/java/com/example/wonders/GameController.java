@@ -337,7 +337,11 @@ public class GameController {
         tab2.setText(playerView.getName());
         playerHandOutline.setVisible(true);
         playerHand.setText(playerView.getName()+"'s Hand");
-
+        for(int i=0;i<5;i++){
+        System.out.println("NbPieces = "+i+" = "+playerView.getWonderContruction().getAllPieces().get(i).getNbPieces());
+        System.out.println("Point = "+i+" = "+playerView.getWonderContruction().getAllPieces().get(i).getPoints());
+            System.out.println("class = "+i+" = "+playerView.getWonderContruction().getAllPieces().get(i).getClass());
+            System.out.println("equal = "+i+" = "+playerView.getWonderContruction().getAllPieces().get(i).getEqual());}
         //for wonder construction images
         switch (playerView.getWonder()){
             case Alexandrie:

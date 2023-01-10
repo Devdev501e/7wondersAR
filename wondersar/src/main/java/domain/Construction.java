@@ -19,7 +19,20 @@ import java.util.ArrayList;
 
                 boolean equal = i%2 == 0;
                 int nbPieces = 1;
-                nbPieces = (equal) ? ++nbPieces : nbPieces;
+               // nbPieces = (equal) ? ++nbPieces : nbPieces;
+                switch (i){
+                    case 0:
+                    case 1:
+                        nbPieces=2;
+                        break;
+                    case 2:
+                    case 3:
+                        nbPieces=3;
+                        break;
+                    case 4:
+                        nbPieces=4;
+                        break;
+                }
 
                 if (i>0) {
                     power = i%2 == 1;

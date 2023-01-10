@@ -22,6 +22,9 @@ public class ConstructionPiece {
     public int getPoints() {
         return points;
     }
+    public boolean getEqual(){
+        return equal;
+    }
 
     public boolean isPower() {
         return power;
