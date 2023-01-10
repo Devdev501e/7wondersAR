@@ -194,11 +194,14 @@ public class GameController {
 
     ArrayList<Player> allPlayers = new ArrayList<>();
     ArrayList<ProgressToken> res;
+    ArrayList<ProgressToken> resLeft;
     private int countCards;
     private int countDraw;
 
     public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<CardDecks> allPlayerDecks,ArrayList<ProgressToken> progressTokens, int turn, boolean beggining) {
         //initialize table game
+        resLeft = new ArrayList<>();
+        resLeft.addAll(progressTokens);
         countCards = 0;
         countDraw = 1;
         for (Player i : players) {
@@ -724,14 +727,12 @@ public class GameController {
         player.addCard(leftDeckCard, allPlayers);
         countCards++;
 
-        if (countCards == 1) {
-            if (player.getAllTokens().size() == 0) {
-                cardDisable(true);
-            }
-            else {
-                for (ProgressToken i : player.getAllTokens()) {
-                    getScienceEffectDuringGame(i, leftDeckCard);
-                }
+        if (player.getAllTokens().size() == 0) {
+            cardDisable(true);
+        }
+        else {
+            for (ProgressToken i : player.getAllTokens()) {
+                getScienceEffectDuringGame(i, leftDeckCard);
             }
         }
 
@@ -756,14 +757,12 @@ public class GameController {
         player.addCard(rightDeckCard, allPlayers);
         countCards++;
 
-        if (countCards == 1) {
-            if (player.getAllTokens().size() == 0) {
-                cardDisable(true);
-            }
-            else {
-                for (ProgressToken i : player.getAllTokens()) {
-                    getScienceEffectDuringGame(i, rightDeckCard);
-                }
+        if (player.getAllTokens().size() == 0) {
+            cardDisable(true);
+        }
+        else {
+            for (ProgressToken i : player.getAllTokens()) {
+                getScienceEffectDuringGame(i, rightDeckCard);
             }
         }
 
@@ -937,29 +936,23 @@ public class GameController {
     }
 
     public void resetTokens() {
-        switch (allPlayers.size()) {
-            case 2:
-            case 3:
-                combat1.setImage(tokenPeace);
-                combat2.setImage(tokenPeace);
-                combat3.setImage(tokenPeace);
-                combats.add(combat1);
-                combats.add(combat2);
-                combats.add(combat3);
-                break;
-            case 4:
-                combat4.setImage(tokenPeace);
-                combats.add(combat4);
-                break;
-            case 5:
-                combat5.setImage(tokenPeace);
-                combats.add(combat5);
-                break;
-            case 6:
-            case 7:
-                combat6.setImage(tokenPeace);
-                combats.add(combat6);
-                break;
+        combat1.setImage(tokenPeace);
+        combat2.setImage(tokenPeace);
+        combat3.setImage(tokenPeace);
+        combats.add(combat1);
+        combats.add(combat2);
+        combats.add(combat3);
+        if (allPlayers.size() >= 4) {
+            combat4.setImage(tokenPeace);
+            combats.add(combat4);
+        }
+        if (allPlayers.size() >= 5) {
+            combat5.setImage(tokenPeace);
+            combats.add(combat5);
+        }
+        if (allPlayers.size() >= 6) {
+            combat6.setImage(tokenPeace);
+            combats.add(combat6);
         }
     }
 

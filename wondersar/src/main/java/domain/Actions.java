@@ -42,7 +42,7 @@ public class Actions {
         return material;
     }
 
-    public boolean canBuildPiece(ConstructionPiece piece, Player player) {
+    public boolean canBuildPiece(ConstructionPiece piece, Player player, ProgressToken res) {
         int nbResources = piece.getNbPieces();
         boolean isEqual = piece.isEqual();
 
