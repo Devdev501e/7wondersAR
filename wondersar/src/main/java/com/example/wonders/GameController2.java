@@ -1003,9 +1003,6 @@ public class GameController2 {
             case Tactic:
                 player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
                 break;
-            case Culture:
-                player.setCultureTokens(player.getCultureTokens()+1);
-                break;
             case Economy:
                 player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
                 break;

@@ -194,9 +194,13 @@ public class GameController {
 
     ArrayList<Player> allPlayers = new ArrayList<>();
     ArrayList<ProgressToken> res;
+    private int countCards;
+    private int countDraw;
 
     public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<CardDecks> allPlayerDecks,ArrayList<ProgressToken> progressTokens, int turn, boolean beggining) {
         //initialize table game
+        countCards = 0;
+        countDraw = 1;
         for (Player i : players) {
             playerNames.add(i.getName());
         }
@@ -331,6 +335,8 @@ public class GameController {
         tab2.setText(playerView.getName());
         playerHandOutline.setVisible(true);
         playerHand.setText(playerView.getName()+"'s Hand");
+
+        //for wonder construction images
         switch (playerView.getWonder()){
             case Alexandrie:
                 ConstImage constImage = ConstImage.AlexandrieBack;
@@ -716,9 +722,19 @@ public class GameController {
 
     public void onButtonLeftDeck() {
         player.addCard(leftDeckCard, allPlayers);
-        for (ProgressToken i : player.getAllTokens()) {
-            getScienceEffectDuringGame(i, player, leftDeckCard);
+        countCards++;
+
+        if (countCards == 1) {
+            if (player.getAllTokens().size() == 0) {
+                cardDisable(true);
+            }
+            else {
+                for (ProgressToken i : player.getAllTokens()) {
+                    getScienceEffectDuringGame(i, leftDeckCard);
+                }
+            }
         }
+
         options.get(0).chooseCard();
         checkCardCorn(leftDeckCard.front);
         canGetToken();
@@ -728,15 +744,29 @@ public class GameController {
         leftDeckCardImage.setImage(leftDeckCardPNG);
         cardCountLeft.setText("Cards: "+options.get(0).cardDeckSize());
 
-        cardDisable(true);
+
+        if (countDraw == countCards) {
+            cardDisable(true);
+        }
+
         endButton.setDisable(false);
     }
 
     public void onButtonRightDeck() {
         player.addCard(rightDeckCard, allPlayers);
-        for (ProgressToken i : player.getAllTokens()) {
-            getScienceEffectDuringGame(i, player, rightDeckCard);
+        countCards++;
+
+        if (countCards == 1) {
+            if (player.getAllTokens().size() == 0) {
+                cardDisable(true);
+            }
+            else {
+                for (ProgressToken i : player.getAllTokens()) {
+                    getScienceEffectDuringGame(i, rightDeckCard);
+                }
+            }
         }
+
         options.get(1).chooseCard();
         checkCardCorn(rightDeckCard.front);
         canGetToken();
@@ -746,17 +776,29 @@ public class GameController {
         rightDeckCardImage.setImage(rightDeckCardPNG);
         cardCountRight.setText("Cards: "+options.get(1).cardDeckSize());
 
-        cardDisable(true);
+        if (countDraw == countCards) {
+            cardDisable(true);
+        }
+
         endButton.setDisable(false);
     }
 
     public void onButtonMainDeck() {
         player.addCard(mainDeckCard, allPlayers);
+        countCards++;
+
+        if (countCards >= 1) {
+            if (player.getAllTokens().size() == 0) {
+                cardDisable(true);
+            }
+            else {
+                for (ProgressToken i : player.getAllTokens()) {
+                    getScienceEffectDuringGame(i, mainDeckCard);
+                }
+            }
+        }
         if (!player.getChat()) {
             infoBoxLabel.setText("Card Picked : "+mainDeckCard.front.cardDisplayName);
-        }
-        for (ProgressToken i : player.getAllTokens()) {
-            getScienceEffectDuringGame(i, player, mainDeckCard);
         }
 
         checkCardCorn(mainDeckCard.front);
@@ -774,7 +816,10 @@ public class GameController {
             mainDeckImage.setImage(mainDeckBackPNG);
         }
 
-        cardDisable(true);
+        if (countDraw == countCards) {
+            cardDisable(true);
+        }
+
         endButton.setDisable(false);
     }
 
@@ -783,6 +828,9 @@ public class GameController {
 
         if (res.get(0) == ProgressToken.Economy) {
             player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
+        }
+        else if (res.get(0) == ProgressToken.Tactic) {
+            player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
         }
 
         res.remove(0);
@@ -796,6 +844,9 @@ public class GameController {
         if (res.get(1) == ProgressToken.Economy) {
             player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
         }
+        else if (res.get(1) == ProgressToken.Tactic) {
+            player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
+        }
         res.remove(1);
 
         Image resImage = new Image(getClass().getResourceAsStream(res.get(3).imageResource));
@@ -808,6 +859,9 @@ public class GameController {
         if (res.get(2) == ProgressToken.Economy) {
             player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
         }
+        else if (res.get(2) == ProgressToken.Tactic) {
+            player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
+        }
         res.remove(2);
         Image resImage = new Image(getClass().getResourceAsStream(res.get(3).imageResource));
         progressImages.get(2).setImage(resImage);
@@ -816,8 +870,13 @@ public class GameController {
 
     public void onProgress3() {
         player.getAllTokens().add(res.get(3));
+        infoBoxOutline.setVisible(true);
+        infoBoxLabel.setText(res.get(3).effectDescription);
         if (res.get(3) == ProgressToken.Economy) {
             player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
+        }
+        else if (res.get(3) == ProgressToken.Tactic) {
+            player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
         }
         res.remove(3);
         disableProgressChoice(true);
@@ -917,14 +976,17 @@ public class GameController {
                 }
 
             }
-            boolean warTime = true;
-            for (ImageView i : combats) {
-                if (i.getImage() == tokenPeace) {
-                    warTime = false;
+            String warTime = "no";
+            for (int i = 0; i < combats.size(); i++) {
+                if (combats.get(i).getImage() == tokenPeace) {
+                    warTime = "false";
                     break;
                 }
+                if (i == combats.size()-1) {
+                    warTime = "true";
+                }
             }
-            if(warTime) {
+            if(warTime.equals("true")) {
                 infoBoxOutline.setVisible(true);
                 infoBoxLabel.setText("Bataille ! ");
                 battle();
@@ -995,7 +1057,6 @@ public class GameController {
         for (int i = 0; i < player.getHand().getScience().length; i++) {
             if (player.getHand().getScience()[i] == 2) {
                 player.getHand().getScience()[i] = 0;
-                System.out.println("yes");
                 infoBoxLabel.setText("Tu peux choisir un jeton progres");
                 disableProgressChoice(false);
                 break;
@@ -1013,40 +1074,39 @@ public class GameController {
         }
     }
 
-    public void getScienceEffectDuringGame(ProgressToken progressToken, Player player, Card cardChosen) {
+    public void getScienceEffectDuringGame(ProgressToken progressToken, Card cardChosen) {
         switch (progressToken) {
-            case Tactic:
-                player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
-                break;
             case Science:
                 if (cardChosen.front.cardCategory == CardCategory.ProgressCard) {
-                    cardDisable(false);
-                    infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+progressToken.effectDescription);
+                    countDraw++;
+                    infoBoxLabel.setText("choose another card");
                 }
                 break;
             case Jewelry:
                 if ((cardChosen.front.material == Material.Stone) || (cardChosen.front.material == Material.Gold)) {
-                    cardDisable(false);
-                    infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+progressToken.effectDescription);
+                    countDraw++;
+                    infoBoxLabel.setText("choose another card");
                 }
                 break;
             case Urbanism:
                 if ((cardChosen.front.material == Material.Wood) || (cardChosen.front.material == Material.Brick)) {
-                    cardDisable(false);
-                    infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+progressToken.effectDescription);
+                    countDraw++;
+                    infoBoxLabel.setText("choose another card");
                 }
                 break;
             case Propaganda:
                 if (cardChosen.front.cornCount != 0) {
-                    cardDisable(false);
-                    infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+progressToken.effectDescription);
+                    countDraw++;
+                    infoBoxLabel.setText("choose another card");
                 }
                 break;
             case ArtsAndCrafts:
                 if ((cardChosen.front.material == Material.Paper) || (cardChosen.front.material == Material.Glass)) {
-                    cardDisable(false);
-                    infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+progressToken.effectDescription);
+                    countDraw++;
+                    infoBoxLabel.setText("choose another card");
                 }
+                break;
+            default:
                 break;
         }
     }
