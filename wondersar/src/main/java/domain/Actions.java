@@ -42,7 +42,7 @@ public class Actions {
         return material;
     }
 
-    public boolean canBuildPiece(ConstructionPiece piece, Player player, ProgressToken res) {
+    public boolean canBuildPiece(ConstructionPiece piece, Player player) {
         int nbResources = piece.getNbPieces();
         boolean isEqual = piece.isEqual();
 
@@ -65,7 +65,35 @@ public class Actions {
             differentPieces += player.getHand().getMaterials()[5];
             return differentPieces >= nbResources;
         }
-    }
+    }public void buidPiece2 (Construction cons, Player player){
+        ConstructionPiece piece;
+        for(int i=0;i<5;i++){
+        piece =cons.getAllPieces().get(i);
+        if(canBuildPiece(piece,player)){
+            piece.setComplete(true);
+          boolean equal= piece.getEqual();
+          int nbRessource =piece.getNbPieces();
+
+          for(int k=0;k<6;k++){
+          int material=  player.getHand().getMaterials()[k];
+
+          if(equal){
+              if(material + player.getHand().getMaterials()[5]>=nbRessource  ){
+
+                  for (int n=0;n<nbRessource;n++){
+                      if(player.getHand().getMaterials()[k]!=0){
+                  player.getHand().removeMaterials(k);}
+                  else{player.getHand().removeMaterials(5);}}
+                break;}
+          } else{
+              if (material!=0 ){
+                    player.getHand().removeMaterials(k);
+                  break;
+              }
+          }
+          }
+        }
+    }}
 
     public void buildPiece(ConstructionPiece piece, Player player) {
         piece.setComplete(true);
