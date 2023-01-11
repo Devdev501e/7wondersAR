@@ -69,7 +69,7 @@ public class Actions {
         ConstructionPiece piece;
         for(int i=0;i<5;i++){
         piece =cons.getAllPieces().get(i);
-        if(canBuildPiece(piece,player)){
+        if(canBuildPiece(piece,player) && !piece.isComplete()){
             piece.setComplete(true);
           boolean equal= piece.getEqual();
           int nbRessource =piece.getNbPieces();
