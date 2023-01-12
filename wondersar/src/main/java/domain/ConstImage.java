@@ -33,21 +33,7 @@ public enum ConstImage {
         this.constructionFront4= "images/wonders/"+constructionFront4;
         this.constructionFront5= "images/wonders/"+constructionFront5;
     }
-    public String getCons1(){
-        return this.construction1;
-    }
-    public String getCons2(){
-        return this.construction2;
-    }
-    public String getCons3(){
-        return this.construction3;
-    }
-    public String getCons4(){
-        return this.construction4;
-    }
-    public String getCons5(){
-        return this.construction5;
-    }
+
     public String getConstruction1(Boolean completed){
         if(completed){
             return this.constructionFront1;
