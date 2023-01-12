@@ -193,9 +193,7 @@ public class GameController {
 
     private Player player;
     private ArrayList<String> playerNames = new ArrayList<>();
-    private final Actions actions = new Actions();
-    ArrayList<CardDecks> options = new ArrayList<>();
-    ArrayList<CardDecks> allDecks = new ArrayList<>();
+    ArrayList<CardDecks> options;
     CardDecks mainDeck;
     private int playerTurn;
 
@@ -207,10 +205,13 @@ public class GameController {
     private int countCards;
     private int countDraw;
 
-    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<CardDecks> allPlayerDecks,ArrayList<ProgressToken> progressTokens, int turn, boolean beggining) {
+    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<ProgressToken> progressTokens, int turn, boolean beggining) {
         //initialize table game
         countCards = 0;
         countDraw = 1;
+
+        options = new ArrayList<>();
+
         for (Player i : players) {
             playerNames.add(i.getName());
         }
@@ -222,7 +223,6 @@ public class GameController {
         if (beggining) {
             allPlayerNames.getItems().addAll(playerNames);
             allPlayers.addAll(players);
-            allDecks.addAll(allPlayerDecks);
             resetTokens();
             res = progressTokens;
 
@@ -277,10 +277,9 @@ public class GameController {
         playerTurn = turn;
         playerName.setText(player.getName());
 
+        options.add(player.getCardDecks());
 
         mainDeck = mainCardDeck;
-
-        options = actions.cardDecksOption(allPlayerDecks, turn);
 
         allPlayerNames.setOnAction(this::onPlayerNames);
 
@@ -309,7 +308,9 @@ public class GameController {
         }
         playerLeftScience.setText("Science: "+totalScience);
         playerLeftShields.setText("Shields: "+playerLeft.getHand().getShieldWar());
-
+        if (players.size() == 2) {
+            options.add(playerLeft.getCardDecks());
+        }
         if (players.size() > 2) {
             Player playerRight;
             if (turn == players.size()-1) {
@@ -318,6 +319,7 @@ public class GameController {
             else {
                 playerRight = players.get(turn+1);
             }
+            options.add(playerRight.getCardDecks());
             playerRightImage.setImage(new Image(getClass().getResourceAsStream("images/imagejeu/silhouette.png")));
             playerRightName.setText(""+playerRight.getName());
             totalMaterial = 0;
@@ -795,9 +797,6 @@ public class GameController {
         rightDeckCardImage.setImage(rightDeckCardPNG);
         cardCountRight.setText("Cards: "+options.get(1).cardDeckSize());
 
-        System.out.println("cards drawn: "+countCards);
-        System.out.println("cards allowed to draw: "+countDraw);
-
         if (countDraw == countCards) {
             cardDisable(true);
         }
@@ -839,9 +838,6 @@ public class GameController {
         else {
             mainDeckImage.setImage(mainDeckBackPNG);
         }
-
-        System.out.println("cards drawn: "+countCards);
-        System.out.println("cards allowed to draw: "+countDraw);
 
         if (countDraw == countCards) {
             cardDisable(true);
@@ -922,7 +918,7 @@ public class GameController {
         else {
             playerTurn++;
         }
-        startTurn(allPlayers, mainDeck, allDecks, res, playerTurn, false);
+        startTurn(allPlayers, mainDeck, res, playerTurn, false);
     }
 
     public void resetPlayerViewBlank() {

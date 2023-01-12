@@ -131,23 +131,11 @@ public class ChoixpersoControleur implements Initializable {
     public void switchScene(Event event)throws IOException{
         //initialize game
         CardDecks mainDeck = new CardDecks("Main");
-        mainDeck.shuffleDeck();
-
-        ArrayList<CardDecks> playerDecks = new ArrayList<>();
 
         ArrayList<ProgressToken> res = new ArrayList<>();
         ProgressTokens progressTokens = new ProgressTokens();
         res.addAll(progressTokens.TOKENS);
         Collections.shuffle(res);
-
-        for (Player i : players) {
-            String wonder = i.getWonder().getDisplayName();
-
-            CardDecks cardDecks = new CardDecks(wonder);
-            cardDecks.shuffleDeck();
-
-            playerDecks.add(cardDecks);
-        }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("gameView.fxml"));
         root=loader.load();
@@ -156,7 +144,7 @@ public class ChoixpersoControleur implements Initializable {
 
 
         GameController gameController = loader.getController();
-        gameController.startTurn(players, mainDeck, playerDecks, res, 0, true);
+        gameController.startTurn(players, mainDeck, res, 0, true);
 
         stage.setScene(scene);
         stage.show();
