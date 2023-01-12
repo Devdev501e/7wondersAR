@@ -388,8 +388,8 @@ public class GameController {
         switch (playerView.getWonder()){
             case Alexandrie:
                 ConstImage constImage = ConstImage.AlexandrieBack;
-                System.out.println(constImage.getConstruction1(!!playerView.getWonderContruction().getAllPieces().get(0).isComplete()));
-                Image cons1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()))));
+                System.out.println(constImage.getConstruction1(playerView.getWonderContruction().getAllPieces().get(0).isComplete()));
+                Image cons1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getConstruction1(playerView.getWonderContruction().getAllPieces().get(0).isComplete()))));
                 construction1.setImage(cons1);
                 construction1.setLayoutX(330);
                 construction1.setLayoutY(272);
@@ -397,8 +397,8 @@ public class GameController {
                 construction1.setFitHeight(35);
 
 
-                System.out.println(constImage.getConstruction2(!playerView.getWonderContruction().getAllPieces().get(1).isComplete()));
-                Image cons2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getConstruction2(!playerView.getWonderContruction().getAllPieces().get(1).isComplete()))));
+                System.out.println(constImage.getConstruction2(playerView.getWonderContruction().getAllPieces().get(1).isComplete()));
+                Image cons2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getConstruction2(playerView.getWonderContruction().getAllPieces().get(1).isComplete()))));
                 construction2.setImage(cons2);
                 construction2.setLayoutX(373);
                 construction2.setLayoutY(230);
@@ -406,8 +406,8 @@ public class GameController {
                 construction2.setFitHeight(44);
 
 
-                System.out.println(constImage.getConstruction3(!playerView.getWonderContruction().getAllPieces().get(2).isComplete()));
-                Image cons3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getConstruction3(!playerView.getWonderContruction().getAllPieces().get(2).isComplete()))));
+                System.out.println(constImage.getConstruction3(playerView.getWonderContruction().getAllPieces().get(2).isComplete()));
+                Image cons3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getConstruction3(playerView.getWonderContruction().getAllPieces().get(2).isComplete()))));
                 construction3.setImage(cons3);
                 construction3.setLayoutX(375);
                 construction3.setLayoutY(186);
@@ -415,16 +415,16 @@ public class GameController {
                 construction3.setFitHeight(45);
 
 
-                System.out.println(constImage.getConstruction4(!playerView.getWonderContruction().getAllPieces().get(3).isComplete()));
-                Image cons4 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getConstruction4(!playerView.getWonderContruction().getAllPieces().get(3).isComplete()))));
+                System.out.println(constImage.getConstruction4(playerView.getWonderContruction().getAllPieces().get(3).isComplete()));
+                Image cons4 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getConstruction4(playerView.getWonderContruction().getAllPieces().get(3).isComplete()))));
                 construction4.setImage(cons4);
                 construction4.setLayoutX(386);
                 construction4.setLayoutY(136);
                 construction4.setFitWidth(59);
                 construction4.setFitHeight(51);
 
-                System.out.println(constImage.getConstruction5(!playerView.getWonderContruction().getAllPieces().get(4).isComplete()));
-                Image cons5 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getConstruction5(!playerView.getWonderContruction().getAllPieces().get(4).isComplete()))));
+                System.out.println(constImage.getConstruction5(playerView.getWonderContruction().getAllPieces().get(4).isComplete()));
+                Image cons5 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getConstruction5(playerView.getWonderContruction().getAllPieces().get(4).isComplete()))));
                 construction5.setImage(cons5);
                 construction5.setLayoutX(394);
                 construction5.setLayoutY(71);
@@ -434,11 +434,11 @@ public class GameController {
                 break;
             case Babylone:
                 ConstImage constImageB = ConstImage.BabylonBack;
-                System.out.println(constImageB.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()));
-                Image cons1B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()))));
+                System.out.println(constImageB.getConstruction1(playerView.getWonderContruction().getAllPieces().get(0).isComplete()));
+                Image cons1B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getConstruction1(playerView.getWonderContruction().getAllPieces().get(0).isComplete()))));
                 construction1.setImage(cons1B);
-                construction1.setLayoutX(309);
-                construction1.setLayoutY(259);
+                construction1.setLayoutX(307);
+                construction1.setLayoutY(258);
                 construction1.setFitWidth(204);
                 construction1.setFitHeight(42);
                 construction1.setX(0);
@@ -448,8 +448,8 @@ public class GameController {
                 construction1.setScaleZ(1);
                 construction1.setPreserveRatio(true);
 
-                System.out.println(constImageB.getConstruction2(!playerView.getWonderContruction().getAllPieces().get(1).isComplete()));
-                Image cons2B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getConstruction2(!playerView.getWonderContruction().getAllPieces().get(1).isComplete()))));
+                System.out.println(constImageB.getConstruction2(playerView.getWonderContruction().getAllPieces().get(1).isComplete()));
+                Image cons2B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getConstruction2(playerView.getWonderContruction().getAllPieces().get(1).isComplete()))));
                 construction2.setImage(cons2B);
                 construction2.setLayoutX(312);
                 construction2.setLayoutY(218);
@@ -457,8 +457,8 @@ public class GameController {
                 construction2.setFitHeight(47);
 
 
-                System.out.println(constImageB.getConstruction3(!playerView.getWonderContruction().getAllPieces().get(2).isComplete()));
-                Image cons3B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getConstruction3(!playerView.getWonderContruction().getAllPieces().get(2).isComplete()))));
+                System.out.println(constImageB.getConstruction3(playerView.getWonderContruction().getAllPieces().get(2).isComplete()));
+                Image cons3B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getConstruction3(playerView.getWonderContruction().getAllPieces().get(2).isComplete()))));
                 construction3.setImage(cons3B);
                 construction3.setLayoutX(325);
                 construction3.setLayoutY(180);
@@ -466,8 +466,8 @@ public class GameController {
                 construction3.setFitHeight(47);
 
 
-                System.out.println(constImageB.getConstruction4(!playerView.getWonderContruction().getAllPieces().get(3).isComplete()));
-                Image cons4B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getConstruction4(!playerView.getWonderContruction().getAllPieces().get(3).isComplete()))));
+                System.out.println(constImageB.getConstruction4(playerView.getWonderContruction().getAllPieces().get(3).isComplete()));
+                Image cons4B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getConstruction4(playerView.getWonderContruction().getAllPieces().get(3).isComplete()))));
                 construction4.setImage(cons4B);
                 construction4.setLayoutX(346);
                 construction4.setLayoutY(119);
@@ -475,19 +475,19 @@ public class GameController {
                 construction4.setFitHeight(61);
 
 
-                System.out.println(constImageB.getConstruction5(!playerView.getWonderContruction().getAllPieces().get(4).isComplete()));
-                Image cons5B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getConstruction5(!playerView.getWonderContruction().getAllPieces().get(4).isComplete()))));
+                System.out.println(constImageB.getConstruction5(playerView.getWonderContruction().getAllPieces().get(4).isComplete()));
+                Image cons5B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getConstruction5(playerView.getWonderContruction().getAllPieces().get(4).isComplete()))));
                 construction5.setImage(cons5B);
                 construction5.setLayoutX(408);
-                construction5.setLayoutY(140);
+                construction5.setLayoutY(143);
                 construction5.setFitWidth(79);
                 construction5.setFitHeight(44);
 
                 break;
             case Rhodes:
                 ConstImage constImageR = ConstImage.Rhodes;
-                System.out.println(constImageR.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()));
-                Image cons1R = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageR.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()))));
+                System.out.println(constImageR.getConstruction1(playerView.getWonderContruction().getAllPieces().get(0).isComplete()));
+                Image cons1R = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageR.getConstruction1(playerView.getWonderContruction().getAllPieces().get(0).isComplete()))));
                 construction1.setImage(cons1R);
                 construction1.setLayoutX(291);
                 construction1.setLayoutY(280);
@@ -495,8 +495,8 @@ public class GameController {
                 construction1.setFitHeight(33);
 
 
-                System.out.println(constImageR.getConstruction2(!playerView.getWonderContruction().getAllPieces().get(1).isComplete()));
-                Image cons2R = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageR.getConstruction2(!playerView.getWonderContruction().getAllPieces().get(1).isComplete()))));
+                System.out.println(constImageR.getConstruction2(playerView.getWonderContruction().getAllPieces().get(1).isComplete()));
+                Image cons2R = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageR.getConstruction2(playerView.getWonderContruction().getAllPieces().get(1).isComplete()))));
                 construction2.setImage(cons2R);
                 construction2.setLayoutX(395);
                 construction2.setLayoutY(279);
@@ -504,8 +504,8 @@ public class GameController {
                 construction2.setFitHeight(33);
 
 
-                System.out.println(constImageR.getConstruction3(!playerView.getWonderContruction().getAllPieces().get(2).isComplete()));
-                Image cons3R = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageR.getConstruction3(!playerView.getWonderContruction().getAllPieces().get(2).isComplete()))));
+                System.out.println(constImageR.getConstruction3(playerView.getWonderContruction().getAllPieces().get(2).isComplete()));
+                Image cons3R = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageR.getConstruction3(playerView.getWonderContruction().getAllPieces().get(2).isComplete()))));
                 construction3.setImage(cons3R);
                 construction3.setLayoutX(334);
                 construction3.setLayoutY(203);
@@ -513,16 +513,16 @@ public class GameController {
                 construction3.setFitHeight(77);
 
 
-                System.out.println(constImageR.getConstruction4(!playerView.getWonderContruction().getAllPieces().get(3).isComplete()));
-                Image cons4R = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageR.getConstruction4(!playerView.getWonderContruction().getAllPieces().get(3).isComplete()))));
+                System.out.println(constImageR.getConstruction4(playerView.getWonderContruction().getAllPieces().get(3).isComplete()));
+                Image cons4R = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageR.getConstruction4(playerView.getWonderContruction().getAllPieces().get(3).isComplete()))));
                 construction4.setImage(cons4R);
                 construction4.setLayoutX(327);
                 construction4.setLayoutY(134);
                 construction4.setFitWidth(131);
                 construction4.setFitHeight(70);
 
-                System.out.println(constImageR.getConstruction5(!playerView.getWonderContruction().getAllPieces().get(4).isComplete()));
-                Image cons5R = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageR.getConstruction5(!playerView.getWonderContruction().getAllPieces().get(4).isComplete()))));
+                System.out.println(constImageR.getConstruction5(playerView.getWonderContruction().getAllPieces().get(4).isComplete()));
+                Image cons5R = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageR.getConstruction5(playerView.getWonderContruction().getAllPieces().get(4).isComplete()))));
                 construction5.setImage(cons5R);
                 construction5.setLayoutX(333);
                 construction5.setLayoutY(52);
@@ -532,8 +532,8 @@ public class GameController {
                 break;
             case Halicarnasse:
                 ConstImage constImageH = ConstImage.Halicarnasse;
-                System.out.println(constImageH.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()));
-                Image cons1H = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageH.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()))));
+                System.out.println(constImageH.getConstruction1(playerView.getWonderContruction().getAllPieces().get(0).isComplete()));
+                Image cons1H = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageH.getConstruction1(playerView.getWonderContruction().getAllPieces().get(0).isComplete()))));
                 construction1.setImage(cons1H);
                 construction1.setLayoutX(284);
                 construction1.setLayoutY(281);
@@ -542,8 +542,8 @@ public class GameController {
                 construction1.setX(0);
                 construction1.setY(0);
 
-                System.out.println(constImageH.getConstruction2(!playerView.getWonderContruction().getAllPieces().get(1).isComplete()));
-                Image cons2H = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageH.getConstruction2(!playerView.getWonderContruction().getAllPieces().get(1).isComplete()))));
+                System.out.println(constImageH.getConstruction2(playerView.getWonderContruction().getAllPieces().get(1).isComplete()));
+                Image cons2H = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageH.getConstruction2(playerView.getWonderContruction().getAllPieces().get(1).isComplete()))));
                 construction2.setImage(cons2H);
                 construction2.setLayoutX(290);
                 construction2.setLayoutY(221);
@@ -552,8 +552,8 @@ public class GameController {
                 construction2.setX(0);
                 construction2.setY(0);
 
-                System.out.println(constImageH.getConstruction3(!playerView.getWonderContruction().getAllPieces().get(2).isComplete()));
-                Image cons3H = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageH.getConstruction3(!playerView.getWonderContruction().getAllPieces().get(2).isComplete()))));
+                System.out.println(constImageH.getConstruction3(playerView.getWonderContruction().getAllPieces().get(2).isComplete()));
+                Image cons3H = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageH.getConstruction3(playerView.getWonderContruction().getAllPieces().get(2).isComplete()))));
                 construction3.setImage(cons3H);
                 construction3.setLayoutX(284);
                 construction3.setLayoutY(158);
@@ -562,8 +562,8 @@ public class GameController {
                 construction3.setX(0);
                 construction3.setY(0);
 
-                System.out.println(constImageH.getConstruction4(!playerView.getWonderContruction().getAllPieces().get(3).isComplete()));
-                Image cons4H = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageH.getConstruction4(!playerView.getWonderContruction().getAllPieces().get(3).isComplete()))));
+                System.out.println(constImageH.getConstruction4(playerView.getWonderContruction().getAllPieces().get(3).isComplete()));
+                Image cons4H = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageH.getConstruction4(playerView.getWonderContruction().getAllPieces().get(3).isComplete()))));
                 construction4.setImage(cons4H);
                 construction4.setLayoutX(398);
                 construction4.setLayoutY(158);
@@ -572,8 +572,8 @@ public class GameController {
                 construction4.setX(0);
                 construction4.setY(0);
 
-                System.out.println(constImageH.getConstruction5(!playerView.getWonderContruction().getAllPieces().get(4).isComplete()));
-                Image cons5H = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageH.getConstruction5(!playerView.getWonderContruction().getAllPieces().get(4).isComplete()))));
+                System.out.println(constImageH.getConstruction5(playerView.getWonderContruction().getAllPieces().get(4).isComplete()));
+                Image cons5H = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageH.getConstruction5(playerView.getWonderContruction().getAllPieces().get(4).isComplete()))));
                 construction5.setImage(cons5H);
                 construction5.setLayoutX(298);
                 construction5.setLayoutY(60);
@@ -584,8 +584,8 @@ public class GameController {
                 break;
             case Gizeh:
                 ConstImage constImageG = ConstImage.Giseh;
-                System.out.println(constImageG.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()));
-                Image cons1G = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageG.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()))));
+                System.out.println(constImageG.getConstruction1(playerView.getWonderContruction().getAllPieces().get(0).isComplete()));
+                Image cons1G = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageG.getConstruction1(playerView.getWonderContruction().getAllPieces().get(0).isComplete()))));
                 construction1.setImage(cons1G);
                 construction1.setLayoutX(330);
                 construction1.setLayoutY(272);
@@ -593,8 +593,8 @@ public class GameController {
                 construction1.setFitHeight(35);
 
 
-                System.out.println(constImageG.getConstruction2(!playerView.getWonderContruction().getAllPieces().get(1).isComplete()));
-                Image cons2G = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageG.getConstruction2(!playerView.getWonderContruction().getAllPieces().get(1).isComplete()))));
+                System.out.println(constImageG.getConstruction2(playerView.getWonderContruction().getAllPieces().get(1).isComplete()));
+                Image cons2G = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageG.getConstruction2(playerView.getWonderContruction().getAllPieces().get(1).isComplete()))));
                 construction2.setImage(cons2G);
                 construction2.setLayoutX(292);
                 construction2.setLayoutY(230);
@@ -602,8 +602,8 @@ public class GameController {
                 construction2.setFitHeight(40);
 
 
-                System.out.println(constImageG.getConstruction3(!playerView.getWonderContruction().getAllPieces().get(2).isComplete()));
-                Image cons3G = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageG.getConstruction3(!playerView.getWonderContruction().getAllPieces().get(2).isComplete()))));
+                System.out.println(constImageG.getConstruction3(playerView.getWonderContruction().getAllPieces().get(2).isComplete()));
+                Image cons3G = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageG.getConstruction3(playerView.getWonderContruction().getAllPieces().get(2).isComplete()))));
                 construction3.setImage(cons3G);
                 construction3.setLayoutX(316);
                 construction3.setLayoutY(191);
@@ -611,16 +611,16 @@ public class GameController {
                 construction3.setFitHeight(43);
 
 
-                System.out.println(constImageG.getConstruction4(!playerView.getWonderContruction().getAllPieces().get(3).isComplete()));
-                Image cons4G = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageG.getConstruction4(!playerView.getWonderContruction().getAllPieces().get(3).isComplete()))));
+                System.out.println(constImageG.getConstruction4(playerView.getWonderContruction().getAllPieces().get(3).isComplete()));
+                Image cons4G = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageG.getConstruction4(playerView.getWonderContruction().getAllPieces().get(3).isComplete()))));
                 construction4.setImage(cons4G);
                 construction4.setLayoutX(340);
                 construction4.setLayoutY(152);
                 construction4.setFitWidth(111);
                 construction4.setFitHeight(42);
 
-                System.out.println(constImageG.getConstruction5(!playerView.getWonderContruction().getAllPieces().get(4).isComplete()));
-                Image cons5G = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageG.getConstruction5(!playerView.getWonderContruction().getAllPieces().get(4).isComplete()))));
+                System.out.println(constImageG.getConstruction5(playerView.getWonderContruction().getAllPieces().get(4).isComplete()));
+                Image cons5G = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageG.getConstruction5(playerView.getWonderContruction().getAllPieces().get(4).isComplete()))));
                 construction5.setImage(cons5G);
                 construction5.setLayoutX(360);
                 construction5.setLayoutY(94);
@@ -632,8 +632,8 @@ public class GameController {
                 break;
             case Ephese:
                 ConstImage constImageE = ConstImage.Ephese;
-                System.out.println(constImageE.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()));
-                Image cons1E = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageE.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()))));
+                System.out.println(constImageE.getConstruction1(playerView.getWonderContruction().getAllPieces().get(0).isComplete()));
+                Image cons1E = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageE.getConstruction1(playerView.getWonderContruction().getAllPieces().get(0).isComplete()))));
                 construction1.setImage(cons1E);
                 construction1.setLayoutX(277);
                 construction1.setLayoutY(261);
@@ -641,8 +641,8 @@ public class GameController {
                 construction1.setFitHeight(45);
 
 
-                System.out.println(constImageE.getConstruction2(!playerView.getWonderContruction().getAllPieces().get(1).isComplete()));
-                Image cons2E = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageE.getConstruction2(!playerView.getWonderContruction().getAllPieces().get(1).isComplete()))));
+                System.out.println(constImageE.getConstruction2(playerView.getWonderContruction().getAllPieces().get(1).isComplete()));
+                Image cons2E = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageE.getConstruction2(playerView.getWonderContruction().getAllPieces().get(1).isComplete()))));
                 construction2.setImage(cons2E);
                 construction2.setLayoutX(289);
                 construction2.setLayoutY(174);
@@ -650,8 +650,8 @@ public class GameController {
                 construction2.setFitHeight(88);
 
 
-                System.out.println(constImageE.getConstruction3(!playerView.getWonderContruction().getAllPieces().get(2).isComplete()));
-                Image cons3E = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageE.getConstruction3(!playerView.getWonderContruction().getAllPieces().get(2).isComplete()))));
+                System.out.println(constImageE.getConstruction3(playerView.getWonderContruction().getAllPieces().get(2).isComplete()));
+                Image cons3E = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageE.getConstruction3(playerView.getWonderContruction().getAllPieces().get(2).isComplete()))));
                 construction3.setImage(cons3E);
                 construction3.setLayoutX(369);
                 construction3.setLayoutY(174);
@@ -659,16 +659,16 @@ public class GameController {
                 construction3.setFitHeight(86);
 
 
-                System.out.println(constImageE.getConstruction4(!playerView.getWonderContruction().getAllPieces().get(3).isComplete()));
-                Image cons4E = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageE.getConstruction4(!playerView.getWonderContruction().getAllPieces().get(3).isComplete()))));
+                System.out.println(constImageE.getConstruction4(playerView.getWonderContruction().getAllPieces().get(3).isComplete()));
+                Image cons4E = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageE.getConstruction4(playerView.getWonderContruction().getAllPieces().get(3).isComplete()))));
                 construction4.setImage(cons4E);
                 construction4.setLayoutX(442);
                 construction4.setLayoutY(174);
                 construction4.setFitWidth(46);
                 construction4.setFitHeight(86);
 
-                System.out.println(constImageE.getConstruction5(!playerView.getWonderContruction().getAllPieces().get(4).isComplete()));
-                Image cons5E = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageE.getConstruction5(!playerView.getWonderContruction().getAllPieces().get(4).isComplete()))));
+                System.out.println(constImageE.getConstruction5(playerView.getWonderContruction().getAllPieces().get(4).isComplete()));
+                Image cons5E = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageE.getConstruction5(playerView.getWonderContruction().getAllPieces().get(4).isComplete()))));
                 construction5.setImage(cons5E);
                 construction5.setLayoutX(280);
                 construction5.setLayoutY(92);
@@ -754,6 +754,7 @@ public class GameController {
         Image leftDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(leftDeckCard.front.imageResource)));
         leftDeckCardImage.setImage(leftDeckCardPNG);
         cardCountLeft.setText("Cards: "+options.get(0).cardDeckSize());
+        buidPiece2(player.getWonderContruction(),player);                           //ajout pour la construction
 
 
         if (countDraw == countCards) {
@@ -787,6 +788,7 @@ public class GameController {
         Image rightDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(rightDeckCard.front.imageResource)));
         rightDeckCardImage.setImage(rightDeckCardPNG);
         cardCountRight.setText("Cards: "+options.get(1).cardDeckSize());
+        buidPiece2(player.getWonderContruction(),player);                           //ajout pour la construction
 
 
         if (countDraw == countCards) {
@@ -822,6 +824,7 @@ public class GameController {
         mainDeck.chooseCard();
         mainDeckCard = mainDeck.getCard(0);
         cardCountMain.setText("Cards: "+mainDeck.cardDeckSize());
+        buidPiece2(player.getWonderContruction(),player);                           //ajout pour la construction
 
         Image mainDeckFrontPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(mainDeckCard.front.imageResource)));
         if (player.getChat()) {
@@ -1155,4 +1158,67 @@ public class GameController {
             //points vennant de carte bleu
         }
     }
+    public boolean canBuildPiece(ConstructionPiece piece, Player player) {
+        int nbResources = piece.getNbPieces();
+        boolean isEqual = piece.isEqual();
+
+        if (isEqual) {
+            boolean canBuild = false;
+            for (int i = 0; i < 5; i++) {
+                int samePieces = player.getHand().getMaterials()[i] + player.getHand().getMaterials()[5];
+                if (samePieces >= nbResources) {
+                    canBuild = true;
+                    break;
+                }
+            }
+            return canBuild;
+        }
+        else {
+            int differentPieces = 0;
+            for (int i = 0; i < 5; i++) {
+                if(player.getHand().getMaterials()[i] != 0)
+                {   differentPieces+=1; }
+            }
+            differentPieces += player.getHand().getMaterials()[5];
+            return differentPieces >= nbResources;
+        }
+    }public void buidPiece2 (Construction cons, Player player){
+        ConstructionPiece piece;
+        Boolean pieceBefor;
+        for(int i=0;i<5;i++){
+            if (i>0){
+                piece =cons.getAllPieces().get(i);
+                pieceBefor = cons.getAllPieces().get(i-1).isComplete();
+            }else{
+                piece =cons.getAllPieces().get(i);
+                pieceBefor =true;
+            }
+            if(canBuildPiece(piece,player) && !piece.isComplete() && pieceBefor){
+                piece.setComplete(true);
+                boolean equal= piece.getEqual();
+                int nbRessource =piece.getNbPieces();
+                int p=0;
+                for(int k=0;k<6;k++){
+                    int material=  player.getHand().getMaterials()[k];
+
+                    if(equal){
+                        if(material + player.getHand().getMaterials()[5]>=nbRessource  ){
+
+                            for (int n=0;n<nbRessource;n++){
+                                if(player.getHand().getMaterials()[k]!=0){
+                                    player.getHand().removeMaterials(k);}
+                                else{player.getHand().removeMaterials(5);}}
+                            break;}
+                    } else{
+                        if (material!=0 ){
+                            player.getHand().removeMaterials(k);
+                            p++;
+                            if(p==nbRessource){break;}
+
+
+                        }
+                    }
+                }
+            }
+        }}
 }

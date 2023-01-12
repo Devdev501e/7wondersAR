@@ -60,6 +60,7 @@ public class Actions {
         else {
             int differentPieces = 0;
             for (int i = 0; i < 5; i++) {
+
                 differentPieces = (player.getHand().getMaterials()[i] != 0)? differentPieces++:differentPieces;
             }
             differentPieces += player.getHand().getMaterials()[5];
@@ -67,13 +68,20 @@ public class Actions {
         }
     }public void buidPiece2 (Construction cons, Player player){
         ConstructionPiece piece;
+        Boolean pieceBefor;
         for(int i=0;i<5;i++){
+            if (i>0){
         piece =cons.getAllPieces().get(i);
-        if(canBuildPiece(piece,player) && !piece.isComplete()){
+        pieceBefor = cons.getAllPieces().get(i-1).isComplete();
+            }else{
+                piece =cons.getAllPieces().get(i);
+                pieceBefor =true;
+            }
+        if(canBuildPiece(piece,player) && !piece.isComplete() && pieceBefor){
             piece.setComplete(true);
           boolean equal= piece.getEqual();
           int nbRessource =piece.getNbPieces();
-
+          int p=0;
           for(int k=0;k<6;k++){
           int material=  player.getHand().getMaterials()[k];
 
@@ -87,8 +95,11 @@ public class Actions {
                 break;}
           } else{
               if (material!=0 ){
-                    player.getHand().removeMaterials(k);
-                  break;
+               player.getHand().removeMaterials(k);
+               p++;
+               if(p==nbRessource){break;}
+
+
               }
           }
           }
