@@ -49,6 +49,7 @@ public class CardDecks {
 				}
 			}
 		}
+		Collections.shuffle(cardDeck);
 	}
 
 	public int cardDeckSize() {

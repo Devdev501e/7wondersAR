@@ -12,6 +12,8 @@ public class Player {
     private Boolean chat;
     private int totalPoints;
 
+    private final CardDecks cardDecks;
+
 
     public Player(String name,Wonder wonder, Hand hand,Boolean chat, ArrayList<ProgressToken> allTokens){
         this.name=name;
@@ -21,10 +23,15 @@ public class Player {
         this.allTokens = allTokens;
         this.wonderContruction = new Construction(wonder);
         this.totalPoints = 0;
+        this.cardDecks = new CardDecks(wonder.displayName);
     }
 
     public String getName() {
         return name;
+    }
+
+    public CardDecks getCardDecks() {
+        return cardDecks;
     }
 
     public Construction getWonderContruction() {

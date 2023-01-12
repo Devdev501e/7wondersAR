@@ -193,9 +193,7 @@ public class GameController {
 
     private Player player;
     private ArrayList<String> playerNames = new ArrayList<>();
-    private final Actions actions = new Actions();
-    ArrayList<CardDecks> options = new ArrayList<>();
-    ArrayList<CardDecks> allDecks = new ArrayList<>();
+    ArrayList<CardDecks> options;
     CardDecks mainDeck;
     private int playerTurn;
 
@@ -207,10 +205,13 @@ public class GameController {
     private int countCards;
     private int countDraw;
 
-    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<CardDecks> allPlayerDecks,ArrayList<ProgressToken> progressTokens, int turn, boolean beggining) {
+    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<ProgressToken> progressTokens, int turn, boolean beggining) {
         //initialize table game
         countCards = 0;
         countDraw = 1;
+
+        options = new ArrayList<>();
+
         for (Player i : players) {
             playerNames.add(i.getName());
         }
@@ -222,7 +223,6 @@ public class GameController {
         if (beggining) {
             allPlayerNames.getItems().addAll(playerNames);
             allPlayers.addAll(players);
-            allDecks.addAll(allPlayerDecks);
             resetTokens();
             res = progressTokens;
 
@@ -277,11 +277,9 @@ public class GameController {
         playerTurn = turn;
         playerName.setText(player.getName());
 
-        System.out.println(player.getAllTokens());
+        options.add(player.getCardDecks());
 
         mainDeck = mainCardDeck;
-
-        options = actions.cardDecksOption(allPlayerDecks, turn);
 
         allPlayerNames.setOnAction(this::onPlayerNames);
 
@@ -310,7 +308,9 @@ public class GameController {
         }
         playerLeftScience.setText("Science: "+totalScience);
         playerLeftShields.setText("Shields: "+playerLeft.getHand().getShieldWar());
-
+        if (players.size() == 2) {
+            options.add(playerLeft.getCardDecks());
+        }
         if (players.size() > 2) {
             Player playerRight;
             if (turn == players.size()-1) {
@@ -319,6 +319,7 @@ public class GameController {
             else {
                 playerRight = players.get(turn+1);
             }
+            options.add(playerRight.getCardDecks());
             playerRightImage.setImage(new Image(getClass().getResourceAsStream("images/imagejeu/silhouette.png")));
             playerRightName.setText(""+playerRight.getName());
             totalMaterial = 0;
@@ -379,11 +380,14 @@ public class GameController {
         tab2.setText(playerView.getName());
         playerHandOutline.setVisible(true);
         playerHand.setText(playerView.getName()+"'s Hand");
-        for(int i=0;i<5;i++){
-        System.out.println("NbPieces = "+i+" = "+playerView.getWonderContruction().getAllPieces().get(i).getNbPieces());
-        System.out.println("Point = "+i+" = "+playerView.getWonderContruction().getAllPieces().get(i).getPoints());
+
+        for (int i=0;i<5;i++) {
+            System.out.println("NbPieces = "+i+" = "+playerView.getWonderContruction().getAllPieces().get(i).getNbPieces());
+            System.out.println("Point = "+i+" = "+playerView.getWonderContruction().getAllPieces().get(i).getPoints());
             System.out.println("class = "+i+" = "+playerView.getWonderContruction().getAllPieces().get(i).getClass());
-            System.out.println("equal = "+i+" = "+playerView.getWonderContruction().getAllPieces().get(i).getEqual());}
+            System.out.println("equal = "+i+" = "+playerView.getWonderContruction().getAllPieces().get(i).getEqual());
+        }
+
         //for wonder construction images
         switch (playerView.getWonder()){
             case Alexandrie:
@@ -682,10 +686,12 @@ public class GameController {
         if (playerView.getChat()) {
             catImage.setImage(catPNG);
         }
+
         //for tokens image
         for (int i = 0; i < playerView.getAllTokens().size(); i++) {
             tokenImages.get(i).setImage(new Image(getClass().getResourceAsStream(playerView.getAllTokens().get(i).imageResource)));
         }
+
         //for military image
         if (playerView.getHand().getMilitaryPoints() != 0) {
             militaryImage.setImage(militaryPNG);
@@ -693,7 +699,8 @@ public class GameController {
                 militaryCount.setText("x"+playerView.getHand().getMilitaryPoints()/3);
             }
         }
-        //for cards
+
+        //for grey cards
         for (int i = 0; i < playerView.getHand().getMaterials().length; i++) {
             if (playerView.getHand().getMaterials()[i] > 0) {
                 materialImages.get(i).setVisible(true);
@@ -702,11 +709,13 @@ public class GameController {
                 materialLabels.get(i).setText("x"+playerView.getHand().getMaterials()[i]);
             }
         }
+        //for green cards
         for (int i = 0; i < playerView.getHand().getScience().length; i++) {
             if (playerView.getHand().getScience()[i] > 0) {
                 scienceImages.get(i).setVisible(true);
             }
         }
+        //for blue cards
         for (int i = 0; i < playerView.getHand().getPointVictoire().length; i++) {
             if (playerView.getHand().getPointVictoire()[i] > 0) {
                 blueImages.get(i).setVisible(true);
@@ -715,12 +724,13 @@ public class GameController {
                 blueLabels.get(i).setText("x"+playerView.getHand().getPointVictoire()[i]);
             }
         }
+        //for red cards
         for (int i = 0; i < playerView.getHand().getShieldCards().length; i++) {
             if (playerView.getHand().getShieldCards()[i] > 0) {
                 redImages.get(i).setVisible(true);
             }
             if (playerView.getHand().getShieldCards()[i] > 1) {
-                redLabels.get(i).setText("x"+playerView.getHand().getShieldCards()[i]);
+                redLabels.get(i).setText("x" + playerView.getHand().getShieldCards()[i]);
             }
         }
     }
@@ -756,7 +766,6 @@ public class GameController {
         cardCountLeft.setText("Cards: "+options.get(0).cardDeckSize());
         buidPiece2(player.getWonderContruction(),player);                           //ajout pour la construction
 
-
         if (countDraw == countCards) {
             cardDisable(true);
         }
@@ -789,7 +798,6 @@ public class GameController {
         rightDeckCardImage.setImage(rightDeckCardPNG);
         cardCountRight.setText("Cards: "+options.get(1).cardDeckSize());
         buidPiece2(player.getWonderContruction(),player);                           //ajout pour la construction
-
 
         if (countDraw == countCards) {
             cardDisable(true);
@@ -852,8 +860,10 @@ public class GameController {
         }
 
         res.remove(0);
-        Image resImage = new Image(getClass().getResourceAsStream(res.get(3).imageResource));
-        progressImages.get(0).setImage(resImage);
+        for (int i = 0; i < progressImages.size(); i++) {
+            Image resImage = new Image(getClass().getResourceAsStream(res.get(i).imageResource));
+            progressImages.get(i).setImage(resImage);
+        }
         disableProgressChoice(true);
     }
 
@@ -866,9 +876,11 @@ public class GameController {
             player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
         }
         res.remove(1);
+        for (int i = 0; i < progressImages.size(); i++) {
+            Image resImage = new Image(getClass().getResourceAsStream(res.get(i).imageResource));
+            progressImages.get(i).setImage(resImage);
+        }
 
-        Image resImage = new Image(getClass().getResourceAsStream(res.get(3).imageResource));
-        progressImages.get(1).setImage(resImage);
         disableProgressChoice(true);
     }
 
@@ -881,8 +893,10 @@ public class GameController {
             player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
         }
         res.remove(2);
-        Image resImage = new Image(getClass().getResourceAsStream(res.get(3).imageResource));
-        progressImages.get(2).setImage(resImage);
+        for (int i = 0; i < progressImages.size(); i++) {
+            Image resImage = new Image(getClass().getResourceAsStream(res.get(i).imageResource));
+            progressImages.get(i).setImage(resImage);
+        }
         disableProgressChoice(true);
     }
 
@@ -907,7 +921,7 @@ public class GameController {
         else {
             playerTurn++;
         }
-        startTurn(allPlayers, mainDeck, allDecks, res, playerTurn, false);
+        startTurn(allPlayers, mainDeck, res, playerTurn, false);
     }
 
     public void resetPlayerViewBlank() {
