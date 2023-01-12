@@ -6,14 +6,16 @@ import java.util.Arrays;
 public class Hand {
     private int[] science = new int[3];
     private int[] materials = new int[6];
-    private int pointVictoire;
+    private int[] pointVictoire = new int[2];
+    private int[] shieldCards = new int[3];
     private int shieldWar;
     private int militaryPoints;
 
     public Hand () {
         Arrays.fill(materials, 0);
         Arrays.fill(science, 0);
-        this.pointVictoire = 0;
+        Arrays.fill(pointVictoire, 0);
+        Arrays.fill(shieldCards, 0);
         this.shieldWar = 0;
         this.militaryPoints = 0;
     }
@@ -25,11 +27,25 @@ public class Hand {
         return shieldWar;
     }
 
-    public int getPointVictoire() {
+    public void addShield(int shieldNumber) {
+        setShieldWar(getShieldWar()+1);
+        shieldCards[shieldNumber] += 1;
+    }
+
+    public int[] getShieldCards() {
+        return shieldCards;
+    }
+
+    public int[] getPointVictoire() {
         return pointVictoire;
     }
-    public void setPointVictoire(int pointVictoire) {
-        this.pointVictoire = pointVictoire;
+    public void setPointVictoire(int position) {
+        if (position == 0) {
+            pointVictoire[position] += 2;
+        }
+        else {
+            pointVictoire[position] += 3;
+        }
     }
 
     public int getMilitaryPoints() {

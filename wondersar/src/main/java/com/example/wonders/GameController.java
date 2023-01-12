@@ -115,6 +115,8 @@ public class GameController {
     private ImageView emperorImage = new ImageView();
     @FXML
     private Label emperorCount;
+    private ArrayList<ImageView> blueImages = new ArrayList<>();
+    private ArrayList<Label> blueLabels = new ArrayList<>();
     @FXML
     private ImageView centurionImage = new ImageView();
     @FXML
@@ -127,12 +129,17 @@ public class GameController {
     private ImageView archerImage = new ImageView();
     @FXML
     private Label archerCount;
+    private  ArrayList<ImageView> redImages = new ArrayList<>();
+    private ArrayList<Label> redLabels = new ArrayList<>();
     @FXML
     private ImageView lawImage = new ImageView();
     @FXML
     private ImageView architectImage = new ImageView();
     @FXML
     private ImageView mechanicImage = new ImageView();
+
+    private ArrayList<ImageView> scienceImages = new ArrayList<>();
+
     @FXML
     private ImageView token1 = new ImageView();
     @FXML
@@ -151,7 +158,7 @@ public class GameController {
     private ImageView token8 = new ImageView();
     @FXML
     private ImageView token9 = new ImageView();
-    private ArrayList<ImageView> tokenImages = new ArrayList<>();
+    private final ArrayList<ImageView> tokenImages = new ArrayList<>();
     @FXML
     private ImageView stoneImage = new ImageView();
     @FXML
@@ -176,6 +183,9 @@ public class GameController {
     private ImageView brickImage = new ImageView();
     @FXML
     private Label brickCount;
+
+    private ArrayList<ImageView> materialImages = new ArrayList<>();
+    private ArrayList<Label> materialLabels = new ArrayList<>();
     @FXML
     private Button endButton;
 
@@ -229,6 +239,38 @@ public class GameController {
             progressImages.add(progress0);
             progressImages.add(progress1);
             progressImages.add(progress2);
+
+            materialImages.add(woodImage);
+            materialImages.add(paperImage);
+            materialImages.add(brickImage);
+            materialImages.add(stoneImage);
+            materialImages.add(glassImage);
+            materialImages.add(goldImage);
+
+            materialLabels.add(woodCount);
+            materialLabels.add(paperCount);
+            materialLabels.add(brickCount);
+            materialLabels.add(stoneCount);
+            materialLabels.add(glassCount);
+            materialLabels.add(goldCount);
+
+            scienceImages.add(lawImage);
+            scienceImages.add(mechanicImage);
+            scienceImages.add(architectImage);
+
+            blueImages.add(womanImage);
+            blueImages.add(emperorImage);
+
+            blueLabels.add(womanCount);
+            blueLabels.add(emperorCount);
+
+            redImages.add(centurionImage);
+            redImages.add(barbarianImage);
+            redImages.add(archerImage);
+
+            redLabels.add(centurionCount);
+            redLabels.add(barbarianCount);
+            redLabels.add(archerCount);
         }
 
         player = players.get(turn);
@@ -648,78 +690,35 @@ public class GameController {
             }
         }
         //for cards
-        int[] counts = new int[11];
-        Arrays.fill(counts, 0);
-        for (Card i : playerView.getAllPlayerCards()) {
-            switch (i.front.cardDisplayName) {
-                case "material:wood":
-                    counts[0]++;
-                    woodImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    woodCount.setText("x"+counts[0]);
-                    break;
-                case "material:paper":
-                    counts[1]++;
-                    paperImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    paperCount.setText("x"+counts[1]);
-                    break;
-                case "material:brick":
-                    counts[2]++;
-                    brickImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    brickCount.setText("x"+counts[2]);
-                    break;
-                case "material:stone":
-                    counts[3]++;
-                    stoneImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    stoneCount.setText("x"+counts[3]);
-                    break;
-                case "material:glass":
-                    counts[4]++;
-                    glassImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    glassCount.setText("x"+counts[4]);
-                    break;
-                case "material:gold":
-                    counts[5]++;
-                    goldImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    goldCount.setText("x"+counts[5]);
-                    break;
-                case "science:law":
-                    lawImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    break;
-                case "science:mechanic":
-                    mechanicImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    break;
-                case "science:architect":
-                    architectImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    break;
-                case "politic:emperor":
-                    counts[6]++;
-                    emperorImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    emperorCount.setText("x"+counts[6]);
-                    break;
-                case "politic:cat":
-                    counts[7]++;
-                    womanImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    catImage.setImage(catPNG);
-                    womanCount.setText("x"+counts[7]);
-                    break;
-                case "war:barbarion":
-                    counts[8]++;
-                    barbarianImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    barbarianCount.setText("x"+counts[8]);
-                    break;
-                case "war:centurion":
-                    counts[9]++;
-                    centurionImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    centurionCount.setText("x"+counts[9]);
-                    break;
-                case "war:archer":
-                    counts[10]++;
-                    architectImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    archerCount.setText("x"+counts[10]);
-                    break;
+        for (int i = 0; i < playerView.getHand().getMaterials().length; i++) {
+            if (playerView.getHand().getMaterials()[i] > 0) {
+                materialImages.get(i).setVisible(true);
+            }
+            if (playerView.getHand().getMaterials()[i] > 1) {
+                materialLabels.get(i).setText("x"+playerView.getHand().getMaterials()[i]);
             }
         }
-
+        for (int i = 0; i < playerView.getHand().getScience().length; i++) {
+            if (playerView.getHand().getScience()[i] > 0) {
+                scienceImages.get(i).setVisible(true);
+            }
+        }
+        for (int i = 0; i < playerView.getHand().getPointVictoire().length; i++) {
+            if (playerView.getHand().getPointVictoire()[i] > 0) {
+                blueImages.get(i).setVisible(true);
+            }
+            if (playerView.getHand().getPointVictoire()[i] > 1) {
+                blueLabels.get(i).setText("x"+playerView.getHand().getPointVictoire()[i]);
+            }
+        }
+        for (int i = 0; i < playerView.getHand().getShieldCards().length; i++) {
+            if (playerView.getHand().getShieldCards()[i] > 0) {
+                redImages.get(i).setVisible(true);
+            }
+            if (playerView.getHand().getShieldCards()[i] > 1) {
+                redLabels.get(i).setText("x"+playerView.getHand().getShieldCards()[i]);
+            }
+        }
     }
 
     public void onButtonLeftDeck() {
@@ -905,38 +904,20 @@ public class GameController {
     }
 
     public void resetPlayerViewBlank() {
-        centurionImage.setImage(null);
-        centurionCount.setText("");
-        archerImage.setImage(null);
-        archerCount.setText("");
-        barbarianImage.setImage(null);
-        barbarianCount.setText("");
-        militaryImage.setImage(null);
-        militaryCount.setText("");
+        for (int i = 0; i < redImages.size(); i++) {
+            redImages.get(i).setVisible(false);
+            redLabels.get(i).setText("");
 
-        womanImage.setImage(null);
-        catImage.setImage(null);
-        womanCount.setText("");
-        emperorImage.setImage(null);
-        emperorCount.setText("");
-
-        lawImage.setImage(null);
-        architectImage.setImage(null);
-        mechanicImage.setImage(null);
-
-        woodImage.setImage(null);
-        woodCount.setText("");
-        paperImage.setImage(null);
-        paperCount.setText("");
-        brickImage.setImage(null);
-        brickCount.setText("");
-        stoneImage.setImage(null);
-        stoneCount.setText("");
-        glassImage.setImage(null);
-        glassCount.setText("");
-        goldImage.setImage(null);
-        goldCount.setText("");
-
+            scienceImages.get(i).setVisible(false);
+        }
+        for (int i = 0; i < blueImages.size(); i++) {
+            blueImages.get(i).setVisible(false);
+            blueLabels.get(i).setText("");
+        }
+        for (int i = 0; i < materialImages.size(); i++) {
+            materialImages.get(i).setVisible(false);
+            materialLabels.get(i).setText("");
+        }
         for (ImageView i : tokenImages) {
             i.setImage(null);
         }
@@ -1047,14 +1028,8 @@ public class GameController {
         }
 
         for (int j = 0; j < allPlayers.size(); j++) {
-            ArrayList<Card> toRemove = new ArrayList<>();
-            for (Card i : allPlayers.get(j).getAllPlayerCards()) {
-                if ((i.front.cardDisplayName.equals("war:barbarian")) || (i.front.cardDisplayName.equals("war:archer"))) {
-                    toRemove.add(i);
-                }
-            }
-            allPlayers.get(j).getAllPlayerCards().removeAll(toRemove);
-            allPlayers.get(j).getHand().setShieldWar(allPlayers.get(j).getHand().getShieldWar()-toRemove.size());
+            allPlayers.get(j).getHand().getShieldCards()[1] = 0;
+            allPlayers.get(j).getHand().getShieldCards()[2] = 0;
         }
     }
 
@@ -1140,27 +1115,21 @@ public class GameController {
                         }
 
                         if (totalCompletion) {
-                            i.getHand().setPointVictoire(i.getHand().getPointVictoire()+6);
+                            i.setTotalPoints(i.getTotalPoints()+6);
                         } else {
-                            i.getHand().setPointVictoire(i.getHand().getPointVictoire()+4);
+                            i.setTotalPoints(i.getTotalPoints()+4);
                         }
                         break;
                     case Politic:
-                        for (Card k : player.getAllPlayerCards()) {
-                            if (k.front.cat) {
-                                i.getHand().setPointVictoire(i.getHand().getPointVictoire()+1);
-                            }
-                        }
+                        i.setTotalPoints((i.getTotalPoints()+(i.getHand().getPointVictoire()[0]/2)));
                         break;
                     case Strategy:
                         int nbMilitaryTokens = player.getHand().getMilitaryPoints()/3;
-                        for (int k = 0; k < nbMilitaryTokens; k++) {
-                            i.getHand().setPointVictoire(i.getHand().getPointVictoire()+1);
-                        }
+                        i.setTotalPoints(i.getTotalPoints()+nbMilitaryTokens);
                         break;
                     case Education:
                         for (int k = 0; k < player.getAllTokens().size(); k++) {
-                            i.getHand().setPointVictoire(i.getHand().getPointVictoire()+1);
+                            i.setTotalPoints(i.getTotalPoints()+1);
                         }
                         break;
                     case Culture:
@@ -1169,10 +1138,10 @@ public class GameController {
                 }
             }
             if (cultureCount == 1) {
-                i.getHand().setPointVictoire(i.getHand().getPointVictoire()+4);
+                i.setTotalPoints(i.getTotalPoints()+4);
             }
             else if (cultureCount == 2) {
-                i.getHand().setPointVictoire(i.getHand().getPointVictoire()+12);
+                i.setTotalPoints(i.getTotalPoints()+12);
             }
 
             //points vennant de construction

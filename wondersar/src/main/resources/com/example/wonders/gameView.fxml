@@ -112,20 +112,62 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="paperImage" fitHeight="91.0" fitWidth="67.0" layoutX="723.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="brickImage" fitHeight="91.0" fitWidth="67.0" layoutX="723.0" layoutY="321.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="glassImage" fitHeight="91.0" fitWidth="67.0" layoutX="652.0" layoutY="321.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="stoneImage" fitHeight="91.0" fitWidth="67.0" layoutX="578.0" layoutY="321.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="woodImage" fitHeight="91.0" fitWidth="67.0" layoutX="652.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="goldImage" fitHeight="91.0" fitWidth="67.0" layoutX="578.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="lawImage" fitHeight="91.0" fitWidth="67.0" layoutX="479.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="mechanicImage" fitHeight="91.0" fitWidth="67.0" layoutX="409.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="architectImage" fitHeight="91.0" fitWidth="67.0" layoutX="338.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="emperorImage" fitHeight="91.0" fitWidth="67.0" layoutX="217.0" layoutY="321.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="womanImage" fitHeight="91.0" fitWidth="67.0" layoutX="142.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="archerImage" fitHeight="91.0" fitWidth="67.0" layoutX="255.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="barbarianImage" fitHeight="91.0" fitWidth="67.0" layoutX="186.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="centurionImage" fitHeight="91.0" fitWidth="67.0" layoutX="118.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="paperImage" fitHeight="91.0" fitWidth="67.0" layoutX="723.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/cards/card-material-paper-women.png" />
+                     </image></ImageView>
+                  <ImageView fx:id="brickImage" fitHeight="91.0" fitWidth="67.0" layoutX="723.0" layoutY="321.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/cards/card-material-brick-women.png" />
+                     </image></ImageView>
+                  <ImageView fx:id="glassImage" fitHeight="91.0" fitWidth="67.0" layoutX="652.0" layoutY="321.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/cards/card-material-glass-women.png" />
+                     </image></ImageView>
+                  <ImageView fx:id="stoneImage" fitHeight="91.0" fitWidth="67.0" layoutX="577.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/cards/card-material-stone-stonecutter.png" />
+                     </image></ImageView>
+                  <ImageView fx:id="woodImage" fitHeight="91.0" fitWidth="67.0" layoutX="652.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/cards/card-material-wood-lumberjack.png" />
+                     </image></ImageView>
+                  <ImageView fx:id="goldImage" fitHeight="91.0" fitWidth="67.0" layoutX="578.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/cards/card-material-gold-vizir.png" />
+                     </image></ImageView>
+                  <ImageView fx:id="lawImage" fitHeight="91.0" fitWidth="67.0" layoutX="479.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/cards/card-progress-law.png" />
+                     </image></ImageView>
+                  <ImageView fx:id="mechanicImage" fitHeight="91.0" fitWidth="67.0" layoutX="409.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/cards/card-progress-mechanic.png" />
+                     </image></ImageView>
+                  <ImageView fx:id="architectImage" fitHeight="91.0" fitWidth="67.0" layoutX="338.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/cards/card-progress-architect.png" />
+                     </image></ImageView>
+                  <ImageView fx:id="emperorImage" fitHeight="91.0" fitWidth="67.0" layoutX="217.0" layoutY="321.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/cards/card-politic-emperor-3laurel.png" />
+                     </image></ImageView>
+                  <ImageView fx:id="womanImage" fitHeight="91.0" fitWidth="67.0" layoutX="142.0" layoutY="322.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/cards/card-politic-women-2laurel-cat.png" />
+                     </image></ImageView>
+                  <ImageView fx:id="archerImage" fitHeight="91.0" fitWidth="67.0" layoutX="255.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/cards/card-war-archer-2corns.png" />
+                     </image></ImageView>
+                  <ImageView fx:id="barbarianImage" fitHeight="91.0" fitWidth="67.0" layoutX="186.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/cards/card-war-barbarian-1corn.png" />
+                     </image></ImageView>
+                  <ImageView fx:id="centurionImage" fitHeight="91.0" fitWidth="67.0" layoutX="118.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/cards/card-war-centurion.png" />
+                     </image></ImageView>
                   <ImageView fx:id="militaryImage" fitHeight="32.0" fitWidth="34.0" layoutX="89.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="catImage" fitHeight="145.0" fitWidth="66.0" layoutX="28.0" layoutY="367.0" pickOnBounds="true" preserveRatio="true" />
                   <Label fx:id="womanCount" layoutX="186.0" layoutY="354.0" />
@@ -154,30 +196,11 @@
                         <Font size="29.0" />
                      </font>
                   </Label>
-                  <ImageView fx:id="construction1" fitHeight="167.0" fitWidth="212.0" layoutX="60.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/wonders/giseh/piece-back-giseh-1.png" />
-                     </image></ImageView>
-                  <ImageView fx:id="construction2" fitHeight="40.0" fitWidth="213.0" layoutX="292.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/wonders/giseh/piece-back-giseh-1.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="construction3" fitHeight="43.0" fitWidth="157.0" layoutX="316.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/wonders/giseh/piece-back-giseh-2.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="construction5" fitHeight="42.0" fitWidth="111.0" layoutX="340.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/wonders/giseh/piece-back-giseh-3.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="construction4" fitHeight="57.0" fitWidth="70.0" layoutX="360.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/wonders/giseh/piece-back-giseh-4.png" />
-                     </image>
-                  </ImageView>
+                  <ImageView fx:id="construction1" fitHeight="167.0" fitWidth="212.0" layoutX="60.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="construction2" fitHeight="40.0" fitWidth="213.0" layoutX="292.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="construction3" fitHeight="43.0" fitWidth="157.0" layoutX="316.0" layoutY="191.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="construction5" fitHeight="42.0" fitWidth="111.0" layoutX="340.0" layoutY="152.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="construction4" fitHeight="57.0" fitWidth="70.0" layoutX="360.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true" />
                </children></AnchorPane>
       </content>
     </Tab>

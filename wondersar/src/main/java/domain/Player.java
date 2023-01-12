@@ -7,20 +7,20 @@ public class Player {
     private final String  name;
     private final  Wonder wonder;
     private final Construction wonderContruction;
-    private ArrayList<Card> allPlayerCards;
     private ArrayList<ProgressToken> allTokens;
     private Hand hand;
     private Boolean chat;
+    private int totalPoints;
 
 
-    public Player(String name,Wonder wonder, Hand hand,Boolean chat, ArrayList<Card> allPlayerCards, ArrayList<ProgressToken> allTokens){
+    public Player(String name,Wonder wonder, Hand hand,Boolean chat, ArrayList<ProgressToken> allTokens){
         this.name=name;
         this.wonder=wonder;
         this.hand = hand;
         this.chat=chat;
-        this.allPlayerCards = allPlayerCards;
         this.allTokens = allTokens;
         this.wonderContruction = new Construction(wonder);
+        this.totalPoints = 0;
     }
 
     public String getName() {
@@ -50,19 +50,25 @@ public class Player {
         return allTokens;
     }
 
-    public ArrayList<Card> getAllPlayerCards() {
-        return allPlayerCards;
+    public int getTotalPoints() {
+        return totalPoints;
+    }
+    public void setTotalPoints(int totalPoints) {
+        this.totalPoints = totalPoints;
     }
 
     public void addCard(Card card, ArrayList<Player> players) {
-        this.allPlayerCards.add(card);
-
         switch (card.getFront().getCardCategory()) {
             case WarCard:
-                this.getHand().setShieldWar(this.getHand().getShieldWar()+card.getFront().shieldCount);
+                this.getHand().addShield(card.front.cornCount);
                 break;
             case PoliticCard:
-                this.getHand().setPointVictoire(this.getHand().getPointVictoire()+card.getFront().laurelCount);
+                if (card.front.laurelCount == 2) {
+                    this.getHand().setPointVictoire(0);
+                }
+                else {
+                    this.getHand().setPointVictoire(1);
+                }
                 if (card.front.cat) {
                     for (Player i : players) {
                         i.chat = false;

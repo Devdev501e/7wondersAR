@@ -94,18 +94,7 @@ public class Actions {
             player.getHand().getMaterials()[intMaterial] = 0;
 
             int j = 0;
-            for (Card i : player.getAllPlayerCards()) {
-                if (i.getFront().material == material) {
-                    cardsToRemove.add(i);
-                }
-                if (j < nbGold) {
-                    if (i.getFront().material == Material.Gold) {
-                        cardsToRemove.add(i);
-                        j++;
-                    }
-                }
-            }
-            player.getAllPlayerCards().removeAll(cardsToRemove);
+
         }
         else {
             ArrayList<Integer> intMaterialToRemove = new ArrayList<>();
@@ -125,19 +114,6 @@ public class Actions {
             }
 
             int j = 0;
-            for (Card i : player.getAllPlayerCards()) {
-                if (materialToRemove.contains(i.getFront().material)) {
-                    cardsToRemove.add(i);
-                    materialToRemove.remove(i.getFront().material);
-                }
-                if (j < nbGold) {
-                    if (i.getFront().material == Material.Gold) {
-                        cardsToRemove.add(i);
-                        j++;
-                    }
-                }
-            }
-            player.getAllPlayerCards().removeAll(cardsToRemove);
 
         }
 

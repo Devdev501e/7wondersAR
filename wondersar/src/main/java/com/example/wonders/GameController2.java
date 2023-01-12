@@ -115,6 +115,8 @@ public class GameController2 {
     private ImageView emperorImage = new ImageView();
     @FXML
     private Label emperorCount;
+    private ArrayList<ImageView> blueImages = new ArrayList<>();
+    private ArrayList<Label> blueLabels = new ArrayList<>();
     @FXML
     private ImageView centurionImage = new ImageView();
     @FXML
@@ -127,12 +129,17 @@ public class GameController2 {
     private ImageView archerImage = new ImageView();
     @FXML
     private Label archerCount;
+    private  ArrayList<ImageView> redImages = new ArrayList<>();
+    private ArrayList<Label> redLabels = new ArrayList<>();
     @FXML
     private ImageView lawImage = new ImageView();
     @FXML
     private ImageView architectImage = new ImageView();
     @FXML
     private ImageView mechanicImage = new ImageView();
+
+    private ArrayList<ImageView> scienceImages = new ArrayList<>();
+
     @FXML
     private ImageView token1 = new ImageView();
     @FXML
@@ -151,7 +158,7 @@ public class GameController2 {
     private ImageView token8 = new ImageView();
     @FXML
     private ImageView token9 = new ImageView();
-    private ArrayList<ImageView> tokenImages = new ArrayList<>();
+    private final ArrayList<ImageView> tokenImages = new ArrayList<>();
     @FXML
     private ImageView stoneImage = new ImageView();
     @FXML
@@ -176,6 +183,9 @@ public class GameController2 {
     private ImageView brickImage = new ImageView();
     @FXML
     private Label brickCount;
+
+    private ArrayList<ImageView> materialImages = new ArrayList<>();
+    private ArrayList<Label> materialLabels = new ArrayList<>();
     @FXML
     private Button endButton;
 
@@ -194,9 +204,13 @@ public class GameController2 {
 
     ArrayList<Player> allPlayers = new ArrayList<>();
     ArrayList<ProgressToken> res;
+    private int countCards;
+    private int countDraw;
 
-    public void startTurn2(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<CardDecks> allPlayerDecks,ArrayList<ProgressToken> progressTokens, int turn, boolean beggining) {
+    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<CardDecks> allPlayerDecks,ArrayList<ProgressToken> progressTokens, int turn, boolean beggining) {
         //initialize table game
+        countCards = 0;
+        countDraw = 1;
         for (Player i : players) {
             playerNames.add(i.getName());
         }
@@ -225,11 +239,45 @@ public class GameController2 {
             progressImages.add(progress0);
             progressImages.add(progress1);
             progressImages.add(progress2);
+
+            materialImages.add(woodImage);
+            materialImages.add(paperImage);
+            materialImages.add(brickImage);
+            materialImages.add(stoneImage);
+            materialImages.add(glassImage);
+            materialImages.add(goldImage);
+
+            materialLabels.add(woodCount);
+            materialLabels.add(paperCount);
+            materialLabels.add(brickCount);
+            materialLabels.add(stoneCount);
+            materialLabels.add(glassCount);
+            materialLabels.add(goldCount);
+
+            scienceImages.add(lawImage);
+            scienceImages.add(mechanicImage);
+            scienceImages.add(architectImage);
+
+            blueImages.add(womanImage);
+            blueImages.add(emperorImage);
+
+            blueLabels.add(womanCount);
+            blueLabels.add(emperorCount);
+
+            redImages.add(centurionImage);
+            redImages.add(barbarianImage);
+            redImages.add(archerImage);
+
+            redLabels.add(centurionCount);
+            redLabels.add(barbarianCount);
+            redLabels.add(archerCount);
         }
 
         player = players.get(turn);
         playerTurn = turn;
         playerName.setText(player.getName());
+
+        System.out.println(player.getAllTokens());
 
         mainDeck = mainCardDeck;
 
@@ -331,6 +379,8 @@ public class GameController2 {
         tab2.setText(playerView.getName());
         playerHandOutline.setVisible(true);
         playerHand.setText(playerView.getName()+"'s Hand");
+
+        //for wonder construction images
         switch (playerView.getWonder()){
             case Alexandrie:
                 ConstImage constImage = ConstImage.AlexandrieBack;
@@ -640,85 +690,58 @@ public class GameController2 {
             }
         }
         //for cards
-        int[] counts = new int[11];
-        Arrays.fill(counts, 0);
-        for (Card i : playerView.getAllPlayerCards()) {
-            switch (i.front.cardDisplayName) {
-                case "material:wood":
-                    counts[0]++;
-                    woodImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    woodCount.setText("x"+counts[0]);
-                    break;
-                case "material:paper":
-                    counts[1]++;
-                    paperImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    paperCount.setText("x"+counts[1]);
-                    break;
-                case "material:brick":
-                    counts[2]++;
-                    brickImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    brickCount.setText("x"+counts[2]);
-                    break;
-                case "material:stone":
-                    counts[3]++;
-                    stoneImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    stoneCount.setText("x"+counts[3]);
-                    break;
-                case "material:glass":
-                    counts[4]++;
-                    glassImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    glassCount.setText("x"+counts[4]);
-                    break;
-                case "material:gold":
-                    counts[5]++;
-                    goldImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    goldCount.setText("x"+counts[5]);
-                    break;
-                case "science:law":
-                    lawImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    break;
-                case "science:mechanic":
-                    mechanicImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    break;
-                case "science:architect":
-                    architectImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    break;
-                case "politic:emperor":
-                    counts[6]++;
-                    emperorImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    emperorCount.setText("x"+counts[6]);
-                    break;
-                case "politic:cat":
-                    counts[7]++;
-                    womanImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    catImage.setImage(catPNG);
-                    womanCount.setText("x"+counts[7]);
-                    break;
-                case "war:barbarion":
-                    counts[8]++;
-                    barbarianImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    barbarianCount.setText("x"+counts[8]);
-                    break;
-                case "war:centurion":
-                    counts[9]++;
-                    centurionImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    centurionCount.setText("x"+counts[9]);
-                    break;
-                case "war:archer":
-                    counts[10]++;
-                    architectImage.setImage(new Image(getClass().getResourceAsStream(i.front.imageResource)));
-                    archerCount.setText("x"+counts[10]);
-                    break;
+        for (int i = 0; i < playerView.getHand().getMaterials().length; i++) {
+            if (playerView.getHand().getMaterials()[i] > 0) {
+                materialImages.get(i).setVisible(true);
+            }
+            if (playerView.getHand().getMaterials()[i] > 1) {
+                materialLabels.get(i).setText("x"+playerView.getHand().getMaterials()[i]);
             }
         }
-
+        for (int i = 0; i < playerView.getHand().getScience().length; i++) {
+            if (playerView.getHand().getScience()[i] > 0) {
+                scienceImages.get(i).setVisible(true);
+            }
+        }
+        for (int i = 0; i < playerView.getHand().getPointVictoire().length; i++) {
+            if (playerView.getHand().getPointVictoire()[i] > 0) {
+                blueImages.get(i).setVisible(true);
+            }
+            if (playerView.getHand().getPointVictoire()[i] > 1) {
+                blueLabels.get(i).setText("x"+playerView.getHand().getPointVictoire()[i]);
+            }
+        }
+        for (int i = 0; i < playerView.getHand().getShieldCards().length; i++) {
+            if (playerView.getHand().getShieldCards()[i] > 0) {
+                redImages.get(i).setVisible(true);
+            }
+            if (playerView.getHand().getShieldCards()[i] > 1) {
+                redLabels.get(i).setText("x"+playerView.getHand().getShieldCards()[i]);
+            }
+        }
     }
 
     public void onButtonLeftDeck() {
         player.addCard(leftDeckCard, allPlayers);
-        for (ProgressToken i : player.getAllTokens()) {
-            getScienceEffectDuringGame(i, player, leftDeckCard);
+        ArrayList<Integer> tokenIgnore = new ArrayList<>();
+        countCards++;
+
+        if (player.getAllTokens().size() == 0) {
+            cardDisable(true);
         }
+        else {
+            for (int i = 0; i < player.getAllTokens().size(); i++) {
+                ProgressToken pt = player.getAllTokens().get(i);
+                if (!tokenIgnore.contains(i)) {
+                    boolean found = getScienceEffectDuringGame(pt, leftDeckCard);
+                    if (found) {
+                        tokenIgnore.add(i);
+                        break;
+                    }
+                }
+            }
+        }
+
         options.get(0).chooseCard();
         checkCardCorn(leftDeckCard.front);
         canGetToken();
@@ -728,15 +751,30 @@ public class GameController2 {
         leftDeckCardImage.setImage(leftDeckCardPNG);
         cardCountLeft.setText("Cards: "+options.get(0).cardDeckSize());
 
-        cardDisable(true);
+
+        if (countDraw == countCards) {
+            cardDisable(true);
+        }
+
         endButton.setDisable(false);
     }
 
     public void onButtonRightDeck() {
         player.addCard(rightDeckCard, allPlayers);
-        for (ProgressToken i : player.getAllTokens()) {
-            getScienceEffectDuringGame(i, player, rightDeckCard);
+        countCards++;
+
+        if (player.getAllTokens().size() == 0) {
+            cardDisable(true);
         }
+        else {
+            for (ProgressToken i : player.getAllTokens()) {
+                boolean found = getScienceEffectDuringGame(i, rightDeckCard);
+                if (found) {
+                    break;
+                }
+            }
+        }
+
         options.get(1).chooseCard();
         checkCardCorn(rightDeckCard.front);
         canGetToken();
@@ -746,17 +784,32 @@ public class GameController2 {
         rightDeckCardImage.setImage(rightDeckCardPNG);
         cardCountRight.setText("Cards: "+options.get(1).cardDeckSize());
 
-        cardDisable(true);
+
+        if (countDraw == countCards) {
+            cardDisable(true);
+        }
+
         endButton.setDisable(false);
     }
 
     public void onButtonMainDeck() {
         player.addCard(mainDeckCard, allPlayers);
+        countCards++;
+
+        if (player.getAllTokens().size() == 0) {
+            cardDisable(true);
+        }
+        else {
+            for (ProgressToken i : player.getAllTokens()) {
+                boolean found = getScienceEffectDuringGame(i, mainDeckCard);
+                if (found) {
+                    break;
+                }
+            }
+        }
+
         if (!player.getChat()) {
             infoBoxLabel.setText("Card Picked : "+mainDeckCard.front.cardDisplayName);
-        }
-        for (ProgressToken i : player.getAllTokens()) {
-            getScienceEffectDuringGame(i, player, mainDeckCard);
         }
 
         checkCardCorn(mainDeckCard.front);
@@ -774,12 +827,23 @@ public class GameController2 {
             mainDeckImage.setImage(mainDeckBackPNG);
         }
 
-        cardDisable(true);
+        if (countDraw == countCards) {
+            cardDisable(true);
+        }
+
         endButton.setDisable(false);
     }
 
     public void onProgress0() {
         player.getAllTokens().add(res.get(0));
+
+        if (res.get(0) == ProgressToken.Economy) {
+            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
+        }
+        else if (res.get(0) == ProgressToken.Tactic) {
+            player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
+        }
+
         res.remove(0);
         Image resImage = new Image(getClass().getResourceAsStream(res.get(3).imageResource));
         progressImages.get(0).setImage(resImage);
@@ -788,7 +852,14 @@ public class GameController2 {
 
     public void onProgress1() {
         player.getAllTokens().add(res.get(1));
+        if (res.get(1) == ProgressToken.Economy) {
+            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
+        }
+        else if (res.get(1) == ProgressToken.Tactic) {
+            player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
+        }
         res.remove(1);
+
         Image resImage = new Image(getClass().getResourceAsStream(res.get(3).imageResource));
         progressImages.get(1).setImage(resImage);
         disableProgressChoice(true);
@@ -796,6 +867,12 @@ public class GameController2 {
 
     public void onProgress2() {
         player.getAllTokens().add(res.get(2));
+        if (res.get(2) == ProgressToken.Economy) {
+            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
+        }
+        else if (res.get(2) == ProgressToken.Tactic) {
+            player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
+        }
         res.remove(2);
         Image resImage = new Image(getClass().getResourceAsStream(res.get(3).imageResource));
         progressImages.get(2).setImage(resImage);
@@ -804,6 +881,14 @@ public class GameController2 {
 
     public void onProgress3() {
         player.getAllTokens().add(res.get(3));
+        infoBoxOutline.setVisible(true);
+        infoBoxLabel.setText(res.get(3).effectDescription);
+        if (res.get(3) == ProgressToken.Economy) {
+            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
+        }
+        else if (res.get(3) == ProgressToken.Tactic) {
+            player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
+        }
         res.remove(3);
         disableProgressChoice(true);
     }
@@ -815,42 +900,24 @@ public class GameController2 {
         else {
             playerTurn++;
         }
-        startTurn2(allPlayers, mainDeck, allDecks, res, playerTurn, false);
+        startTurn(allPlayers, mainDeck, allDecks, res, playerTurn, false);
     }
 
     public void resetPlayerViewBlank() {
-        centurionImage.setImage(null);
-        centurionCount.setText("");
-        archerImage.setImage(null);
-        archerCount.setText("");
-        barbarianImage.setImage(null);
-        barbarianCount.setText("");
-        militaryImage.setImage(null);
-        militaryCount.setText("");
+        for (int i = 0; i < redImages.size(); i++) {
+            redImages.get(i).setVisible(false);
+            redLabels.get(i).setText("");
 
-        womanImage.setImage(null);
-        catImage.setImage(null);
-        womanCount.setText("");
-        emperorImage.setImage(null);
-        emperorCount.setText("");
-
-        lawImage.setImage(null);
-        architectImage.setImage(null);
-        mechanicImage.setImage(null);
-
-        woodImage.setImage(null);
-        woodCount.setText("");
-        paperImage.setImage(null);
-        paperCount.setText("");
-        brickImage.setImage(null);
-        brickCount.setText("");
-        stoneImage.setImage(null);
-        stoneCount.setText("");
-        glassImage.setImage(null);
-        glassCount.setText("");
-        goldImage.setImage(null);
-        goldCount.setText("");
-
+            scienceImages.get(i).setVisible(false);
+        }
+        for (int i = 0; i < blueImages.size(); i++) {
+            blueImages.get(i).setVisible(false);
+            blueLabels.get(i).setText("");
+        }
+        for (int i = 0; i < materialImages.size(); i++) {
+            materialImages.get(i).setVisible(false);
+            materialLabels.get(i).setText("");
+        }
         for (ImageView i : tokenImages) {
             i.setImage(null);
         }
@@ -863,29 +930,23 @@ public class GameController2 {
     }
 
     public void resetTokens() {
-        switch (allPlayers.size()) {
-            case 2:
-            case 3:
-                combat1.setImage(tokenPeace);
-                combat2.setImage(tokenPeace);
-                combat3.setImage(tokenPeace);
-                combats.add(combat1);
-                combats.add(combat2);
-                combats.add(combat3);
-                break;
-            case 4:
-                combat4.setImage(tokenPeace);
-                combats.add(combat4);
-                break;
-            case 5:
-                combat5.setImage(tokenPeace);
-                combats.add(combat5);
-                break;
-            case 6:
-            case 7:
-                combat6.setImage(tokenPeace);
-                combats.add(combat6);
-                break;
+        combat1.setImage(tokenPeace);
+        combat2.setImage(tokenPeace);
+        combat3.setImage(tokenPeace);
+        combats.add(combat1);
+        combats.add(combat2);
+        combats.add(combat3);
+        if (allPlayers.size() >= 4) {
+            combat4.setImage(tokenPeace);
+            combats.add(combat4);
+        }
+        if (allPlayers.size() >= 5) {
+            combat5.setImage(tokenPeace);
+            combats.add(combat5);
+        }
+        if (allPlayers.size() >= 6) {
+            combat6.setImage(tokenPeace);
+            combats.add(combat6);
         }
     }
 
@@ -902,14 +963,17 @@ public class GameController2 {
                 }
 
             }
-            boolean warTime = true;
-            for (ImageView i : combats) {
-                if (i.getImage() == tokenPeace) {
-                    warTime = false;
+            String warTime = "no";
+            for (int i = 0; i < combats.size(); i++) {
+                if (combats.get(i).getImage() == tokenPeace) {
+                    warTime = "false";
                     break;
                 }
+                if (i == combats.size()-1) {
+                    warTime = "true";
+                }
             }
-            if(warTime) {
+            if(warTime.equals("true")) {
                 infoBoxOutline.setVisible(true);
                 infoBoxLabel.setText("Bataille ! ");
                 battle();
@@ -964,14 +1028,8 @@ public class GameController2 {
         }
 
         for (int j = 0; j < allPlayers.size(); j++) {
-            ArrayList<Card> toRemove = new ArrayList<>();
-            for (Card i : allPlayers.get(j).getAllPlayerCards()) {
-                if ((i.front.cardDisplayName.equals("war:barbarian")) || (i.front.cardDisplayName.equals("war:archer"))) {
-                    toRemove.add(i);
-                }
-            }
-            allPlayers.get(j).getAllPlayerCards().removeAll(toRemove);
-            allPlayers.get(j).getHand().setShieldWar(allPlayers.get(j).getHand().getShieldWar()-toRemove.size());
+            allPlayers.get(j).getHand().getShieldCards()[1] = 0;
+            allPlayers.get(j).getHand().getShieldCards()[2] = 0;
         }
     }
 
@@ -980,7 +1038,6 @@ public class GameController2 {
         for (int i = 0; i < player.getHand().getScience().length; i++) {
             if (player.getHand().getScience()[i] == 2) {
                 player.getHand().getScience()[i] = 0;
-                System.out.println("yes");
                 infoBoxLabel.setText("Tu peux choisir un jeton progres");
                 disableProgressChoice(false);
                 break;
@@ -998,47 +1055,100 @@ public class GameController2 {
         }
     }
 
-    public void getScienceEffectDuringGame(ProgressToken progressToken, Player player, Card cardChosen) {
+    public boolean getScienceEffectDuringGame(ProgressToken progressToken, Card cardChosen) {
+        boolean found = false;
+
         switch (progressToken) {
-            case Tactic:
-                player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
-                break;
-            case Culture:
-              //  player.setCultureTokens(player.getCultureTokens()+1);
-                break;
-            case Economy:
-                player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
-                break;
             case Science:
                 if (cardChosen.front.cardCategory == CardCategory.ProgressCard) {
-                    cardDisable(false);
-                    infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+progressToken.effectDescription);
+                    countDraw++;
+                    found = true;
+                    infoBoxLabel.setText("choose another card");
                 }
                 break;
             case Jewelry:
                 if ((cardChosen.front.material == Material.Stone) || (cardChosen.front.material == Material.Gold)) {
-                    cardDisable(false);
-                    infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+progressToken.effectDescription);
+                    countDraw++;
+                    found = true;
+                    infoBoxLabel.setText("choose another card");
                 }
                 break;
             case Urbanism:
                 if ((cardChosen.front.material == Material.Wood) || (cardChosen.front.material == Material.Brick)) {
-                    cardDisable(false);
-                    infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+progressToken.effectDescription);
+                    countDraw++;
+                    found = true;
+                    infoBoxLabel.setText("choose another card");
                 }
                 break;
             case Propaganda:
                 if (cardChosen.front.cornCount != 0) {
-                    cardDisable(false);
-                    infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+progressToken.effectDescription);
+                    countDraw++;
+                    found = true;
+                    infoBoxLabel.setText("choose another card");
                 }
                 break;
             case ArtsAndCrafts:
                 if ((cardChosen.front.material == Material.Paper) || (cardChosen.front.material == Material.Glass)) {
-                    cardDisable(false);
-                    infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+progressToken.effectDescription);
+                    countDraw++;
+                    found = true;
+                    infoBoxLabel.setText("choose another card");
                 }
                 break;
+        }
+        return found;
+    }
+
+    public void calculateFinalPoints() {
+        for (Player i : allPlayers) {
+            int cultureCount = 0;
+
+            //points vennant de jetons scientifique
+            for (ProgressToken j : i.getAllTokens()) {
+                switch (j) {
+                    case Decoration:
+                        boolean totalCompletion = true;
+                        for (ConstructionPiece k : player.getWonderContruction().getAllPieces()) {
+                            if (!k.isComplete()) {
+                                totalCompletion = false;
+                                break;
+                            }
+                        }
+
+                        if (totalCompletion) {
+                            i.setTotalPoints(i.getTotalPoints()+6);
+                        } else {
+                            i.setTotalPoints(i.getTotalPoints()+4);
+                        }
+                        break;
+                    case Politic:
+                        i.setTotalPoints((i.getTotalPoints()+(i.getHand().getPointVictoire()[0]/2)));
+                        break;
+                    case Strategy:
+                        int nbMilitaryTokens = player.getHand().getMilitaryPoints()/3;
+                        i.setTotalPoints(i.getTotalPoints()+nbMilitaryTokens);
+                        break;
+                    case Education:
+                        for (int k = 0; k < player.getAllTokens().size(); k++) {
+                            i.setTotalPoints(i.getTotalPoints()+1);
+                        }
+                        break;
+                    case Culture:
+                        cultureCount++;
+                        break;
+                }
+            }
+            if (cultureCount == 1) {
+                i.setTotalPoints(i.getTotalPoints()+4);
+            }
+            else if (cultureCount == 2) {
+                i.setTotalPoints(i.getTotalPoints()+12);
+            }
+
+            //points vennant de construction
+
+            //points vennant de guerre
+
+            //points vennant de carte bleu
         }
     }
 }

@@ -105,7 +105,7 @@ public class ChoixpersoControleur implements Initializable {
         String word =nameTextField.getText();
       if(word!=null && !word.equals("") && !myChoiceBox.getItems().equals("")&& myChoiceBox != null){
         String name = nameTextField.getText();
-        players.add(new Player(name, Wonder.valueOf(wonderChoice), new Hand(),false, new ArrayList<>(), new ArrayList<>()));
+        players.add(new Player(name, Wonder.valueOf(wonderChoice), new Hand(),false, new ArrayList<>()));
 
         for(int i=0;i< players.size();i++){
             labelTextefield.setText(players.get(i).getName()+ " \n"+players.get(i).getWonder());
