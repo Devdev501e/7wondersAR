@@ -40,12 +40,7 @@ public class Hand {
         return pointVictoire;
     }
     public void setPointVictoire(int position) {
-        if (position == 0) {
-            pointVictoire[position] += 2;
-        }
-        else {
-            pointVictoire[position] += 3;
-        }
+        pointVictoire[position] +=1;
     }
 
     public int getMilitaryPoints() {
@@ -59,10 +54,10 @@ public class Hand {
         return materials;
     }
     public void addMaterials(int materialNb) {
-        materials[materialNb] = materials[materialNb]+1;
+        materials[materialNb] +=1;
     }
     public void removeMaterials(int materialNb) {
-        materials[materialNb] = materials[materialNb]-1;
+        materials[materialNb] -= 1;
     }
 
     public int[] getScience() {

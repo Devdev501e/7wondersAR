@@ -101,12 +101,9 @@ public class Actions {
         int nbResources = piece.getNbPieces();
         boolean isEqual = piece.isEqual();
 
-        ArrayList<Card> cardsToRemove = new ArrayList<>();
-
         if (isEqual) {
             int max = 0;
             int intMaterial = 0;
-            Material material;
 
             for (int i = 0; i < 5; i++) {
                 if (max < player.getHand().getMaterials()[i]) {
@@ -115,33 +112,34 @@ public class Actions {
                 }
             }
 
-            int nbGold = nbResources - max;
-            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]-nbGold;
-
-            material = getMaterialType(intMaterial);
-            player.getHand().getMaterials()[intMaterial] = 0;
-
-            int j = 0;
+            int usedGold = nbResources - max;
+            int usedOther = max;
+            if((player.getAllTokens().contains(ProgressToken.Economy)) && (usedGold%2 != 0)) {
+                usedGold +=1;
+                usedOther -=1;
+            }
+            player.getHand().getMaterials()[5] -= usedGold;
+            player.getHand().getMaterials()[intMaterial] -= usedOther;
 
         }
         else {
             ArrayList<Integer> intMaterialToRemove = new ArrayList<>();
-            ArrayList<Material> materialToRemove = new ArrayList<>();
 
             for (int i = 0; i < 5; i++) {
                 if (player.getHand().getMaterials()[i] != 0) {
                     intMaterialToRemove.add(i);
-                    player.getHand().removeMaterials(i);
                 }
             }
-            int nbGold = nbResources - intMaterialToRemove.size();
-            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]-nbGold;
 
-            for (int i : intMaterialToRemove) {
-                materialToRemove.add(getMaterialType(i));
+            int usedGold = nbResources - intMaterialToRemove.size();
+            if((player.getAllTokens().contains(ProgressToken.Economy)) && (usedGold%2 != 0)) {
+                usedGold +=1;
+                intMaterialToRemove.remove(intMaterialToRemove.size()-1);
             }
-
-            int j = 0;
+            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]-usedGold;
+            for (int i : intMaterialToRemove) {
+                player.getHand().getMaterials()[i] -=1;
+            }
 
         }
 
