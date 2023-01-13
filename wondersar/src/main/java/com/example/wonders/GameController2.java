@@ -391,8 +391,8 @@ public class GameController2 {
         //for wonder construction images
         switch (playerView.getWonder()){
             case Alexandrie:
-                ConstImage constImage = ConstImage.AlexandrieBack;
-                System.out.println(constImage.getConstruction1(!!playerView.getWonderContruction().getAllPieces().get(0).isComplete()));
+                ConstImage constImage = ConstImage.Alexandrie;
+                System.out.println(constImage.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()));
                 Image cons1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()))));
                 construction1.setImage(cons1);
                 construction1.setLayoutX(330);
@@ -413,10 +413,10 @@ public class GameController2 {
                 System.out.println(constImage.getConstruction3(!playerView.getWonderContruction().getAllPieces().get(2).isComplete()));
                 Image cons3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getConstruction3(!playerView.getWonderContruction().getAllPieces().get(2).isComplete()))));
                 construction3.setImage(cons3);
-                construction3.setLayoutX(375);
-                construction3.setLayoutY(186);
-                construction3.setFitWidth(81);
-                construction3.setFitHeight(45);
+                construction3.setLayoutX(373);
+                construction3.setLayoutY(171);
+                construction3.setFitWidth(85);
+                construction3.setFitHeight(58);
 
 
                 System.out.println(constImage.getConstruction4(!playerView.getWonderContruction().getAllPieces().get(3).isComplete()));
@@ -431,18 +431,18 @@ public class GameController2 {
                 Image cons5 = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImage.getConstruction5(!playerView.getWonderContruction().getAllPieces().get(4).isComplete()))));
                 construction5.setImage(cons5);
                 construction5.setLayoutX(394);
-                construction5.setLayoutY(71);
+                construction5.setLayoutY(64);
                 construction5.setFitWidth(64);
                 construction5.setFitHeight(71);
 
                 break;
             case Babylone:
-                ConstImage constImageB = ConstImage.BabylonBack;
+                ConstImage constImageB = ConstImage.Babylon;
                 System.out.println(constImageB.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()));
                 Image cons1B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()))));
                 construction1.setImage(cons1B);
-                construction1.setLayoutX(309);
-                construction1.setLayoutY(259);
+                construction1.setLayoutX(307);
+                construction1.setLayoutY(258);
                 construction1.setFitWidth(204);
                 construction1.setFitHeight(42);
                 construction1.setX(0);
@@ -483,7 +483,7 @@ public class GameController2 {
                 Image cons5B = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageB.getConstruction5(!playerView.getWonderContruction().getAllPieces().get(4).isComplete()))));
                 construction5.setImage(cons5B);
                 construction5.setLayoutX(408);
-                construction5.setLayoutY(140);
+                construction5.setLayoutY(143);
                 construction5.setFitWidth(79);
                 construction5.setFitHeight(44);
 
@@ -539,10 +539,10 @@ public class GameController2 {
                 System.out.println(constImageH.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()));
                 Image cons1H = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageH.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()))));
                 construction1.setImage(cons1H);
-                construction1.setLayoutX(284);
+                construction1.setLayoutX(290);
                 construction1.setLayoutY(281);
-                construction1.setFitWidth(229);
-                construction1.setFitHeight(27);
+                construction1.setFitWidth(190);
+                construction1.setFitHeight(30);
                 construction1.setX(0);
                 construction1.setY(0);
 
@@ -591,7 +591,7 @@ public class GameController2 {
                 System.out.println(constImageG.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()));
                 Image cons1G = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageG.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()))));
                 construction1.setImage(cons1G);
-                construction1.setLayoutX(330);
+                construction1.setLayoutX(0);
                 construction1.setLayoutY(272);
                 construction1.setFitWidth(190);
                 construction1.setFitHeight(35);
@@ -633,6 +633,51 @@ public class GameController2 {
 
                 break;
             case Olympie:
+                ConstImage constImageO = ConstImage.Olympie;
+                System.out.println(constImageO.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()));
+                Image cons1O = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageO.getConstruction1(!playerView.getWonderContruction().getAllPieces().get(0).isComplete()))));
+                construction1.setImage(cons1O);
+                construction1.setLayoutX(325);
+                construction1.setLayoutY(261);
+                construction1.setFitWidth(201);
+                construction1.setFitHeight(46);
+
+
+                System.out.println(constImageO.getConstruction2(!playerView.getWonderContruction().getAllPieces().get(1).isComplete()));
+                Image cons2O = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageO.getConstruction2(!playerView.getWonderContruction().getAllPieces().get(1).isComplete()))));
+                construction2.setImage(cons2O);
+                construction2.setLayoutX(341);
+                construction2.setLayoutY(182);
+                construction2.setFitWidth(88);
+                construction2.setFitHeight(80);
+
+
+                System.out.println(constImageO.getConstruction3(!playerView.getWonderContruction().getAllPieces().get(2).isComplete()));
+                Image cons3O = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageO.getConstruction3(!playerView.getWonderContruction().getAllPieces().get(2).isComplete()))));
+                construction3.setImage(cons3O);
+                construction3.setLayoutX(422);
+                construction3.setLayoutY(182);
+                construction3.setFitWidth(91);
+                construction3.setFitHeight(83);
+
+
+                System.out.println(constImageO.getConstruction4(!playerView.getWonderContruction().getAllPieces().get(3).isComplete()));
+                Image cons4O = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageO.getConstruction4(!playerView.getWonderContruction().getAllPieces().get(3).isComplete()))));
+                construction4.setImage(cons4O);
+                construction4.setLayoutX(340);
+                construction4.setLayoutY(110);
+                construction4.setFitWidth(170);
+                construction4.setFitHeight(77);
+
+                System.out.println(constImageO.getConstruction5(!playerView.getWonderContruction().getAllPieces().get(4).isComplete()));
+                Image cons5O = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageO.getConstruction5(!playerView.getWonderContruction().getAllPieces().get(4).isComplete()))));
+                construction5.setImage(cons5O);
+                construction5.setLayoutX(347);
+                construction5.setLayoutY(64);
+                construction5.setFitWidth(158);
+                construction5.setFitHeight(66);
+
+
                 break;
             case Ephese:
                 ConstImage constImageE = ConstImage.Ephese;
@@ -660,7 +705,7 @@ public class GameController2 {
                 construction3.setLayoutX(369);
                 construction3.setLayoutY(174);
                 construction3.setFitWidth(46);
-                construction3.setFitHeight(86);
+                construction3.setFitHeight(88);
 
 
                 System.out.println(constImageE.getConstruction4(!playerView.getWonderContruction().getAllPieces().get(3).isComplete()));
@@ -669,7 +714,7 @@ public class GameController2 {
                 construction4.setLayoutX(442);
                 construction4.setLayoutY(174);
                 construction4.setFitWidth(46);
-                construction4.setFitHeight(86);
+                construction4.setFitHeight(88);
 
                 System.out.println(constImageE.getConstruction5(!playerView.getWonderContruction().getAllPieces().get(4).isComplete()));
                 Image cons5E = new Image(Objects.requireNonNull(getClass().getResourceAsStream(constImageE.getConstruction5(!playerView.getWonderContruction().getAllPieces().get(4).isComplete()))));
