@@ -384,7 +384,7 @@ public class GameController {
             }
         }
 
-        playerNameTab.setText(playerView.getName());
+        playerNameTab.setText(playerView.getName()+" "+" - "+playerView.getWonder().displayName);
         tab2.setText(playerView.getName());
         playerHandOutline.setVisible(true);
         playerHand.setText(playerView.getName()+"'s Hand");

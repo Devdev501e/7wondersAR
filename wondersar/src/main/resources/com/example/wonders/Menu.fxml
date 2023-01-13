@@ -20,7 +20,7 @@
    <children>
       <ImageView fitHeight="552.0" fitWidth="809.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <image>
-            <Image url="@images/imagejeu/Fondecranfinal.png" />
+            <Image url="@images/imagejeu/FondecranfinalMENU.png" />
          </image>
       </ImageView>
       <Button fx:id="button" cache="true" mnemonicParsing="false" onAction="#button" style="-fx-region-border: none;" textFill="TRANSPARENT" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
