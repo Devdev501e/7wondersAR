@@ -7,6 +7,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -211,6 +212,9 @@ public class GameController {
     private int countCards;
     private int countDraw;
     private int choice;
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<ProgressToken> progressTokens, int turn, boolean beggining) {
         //initialize table game
@@ -1445,5 +1449,14 @@ public class GameController {
             allPlayers.get(number).getCardDecks().chooseCard();
         }
         powerChoiceBox.setDisable(true);
+    }
+    public void retour (Event event) throws  IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+
+        stage.setScene(scene);
+
+        stage.show();
     }
 }

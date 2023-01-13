@@ -51,11 +51,11 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <Label fx:id="labelBox" alignment="CENTER" contentDisplay="CENTER" prefHeight="97.0" prefWidth="215.0" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+      <Label fx:id="labelBox" alignment="CENTER" contentDisplay="CENTER" prefHeight="97.0" prefWidth="215.0" textAlignment="CENTER" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <Label fx:id="labelinfo" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="158.0" text="Nombres de joueurs :" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Label fx:id="labelinfo" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="158.0" text="Nombres de joueurs :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets bottom="100.0" right="300.0" />
          </GridPane.margin>
@@ -63,7 +63,7 @@
             <Font name="Impact" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="labelinfo2" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="158.0" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Label fx:id="labelinfo2" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="158.0" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>
             <Font name="Impact" size="14.0" />
          </font>
