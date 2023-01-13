@@ -1174,8 +1174,8 @@ public class GameController {
         return canBuild;
     }
 
-    public void buidPiece (Construction cons, Player player) throws IOException {
-        ConstructionPiece piece;
+    public boolean buidPiece (Construction cons, Player player) throws IOException {
+        ConstructionPiece piece = null;
         Boolean pieceBefor;
         for (int i=0;i<5;i++) {
             if (i>0) {
@@ -1248,6 +1248,48 @@ public class GameController {
             stage.setScene(scene);
             stage.setTitle("Round");
             stage.show();
+        }
+
+        if(piece.isComplete()) {
+            return piece.isPower();
+        }
+        else {
+            return false;
+        }
+    }
+
+    public void buildPower(Player player) {
+        Wonder wonder = player.getWonder();
+        switch (wonder) {
+            case Ephese:
+                Card card = mainDeck.getCard(0);
+                infoBoxOutline.setVisible(true);
+                infoBoxLabel.setText("Power: t'as pris la carte "+card.front.cardDisplayName);
+                player.addCard(card, allPlayers);
+                mainDeck.chooseCard();
+                break;
+            case Rhodes:
+                player.getHand().setShieldWar(player.getHand().getShieldWar()+1);
+                break;
+            case Olympie:
+                Card cardLeft = options.get(0).getCard(0);
+                Card cardRight = options.get(1).getCard(0);
+                infoBoxOutline.setVisible(true);
+                infoBoxLabel.setText("Power: t'as pris les carte "+cardLeft.front.cardDisplayName+" et "+cardRight.front.cardDisplayName);
+                player.addCard(cardLeft, allPlayers);
+                player.addCard(cardRight, allPlayers);
+                options.get(0).chooseCard();
+                options.get(1).chooseCard();
+                break;
+            case Babylone:
+                disableProgressChoice(false);
+                infoBoxOutline.setVisible(true);
+                infoBoxLabel.setText("Power: choisis un jetons progrès");
+                break;
+            case Alexandrie:
+                break;
+            case Halicarnasse:
+                break;
         }
     }
 }
