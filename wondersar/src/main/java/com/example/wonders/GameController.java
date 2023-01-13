@@ -5,11 +5,16 @@ package com.example.wonders;
 import domain.*;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -734,7 +739,7 @@ public class GameController {
         }
     }
 
-    public void onButtonLeftDeck() {
+    public void onButtonLeftDeck() throws IOException {
         player.addCard(leftDeckCard, allPlayers);
         ArrayList<Integer> tokenIgnore = new ArrayList<>();
         countCards++;
@@ -772,7 +777,7 @@ public class GameController {
         endButton.setDisable(false);
     }
 
-    public void onButtonRightDeck() {
+    public void onButtonRightDeck() throws IOException {
         player.addCard(rightDeckCard, allPlayers);
         countCards++;
 
@@ -805,7 +810,7 @@ public class GameController {
         endButton.setDisable(false);
     }
 
-    public void onButtonMainDeck() {
+    public void onButtonMainDeck() throws IOException {
         player.addCard(mainDeckCard, allPlayers);
         countCards++;
 
@@ -1169,7 +1174,7 @@ public class GameController {
         return canBuild;
     }
 
-    public void buidPiece (Construction cons, Player player) {
+    public void buidPiece (Construction cons, Player player) throws IOException {
         ConstructionPiece piece;
         Boolean pieceBefor;
         for (int i=0;i<5;i++) {
@@ -1233,7 +1238,16 @@ public class GameController {
 
         boolean buildComplete = player.getWonderContruction().getAllPieces().get(4).isComplete();
         if (buildComplete) {
+            FXMLLoader root =  new FXMLLoader(getClass().getResource("endScreen.fxml"));
+            Stage stage = (Stage) endButton.getScene().getWindow();
+            Scene scene = new Scene(root.load());
 
+            EndScreen endScreen = root.getController();
+            endScreen.getInfo(allPlayers);
+
+            stage.setScene(scene);
+            stage.setTitle("Round");
+            stage.show();
         }
     }
 }
