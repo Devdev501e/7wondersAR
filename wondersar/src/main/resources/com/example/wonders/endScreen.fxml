@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.wonders.EndScreen"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wonders.EndScreen">
+   <children>
+      <ImageView fx:id="imagePodium" fitHeight="125.0" fitWidth="378.0" layoutX="120.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="player1st" alignment="CENTER" layoutX="254.0" layoutY="96.0" prefHeight="39.0" prefWidth="92.0">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Label>
+      <Label fx:id="player3rd" alignment="CENTER" layoutX="375.0" layoutY="146.0" prefHeight="39.0" prefWidth="92.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="player2nd" alignment="CENTER" layoutX="135.0" layoutY="127.0" prefHeight="39.0" prefWidth="92.0">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="loserLabel" alignment="TOP_LEFT" layoutX="174.0" layoutY="271.0" prefHeight="104.0" prefWidth="268.0" text="Label" wrapText="true" />
+      <ImageView fx:id="imageMedal" fitHeight="183.0" fitWidth="136.0" layoutX="100.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/imagejeu/1st_place.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="playerWinner" layoutX="240.0" layoutY="111.0" text="Label">
+         <font>
+            <Font size="41.0" />
+         </font>
+      </Label>
+   </children>
 </AnchorPane>
