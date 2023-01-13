@@ -81,8 +81,6 @@ public class GameController {
     private ImageView progress1 = new ImageView();
     @FXML
     private ImageView progress2 = new ImageView();
-    @FXML
-    private ImageView progressBack = new ImageView();
     private ArrayList<ImageView> progressImages = new ArrayList<>();
 
     @FXML
@@ -221,6 +219,7 @@ public class GameController {
         cardDisable(false);
 
         if (beggining) {
+            players.get(turn).getAllTokens().add(ProgressToken.Economy);
             allPlayerNames.getItems().addAll(playerNames);
             allPlayers.addAll(players);
             resetTokens();
@@ -764,7 +763,7 @@ public class GameController {
         Image leftDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(leftDeckCard.front.imageResource)));
         leftDeckCardImage.setImage(leftDeckCardPNG);
         cardCountLeft.setText("Cards: "+options.get(0).cardDeckSize());
-        buidPiece2(player.getWonderContruction(),player);                           //ajout pour la construction
+        buidPiece(player.getWonderContruction(),player);                           //ajout pour la construction
 
         if (countDraw == countCards) {
             cardDisable(true);
@@ -797,7 +796,7 @@ public class GameController {
         Image rightDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(rightDeckCard.front.imageResource)));
         rightDeckCardImage.setImage(rightDeckCardPNG);
         cardCountRight.setText("Cards: "+options.get(1).cardDeckSize());
-        buidPiece2(player.getWonderContruction(),player);                           //ajout pour la construction
+        buidPiece(player.getWonderContruction(),player);                           //ajout pour la construction
 
         if (countDraw == countCards) {
             cardDisable(true);
@@ -832,7 +831,7 @@ public class GameController {
         mainDeck.chooseCard();
         mainDeckCard = mainDeck.getCard(0);
         cardCountMain.setText("Cards: "+mainDeck.cardDeckSize());
-        buidPiece2(player.getWonderContruction(),player);                           //ajout pour la construction
+        buidPiece(player.getWonderContruction(),player);                           //ajout pour la construction
 
         Image mainDeckFrontPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(mainDeckCard.front.imageResource)));
         if (player.getChat()) {
@@ -1118,121 +1117,123 @@ public class GameController {
         }
         return found;
     }
-
-    public void calculateFinalPoints() {
-        for (Player i : allPlayers) {
-            int cultureCount = 0;
-
-            //points vennant de jetons scientifique
-            for (ProgressToken j : i.getAllTokens()) {
-                switch (j) {
-                    case Decoration:
-                        boolean totalCompletion = true;
-                        for (ConstructionPiece k : player.getWonderContruction().getAllPieces()) {
-                            if (!k.isComplete()) {
-                                totalCompletion = false;
-                                break;
-                            }
-                        }
-
-                        if (totalCompletion) {
-                            i.setTotalPoints(i.getTotalPoints()+6);
-                        } else {
-                            i.setTotalPoints(i.getTotalPoints()+4);
-                        }
-                        break;
-                    case Politic:
-                        i.setTotalPoints((i.getTotalPoints()+(i.getHand().getPointVictoire()[0]/2)));
-                        break;
-                    case Strategy:
-                        int nbMilitaryTokens = player.getHand().getMilitaryPoints()/3;
-                        i.setTotalPoints(i.getTotalPoints()+nbMilitaryTokens);
-                        break;
-                    case Education:
-                        for (int k = 0; k < player.getAllTokens().size(); k++) {
-                            i.setTotalPoints(i.getTotalPoints()+1);
-                        }
-                        break;
-                    case Culture:
-                        cultureCount++;
-                        break;
-                }
-            }
-            if (cultureCount == 1) {
-                i.setTotalPoints(i.getTotalPoints()+4);
-            }
-            else if (cultureCount == 2) {
-                i.setTotalPoints(i.getTotalPoints()+12);
-            }
-
-            //points vennant de construction
-
-            //points vennant de guerre
-
-            //points vennant de carte bleu
-        }
-    }
     public boolean canBuildPiece(ConstructionPiece piece, Player player) {
         int nbResources = piece.getNbPieces();
-        boolean isEqual = piece.isEqual();
-
-        if (isEqual) {
-            boolean canBuild = false;
-            for (int i = 0; i < 5; i++) {
-                int samePieces = player.getHand().getMaterials()[i] + player.getHand().getMaterials()[5];
-                if (samePieces >= nbResources) {
-                    canBuild = true;
+        boolean canBuild;
+        boolean isEqual;
+        if (player.getAllTokens().contains(ProgressToken.Ingeniery)) {
+            while (true) {
+                canBuild = false;
+                for (int i = 0; i < 5; i++) {
+                    int samePieces = player.getHand().getMaterials()[i] + player.getHand().getMaterials()[5];
+                    if (samePieces >= nbResources) {
+                        canBuild = true;
+                        break;
+                    }
+                }
+                if (canBuild) {
                     break;
                 }
+                int differentPieces = 0;
+                for (int i = 0; i < 5; i++) {
+                    if(player.getHand().getMaterials()[i] != 0)
+                    {   differentPieces+=1; }
+                }
+                differentPieces += player.getHand().getMaterials()[5];
+                canBuild = differentPieces >= nbResources;
+                break;
             }
-            return canBuild;
         }
         else {
-            int differentPieces = 0;
-            for (int i = 0; i < 5; i++) {
-                if(player.getHand().getMaterials()[i] != 0)
-                {   differentPieces+=1; }
+            isEqual = piece.isEqual();
+            if (isEqual) {
+                canBuild = false;
+                for (int i = 0; i < 5; i++) {
+                    int samePieces = player.getHand().getMaterials()[i] + player.getHand().getMaterials()[5];
+                    if (samePieces >= nbResources) {
+                        canBuild = true;
+                        break;
+                    }
+                }
             }
-            differentPieces += player.getHand().getMaterials()[5];
-            return differentPieces >= nbResources;
+            else {
+                int differentPieces = 0;
+                for (int i = 0; i < 5; i++) {
+                    if(player.getHand().getMaterials()[i] != 0)
+                    {   differentPieces+=1; }
+                }
+                differentPieces += player.getHand().getMaterials()[5];
+                canBuild = differentPieces >= nbResources;
+            }
         }
-    }public void buidPiece2 (Construction cons, Player player){
+        return canBuild;
+    }
+
+    public void buidPiece (Construction cons, Player player) {
         ConstructionPiece piece;
         Boolean pieceBefor;
-        for(int i=0;i<5;i++){
-            if (i>0){
+        for (int i=0;i<5;i++) {
+            if (i>0) {
                 piece =cons.getAllPieces().get(i);
                 pieceBefor = cons.getAllPieces().get(i-1).isComplete();
-            }else{
+            } else {
                 piece =cons.getAllPieces().get(i);
                 pieceBefor =true;
             }
-            if(canBuildPiece(piece,player) && !piece.isComplete() && pieceBefor){
+            if (canBuildPiece(piece,player) && !piece.isComplete() && pieceBefor) {
                 piece.setComplete(true);
-                boolean equal= piece.getEqual();
-                int nbRessource =piece.getNbPieces();
+                boolean equal = piece.getEqual();
+                int nbRessource = piece.getNbPieces();
                 int p=0;
-                for(int k=0;k<6;k++){
+
+                for (int k=0;k<6;k++) {
                     int material=  player.getHand().getMaterials()[k];
+                    if (equal) {
+                        if (material + player.getHand().getMaterials()[5] >= nbRessource) {
+                            int max = player.getHand().getMaterials()[k];
 
-                    if(equal){
-                        if(material + player.getHand().getMaterials()[5]>=nbRessource  ){
-
-                            for (int n=0;n<nbRessource;n++){
-                                if(player.getHand().getMaterials()[k]!=0){
-                                    player.getHand().removeMaterials(k);}
-                                else{player.getHand().removeMaterials(5);}}
-                            break;}
-                    } else{
-                        if (material!=0 ){
+                            int usedGold = nbRessource - max;
+                            int usedOther = max;
+                            if((player.getAllTokens().contains(ProgressToken.Economy)) && (usedGold%2 != 0)) {
+                                usedGold +=1;
+                                usedOther -=1;
+                            }
+                            for (int n = 0; n < usedGold; n++) {
+                                player.getHand().removeMaterials(5);
+                            }
+                            for (int n = 0; n < usedOther; n++) {
+                                player.getHand().removeMaterials(k);
+                            }
+                            break;
+                        }
+                    } else {
+                        int previousElem = 10;
+                        if (material!=0) {
+                            int elemLeft = nbRessource-p;
+                            if (player.getAllTokens().contains(ProgressToken.Economy) && (k == 5)) {
+                                player.getHand().removeMaterials(k);
+                                if (elemLeft == 1) {
+                                    if (previousElem != 10) {
+                                        player.getHand().addMaterials(previousElem);
+                                    }
+                                }
+                            }
                             player.getHand().removeMaterials(k);
+                            System.out.println(player.getHand().getMaterials()[5]);
                             p++;
-                            if(p==nbRessource){break;}
-
-
+                            previousElem = k;
+                            if (p==nbRessource) {
+                                break;
+                            }
                         }
                     }
                 }
             }
-        }}
+        }
+
+        boolean buildComplete = player.getWonderContruction().getAllPieces().get(4).isComplete();
+        if (buildComplete) {
+
+        }
+    }
 }
