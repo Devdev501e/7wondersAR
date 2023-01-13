@@ -99,6 +99,7 @@
                         <Font size="13.0" />
                      </font>
                   </Label>
+                  <ChoiceBox fx:id="powerChoiceBox" layoutX="325.0" layoutY="68.0" prefWidth="150.0" />
                </children></AnchorPane>
       </content>
     </Tab>

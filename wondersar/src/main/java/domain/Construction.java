@@ -34,8 +34,8 @@ import java.util.ArrayList;
                         break;
                 }
 
-                if (i>0) {
-                    power = i%2 == 1;
+                if ((i == 1) || (i == 3)) {
+                    power = true;
                 }
 
                 switch (wonder) {

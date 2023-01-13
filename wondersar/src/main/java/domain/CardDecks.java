@@ -64,6 +64,11 @@ public class CardDecks {
 		return cardDeck.get(position);
 	}
 
+	public void removeCard(int position) {
+		Card card = this.cardDeck.get(position);
+		this.cardDeck.remove(card);
+	}
+
 	public void chooseCard() {
 		Card card = this.cardDeck.get(0);
 		this.cardDeck.remove(card);
