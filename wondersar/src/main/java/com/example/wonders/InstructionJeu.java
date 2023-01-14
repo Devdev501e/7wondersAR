@@ -71,6 +71,8 @@ public class InstructionJeu implements Initializable {
     private Image finPNG = new Image(getClass().getResourceAsStream("images/imagejeu/findepartie.png"));
     @FXML
     private Label finDescription;
+    @FXML
+    Button retour;
 
     private ArrayList<ProgressToken> res = new ArrayList<>();
     private int currentRes = 0;
@@ -80,6 +82,7 @@ public class InstructionJeu implements Initializable {
 
     @Override
     public void initialize (URL url, ResourceBundle resourceBundle) {
+        retour.getStylesheets().add(getClass().getResource("Back.css").toExternalForm());
         page2Visible(false);
         wonders.addAll(Arrays.asList(Wonder.values()));
 
