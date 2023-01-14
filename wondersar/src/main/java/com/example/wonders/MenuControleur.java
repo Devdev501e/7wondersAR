@@ -50,6 +50,16 @@ public class MenuControleur implements Initializable {
 
     }
 
+    public void onInstructions() throws IOException {
+        FXMLLoader root =  new FXMLLoader(getClass().getResource("instructionJeu.fxml"));
+        Stage stage = (Stage) instruction.getScene().getWindow();
+        Scene scene = new Scene(root.load());
+
+        stage.setScene(scene);
+        stage.setTitle("Règles du jeu");
+        stage.show();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         button.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
