@@ -215,12 +215,14 @@ public class GameController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    @FXML
+    private Button retour;
 
     public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<ProgressToken> progressTokens, int turn, boolean beggining) {
         //initialize table game
         countCards = 0;
         countDraw = 1;
-
+         retour.getStylesheets().add(getClass().getResource("Back.css").toExternalForm());
         options = new ArrayList<>();
         powerChoiceBox.setVisible(false);
 

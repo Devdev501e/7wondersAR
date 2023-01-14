@@ -68,8 +68,8 @@ public class ChoixpersoControleur implements Initializable {
     public void initialize (URL url, ResourceBundle resourceBundle) {
         nameTextField.setVisible(false);
         startGame.setVisible(false);
-        retour.setGraphic(icon);
-        valider.setGraphic(icon2);
+        retour.getStylesheets().add(getClass().getResource("Back.css").toExternalForm());
+        valider.getStylesheets().add(getClass().getResource("Confirm.css").toExternalForm());
 
         myChoiceBox.getItems().addAll(NP);//chose box
         myChoiceBox.setOnAction(this::getNumber);
@@ -116,7 +116,7 @@ public class ChoixpersoControleur implements Initializable {
         myChoiceBox.setValue("");
 
         if (players.size() == nombre) {
-            startGame.setGraphic(icon3);
+            startGame.getStylesheets().add(getClass().getResource("Startgame.css").toExternalForm());
             valider.setVisible(false);
             startGame.setVisible(true);
             myChoiceBox.setDisable(true);

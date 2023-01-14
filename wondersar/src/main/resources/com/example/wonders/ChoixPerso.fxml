@@ -32,19 +32,19 @@
       </ChoiceBox>
       <TextField fx:id="nameTextField" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#onConfirmButton" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
 
-       <Button fx:id="retour" mnemonicParsing="false" onAction="#retour" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+       <Button fx:id="retour" mnemonicParsing="false" onAction="#retour" prefHeight="38.0" prefWidth="109.0" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
          <GridPane.margin>
             <Insets bottom="20.0" left="20.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="valider" mnemonicParsing="false" onAction="#onConfirmButton" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Button fx:id="valider" mnemonicParsing="false" onAction="#onConfirmButton" prefHeight="55.0" prefWidth="211.75" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets top="120.0" />
          </GridPane.margin>
       </Button>
-      <Button fx:id="startGame" mnemonicParsing="false" onAction="#switchScene" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Button fx:id="startGame" mnemonicParsing="false" onAction="#switchScene" prefHeight="41.25" prefWidth="220.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
           <GridPane.margin>
-              <Insets top="200.0" />
+              <Insets top="150.0" />
           </GridPane.margin>
       </Button>
       <Label fx:id="labelTextefield" alignment="CENTER" contentDisplay="CENTER" prefHeight="97.0" prefWidth="215.0" textAlignment="CENTER" textFill="WHITE">

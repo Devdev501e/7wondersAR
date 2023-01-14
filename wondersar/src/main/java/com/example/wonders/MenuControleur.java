@@ -57,6 +57,6 @@ public class MenuControleur implements Initializable {
         button.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 
-        instruction.setGraphic(intruction);
+        instruction.getStylesheets().add(getClass().getResource("Instruction.css").toExternalForm());
     }
 }
