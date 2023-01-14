@@ -33,10 +33,8 @@ public class MenuControleur implements Initializable {
     private Button instruction;
     private Scene scene;
     private Stage stage;
-    private final Image image = new Image(getClass().getResourceAsStream("images/imagejeu/startvr.png"));
-    private final Image image2 = new Image(getClass().getResourceAsStream("images/imagejeu/instruction.png"));
-    private final ImageView start = new ImageView(image);
-    private final ImageView intruction = new ImageView(image2);
+
+
 
     public void button(Event event) throws IOException {
      Parent root = FXMLLoader.load(getClass().getResource("ChoixPerso.fxml"));

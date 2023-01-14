@@ -48,14 +48,8 @@ public class ChoixpersoControleur implements Initializable {
 
     private Stage stage;
     private Scene scene;
-    private final Image image = new Image(getClass().getResourceAsStream("images/imagejeu/retour.png"));
-    private final ImageView icon = new ImageView(image);
 
 
-    private final Image image2 = new Image(getClass().getResourceAsStream("images/imagejeu/valider1.png"));
-    private final ImageView icon2 = new ImageView(image2);
-    private final Image image3 = new Image(getClass().getResourceAsStream("images/imagejeu/Start games.png"));
-    private final ImageView icon3 = new ImageView(image3);
     private Parent root;
     private int nombre;
     private String wonderChoice;
