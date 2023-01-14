@@ -45,6 +45,12 @@ public class ChoixpersoControleur implements Initializable {
     Label labelinfo2;
     @FXML
     ArrayList<String> wonderName=new ArrayList<>();
+    @FXML
+    ImageView tableau;
+    @FXML
+    ImageView info;
+    @FXML
+    ImageView deck;
 
     private Stage stage;
     private Scene scene;
@@ -58,15 +64,18 @@ public class ChoixpersoControleur implements Initializable {
 
 
 
+
     @Override
     public void initialize (URL url, ResourceBundle resourceBundle) {
+        tableau.setVisible(false);
         nameTextField.setVisible(false);
         startGame.setVisible(false);
         retour.getStylesheets().add(getClass().getResource("Back.css").toExternalForm());
         valider.getStylesheets().add(getClass().getResource("Confirm.css").toExternalForm());
-
+        valider.setVisible(false);
         myChoiceBox.getItems().addAll(NP);//chose box
         myChoiceBox.setOnAction(this::getNumber);
+
 
     }
 
@@ -74,9 +83,11 @@ public class ChoixpersoControleur implements Initializable {
         labelinfo.setText("Wonders :");
         labelinfo2.setText("Name : ");
         if (myChoiceBox.getValue()!=null) {
-
+            valider.setVisible(true);
             nombre = Integer.parseInt(myChoiceBox.getValue());
-            labelBox.setText("Vous avez choisi "+nombre+" joueur ");
+            int info = nombre-players.size();
+            labelBox.setText("You have chosen "+nombre+" players \nyou have to choose "+nombre+" more players");
+            tableau.setVisible(true);
             for (Wonder wonders:Wonder.values()){
                 wonderName.add(wonders.getDisplayName());
             }
@@ -90,6 +101,14 @@ public class ChoixpersoControleur implements Initializable {
     }
 
     public void getWonderChoice(Event event) {
+        if(myChoiceBox.getValue()!=null&& !myChoiceBox.getValue().equals("")) {
+            Image tokenPeace = new Image(getClass().getResourceAsStream("images/imagejeu/" + myChoiceBox.getValue()+".png"));
+            info.setImage(tokenPeace);
+            info.setFitWidth(286);
+            info.setFitHeight(75);
+            Image deks =new Image(getClass().getResourceAsStream("images/decks/deck-" + myChoiceBox.getValue()+".png"));
+            deck.setImage(deks);
+        }
 
         wonderChoice = myChoiceBox.getValue();
 
@@ -116,9 +135,11 @@ public class ChoixpersoControleur implements Initializable {
             myChoiceBox.setDisable(true);
             nameTextField.setDisable(true);
         }}
-      else{
-          labelTextefield.setText("écris un nom valide!!");
-      }
+      else if(myChoiceBox.getValue()==null ){
+          labelTextefield.setText("Choose a wonders !! ");
+      }else {labelTextefield.setText("write a name !!");}
+        int info = nombre-players.size();
+        labelBox.setText("You have chosen "+nombre+" players \nyou have to choose "+info+" more players");
 
     }
 

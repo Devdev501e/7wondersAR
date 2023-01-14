@@ -25,6 +25,24 @@
             <Image url="@images/imagejeu/Fondecranfinal.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="deck" fitHeight="424.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets right="80.0" />
+         </GridPane.margin>
+      </ImageView>
+      <ImageView fx:id="info" fitHeight="75.0" fitWidth="286.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+         <GridPane.margin>
+            <Insets top="50.0" />
+         </GridPane.margin>
+      </ImageView>
+      <ImageView fx:id="tableau" fitHeight="129.0" fitWidth="278.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets top="350.0" />
+         </GridPane.margin>
+         <image>
+            <Image url="@images/imagejeu/Tableau.png" />
+         </image>
+      </ImageView>
       <ChoiceBox fx:id="myChoiceBox" prefWidth="150.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
           <GridPane.margin>
               <Insets top="-100.0" />
@@ -51,10 +69,13 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <Label fx:id="labelBox" alignment="CENTER" contentDisplay="CENTER" prefHeight="97.0" prefWidth="215.0" textAlignment="CENTER" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+      <Label fx:id="labelBox" alignment="CENTER" contentDisplay="CENTER" prefHeight="98.0" prefWidth="273.0" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>
             <Font name="System Bold" size="14.0" />
-         </font></Label>
+         </font>
+         <GridPane.margin>
+            <Insets top="350.0" />
+         </GridPane.margin></Label>
       <Label fx:id="labelinfo" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="158.0" text="Nombres de joueurs :" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets bottom="100.0" right="300.0" />
