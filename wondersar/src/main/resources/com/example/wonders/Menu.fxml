@@ -23,10 +23,13 @@
             <Image url="@images/imagejeu/FondecranfinalMENU.png" />
          </image>
       </ImageView>
-      <Button fx:id="button" cache="true" mnemonicParsing="false" onAction="#button" style="-fx-region-border: none;" textFill="TRANSPARENT" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+      <Button fx:id="button" cache="true" mnemonicParsing="false" onAction="#button" prefHeight="70.0" prefWidth="189.0" style="-fx-region-border: none;" textFill="TRANSPARENT" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <GridPane.margin>
             <Insets top="-20.0" />
          </GridPane.margin>
+         <graphic>
+            <ImageView fitHeight="18.0" fitWidth="1.0" pickOnBounds="true" preserveRatio="true" />
+         </graphic>
       </Button>
       <Button fx:id="instruction" mnemonicParsing="false" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <GridPane.margin>

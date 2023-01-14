@@ -1,10 +1,28 @@
 .button {
+  width:198px ;
+    height: 70px;
 
-    -fx-graphic: url("images/imagejeu/retour.png");
-     border: none;
+    -fx-background-color: transparent;
+    -fx-background-image: url("images/imagejeu/start2.png");
+    -fx-background-size: cover;
+}
 
+.button:hover {
 
+    -fx-background-image: url("images/imagejeu/start1.png");
+    border: none;
+    -fx-background-size: cover;
 
 }
 
 
+.button:active{
+
+    -fx-background-image: url("images/imagejeu/startvr.png");
+    -fx-background-size: cover;
+}
+
+.img-size img {
+    width: 30px;
+    height: 30px;
+}

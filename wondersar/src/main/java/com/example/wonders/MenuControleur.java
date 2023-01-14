@@ -54,7 +54,7 @@ public class MenuControleur implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        button.setGraphic(start);
+        button.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 
 
         instruction.setGraphic(intruction);
