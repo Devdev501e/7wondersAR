@@ -1,0 +1,22 @@
+.button {
+    width:198px ;
+    height: 70px;
+
+    -fx-background-color: transparent;
+    -fx-background-image: url("images/imagejeu/Exit1.png");
+    -fx-background-size: cover;
+}
+
+.button:hover {
+
+    -fx-background-image: url("images/imagejeu/Exit2.png");
+    border: none;
+    -fx-background-size: cover;
+
+}
+
+
+.img-size img {
+    width: 30px;
+    height: 30px;
+}

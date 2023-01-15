@@ -65,10 +65,13 @@
               <Insets top="150.0" />
           </GridPane.margin>
       </Button>
-      <Label fx:id="labelTextefield" alignment="CENTER" contentDisplay="CENTER" prefHeight="97.0" prefWidth="215.0" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="labelTextefield" alignment="CENTER" contentDisplay="CENTER" prefHeight="58.0" prefWidth="142.0" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
          <font>
             <Font name="System Bold" size="14.0" />
-         </font></Label>
+         </font>
+         <GridPane.margin>
+            <Insets right="170.0" />
+         </GridPane.margin></Label>
       <Label fx:id="labelBox" alignment="CENTER" contentDisplay="CENTER" prefHeight="98.0" prefWidth="273.0" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>
             <Font name="System Bold" size="14.0" />
