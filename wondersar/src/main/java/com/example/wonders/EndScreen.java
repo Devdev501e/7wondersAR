@@ -9,6 +9,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Objects;
 
 public class EndScreen {
@@ -36,27 +38,25 @@ public class EndScreen {
         playerLabels.add(player2nd);
         playerLabels.add(player3rd);
         playerLabels.add(loserLabel);
-        Player[] playerOrder = calculateFinalPoints(players);
+        ArrayList<Player> playerOrder = calculateFinalPoints(players);
         for (Player i : playerOrder) {
             System.out.println(i.getName());
         }
         if (players.size() == 2) {
             imageMedal.setImage(medalPNG);
-            playerWinner.setText(playerOrder[0].getName()+"("+playerOrder[0].getTotalPoints()+" points)");
-            loserLabel.setText(playerOrder[1].getName()+"("+playerOrder[1].getTotalPoints()+" points)");
+            playerWinner.setText(playerOrder.get(0).getName()+"("+playerOrder.get(0).getTotalPoints()+" points)");
+            loserLabel.setText(playerOrder.get(1).getName()+"("+playerOrder.get(1).getTotalPoints()+" points)");
         }
         else {
             imagePodium.setImage(podiumPNG);
             for (int i = 0; i < players.size(); i++) {
                 int num = Math.min(players.size()-1, 3);
-                playerLabels.get(num).setText(playerLabels.get(num).getText()+i+". "+playerOrder[i].getName()+"("+playerOrder[i].getTotalPoints()+" points)\n");
+                playerLabels.get(num).setText(playerLabels.get(num).getText()+i+". "+playerOrder.get(i).getName()+"("+playerOrder.get(i).getTotalPoints()+" points)\n");
             }
         }
     }
 
-    public Player[] calculateFinalPoints(ArrayList<Player> allPlayers) {
-        Player[] playerWinner = new Player[allPlayers.size()];
-        Player temp;
+    public ArrayList<Player> calculateFinalPoints(ArrayList<Player> allPlayers) {
         for (Player i : allPlayers) {
             int cultureCount = 0;
 
@@ -119,13 +119,9 @@ public class EndScreen {
             System.out.println(i.getName()+": "+i.getTotalPoints());
         }
 
-        for (int i = 0; i < allPlayers.size(); i++) {
-            for (int j = i+1; j < allPlayers.size(); j++) {
-                if (allPlayers.get(i).getTotalPoints() > allPlayers.get(j).getTotalPoints()) {
-                    playerWinner[i] = allPlayers.get(i);
-                }
-            }
-        }
-        return playerWinner;
+        Collections.sort(allPlayers, Comparator.comparing(Player::getTotalPoints));
+        Collections.reverse(allPlayers);
+
+        return allPlayers;
     }
 }

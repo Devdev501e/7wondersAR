@@ -353,27 +353,9 @@ public class GameController {
         }
 
         //Card choice info
-        leftDeckCard = options.get(0).getCard(0);
-        Image leftDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(leftDeckCard.front.imageResource)));
-        leftDeckCardImage.setImage(leftDeckCardPNG);
-        cardCountLeft.setText("Cards: "+options.get(0).cardDeckSize());
-
-
-        rightDeckCard = options.get(1).getCard(0);
-        Image rightDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(rightDeckCard.front.imageResource)));
-        rightDeckCardImage.setImage(rightDeckCardPNG);
-        cardCountRight.setText("Cards: "+options.get(1).cardDeckSize());
-
-        mainDeckCard = mainDeck.getCard(0);
-        Image mainDeckFrontPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(mainDeckCard.front.imageResource)));
-
-        if (player.getChat()) {
-            mainDeckImage.setImage(mainDeckFrontPNG);
-        }
-        else {
-            mainDeckImage.setImage(mainDeckBackPNG);
-        }
-        cardCountMain.setText("Cards: "+mainDeck.cardDeckSize());
+        resetCardImage(0);
+        resetCardImage(1);
+        resetCardImage(2);
 
         //set up tab2
         tab2.setText("None");
@@ -852,21 +834,36 @@ public class GameController {
 
     public void resetCardImage(int place) {
         if (place == 0) {
-            leftDeckCard = options.get(0).getCard(0);
-            Image leftDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(leftDeckCard.front.imageResource)));
+            Image leftDeckCardPNG;
+            try {
+                leftDeckCard = options.get(0).getCard(0);
+                leftDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(leftDeckCard.front.imageResource)));
+            } catch (IndexOutOfBoundsException e) {
+                leftDeckCardPNG = null;
+            }
             leftDeckCardImage.setImage(leftDeckCardPNG);
             cardCountLeft.setText("Cards: "+options.get(0).cardDeckSize());
         }
         else if (place == 1) {
-            rightDeckCard = options.get(1).getCard(0);
-            Image rightDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(rightDeckCard.front.imageResource)));
+            Image rightDeckCardPNG;
+            try {
+                rightDeckCard = options.get(1).getCard(0);
+                rightDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(rightDeckCard.front.imageResource)));
+            } catch (IndexOutOfBoundsException e) {
+                rightDeckCardPNG = null;
+            }
             rightDeckCardImage.setImage(rightDeckCardPNG);
             cardCountRight.setText("Cards: "+options.get(1).cardDeckSize());
         }
         else {
-            mainDeckCard = mainDeck.getCard(0);
+            Image mainDeckFrontPNG;
+            try {
+                mainDeckCard = mainDeck.getCard(0);
+                mainDeckFrontPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(mainDeckCard.front.imageResource)));
+            } catch (IndexOutOfBoundsException e) {
+                mainDeckFrontPNG = null;
+            }
             cardCountMain.setText("Cards: "+mainDeck.cardDeckSize());
-            Image mainDeckFrontPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(mainDeckCard.front.imageResource)));
             if (player.getChat()) {
                 mainDeckImage.setImage(mainDeckFrontPNG);
             }
