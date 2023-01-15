@@ -1214,6 +1214,7 @@ public class GameController {
                     }
                 }
                 if (canBuild) {
+                    piece.setEqual(true);
                     break;
                 }
                 int differentPieces = 0;
@@ -1223,6 +1224,9 @@ public class GameController {
                 }
                 differentPieces += player.getHand().getMaterials()[5];
                 canBuild = differentPieces >= nbResources;
+                if (canBuild) {
+                    piece.setEqual(false);
+                }
                 break;
             }
         }
