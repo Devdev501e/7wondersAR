@@ -107,10 +107,14 @@ public class EndScreen {
             //points vennant de carte bleu
             i.setTotalPoints(i.getTotalPoints()+ i.getHand().getPointVictoire()[0]*2);
             i.setTotalPoints(i.getTotalPoints()+ i.getHand().getPointVictoire()[1]*3);
+
+            if (i.getChat()) {
+                i.setTotalPoints(i.getTotalPoints()+2);
+            }
         }
 
         for (int i = 0; i < allPlayers.size(); i++) {
-            for (int j=1+i; j < allPlayers.size(); i++) {
+            for (int j=1+i; j < allPlayers.size()-1; i++) {
                 if (allPlayers.get(i).getTotalPoints() > allPlayers.get(j).getTotalPoints()) {
                     temp = allPlayers.get(i);
                     playerWinner[i] = allPlayers.get(j);

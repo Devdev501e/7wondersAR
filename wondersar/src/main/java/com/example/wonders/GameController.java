@@ -833,6 +833,7 @@ public class GameController {
         if (power) {
             System.out.println("You are here");
             buildPower(player);
+            powerChoiceBox.setValue("");
         }
 
         if (countDraw == countCards) {
@@ -871,6 +872,7 @@ public class GameController {
         if (power) {
             System.out.println("You are here");
             buildPower(player);
+            powerChoiceBox.setValue("");
         }
 
         if (countDraw == countCards) {
@@ -911,6 +913,7 @@ public class GameController {
         if (power) {
             System.out.println("You are here");
             buildPower(player);
+            powerChoiceBox.setValue("");
         }
 
         Image mainDeckFrontPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(mainDeckCard.front.imageResource)));
@@ -1361,16 +1364,18 @@ public class GameController {
 
     public void buildPower(Player player) {
         Wonder wonder = player.getWonder();
+        powerChoiceBox.setDisable(false);
+        infoBoxOutline.setVisible(true);
         switch (wonder) {
             case Ephese:
                 Card card = mainDeck.getCard(0);
-                infoBoxOutline.setVisible(true);
                 infoBoxLabel.setText("Power: t'as pris la carte "+card.front.cardDisplayName);
                 player.addCard(card, allPlayers);
                 mainDeck.chooseCard();
                 break;
             case Rhodes:
                 player.getHand().setShieldWar(player.getHand().getShieldWar()+1);
+                infoBoxLabel.setText("Power: Ajouter un bouclier au total");
                 break;
             case Olympie:
                 Card cardLeft = options.get(0).getCard(0);
@@ -1401,12 +1406,14 @@ public class GameController {
                 }
                 powerChoiceBox.getItems().addAll(cardDescription);
                 powerChoiceBox.setOnAction(this::getPowerCardAlexandrie);
+                infoBoxLabel.setText("Power: choisis une des cartes de la liste: ");
                 break;
             case Halicarnasse:
                 powerChoiceBox.setVisible(true);
                 String[] choice = {"gauche", "droite"};
                 powerChoiceBox.getItems().addAll(choice);
                 powerChoiceBox.setOnAction(this::getChoice);
+                infoBoxLabel.setText("Power: Gauche ou droite: ");
                 break;
         }
     }
@@ -1427,6 +1434,7 @@ public class GameController {
         }
         powerChoiceBox.getItems().addAll(cardChoices);
         powerChoiceBox.setOnAction(this::getPowerCardHalicarnasse);
+        infoBoxLabel.setText("Power: choisis une des cartes de la liste: ");
     }
 
     public void getPowerCardHalicarnasse(Event event) {
