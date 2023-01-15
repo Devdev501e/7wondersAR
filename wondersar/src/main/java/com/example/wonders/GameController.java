@@ -3,6 +3,7 @@ package com.example.wonders;
 
 
 import domain.*;
+import javafx.animation.TranslateTransition;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -193,6 +195,11 @@ public class GameController {
     private final ArrayList<Label> materialLabels = new ArrayList<>();
     @FXML
     private Button endButton;
+    @FXML
+    ImageView animationLeft;
+    @FXML
+    ImageView animationRight;
+
 
     //-------------------------------------------needed variables
 
@@ -790,6 +797,20 @@ public class GameController {
     }
 
     public void onButtonLeftDeck() throws IOException {
+        animationLeft.setImage(leftDeckCardImage.getImage());
+        TranslateTransition translate=new TranslateTransition();
+        translate.setNode(animationLeft);
+        translate.setDuration(Duration.millis(1000));
+        translate.setByX(230);
+        translate.setByY(80);
+        translate.setCycleCount(1);
+        translate.setAutoReverse(true);
+
+        translate.play();
+
+
+
+
         player.addCard(leftDeckCard, allPlayers);
 
         options.get(0).chooseCard();
@@ -814,6 +835,15 @@ public class GameController {
     }
 
     public void onButtonRightDeck() throws IOException {
+        animationRight.setImage(rightDeckCardImage.getImage());
+        TranslateTransition translate=new TranslateTransition();
+        translate.setNode(animationRight);
+        translate.setDuration(Duration.millis(1000));
+        translate.setByX(-230);
+        translate.setByY(-80);
+        translate.setCycleCount(1);
+        translate.setAutoReverse(true);
+        translate.play();
         player.addCard(rightDeckCard, allPlayers);
 
         options.get(1).chooseCard();
@@ -991,6 +1021,8 @@ public class GameController {
     }
 
     public void onButtonEnd() {
+
+
         if (playerTurn == allPlayers.size()-1) {
             playerTurn = 0;
         }

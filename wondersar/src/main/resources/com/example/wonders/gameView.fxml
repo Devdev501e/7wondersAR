@@ -26,6 +26,7 @@
                      </image>
                   </ImageView>
                   <Ellipse fill="#c67409" layoutX="400.0" layoutY="230.0" radiusX="400.0" radiusY="150.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                  <ImageView fx:id="animationRight" fitHeight="128.0" fitWidth="89.0" layoutX="599.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="rightDeckCardImage" fitHeight="128.0" fitWidth="99.0" layoutX="599.0" layoutY="316.0" onMouseClicked="#onButtonRightDeck" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-back/card-back-question.png" />
@@ -58,6 +59,7 @@
                   <Label fx:id="playerRightMaterial" layoutX="543.0" layoutY="165.0" prefHeight="17.0" prefWidth="66.0" />
                   <Label fx:id="playerRightScience" layoutX="655.0" layoutY="165.0" prefHeight="17.0" prefWidth="83.0" />
                   <Label fx:id="playerRightShields" layoutX="591.0" layoutY="187.0" prefHeight="17.0" prefWidth="104.0" />
+                  <ImageView fx:id="animationLeft" fitHeight="131.0" fitWidth="93.0" layoutX="115.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="leftDeckCardImage" fitHeight="128.0" fitWidth="99.0" layoutX="118.0" layoutY="316.0" onMouseClicked="#onButtonLeftDeck" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-back/card-back-question.png" />
