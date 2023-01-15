@@ -217,6 +217,12 @@ public class GameController {
     private Parent root;
     @FXML
     private Button retour;
+    ArrayList<String> cardChoices = new ArrayList<>();
+    ArrayList<String> cardDescription = new ArrayList<>();
+    ArrayList<Integer> tokenIgnore = new ArrayList<>();
+
+    boolean power;
+
 
     public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<ProgressToken> progressTokens, int turn, boolean beggining) {
         //initialize table game
@@ -801,9 +807,103 @@ public class GameController {
 
     public void onButtonLeftDeck() throws IOException {
         player.addCard(leftDeckCard, allPlayers);
-        ArrayList<Integer> tokenIgnore = new ArrayList<>();
+        options.get(0).chooseCard();
+
         countCards++;
 
+        power = buidPiece(player.getWonderContruction(),player);
+        if (power) {
+            buildPower(player);
+            powerChoiceBox.setValue(null);
+        }
+
+        checkChosenCard(player, leftDeckCard, tokenIgnore);
+
+        resetCardImage(0);
+
+        if (countDraw >= countCards) {
+            cardDisable(true);
+        }
+
+        endButton.setDisable(false);
+    }
+
+    public void onButtonRightDeck() throws IOException {
+        player.addCard(rightDeckCard, allPlayers);
+        options.get(1).chooseCard();
+
+        countCards++;
+
+        power = buidPiece(player.getWonderContruction(),player);
+        if (power) {
+            buildPower(player);
+            powerChoiceBox.setValue(null);
+        }
+
+        checkChosenCard(player, rightDeckCard, tokenIgnore);
+
+        resetCardImage(1);
+
+        if (countDraw >= countCards) {
+            cardDisable(true);
+        }
+
+        endButton.setDisable(false);
+    }
+
+    public void resetCardImage(int place) {
+        if (place == 0) {
+            leftDeckCard = options.get(0).getCard(0);
+            Image leftDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(leftDeckCard.front.imageResource)));
+            leftDeckCardImage.setImage(leftDeckCardPNG);
+            cardCountLeft.setText("Cards: "+options.get(0).cardDeckSize());
+        }
+        else if (place == 1) {
+            rightDeckCard = options.get(1).getCard(0);
+            Image rightDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(rightDeckCard.front.imageResource)));
+            rightDeckCardImage.setImage(rightDeckCardPNG);
+            cardCountRight.setText("Cards: "+options.get(1).cardDeckSize());
+        }
+        else {
+            mainDeckCard = mainDeck.getCard(0);
+            cardCountMain.setText("Cards: "+mainDeck.cardDeckSize());
+            Image mainDeckFrontPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(mainDeckCard.front.imageResource)));
+            if (player.getChat()) {
+                mainDeckImage.setImage(mainDeckFrontPNG);
+            }
+            else {
+                mainDeckImage.setImage(mainDeckBackPNG);
+            }
+        }
+    }
+
+    public void onButtonMainDeck() throws IOException {
+        player.addCard(mainDeckCard, allPlayers);
+        mainDeck.chooseCard();
+
+        countCards++;
+        if (!player.getChat()) {
+            infoBoxLabel.setText("Card Picked : "+mainDeckCard.front.cardDisplayName);
+        }
+        power = buidPiece(player.getWonderContruction(),player);
+
+        if (power) {
+            buildPower(player);
+            powerChoiceBox.setValue(null);
+        }
+
+        checkChosenCard(player, mainDeckCard, tokenIgnore);
+
+        resetCardImage(2);
+
+        if (countDraw >= countCards) {
+            cardDisable(true);
+        }
+
+        endButton.setDisable(false);
+    }
+
+    public void checkChosenCard(Player player, Card card, ArrayList<Integer> tokenIgnore) {
         if (player.getAllTokens().size() == 0) {
             cardDisable(true);
         }
@@ -820,115 +920,8 @@ public class GameController {
             }
         }
 
-        options.get(0).chooseCard();
-        checkCardCorn(leftDeckCard.front);
+        checkCardCorn(card.front);
         canGetToken();
-
-        leftDeckCard = options.get(0).getCard(0);
-        Image leftDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(leftDeckCard.front.imageResource)));
-        leftDeckCardImage.setImage(leftDeckCardPNG);
-        cardCountLeft.setText("Cards: "+options.get(0).cardDeckSize());
-        boolean power = buidPiece(player.getWonderContruction(),player);                           //ajout pour la construction
-
-        if (power) {
-            System.out.println("You are here");
-            buildPower(player);
-            powerChoiceBox.setValue("");
-        }
-
-        if (countDraw == countCards) {
-            cardDisable(true);
-        }
-
-        endButton.setDisable(false);
-    }
-
-    public void onButtonRightDeck() throws IOException {
-        player.addCard(rightDeckCard, allPlayers);
-        countCards++;
-
-        if (player.getAllTokens().size() == 0) {
-            cardDisable(true);
-        }
-        else {
-            for (ProgressToken i : player.getAllTokens()) {
-                boolean found = getScienceEffectDuringGame(i, rightDeckCard);
-                if (found) {
-                    break;
-                }
-            }
-        }
-
-        options.get(1).chooseCard();
-        checkCardCorn(rightDeckCard.front);
-        canGetToken();
-
-        rightDeckCard = options.get(1).getCard(0);
-        Image rightDeckCardPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(rightDeckCard.front.imageResource)));
-        rightDeckCardImage.setImage(rightDeckCardPNG);
-        cardCountRight.setText("Cards: "+options.get(1).cardDeckSize());
-        boolean power = buidPiece(player.getWonderContruction(),player);                           //ajout pour la construction
-
-        if (power) {
-            System.out.println("You are here");
-            buildPower(player);
-            powerChoiceBox.setValue("");
-        }
-
-        if (countDraw == countCards) {
-            cardDisable(true);
-        }
-
-        endButton.setDisable(false);
-    }
-
-    public void onButtonMainDeck() throws IOException {
-        player.addCard(mainDeckCard, allPlayers);
-        countCards++;
-
-        if (player.getAllTokens().size() == 0) {
-            cardDisable(true);
-        }
-        else {
-            for (ProgressToken i : player.getAllTokens()) {
-                boolean found = getScienceEffectDuringGame(i, mainDeckCard);
-                if (found) {
-                    break;
-                }
-            }
-        }
-
-        if (!player.getChat()) {
-            infoBoxLabel.setText("Card Picked : "+mainDeckCard.front.cardDisplayName);
-        }
-
-        checkCardCorn(mainDeckCard.front);
-        canGetToken();
-
-        mainDeck.chooseCard();
-        mainDeckCard = mainDeck.getCard(0);
-        cardCountMain.setText("Cards: "+mainDeck.cardDeckSize());
-        boolean power = buidPiece(player.getWonderContruction(),player);                           //ajout pour la construction
-
-        if (power) {
-            System.out.println("You are here");
-            buildPower(player);
-            powerChoiceBox.setValue("");
-        }
-
-        Image mainDeckFrontPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(mainDeckCard.front.imageResource)));
-        if (player.getChat()) {
-            mainDeckImage.setImage(mainDeckFrontPNG);
-        }
-        else {
-            mainDeckImage.setImage(mainDeckBackPNG);
-        }
-
-        if (countDraw == countCards) {
-            cardDisable(true);
-        }
-
-        endButton.setDisable(false);
     }
 
     public void onProgress0() {
@@ -1364,14 +1357,17 @@ public class GameController {
 
     public void buildPower(Player player) {
         Wonder wonder = player.getWonder();
-        powerChoiceBox.setDisable(false);
         infoBoxOutline.setVisible(true);
+        powerChoiceBox.setDisable(false);
+        power = false;
         switch (wonder) {
             case Ephese:
-                Card card = mainDeck.getCard(0);
-                infoBoxLabel.setText("Power: t'as pris la carte "+card.front.cardDisplayName);
-                player.addCard(card, allPlayers);
+                infoBoxLabel.setText("Power: t'as pris la carte "+mainDeckCard.front.cardDisplayName);
+                player.addCard(mainDeckCard, allPlayers);
+                checkChosenCard(player, mainDeckCard, tokenIgnore);
+
                 mainDeck.chooseCard();
+                resetCardImage(2);
                 break;
             case Rhodes:
                 player.getHand().setShieldWar(player.getHand().getShieldWar()+1);
@@ -1384,8 +1380,12 @@ public class GameController {
                 infoBoxLabel.setText("Power: t'as pris les carte "+cardLeft.front.cardDisplayName+" et "+cardRight.front.cardDisplayName);
                 player.addCard(cardLeft, allPlayers);
                 player.addCard(cardRight, allPlayers);
+                checkChosenCard(player, cardLeft, tokenIgnore);
+                checkChosenCard(player, cardRight, tokenIgnore);
                 options.get(0).chooseCard();
+                resetCardImage(0);
                 options.get(1).chooseCard();
+                resetCardImage(1);
                 break;
             case Babylone:
                 disableProgressChoice(false);
@@ -1394,12 +1394,11 @@ public class GameController {
                 break;
             case Alexandrie:
                 powerChoiceBox.setVisible(true);
-                ArrayList<String> cardDescription = new ArrayList<>();
                 for (int i = 0; i < allPlayers.size(); i++) {
                     cardDescription.add("["+i+"]"+allPlayers.get(i).getCardDecks().getCard(0).front.cardDisplayName);
                 }
                 if (player.getChat()) {
-                    cardDescription.add(mainDeck.getCard(0).front.cardDisplayName);
+                    cardDescription.add("[2]"+mainDeck.getCard(0).front.cardDisplayName);
                 }
                 else {
                     cardDescription.add("MainDeck");
@@ -1419,46 +1418,68 @@ public class GameController {
     }
 
     public void getChoice(Event event) {
-        ArrayList<String> cardChoices = new ArrayList<>();
-        if (powerChoiceBox.getValue().equals("gauche")) {
-            for (int i = 0; i < 5; i++) {
-                cardChoices.add("["+i+"]"+options.get(0).getCard(i).front.cardDisplayName);
+        if (!powerChoiceBox.getValue().equals("")) {
+            if (powerChoiceBox.getValue().equals("gauche")) {
+                for (int i = 0; i < 5; i++) {
+                    cardChoices.add("["+i+"]"+options.get(0).getCard(i).front.cardDisplayName);
+                }
+                choice = 0;
             }
-            choice = 0;
-        }
-        else {
-            choice = 1;
-            for (int i = 0; i < 5; i++) {
-                cardChoices.add("["+i+"]"+options.get(1).getCard(i).front.cardDisplayName);
+            else {
+                choice = 1;
+                for (int i = 0; i < 5; i++) {
+                    cardChoices.add("["+i+"]"+options.get(1).getCard(i).front.cardDisplayName);
+                }
             }
+            powerChoiceBox.getItems().addAll(cardChoices);
+            powerChoiceBox.getItems().remove("gauche");
+            powerChoiceBox.getItems().remove("droite");
+            powerChoiceBox.setOnAction(this::getPowerCardHalicarnasse);
+            infoBoxLabel.setText("Power: choisis une des cartes de la liste: ");
         }
-        powerChoiceBox.getItems().addAll(cardChoices);
-        powerChoiceBox.setOnAction(this::getPowerCardHalicarnasse);
-        infoBoxLabel.setText("Power: choisis une des cartes de la liste: ");
     }
 
     public void getPowerCardHalicarnasse(Event event) {
-        String card = powerChoiceBox.getValue();
-        int number = Integer.parseInt(card.substring(1,2));
+        if (powerChoiceBox.getValue()!=null) {
+            String card = powerChoiceBox.getValue();
+            int number = Integer.parseInt(card.substring(1,2));
+            player.addCard(options.get(choice).getCard(number), allPlayers);
+            checkChosenCard(player, options.get(choice).getCard(number), tokenIgnore);
 
-        player.addCard(options.get(choice).getCard(number), allPlayers);
-        options.get(choice).removeCard(number);
-        options.get(choice).shuffleDeck();
-        powerChoiceBox.setDisable(true);
+            options.get(choice).removeCard(number);
+            options.get(choice).shuffleDeck();
+            resetCardImage(choice);
+            powerChoiceBox.setDisable(true);
+            powerChoiceBox.getItems().removeAll(cardChoices);
+        }
     }
 
     public void getPowerCardAlexandrie(Event event) {
-        String card = powerChoiceBox.getValue();
-        if (card.equals("MainDeck")) {
-            player.addCard(mainDeck.getCard(0), allPlayers);
-            mainDeck.chooseCard();
+        if (powerChoiceBox.getValue()!=null) {
+            String card = powerChoiceBox.getValue();
+            if (card.equals("MainDeck")) {
+                player.addCard(mainDeck.getCard(0), allPlayers);
+                mainDeck.chooseCard();
+            }
+            else {
+                int number = Integer.parseInt(card.substring(1,2));
+                if (number == 2) {
+                    player.addCard(mainDeck.getCard(0), allPlayers);
+                    checkChosenCard(player, mainDeck.getCard(0), tokenIgnore);
+                    mainDeck.chooseCard();
+                }
+                else {
+                    player.addCard(allPlayers.get(number).getCardDecks().getCard(0), allPlayers);
+                    checkChosenCard(player, allPlayers.get(number).getCardDecks().getCard(0), tokenIgnore);
+                    allPlayers.get(number).getCardDecks().chooseCard();
+
+                }
+                resetCardImage(number);
+            }
+
+            powerChoiceBox.getItems().removeAll(cardDescription);
+            powerChoiceBox.setDisable(true);
         }
-        else {
-            int number = Integer.parseInt(card.substring(1,2));
-            player.addCard(allPlayers.get(number).getCardDecks().getCard(0), allPlayers);
-            allPlayers.get(number).getCardDecks().chooseCard();
-        }
-        powerChoiceBox.setDisable(true);
     }
     public void retour (Event event) throws  IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
