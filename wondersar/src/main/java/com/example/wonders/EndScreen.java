@@ -31,6 +31,7 @@ public class EndScreen {
     ArrayList<Label> playerLabels = new ArrayList<>();
 
     public void getInfo(ArrayList<Player> players) {
+        System.out.println(players);
         playerLabels.add(player1st);
         playerLabels.add(player2nd);
         playerLabels.add(player3rd);
@@ -119,11 +120,9 @@ public class EndScreen {
         }
 
         for (int i = 0; i < allPlayers.size(); i++) {
-            for (int j=1+i; j < allPlayers.size()-1; i++) {
+            for (int j = i+1; j < allPlayers.size(); j++) {
                 if (allPlayers.get(i).getTotalPoints() > allPlayers.get(j).getTotalPoints()) {
-                    temp = allPlayers.get(i);
-                    playerWinner[i] = allPlayers.get(j);
-                    allPlayers.add(j, temp);
+                    playerWinner[i] = allPlayers.get(i);
                 }
             }
         }

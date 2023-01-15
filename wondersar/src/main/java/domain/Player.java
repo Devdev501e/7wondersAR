@@ -11,8 +11,8 @@ public class Player {
     private Hand hand;
     private Boolean chat;
     private int totalPoints;
-
     private final CardDecks cardDecks;
+    private ArrayList<Integer> tokenIgnore;
 
 
     public Player(String name,Wonder wonder, Hand hand,Boolean chat, ArrayList<ProgressToken> allTokens){
@@ -24,6 +24,7 @@ public class Player {
         this.wonderContruction = new Construction(wonder);
         this.totalPoints = 0;
         this.cardDecks = new CardDecks(wonder.displayName);
+        this.tokenIgnore = new ArrayList<>();
     }
 
     public String getName() {
@@ -62,6 +63,14 @@ public class Player {
     }
     public void setTotalPoints(int totalPoints) {
         this.totalPoints = totalPoints;
+    }
+
+    public ArrayList<Integer> getTokenIgnore() {
+        return tokenIgnore;
+    }
+
+    public void setTokenIgnore(ArrayList<Integer> tokenIgnore) {
+        this.tokenIgnore = tokenIgnore;
     }
 
     public void addCard(Card card, ArrayList<Player> players) {

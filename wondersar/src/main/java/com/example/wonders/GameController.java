@@ -212,9 +212,8 @@ public class GameController {
     private int choice;
     @FXML
     private Button retour;
-    ArrayList<String> cardChoices = new ArrayList<>();
-    ArrayList<String> cardDescription = new ArrayList<>();
-    ArrayList<Integer> tokenIgnore = new ArrayList<>();
+    ArrayList<String> cardChoices;
+    ArrayList<String> cardDescription;
 
     boolean power;
 
@@ -223,7 +222,7 @@ public class GameController {
         //initialize table game
         countCards = 0;
         countDraw = 1;
-         retour.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Back.css")).toExternalForm());
+        retour.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Back.css")).toExternalForm());
         options = new ArrayList<>();
         powerChoiceBox.setVisible(false);
 
@@ -236,7 +235,7 @@ public class GameController {
         cardDisable(false);
 
         if (beggining) {
-            players.get(turn).getAllTokens().add(ProgressToken.Economy);
+            players.get(turn).getAllTokens().add(ProgressToken.Ingeniery);
             allPlayerNames.getItems().addAll(playerNames);
             allPlayers.addAll(players);
             resetTokens();
@@ -292,6 +291,8 @@ public class GameController {
         player = players.get(turn);
         playerTurn = turn;
         playerName.setText(player.getName());
+
+        player.setTokenIgnore(new ArrayList<>());
 
         options.add(player.getCardDecks());
 
@@ -803,6 +804,7 @@ public class GameController {
 
     public void onButtonLeftDeck() throws IOException {
         player.addCard(leftDeckCard, allPlayers);
+
         options.get(0).chooseCard();
 
         countCards++;
@@ -813,7 +815,7 @@ public class GameController {
             powerChoiceBox.setValue(null);
         }
 
-        checkChosenCard(player, leftDeckCard, tokenIgnore);
+        checkChosenCard(player, leftDeckCard);
 
         resetCardImage(0);
 
@@ -826,6 +828,7 @@ public class GameController {
 
     public void onButtonRightDeck() throws IOException {
         player.addCard(rightDeckCard, allPlayers);
+
         options.get(1).chooseCard();
 
         countCards++;
@@ -836,7 +839,7 @@ public class GameController {
             powerChoiceBox.setValue(null);
         }
 
-        checkChosenCard(player, rightDeckCard, tokenIgnore);
+        checkChosenCard(player, rightDeckCard);
 
         resetCardImage(1);
 
@@ -888,7 +891,7 @@ public class GameController {
             powerChoiceBox.setValue(null);
         }
 
-        checkChosenCard(player, mainDeckCard, tokenIgnore);
+        checkChosenCard(player, mainDeckCard);
 
         resetCardImage(2);
 
@@ -899,17 +902,17 @@ public class GameController {
         endButton.setDisable(false);
     }
 
-    public void checkChosenCard(Player player, Card card, ArrayList<Integer> tokenIgnore) {
+    public void checkChosenCard(Player player, Card card) {
         if (player.getAllTokens().size() == 0) {
             cardDisable(true);
         }
         else {
             for (int i = 0; i < player.getAllTokens().size(); i++) {
                 ProgressToken pt = player.getAllTokens().get(i);
-                if (!tokenIgnore.contains(i)) {
+                if (!player.getTokenIgnore().contains(i)) {
                     boolean found = getScienceEffectDuringGame(pt, leftDeckCard);
                     if (found) {
-                        tokenIgnore.add(i);
+                        player.getTokenIgnore().add(i);
                         break;
                     }
                 }
@@ -1197,33 +1200,17 @@ public class GameController {
     }
     public boolean canBuildPiece(ConstructionPiece piece, Player player) {
         int nbResources = piece.getNbPieces();
-        boolean canBuild;
+        boolean canBuild = false;
         boolean isEqual;
         if (player.getAllTokens().contains(ProgressToken.Ingeniery)) {
-            while (true) {
-                canBuild = false;
-                for (int i = 0; i < 5; i++) {
-                    int samePieces = player.getHand().getMaterials()[i] + player.getHand().getMaterials()[5];
-                    if (samePieces >= nbResources) {
-                        canBuild = true;
-                        break;
-                    }
-                }
-                if (canBuild) {
-                    piece.setEqual(true);
+            int totalMaterial = 0;
+            for (int i : player.getHand().getMaterials()) {
+                totalMaterial +=i;
+
+                if (totalMaterial >= nbResources) {
+                    canBuild = true;
                     break;
                 }
-                int differentPieces = 0;
-                for (int i = 0; i < 5; i++) {
-                    if(player.getHand().getMaterials()[i] != 0)
-                    {   differentPieces+=1; }
-                }
-                differentPieces += player.getHand().getMaterials()[5];
-                canBuild = differentPieces >= nbResources;
-                if (canBuild) {
-                    piece.setEqual(false);
-                }
-                break;
             }
         }
         else {
@@ -1264,6 +1251,7 @@ public class GameController {
                 piece =cons.getAllPieces().get(i);
                 pieceBefor =true;
             }
+
             if (canBuildPiece(piece,player) && !piece.isComplete() && pieceBefor) {
                 switch (player.getWonder()) {
                     case Halicarnasse:
@@ -1288,43 +1276,60 @@ public class GameController {
                 int p=0;
                 int previousElem = 10;
 
-                for (int k=0;k<6;k++) {
-                    int material=  player.getHand().getMaterials()[k];
-                    if (equal) {
-                        if (material + player.getHand().getMaterials()[5] >= nbRessource) {
-                            int max = player.getHand().getMaterials()[k];
+                if (player.getAllTokens().contains(ProgressToken.Ingeniery)) {
+                    for (int k = 0; k < 6; k++) {
+                         p += player.getHand().getMaterials()[k];
+                         if (p <= nbRessource) {
+                             player.getHand().getMaterials()[k] = 0;
+                         }
+                         else {
+                             player.getHand().getMaterials()[k] -= p-nbRessource;
+                         }
 
-                            int usedGold = nbRessource - max;
-                            int usedOther = max;
-                            if((player.getAllTokens().contains(ProgressToken.Economy)) && (usedGold%2 != 0)) {
-                                usedGold +=1;
-                                usedOther -=1;
+                         if (p>= nbRessource) {
+                             break;
+                         }
+                    }
+                }
+                else {
+                    for (int k=0;k<6;k++) {
+                        int material=  player.getHand().getMaterials()[k];
+                        if (equal) {
+                            if (material + player.getHand().getMaterials()[5] >= nbRessource) {
+                                int max = player.getHand().getMaterials()[k];
+
+                                int usedGold = nbRessource - max;
+                                int usedOther = max;
+                                if((player.getAllTokens().contains(ProgressToken.Economy)) && (usedGold%2 != 0)) {
+                                    usedGold +=1;
+                                    usedOther -=1;
+                                }
+                                for (int n = 0; n < usedGold; n++) {
+                                    player.getHand().removeMaterials(5);
+                                }
+                                for (int n = 0; n < usedOther; n++) {
+                                    player.getHand().removeMaterials(k);
+                                }
+                                break;
                             }
-                            for (int n = 0; n < usedGold; n++) {
-                                player.getHand().removeMaterials(5);
-                            }
-                            for (int n = 0; n < usedOther; n++) {
-                                player.getHand().removeMaterials(k);
-                            }
-                            break;
-                        }
-                    } else {
-                        if (material!=0) {
-                            int elemLeft = nbRessource-p;
-                            if (player.getAllTokens().contains(ProgressToken.Economy) && (k == 5)) {
-                                player.getHand().removeMaterials(k);
-                                if (elemLeft == 1) {
-                                    if (previousElem != 10) {
-                                        player.getHand().addMaterials(previousElem);
+                        } else {
+                            if (material!=0) {
+                                int elemLeft = nbRessource-p;
+                                if (player.getAllTokens().contains(ProgressToken.Economy) && (k == 5)) {
+                                    player.getHand().removeMaterials(k);
+                                    if (elemLeft == 1) {
+                                        if (previousElem != 10) {
+                                            player.getHand().addMaterials(previousElem);
+                                        }
                                     }
                                 }
-                            }
-                            player.getHand().removeMaterials(k);
-                            System.out.println(player.getHand().getMaterials()[5]);
-                            p++;
-                            previousElem = k;
-                            if (p==nbRessource) {
-                                break;
+                                player.getHand().removeMaterials(k);
+                                System.out.println(player.getHand().getMaterials()[5]);
+                                p++;
+                                previousElem = k;
+                                if (p==nbRessource) {
+                                    break;
+                                }
                             }
                         }
                     }
@@ -1364,7 +1369,7 @@ public class GameController {
             case Ephese:
                 infoBoxLabel.setText("Power: t'as pris la carte "+mainDeckCard.front.cardDisplayName);
                 player.addCard(mainDeckCard, allPlayers);
-                checkChosenCard(player, mainDeckCard, tokenIgnore);
+                checkChosenCard(player, mainDeckCard);
 
                 mainDeck.chooseCard();
                 resetCardImage(2);
@@ -1380,8 +1385,8 @@ public class GameController {
                 infoBoxLabel.setText("Power: t'as pris les carte "+cardLeft.front.cardDisplayName+" et "+cardRight.front.cardDisplayName);
                 player.addCard(cardLeft, allPlayers);
                 player.addCard(cardRight, allPlayers);
-                checkChosenCard(player, cardLeft, tokenIgnore);
-                checkChosenCard(player, cardRight, tokenIgnore);
+                checkChosenCard(player, cardLeft);
+                checkChosenCard(player, cardRight);
                 options.get(0).chooseCard();
                 resetCardImage(0);
                 options.get(1).chooseCard();
@@ -1394,6 +1399,7 @@ public class GameController {
                 break;
             case Alexandrie:
                 powerChoiceBox.setVisible(true);
+                cardDescription = new ArrayList<>();
                 for (int i = 0; i < allPlayers.size(); i++) {
                     cardDescription.add("["+i+"]"+allPlayers.get(i).getCardDecks().getCard(0).front.cardDisplayName);
                 }
@@ -1419,6 +1425,7 @@ public class GameController {
 
     public void getChoice(Event event) {
         if (!powerChoiceBox.getValue().equals("")) {
+            cardChoices = new ArrayList<>();
             if (powerChoiceBox.getValue().equals("gauche")) {
                 for (int i = 0; i < 5; i++) {
                     cardChoices.add("["+i+"]"+options.get(0).getCard(i).front.cardDisplayName);
@@ -1444,7 +1451,7 @@ public class GameController {
             String card = powerChoiceBox.getValue();
             int number = Integer.parseInt(card.substring(1,2));
             player.addCard(options.get(choice).getCard(number), allPlayers);
-            checkChosenCard(player, options.get(choice).getCard(number), tokenIgnore);
+            checkChosenCard(player, options.get(choice).getCard(number));
 
             options.get(choice).removeCard(number);
             options.get(choice).shuffleDeck();
@@ -1465,20 +1472,19 @@ public class GameController {
                 int number = Integer.parseInt(card.substring(1,2));
                 if (number == 2) {
                     player.addCard(mainDeck.getCard(0), allPlayers);
-                    checkChosenCard(player, mainDeck.getCard(0), tokenIgnore);
+                    checkChosenCard(player, mainDeck.getCard(0));
                     mainDeck.chooseCard();
                 }
                 else {
                     player.addCard(allPlayers.get(number).getCardDecks().getCard(0), allPlayers);
-                    checkChosenCard(player, allPlayers.get(number).getCardDecks().getCard(0), tokenIgnore);
+                    checkChosenCard(player, allPlayers.get(number).getCardDecks().getCard(0));
                     allPlayers.get(number).getCardDecks().chooseCard();
 
                 }
                 resetCardImage(number);
+                powerChoiceBox.getItems().removeAll(cardDescription);
+                powerChoiceBox.setDisable(true);
             }
-
-            powerChoiceBox.getItems().removeAll(cardDescription);
-            powerChoiceBox.setDisable(true);
         }
     }
     public void retour (Event event) throws  IOException {
