@@ -1,5 +1,6 @@
 package com.example.wonders;
 
+import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,8 @@ public class MenuControleur implements Initializable {
 
     @FXML
     private Button instruction;
+    @FXML
+    private Button exit;
 
 
     public void button(Event event) throws IOException {
@@ -42,13 +45,18 @@ public class MenuControleur implements Initializable {
         stage.setScene(scene);
         stage.setTitle("Règles du jeu");
         stage.show();
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        exit.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Exit.css")).toExternalForm());
         button.getStylesheets().add(Objects.requireNonNull(getClass().getResource("application.css")).toExternalForm());
 
 
         instruction.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Instruction.css")).toExternalForm());
+    }
+    public void quiter() throws IOException{
+        Platform.exit();
     }
 }
