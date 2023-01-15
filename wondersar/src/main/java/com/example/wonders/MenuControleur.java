@@ -8,45 +8,29 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MenuControleur implements Initializable {
     @FXML
     private Button button;
-    @FXML
-    private ImageView imageView;
-    @FXML
-    private Label label;
 
-    private Image myimage;
     @FXML
     private Button instruction;
-    private Scene scene;
-    private Stage stage;
-
 
 
     public void button(Event event) throws IOException {
-     Parent root = FXMLLoader.load(getClass().getResource("ChoixPerso.fxml"));
-     stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-     scene = new Scene(root);
+     Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ChoixPerso.fxml")));
+     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+     Scene scene = new Scene(root);
 
      stage.setScene(scene);
 
      stage.show();
-
-    }
-    public void surbrillance(Event event){
 
     }
 
@@ -62,9 +46,9 @@ public class MenuControleur implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        button.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+        button.getStylesheets().add(Objects.requireNonNull(getClass().getResource("application.css")).toExternalForm());
 
 
-        instruction.getStylesheets().add(getClass().getResource("Instruction.css").toExternalForm());
+        instruction.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Instruction.css")).toExternalForm());
     }
 }

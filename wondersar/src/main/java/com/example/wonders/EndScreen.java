@@ -9,11 +9,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class EndScreen {
     @FXML
     private ImageView imagePodium = new ImageView();
-    private Image podiumPNG = new Image(getClass().getResourceAsStream("images/imagejeu/podium.png"));
+    private final Image podiumPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/imagejeu/podium.png")));
     @FXML
     private Label player1st;
     @FXML
@@ -24,7 +25,7 @@ public class EndScreen {
     private Label loserLabel;
     @FXML
     private ImageView imageMedal = new ImageView();
-    private Image medalPNG = new Image(getClass().getResourceAsStream("images/imagejeu/1st_place.png"));
+    private final Image medalPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/imagejeu/1st_place.png")));
     @FXML
     private Label playerWinner;
     ArrayList<Label> playerLabels = new ArrayList<>();
@@ -35,6 +36,9 @@ public class EndScreen {
         playerLabels.add(player3rd);
         playerLabels.add(loserLabel);
         Player[] playerOrder = calculateFinalPoints(players);
+        for (Player i : playerOrder) {
+            System.out.println(i.getName());
+        }
         if (players.size() == 2) {
             imageMedal.setImage(medalPNG);
             playerWinner.setText(playerOrder[0].getName()+"("+playerOrder[0].getTotalPoints()+" points)");
@@ -111,6 +115,7 @@ public class EndScreen {
             if (i.getChat()) {
                 i.setTotalPoints(i.getTotalPoints()+2);
             }
+            System.out.println(i.getName()+": "+i.getTotalPoints());
         }
 
         for (int i = 0; i < allPlayers.size(); i++) {

@@ -17,8 +17,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Objects;
 
 public class GameController {
@@ -80,7 +78,7 @@ public class GameController {
     private ImageView combat5 = new ImageView();
     @FXML
     private ImageView combat6 = new ImageView();
-    private ArrayList<ImageView> combats = new ArrayList<>();
+    private final ArrayList<ImageView> combats = new ArrayList<>();
 
     @FXML
     private ImageView progress0 = new ImageView();
@@ -88,7 +86,7 @@ public class GameController {
     private ImageView progress1 = new ImageView();
     @FXML
     private ImageView progress2 = new ImageView();
-    private ArrayList<ImageView> progressImages = new ArrayList<>();
+    private final ArrayList<ImageView> progressImages = new ArrayList<>();
 
     @FXML
     private Rectangle infoBoxOutline;
@@ -108,10 +106,10 @@ public class GameController {
     private Label playerHand;
     @FXML
     private ImageView catImage = new ImageView();
-    private Image catPNG = new Image(getClass().getResourceAsStream("images/tokens/token-cat.png"));
+    private final Image catPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/tokens/token-cat.png")));
     @FXML
     private ImageView militaryImage = new ImageView();
-    private Image militaryPNG = new Image(getClass().getResourceAsStream("images/tokens/token-3-laurel-points.png"));
+    private final Image militaryPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/tokens/token-3-laurel-points.png")));
     @FXML
     private Label militaryCount;
     @FXML
@@ -122,8 +120,8 @@ public class GameController {
     private ImageView emperorImage = new ImageView();
     @FXML
     private Label emperorCount;
-    private ArrayList<ImageView> blueImages = new ArrayList<>();
-    private ArrayList<Label> blueLabels = new ArrayList<>();
+    private final ArrayList<ImageView> blueImages = new ArrayList<>();
+    private final ArrayList<Label> blueLabels = new ArrayList<>();
     @FXML
     private ImageView centurionImage = new ImageView();
     @FXML
@@ -136,8 +134,8 @@ public class GameController {
     private ImageView archerImage = new ImageView();
     @FXML
     private Label archerCount;
-    private  ArrayList<ImageView> redImages = new ArrayList<>();
-    private ArrayList<Label> redLabels = new ArrayList<>();
+    private final  ArrayList<ImageView> redImages = new ArrayList<>();
+    private final ArrayList<Label> redLabels = new ArrayList<>();
     @FXML
     private ImageView lawImage = new ImageView();
     @FXML
@@ -145,7 +143,7 @@ public class GameController {
     @FXML
     private ImageView mechanicImage = new ImageView();
 
-    private ArrayList<ImageView> scienceImages = new ArrayList<>();
+    private final ArrayList<ImageView> scienceImages = new ArrayList<>();
 
     @FXML
     private ImageView token1 = new ImageView();
@@ -191,30 +189,27 @@ public class GameController {
     @FXML
     private Label brickCount;
 
-    private ArrayList<ImageView> materialImages = new ArrayList<>();
-    private ArrayList<Label> materialLabels = new ArrayList<>();
+    private final ArrayList<ImageView> materialImages = new ArrayList<>();
+    private final ArrayList<Label> materialLabels = new ArrayList<>();
     @FXML
     private Button endButton;
 
     //-------------------------------------------needed variables
 
     private Player player;
-    private ArrayList<String> playerNames = new ArrayList<>();
+    private final ArrayList<String> playerNames = new ArrayList<>();
     ArrayList<CardDecks> options;
     CardDecks mainDeck;
     private int playerTurn;
 
-    Image tokenPeace = new Image(getClass().getResourceAsStream("images/tokens/token-conflict-peace.png"));
-    Image tokenWar = new Image(getClass().getResourceAsStream("images/tokens/token-conflict-war.png"));
+    Image tokenPeace = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/tokens/token-conflict-peace.png")));
+    Image tokenWar = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/tokens/token-conflict-war.png")));
 
     ArrayList<Player> allPlayers = new ArrayList<>();
     ArrayList<ProgressToken> res;
     private int countCards;
     private int countDraw;
     private int choice;
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
     @FXML
     private Button retour;
     ArrayList<String> cardChoices = new ArrayList<>();
@@ -228,7 +223,7 @@ public class GameController {
         //initialize table game
         countCards = 0;
         countDraw = 1;
-         retour.getStylesheets().add(getClass().getResource("Back.css").toExternalForm());
+         retour.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Back.css")).toExternalForm());
         options = new ArrayList<>();
         powerChoiceBox.setVisible(false);
 
@@ -305,7 +300,7 @@ public class GameController {
         allPlayerNames.setOnAction(this::onPlayerNames);
 
         for (int i = 0; i < progressImages.size(); i++) {
-            Image resImage = new Image(getClass().getResourceAsStream(res.get(i).imageResource));
+            Image resImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(res.get(i).imageResource)));
             progressImages.get(i).setImage(resImage);
             progressImages.get(i).setDisable(true);
         }
@@ -341,7 +336,7 @@ public class GameController {
                 playerRight = players.get(turn+1);
             }
             options.add(playerRight.getCardDecks());
-            playerRightImage.setImage(new Image(getClass().getResourceAsStream("images/imagejeu/silhouette.png")));
+            playerRightImage.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/imagejeu/silhouette.png"))));
             playerRightName.setText(""+playerRight.getName());
             totalMaterial = 0;
             for (int i : playerRight.getHand().getMaterials()) {
@@ -396,6 +391,7 @@ public class GameController {
             }
         }
 
+        assert playerView != null;
         playerNameTab.setText(playerView.getName()+" "+" - "+playerView.getWonder().displayName);
         tab2.setText(playerView.getName());
         playerHandOutline.setVisible(true);
@@ -754,7 +750,7 @@ public class GameController {
 
         //for tokens image
         for (int i = 0; i < playerView.getAllTokens().size(); i++) {
-            tokenImages.get(i).setImage(new Image(getClass().getResourceAsStream(playerView.getAllTokens().get(i).imageResource)));
+            tokenImages.get(i).setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(playerView.getAllTokens().get(i).imageResource))));
         }
 
         //for military image
@@ -936,7 +932,7 @@ public class GameController {
 
         res.remove(0);
         for (int i = 0; i < progressImages.size(); i++) {
-            Image resImage = new Image(getClass().getResourceAsStream(res.get(i).imageResource));
+            Image resImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(res.get(i).imageResource)));
             progressImages.get(i).setImage(resImage);
         }
         disableProgressChoice(true);
@@ -952,7 +948,7 @@ public class GameController {
         }
         res.remove(1);
         for (int i = 0; i < progressImages.size(); i++) {
-            Image resImage = new Image(getClass().getResourceAsStream(res.get(i).imageResource));
+            Image resImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(res.get(i).imageResource)));
             progressImages.get(i).setImage(resImage);
         }
 
@@ -969,7 +965,7 @@ public class GameController {
         }
         res.remove(2);
         for (int i = 0; i < progressImages.size(); i++) {
-            Image resImage = new Image(getClass().getResourceAsStream(res.get(i).imageResource));
+            Image resImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(res.get(i).imageResource)));
             progressImages.get(i).setImage(resImage);
         }
         disableProgressChoice(true);
@@ -1055,12 +1051,12 @@ public class GameController {
     public void checkCardCorn(CardType card) {
         if (card.cardCategory == CardCategory.WarCard) {
             int count = 0;
-            for (int i = 0; i < combats.size(); i++) {
+            for (ImageView combat : combats) {
                 if (count == card.cornCount) {
                     break;
                 }
-                if (combats.get(i).getImage() == tokenPeace) {
-                    combats.get(i).setImage(tokenWar);
+                if (combat.getImage() == tokenPeace) {
+                    combat.setImage(tokenWar);
                     count++;
                 }
 
@@ -1085,8 +1081,8 @@ public class GameController {
     }
 
     public void disableProgressChoice(boolean disable) {
-        for (int j = 0; j < progressImages.size(); j++) {
-            progressImages.get(j).setDisable(disable);
+        for (ImageView progressImage : progressImages) {
+            progressImage.setDisable(disable);
         }
     }
 
@@ -1129,9 +1125,9 @@ public class GameController {
             }
         }
 
-        for (int j = 0; j < allPlayers.size(); j++) {
-            allPlayers.get(j).getHand().getShieldCards()[1] = 0;
-            allPlayers.get(j).getHand().getShieldCards()[2] = 0;
+        for (Player allPlayer : allPlayers) {
+            allPlayer.getHand().getShieldCards()[1] = 0;
+            allPlayer.getHand().getShieldCards()[2] = 0;
         }
     }
 
@@ -1257,9 +1253,9 @@ public class GameController {
 
     public boolean buidPiece (Construction cons, Player player) throws IOException {
         ConstructionPiece piece;
-        Boolean pieceBuild = false;
-        Boolean piecePower = false;
-        Boolean pieceBefor;
+        boolean pieceBuild = false;
+        boolean piecePower = false;
+        boolean pieceBefor;
         for (int i=0;i<5;i++) {
             if (i>0) {
                 piece =cons.getAllPieces().get(i);
@@ -1290,6 +1286,7 @@ public class GameController {
                 boolean equal = piece.getEqual();
                 int nbRessource = piece.getNbPieces();
                 int p=0;
+                int previousElem = 10;
 
                 for (int k=0;k<6;k++) {
                     int material=  player.getHand().getMaterials()[k];
@@ -1312,7 +1309,6 @@ public class GameController {
                             break;
                         }
                     } else {
-                        int previousElem = 10;
                         if (material!=0) {
                             int elemLeft = nbRessource-p;
                             if (player.getAllTokens().contains(ProgressToken.Economy) && (k == 5)) {
@@ -1486,9 +1482,9 @@ public class GameController {
         }
     }
     public void retour (Event event) throws  IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Menu.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
 
         stage.setScene(scene);
 

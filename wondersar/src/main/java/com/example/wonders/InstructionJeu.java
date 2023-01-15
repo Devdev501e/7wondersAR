@@ -9,7 +9,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Pagination;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
@@ -19,21 +18,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class InstructionJeu implements Initializable {
-    @FXML
-    private Button page1;
-    @FXML
-    private Button page2;
-    @FXML
-    private Button page3;
     @FXML
     private Label labelTitle;
 
     @FXML
     private ImageView imagePartie;
-    private Image partiePNG = new Image(getClass().getResourceAsStream("images/imagejeu/tourDuJeu.png"));
+    private final Image partiePNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/imagejeu/tourDuJeu.png")));
 
     @FXML
     private ImageView imageToken;
@@ -63,31 +57,30 @@ public class InstructionJeu implements Initializable {
 
     @FXML
     private ImageView image2Joueur;
-    private Image joueurPNG = new Image(getClass().getResourceAsStream("images/imagejeu/partie2joueur.png"));
+    private final Image joueurPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/imagejeu/partie2joueur.png")));
     @FXML
     private Label joueurDescription;
     @FXML
     private ImageView imageFin;
-    private Image finPNG = new Image(getClass().getResourceAsStream("images/imagejeu/findepartie.png"));
+    private final Image finPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/imagejeu/findepartie.png")));
     @FXML
     private Label finDescription;
     @FXML
     Button retour;
 
-    private ArrayList<ProgressToken> res = new ArrayList<>();
+    private final ArrayList<ProgressToken> res = new ArrayList<>();
     private int currentRes = 0;
-    private String[] images = {"images/imagejeu/alexandrie_icon.png", "images/imagejeu/halicarnasse_icon.png", "images/imagejeu/ephese_icon.png", "images/imagejeu/olympie_icon.png", "images/imagejeu/babylon_icon.png", "images/imagejeu/rhodes_icon.png", "images/imagejeu/gizeh_icon.png"};
+    private final String[] images = {"images/imagejeu/alexandrie_icon.png", "images/imagejeu/halicarnasse_icon.png", "images/imagejeu/ephese_icon.png", "images/imagejeu/olympie_icon.png", "images/imagejeu/babylon_icon.png", "images/imagejeu/rhodes_icon.png", "images/imagejeu/gizeh_icon.png"};
     private int currentWonder = 0;
-    private ArrayList<Wonder> wonders = new ArrayList<>();
+    private final ArrayList<Wonder> wonders = new ArrayList<>();
 
     @Override
     public void initialize (URL url, ResourceBundle resourceBundle) {
-        retour.getStylesheets().add(getClass().getResource("Back.css").toExternalForm());
+        retour.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Back.css")).toExternalForm());
         page2Visible(false);
         wonders.addAll(Arrays.asList(Wonder.values()));
 
-        ProgressTokens progressTokens = new ProgressTokens();
-        res.addAll(progressTokens.TOKENS);
+        res.addAll(ProgressTokens.TOKENS);
 
         imagePartie.setImage(partiePNG);
         labelTitle.setText("Tour d'une partie : ");
@@ -168,13 +161,13 @@ public class InstructionJeu implements Initializable {
     }
 
     public void setToken(int position) {
-        imageToken.setImage(new Image(getClass().getResourceAsStream(res.get(position).imageResource)));
+        imageToken.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(res.get(position).imageResource))));
         tokenName.setText(res.get(position).displayName);
         tokenDescription.setText(res.get(position).effectDescription);
     }
 
     public void setWonder(int position) {
-        imageWonder.setImage(new Image(getClass().getResourceAsStream(images[position])));
+        imageWonder.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream(images[position]))));
         nameWonder.setText(wonders.get(position).displayName);
         descriptionWonder.setText(wonders.get(position).effectDescription);
     }

@@ -56,10 +56,9 @@ public class ChoixpersoControleur implements Initializable {
     private Scene scene;
 
 
-    private Parent root;
     private int nombre;
     private String wonderChoice;
-    private ArrayList<Player> players = new ArrayList<>();
+    private final ArrayList<Player> players = new ArrayList<>();
 
 
 
@@ -70,8 +69,8 @@ public class ChoixpersoControleur implements Initializable {
         tableau.setVisible(false);
         nameTextField.setVisible(false);
         startGame.setVisible(false);
-        retour.getStylesheets().add(getClass().getResource("Back.css").toExternalForm());
-        valider.getStylesheets().add(getClass().getResource("Confirm.css").toExternalForm());
+        retour.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Back.css")).toExternalForm());
+        valider.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Confirm.css")).toExternalForm());
         valider.setVisible(false);
         myChoiceBox.getItems().addAll(NP);//chose box
         myChoiceBox.setOnAction(this::getNumber);
@@ -85,7 +84,6 @@ public class ChoixpersoControleur implements Initializable {
         if (myChoiceBox.getValue()!=null) {
             valider.setVisible(true);
             nombre = Integer.parseInt(myChoiceBox.getValue());
-            int info = nombre-players.size();
             labelBox.setText("You have chosen "+nombre+" players \nyou have to choose "+nombre+" more players");
             tableau.setVisible(true);
             for (Wonder wonders:Wonder.values()){
@@ -102,11 +100,11 @@ public class ChoixpersoControleur implements Initializable {
 
     public void getWonderChoice(Event event) {
         if(myChoiceBox.getValue()!=null&& !myChoiceBox.getValue().equals("")) {
-            Image tokenPeace = new Image(getClass().getResourceAsStream("images/imagejeu/" + myChoiceBox.getValue()+".png"));
+            Image tokenPeace = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/imagejeu/" + myChoiceBox.getValue() + ".png")));
             info.setImage(tokenPeace);
             info.setFitWidth(286);
             info.setFitHeight(75);
-            Image deks =new Image(getClass().getResourceAsStream("images/decks/deck-" + myChoiceBox.getValue()+".png"));
+            Image deks =new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/decks/deck-" + myChoiceBox.getValue() + ".png")));
             deck.setImage(deks);
         }
 
@@ -116,44 +114,48 @@ public class ChoixpersoControleur implements Initializable {
 
     public void onConfirmButton() {
         String word =nameTextField.getText();
-      if(word!=null && !word.equals("") && !myChoiceBox.getItems().equals("")&& myChoiceBox != null){
-        String name = nameTextField.getText();
-        players.add(new Player(name, Wonder.valueOf(wonderChoice), new Hand(),false, new ArrayList<>()));
+        if(word!=null && !word.equals("") && !myChoiceBox.getItems().equals("")&& myChoiceBox != null){
+            String name = nameTextField.getText();
+            players.add(new Player(name, Wonder.valueOf(wonderChoice), new Hand(),false, new ArrayList<>()));
 
-        for(int i=0;i< players.size();i++){
-            labelTextefield.setText(players.get(i).getName()+ " \n"+players.get(i).getWonder());
+            for (Player player : players) {
+                labelTextefield.setText(player.getName() + " \n" + player.getWonder());
+            }
+
+            myChoiceBox.getItems().remove(wonderChoice);
+
+            nameTextField.setText("");
+            myChoiceBox.setValue("");
+
+            if (players.size() == nombre) {
+                startGame.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Startgame.css")).toExternalForm());
+                valider.setVisible(false);
+                startGame.setVisible(true);
+                myChoiceBox.setDisable(true);
+                nameTextField.setDisable(true);
+            }
         }
-        myChoiceBox.getItems().remove(wonderChoice);
 
-        nameTextField.setText("");
-        myChoiceBox.setValue("");
+        else if (myChoiceBox.getValue()==null ) {
+            labelTextefield.setText("Choose a wonders !! ");
+        }
+        else { labelTextefield.setText("write a name !!"); }
 
-        if (players.size() == nombre) {
-            startGame.getStylesheets().add(getClass().getResource("Startgame.css").toExternalForm());
-            valider.setVisible(false);
-            startGame.setVisible(true);
-            myChoiceBox.setDisable(true);
-            nameTextField.setDisable(true);
-        }}
-      else if(myChoiceBox.getValue()==null ){
-          labelTextefield.setText("Choose a wonders !! ");
-      }else {labelTextefield.setText("write a name !!");}
-        int info = nombre-players.size();
-        labelBox.setText("You have chosen "+nombre+" players \nyou have to choose "+info+" more players");
-
+        int infoNum = nombre-players.size();
+        labelBox.setText("You have chosen "+nombre+" players \nyou have to choose "+infoNum+" more players");
+        deck.setImage(null);
+        info.setImage(null);
     }
 
     public void switchScene(Event event)throws IOException{
         //initialize game
         CardDecks mainDeck = new CardDecks("Main");
 
-        ArrayList<ProgressToken> res = new ArrayList<>();
-        ProgressTokens progressTokens = new ProgressTokens();
-        res.addAll(progressTokens.TOKENS);
+        ArrayList<ProgressToken> res = new ArrayList<>(ProgressTokens.TOKENS);
         Collections.shuffle(res);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("gameView.fxml"));
-        root=loader.load();
+        Parent root = loader.load();
         stage = (javafx.stage.Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
 
@@ -168,7 +170,7 @@ public class ChoixpersoControleur implements Initializable {
 
 
     public void retour (Event event) throws  IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Menu.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
 
