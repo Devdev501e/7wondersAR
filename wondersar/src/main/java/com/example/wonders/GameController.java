@@ -801,14 +801,11 @@ public class GameController {
         TranslateTransition translate=new TranslateTransition();
         translate.setNode(animationLeft);
         translate.setDuration(Duration.millis(1000));
+        translate.getDuration();
         translate.setByX(230);
         translate.setByY(80);
         translate.setCycleCount(1);
-        translate.setAutoReverse(true);
-
         translate.play();
-
-
 
 
         player.addCard(leftDeckCard, allPlayers);
