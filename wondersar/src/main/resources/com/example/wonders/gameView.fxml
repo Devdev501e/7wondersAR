@@ -59,12 +59,13 @@
                   <Label fx:id="playerRightMaterial" layoutX="543.0" layoutY="165.0" prefHeight="17.0" prefWidth="66.0" />
                   <Label fx:id="playerRightScience" layoutX="655.0" layoutY="165.0" prefHeight="17.0" prefWidth="83.0" />
                   <Label fx:id="playerRightShields" layoutX="591.0" layoutY="187.0" prefHeight="17.0" prefWidth="104.0" />
-                  <ImageView fx:id="animationLeft" fitHeight="131.0" fitWidth="93.0" layoutX="115.0" layoutY="314.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="animationLeft" fitHeight="128.0" fitWidth="89.0" layoutX="118.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="leftDeckCardImage" fitHeight="128.0" fitWidth="99.0" layoutX="118.0" layoutY="316.0" onMouseClicked="#onButtonLeftDeck" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-back/card-back-question.png" />
                      </image>
                   </ImageView>
+                  <ImageView fx:id="animationMain" fitHeight="129.0" fitWidth="88.0" layoutX="339.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="mainDeckImage" fitHeight="128.0" fitWidth="99.0" layoutX="339.0" layoutY="226.0" onMouseClicked="#onButtonMainDeck" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/cards/card-back/card-back-question.png" />

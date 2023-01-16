@@ -4,7 +4,9 @@ package com.example.wonders;
 
 import domain.*;
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -199,6 +201,8 @@ public class GameController {
     ImageView animationLeft;
     @FXML
     ImageView animationRight;
+    @FXML
+    ImageView animationMain;
 
 
     //-------------------------------------------needed variables
@@ -221,6 +225,7 @@ public class GameController {
     private Button retour;
     ArrayList<String> cardChoices;
     ArrayList<String> cardDescription;
+
 
     boolean power;
 
@@ -798,14 +803,21 @@ public class GameController {
 
     public void onButtonLeftDeck() throws IOException {
         animationLeft.setImage(leftDeckCardImage.getImage());
-        TranslateTransition translate=new TranslateTransition();
-        translate.setNode(animationLeft);
-        translate.setDuration(Duration.millis(1000));
-        translate.getDuration();
-        translate.setByX(230);
-        translate.setByY(80);
-        translate.setCycleCount(1);
-        translate.play();
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(1),animationLeft );
+        transition.setToX(230);
+        transition.setToY(80);
+        transition.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                TranslateTransition retour=new TranslateTransition(Duration.seconds(1),animationLeft);
+                animationLeft.setImage(null);
+                retour.setToX(0);
+                retour.setToY(0);
+                retour.play();
+            }
+        });
+
+        transition.play();
 
 
         player.addCard(leftDeckCard, allPlayers);
@@ -832,15 +844,23 @@ public class GameController {
     }
 
     public void onButtonRightDeck() throws IOException {
+
         animationRight.setImage(rightDeckCardImage.getImage());
-        TranslateTransition translate=new TranslateTransition();
-        translate.setNode(animationRight);
-        translate.setDuration(Duration.millis(1000));
-        translate.setByX(-230);
-        translate.setByY(-80);
-        translate.setCycleCount(1);
-        translate.setAutoReverse(true);
-        translate.play();
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(1),animationRight );
+        transition.setToX(-230);
+        transition.setToY(80);
+        transition.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                TranslateTransition retour=new TranslateTransition(Duration.seconds(0.1),animationRight);
+                animationRight.setImage(null);
+                retour.setToX(0);
+                retour.setToY(-0);
+                retour.play();
+            }
+        });
+
+        transition.play();
         player.addCard(rightDeckCard, allPlayers);
 
         options.get(1).chooseCard();
@@ -906,6 +926,26 @@ public class GameController {
     }
 
     public void onButtonMainDeck() throws IOException {
+
+        Image mainDeckFrontPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(mainDeckCard.front.imageResource)));
+        animationMain.setImage( mainDeckFrontPNG);
+
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(1),animationMain );
+        transition.setToX(0);
+        transition.setToY(160);
+        transition.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                TranslateTransition retour=new TranslateTransition(Duration.seconds(0.1),animationMain);
+                animationMain.setImage(null);
+                retour.setToX(0);
+                retour.setToY(-0);
+                retour.play();
+            }
+        });
+
+        transition.play();
+
         player.addCard(mainDeckCard, allPlayers);
         mainDeck.chooseCard();
 
