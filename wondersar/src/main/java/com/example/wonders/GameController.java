@@ -219,6 +219,8 @@ public class GameController {
     private int countCards;
     private int countDraw;
     private int choice;
+    boolean additionalChoice;
+
     @FXML
     private Button retour;
     ArrayList<String> cardChoices;
@@ -228,10 +230,12 @@ public class GameController {
     boolean power;
 
 
-    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<ProgressToken> progressTokens, int turn, boolean beggining, int cardsDrawn, int cardsToDraw) {
+    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<ProgressToken> progressTokens, int turn, String beggining, int cardsDrawn, int cardsToDraw, boolean additionalChoice) {
         //initialize table game
         countCards = cardsDrawn;
         countDraw = cardsToDraw;
+
+
 
         retour.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Back.css")).toExternalForm());
         options = new ArrayList<>();
@@ -247,7 +251,7 @@ public class GameController {
 
         System.out.println(allPlayers);
 
-        if (beggining) {
+        if (!beggining.equals("false")) {
             players.get(turn).getAllTokens().add(ProgressToken.Ingeniery);
             allPlayerNames.getItems().addAll(playerNames);
             allPlayers.addAll(players);
@@ -299,6 +303,9 @@ public class GameController {
             redLabels.add(centurionCount);
             redLabels.add(barbarianCount);
             redLabels.add(archerCount);
+            if ((beggining.equals("save")) && (!additionalChoice)) {
+                endButton.setDisable(false);
+            }
         }
 
         player = players.get(turn);
@@ -374,6 +381,13 @@ public class GameController {
         //set up tab2
         tab2.setText("None");
         playerNameTab.setText("No one selected yet ! Please use the choice box");
+
+        if (countDraw == countCards) {
+            System.out.println("drawn: "+countCards);
+            System.out.println("to draw: "+countDraw);
+
+            cardDisable(true);
+        }
     }
 
     public void onPlayerNames(Event event) {
@@ -823,10 +837,10 @@ public class GameController {
         countCards++;
 
         power = buidPiece(player.getWonderContruction(),player);
-        boolean additionalchoice = false;
+        additionalChoice = false;
         if (power) {
             endButton.setDisable(true);
-            additionalchoice = buildPower(player);
+            additionalChoice = buildPower(player);
             powerChoiceBox.setValue(null);
         }
 
@@ -834,10 +848,10 @@ public class GameController {
 
         resetCardImage(0);
 
-        if (!additionalchoice) {
+        if (!additionalChoice) {
             endButton.setDisable(false);
         }
-        if (countDraw >= countCards) {
+        if (countDraw == countCards) {
             cardDisable(true);
         }
     }
@@ -863,10 +877,10 @@ public class GameController {
         countCards++;
 
         power = buidPiece(player.getWonderContruction(),player);
-        boolean additionalchoice = false;
+        additionalChoice = false;
         if (power) {
             endButton.setDisable(true);
-            additionalchoice = buildPower(player);
+            additionalChoice = buildPower(player);
             powerChoiceBox.setValue(null);
         }
 
@@ -874,7 +888,7 @@ public class GameController {
 
         resetCardImage(1);
 
-        if ((countDraw >= countCards) && (!additionalchoice)) {
+        if ((countDraw == countCards) && (!additionalChoice)) {
             cardDisable(true);
             endButton.setDisable(false);
         }
@@ -947,10 +961,10 @@ public class GameController {
             infoBoxLabel.setText("Card Picked : "+mainDeckCard.front.cardDisplayName);
         }
         power = buidPiece(player.getWonderContruction(),player);
-        boolean additionalchoice = false;
+        additionalChoice = false;
         if (power) {
             endButton.setDisable(true);
-            additionalchoice = buildPower(player);
+            additionalChoice = buildPower(player);
             powerChoiceBox.setValue(null);
         }
 
@@ -958,7 +972,7 @@ public class GameController {
 
         resetCardImage(2);
 
-        if ((countDraw >= countCards) && (!additionalchoice)) {
+        if ((countDraw == countCards) && (!additionalChoice)) {
             cardDisable(true);
             endButton.setDisable(false);
         }
@@ -1063,7 +1077,7 @@ public class GameController {
         else {
             playerTurn++;
         }
-        startTurn(allPlayers, mainDeck, res, playerTurn, false, 0, 1);
+        startTurn(allPlayers, mainDeck, res, playerTurn, "false", 0, 1, false);
     }
 
     public void resetPlayerViewBlank() {
@@ -1105,7 +1119,7 @@ public class GameController {
         combats.add(combat1);
         combats.add(combat2);
         combats.add(combat3);
-        if (allPlayers.size() >= 4) {
+        if (allPlayers.size() == 4) {
             combat4.setImage(tokenPeace);
             combats.add(combat4);
         }
@@ -1431,7 +1445,7 @@ public class GameController {
         infoBoxOutline.setVisible(true);
         powerChoiceBox.setDisable(false);
         power = false;
-        boolean additionalChoice = false;
+        additionalChoice = false;
         switch (wonder) {
             case Ephese:
                 infoBoxLabel.setText("Power: t'as pris la carte "+mainDeckCard.front.cardDisplayName);
@@ -1575,7 +1589,7 @@ public class GameController {
 
 
         MenuControleur menuControleur = loader.getController();
-        menuControleur.sauvegarde(options,allPlayers,cardChoices,res,mainDeck,playerTurn,countCards,countDraw);
+        menuControleur.sauvegarde(options,allPlayers,cardChoices,res,mainDeck,playerTurn,countCards,countDraw,additionalChoice);
         stage.setScene(scene);
         stage.show();
     }

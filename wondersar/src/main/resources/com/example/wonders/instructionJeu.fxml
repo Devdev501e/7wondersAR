@@ -55,7 +55,7 @@
       <Label fx:id="expLabel" layoutX="612.0" layoutY="479.0" prefHeight="51.0" prefWidth="168.0" text="Ici vous pourez choisir quel vue de joueur voit" textFill="#f5f5f5" wrapText="true" />
       <Label fx:id="expLabel1" layoutX="451.0" layoutY="297.0" text="Les jetons guerre" textFill="#f5f5f5" />
       <Label fx:id="expLabel2" layoutX="598.0" layoutY="249.0" prefHeight="39.0" prefWidth="168.0" text="Une petite description du joueur a votre droite" textFill="#f5f5f5" wrapText="true" />
-      <Label fx:id="expLabel4" layoutX="180.0" layoutY="25.0" prefHeight="39.0" prefWidth="226.0" text="Ce tab permet de voir les information spécifique d'un joueur" wrapText="true" />
+      <Label fx:id="expLabel4" layoutX="188.0" layoutY="31.0" prefHeight="39.0" prefWidth="226.0" text="Ce tab permet de voir les information spécifique d'un joueur" wrapText="true" />
       <Label fx:id="expLabel5" layoutX="224.0" layoutY="424.0" prefHeight="39.0" prefWidth="119.0" text="Pour choisir la carte, appuyer sur l'image" textFill="#f5f5f5" wrapText="true" />
       <Label fx:id="expLabel3" layoutX="312.0" layoutY="363.0" prefHeight="39.0" prefWidth="162.0" text="Quand vous devez choisir, appuyer sur l'un d'entre eux" textFill="#f5f5f5" wrapText="true" />
       <Button fx:id="buttonRightToken" layoutX="665.0" layoutY="136.0" mnemonicParsing="false" onAction="#onRightToken" text="&gt;" />

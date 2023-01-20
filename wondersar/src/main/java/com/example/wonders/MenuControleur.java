@@ -41,7 +41,9 @@ public class MenuControleur implements Initializable {
     ArrayList<Player> allPlayers = new ArrayList<>();
     ArrayList<ProgressToken> res;
     int countCards;
-    private   int countDraw;
+    private int countDraw;
+
+    private boolean additionalChoice;
 
     ArrayList<String> cardChoices;
 
@@ -49,21 +51,16 @@ public class MenuControleur implements Initializable {
 
 //---------------------------------------------------------------------------------------------
 
-    public void sauvegarde(ArrayList<CardDecks> options1,
-                            ArrayList<Player> allPlayers1,
-                            ArrayList<String> cardChoices1,
-                           ArrayList<ProgressToken> res1,
-                         CardDecks mainDeck1,
-                            int playerTurn1,
-                            int countCards1,
-                            int countDraw1
-                           ){
+    public void sauvegarde(ArrayList<CardDecks> options1, ArrayList<Player> allPlayers1, ArrayList<String> cardChoices1,
+                           ArrayList<ProgressToken> res1, CardDecks mainDeck1, int playerTurn1, int countCards1,
+                           int countDraw1, boolean additionalChoice1){
 
         options=options1;
         allPlayers=allPlayers1;
         System.out.println(allPlayers);
-         res =res1;
+        res =res1;
         cardChoices=cardChoices1;
+        additionalChoice = additionalChoice1;
 
         mainDeck=mainDeck1;
         playerTurn=playerTurn1;
@@ -84,7 +81,7 @@ public class MenuControleur implements Initializable {
 
 
            GameController gameController = loader.getController();
-           gameController.startTurn(allPlayers, mainDeck, res, playerTurn, true, countCards, countDraw);
+           gameController.startTurn(allPlayers, mainDeck, res, playerTurn, "save", countCards, countDraw, additionalChoice);
 
 
         stage.setScene(scene);
@@ -111,7 +108,7 @@ public class MenuControleur implements Initializable {
         scene = new Scene(root);
         if(allPlayers.size()!=0) {
             InstructionJeu instructionJeu = loader.getController();
-            instructionJeu.sauvegarde(options, allPlayers, cardChoices, res, mainDeck, playerTurn, countCards, countDraw);
+            instructionJeu.sauvegarde(options, allPlayers, cardChoices, res, mainDeck, playerTurn, countCards, countDraw, additionalChoice);
         }
 
         stage.setScene(scene);

@@ -112,7 +112,8 @@ public class InstructionJeu implements Initializable {
     ArrayList<Player> allPlayers = new ArrayList<>();
     ArrayList<ProgressToken> resPlayer;
     int countCards;
-    private   int countDraw;
+    private int countDraw;
+    private boolean additionalChoice;
 
     ArrayList<String> cardChoices;
 
@@ -121,7 +122,7 @@ public class InstructionJeu implements Initializable {
 //---------------------------------------------------------------------------------------------
     public void sauvegarde(ArrayList<CardDecks> options1, ArrayList<Player> allPlayers1, ArrayList<String> cardChoices1,
                            ArrayList<ProgressToken> res1, CardDecks mainDeck1, int playerTurn1, int countCards1,
-                           int countDraw1) {
+                           int countDraw1, boolean additionalChoice1) {
         options=options1;
         allPlayers=allPlayers1;
         resPlayer =res1;
@@ -131,6 +132,7 @@ public class InstructionJeu implements Initializable {
         playerTurn=playerTurn1;
         countCards =countCards1;
         countDraw=countDraw1;
+        additionalChoice = additionalChoice1;
     }
 
     @Override
@@ -298,7 +300,7 @@ public class InstructionJeu implements Initializable {
 
      if(allPlayers.size()!=0) {
          MenuControleur menuControleur = loader.getController();
-         menuControleur.sauvegarde(options, allPlayers, cardChoices, res, mainDeck, playerTurn, countCards, countDraw);
+         menuControleur.sauvegarde(options, allPlayers, cardChoices, res, mainDeck, playerTurn, countCards, countDraw, additionalChoice);
      }
 
         stage.setScene(scene);
