@@ -33,8 +33,6 @@
       <Rectangle fx:id="outlineWonder" arcHeight="5.0" arcWidth="5.0" fill="#ffffffe5" height="102.0" layoutX="146.0" layoutY="227.0" stroke="BLACK" strokeType="INSIDE" width="489.0" />
       <Label fx:id="joueurDescription" layoutX="84.0" layoutY="119.0" prefHeight="82.0" prefWidth="612.0" textFill="WHITE" wrapText="true" />
       <Label fx:id="tokenDescription" layoutX="271.0" layoutY="140.0" prefHeight="70.0" prefWidth="355.0" wrapText="true" />
-      <Button fx:id="buttonRightToken" layoutX="665.0" layoutY="136.0" mnemonicParsing="false" onAction="#onRightToken" text="&gt;" />
-      <Button fx:id="buttonLeftToken" layoutX="97.0" layoutY="137.0" mnemonicParsing="false" onAction="#onLeftToken" text="&lt;" />
       <ImageView fx:id="imageWonder" fitHeight="82.0" fitWidth="107.0" layoutX="152.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="nameWonder" layoutX="254.0" layoutY="234.0">
          <font>
@@ -43,10 +41,26 @@
       <Label fx:id="descriptionWonder" layoutX="265.0" layoutY="257.0" prefHeight="70.0" prefWidth="355.0" wrapText="true" />
       <Label fx:id="finDescription" layoutX="124.0" layoutY="280.0" prefHeight="174.0" prefWidth="538.0" textFill="WHITE" wrapText="true" />
       <Button fx:id="retour" layoutX="34.0" layoutY="485.0" mnemonicParsing="false" onAction="#onRetour" prefHeight="39.0" prefWidth="99.0" />
-      <Button fx:id="buttonLeftWonder" layoutX="97.0" layoutY="253.0" mnemonicParsing="false" onAction="#onLeftWonder" text="&lt;" />
-      <Button fx:id="buttonRightWonder" layoutX="665.0" layoutY="254.0" mnemonicParsing="false" onAction="#onRightWonder" text="&gt;" />
       <Button fx:id="page2" layoutX="379.0" layoutY="479.0" mnemonicParsing="false" onAction="#onButton2" text="2" />
       <Button fx:id="page1" layoutX="356.0" layoutY="479.0" mnemonicParsing="false" onAction="#onButton1" text="1" />
       <Button fx:id="page3" layoutX="402.0" layoutY="479.0" mnemonicParsing="false" onAction="#onButton3" text="3" />
+      <Button layoutX="425.0" layoutY="479.0" mnemonicParsing="false" onAction="#onButton4" text="4" />
+      <ImageView fx:id="vueJeu" fitHeight="459.0" fitWidth="714.0" layoutX="85.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
+      <Rectangle fx:id="outlineExp" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="200.0" layoutX="496.0" layoutY="50.0" stroke="#0013ff" strokeType="INSIDE" strokeWidth="3.0" width="200.0" />
+      <Rectangle fx:id="outlineExp5" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="39.0" layoutX="124.0" layoutY="33.0" stroke="#e900ff" strokeType="INSIDE" strokeWidth="3.0" width="51.0" />
+      <Rectangle fx:id="outlineExp4" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="132.0" layoutX="154.0" layoutY="297.0" stroke="#f6ff00" strokeType="INSIDE" strokeWidth="3.0" width="107.0" />
+      <Rectangle fx:id="outlineExp1" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="51.0" layoutX="585.0" layoutY="429.0" stroke="#e900ff" strokeType="INSIDE" strokeWidth="3.0" width="144.0" />
+      <Rectangle fx:id="outlineExp3" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="132.0" layoutX="305.0" layoutY="231.0" stroke="#00ff27" strokeType="INSIDE" strokeWidth="3.0" width="51.0" />
+      <Rectangle fx:id="outlineExp2" arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="57.0" layoutX="424.0" layoutY="238.0" stroke="#f50000" strokeType="INSIDE" strokeWidth="3.0" width="60.0" />
+      <Label fx:id="expLabel" layoutX="612.0" layoutY="479.0" prefHeight="51.0" prefWidth="168.0" text="Ici vous pourez choisir quel vue de joueur voit" textFill="#f5f5f5" wrapText="true" />
+      <Label fx:id="expLabel1" layoutX="451.0" layoutY="297.0" text="Les jetons guerre" textFill="#f5f5f5" />
+      <Label fx:id="expLabel2" layoutX="598.0" layoutY="249.0" prefHeight="39.0" prefWidth="168.0" text="Une petite description du joueur a votre droite" textFill="#f5f5f5" wrapText="true" />
+      <Label fx:id="expLabel4" layoutX="180.0" layoutY="25.0" prefHeight="39.0" prefWidth="226.0" text="Ce tab permet de voir les information spécifique d'un joueur" wrapText="true" />
+      <Label fx:id="expLabel5" layoutX="224.0" layoutY="424.0" prefHeight="39.0" prefWidth="119.0" text="Pour choisir la carte, appuyer sur l'image" textFill="#f5f5f5" wrapText="true" />
+      <Label fx:id="expLabel3" layoutX="312.0" layoutY="363.0" prefHeight="39.0" prefWidth="162.0" text="Quand vous devez choisir, appuyer sur l'un d'entre eux" textFill="#f5f5f5" wrapText="true" />
+      <Button fx:id="buttonRightToken" layoutX="665.0" layoutY="136.0" mnemonicParsing="false" onAction="#onRightToken" text="&gt;" />
+      <Button fx:id="buttonLeftWonder" layoutX="97.0" layoutY="253.0" mnemonicParsing="false" onAction="#onLeftWonder" text="&lt;" />
+      <Button fx:id="buttonLeftToken" layoutX="97.0" layoutY="137.0" mnemonicParsing="false" onAction="#onLeftToken" text="&lt;" />
+      <Button fx:id="buttonRightWonder" layoutX="665.0" layoutY="254.0" mnemonicParsing="false" onAction="#onRightWonder" text="&gt;" />
    </children>
 </AnchorPane>

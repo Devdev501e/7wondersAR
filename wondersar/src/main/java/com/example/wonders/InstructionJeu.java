@@ -58,6 +58,36 @@ public class InstructionJeu implements Initializable {
     private Button buttonRightWonder;
 
     @FXML
+    private Label expLabel;
+    @FXML
+    private Label expLabel1;
+    @FXML
+    private Label expLabel2;
+    @FXML
+    private Label expLabel3;
+    @FXML
+    private Label expLabel4;
+    @FXML
+    private Label expLabel5;
+    @FXML
+    private Rectangle outlineExp;
+    @FXML
+    private Rectangle outlineExp1;
+    @FXML
+    private Rectangle outlineExp2;
+    @FXML
+    private Rectangle outlineExp3;
+    @FXML
+    private Rectangle outlineExp4;
+    @FXML
+    private Rectangle outlineExp5;
+    private ArrayList<Label> expLabels = new ArrayList<>();
+    private ArrayList<Rectangle> expOutlines = new ArrayList<>();
+    private Image vuePNG = new Image(getClass().getResourceAsStream("images/imagejeu/game_view.png"));
+    @FXML
+    private ImageView vueJeu;
+
+    @FXML
     private ImageView image2Joueur;
     private final Image joueurPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/imagejeu/partie2joueur.png")));
     @FXML
@@ -90,35 +120,39 @@ public class InstructionJeu implements Initializable {
 
 
 //---------------------------------------------------------------------------------------------
-public void sauvegarde(ArrayList<CardDecks> options1,
-                       ArrayList<Player> allPlayers1,
-                       ArrayList<String> cardChoices1,
-                       ArrayList<ProgressToken> res1,
-                       CardDecks mainDeck1,
-                       int playerTurn1,
-                       int countCards1,
-                       int countDraw1
-){
+    public void sauvegarde(ArrayList<CardDecks> options1, ArrayList<Player> allPlayers1, ArrayList<String> cardChoices1,
+                           ArrayList<ProgressToken> res1, CardDecks mainDeck1, int playerTurn1, int countCards1,
+                           int countDraw1) {
+        options=options1;
+        allPlayers=allPlayers1;
+        resPlayer =res1;
+        cardChoices=cardChoices1;
 
-    options=options1;
-    allPlayers=allPlayers1;
-    System.out.println(allPlayers);
-    resPlayer =res1;
-    cardChoices=cardChoices1;
+        mainDeck=mainDeck1;
+        playerTurn=playerTurn1;
+        countCards =countCards1;
+        countDraw=countDraw1;
+    }
 
-    mainDeck=mainDeck1;
-    playerTurn=playerTurn1;
-    countCards =countCards1;
-    countDraw=countDraw1;
-
-
-
-
-}
     @Override
     public void initialize (URL url, ResourceBundle resourceBundle) {
         retour.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Back.css")).toExternalForm());
+        expOutlines.add(outlineExp);
+        expOutlines.add(outlineExp1);
+        expOutlines.add(outlineExp2);
+        expOutlines.add(outlineExp3);
+        expOutlines.add(outlineExp4);
+        expOutlines.add(outlineExp5);
+
+        expLabels.add(expLabel);
+        expLabels.add(expLabel1);
+        expLabels.add(expLabel2);
+        expLabels.add(expLabel3);
+        expLabels.add(expLabel4);
+        expLabels.add(expLabel5);
+
         page2Visible(false);
+        page4Visible(false);
         wonders.addAll(Arrays.asList(Wonder.values()));
 
         res.addAll(ProgressTokens.TOKENS);
@@ -135,6 +169,8 @@ public void sauvegarde(ArrayList<CardDecks> options1,
         imageFin.setImage(null);
         finDescription.setText("");
         joueurDescription.setText("");
+        page4Visible(false);
+        vueJeu.setImage(null);
 
         imagePartie.setImage(partiePNG);
         labelTitle.setText("Tour d'une partie : ");
@@ -145,6 +181,8 @@ public void sauvegarde(ArrayList<CardDecks> options1,
         imageWonder.setImage(null);
         imageToken.setImage(null);
         imagePartie.setImage(null);
+        page4Visible(false);
+        vueJeu.setImage(null);
 
         labelTitle.setText("Info suplémentaire : ");
         image2Joueur.setImage(joueurPNG);
@@ -174,11 +212,28 @@ public void sauvegarde(ArrayList<CardDecks> options1,
         imageFin.setImage(null);
         finDescription.setText("");
         joueurDescription.setText("");
+        page4Visible(false);
+        vueJeu.setImage(null);
 
         labelTitle.setText("Jetons & Merveilles : ");
 
         setToken(currentRes);
         setWonder(currentWonder);
+    }
+
+    public void onButton4() {
+        page2Visible(false);
+        imageWonder.setImage(null);
+        imageToken.setImage(null);
+        image2Joueur.setImage(null);
+        imageFin.setImage(null);
+        finDescription.setText("");
+        joueurDescription.setText("");
+        imagePartie.setImage(null);
+
+        page4Visible(true);
+        vueJeu.setImage(vuePNG);
+        labelTitle.setText("Vue du Jeu");
     }
 
     public void onLeftToken() {
@@ -226,6 +281,13 @@ public void sauvegarde(ArrayList<CardDecks> options1,
         descriptionWonder.setText("");
         tokenName.setText("");
         tokenDescription.setText("");
+    }
+
+    public void page4Visible(boolean visible) {
+        for (int i = 0; i < 6; i++) {
+            expLabels.get(i).setVisible(visible);
+            expOutlines.get(i).setVisible(visible);
+        }
     }
 
     public void onRetour(Event event) throws IOException {
