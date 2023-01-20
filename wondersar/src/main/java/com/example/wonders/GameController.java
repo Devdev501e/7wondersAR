@@ -228,9 +228,9 @@ public class GameController {
     ArrayList<String> cardChoices;
     ArrayList<String> cardDescription;
 
-
     boolean power;
 
+    //-------------------------------------------
 
     public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<ProgressToken> progressTokens, int turn, String beggining, int cardsDrawn, int cardsToDraw, boolean additionalChoice) {
         //initialize table game
@@ -390,6 +390,668 @@ public class GameController {
         }
     }
 
+
+    // choose card methods
+    public void onButtonLeftDeck() throws IOException {
+        animationLeft.setImage(leftDeckCardImage.getImage());
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(1),animationLeft );
+        transition.setToX(230);
+        transition.setToY(80);
+        transition.setOnFinished(event -> {
+            TranslateTransition retour = new TranslateTransition(Duration.seconds(1), animationLeft);
+            animationLeft.setImage(null);
+            retour.setToX(0);
+            retour.setToY(0);
+            retour.play();
+        });
+
+        transition.play();
+
+
+        player.addCard(leftDeckCard, allPlayers);
+        options.get(0).chooseCard();
+        countCards++;
+
+        power = buidPiece(player.getWonderContruction(),player);
+        additionalChoice = false;
+        if (power) {
+            endButton.setDisable(true);
+            additionalChoice = buildPower(player);
+            powerChoiceBox.setValue(null);
+        }
+
+        checkChosenCard(player, leftDeckCard);
+
+        resetCardImage(0);
+
+        if (!additionalChoice) {
+            endButton.setDisable(false);
+        }
+        if (countDraw == countCards) {
+            cardDisable(true);
+        }
+    }
+
+    public void onButtonRightDeck() throws IOException {
+
+        animationRight.setImage(rightDeckCardImage.getImage());
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(1),animationRight );
+        transition.setToX(-230);
+        transition.setToY(80);
+        transition.setOnFinished(event -> {
+            TranslateTransition retour=new TranslateTransition(Duration.seconds(0.1),animationRight);
+            animationRight.setImage(null);
+            retour.setToX(0);
+            retour.setToY(-0);
+            retour.play();
+        });
+
+        transition.play();
+
+        player.addCard(rightDeckCard, allPlayers);
+        options.get(1).chooseCard();
+        countCards++;
+
+        power = buidPiece(player.getWonderContruction(),player);
+        additionalChoice = false;
+        if (power) {
+            endButton.setDisable(true);
+            additionalChoice = buildPower(player);
+            powerChoiceBox.setValue(null);
+        }
+
+        checkChosenCard(player, rightDeckCard);
+
+        resetCardImage(1);
+
+        if ((countDraw == countCards) && (!additionalChoice)) {
+            cardDisable(true);
+            endButton.setDisable(false);
+        }
+    }
+
+    public void onButtonMainDeck() throws IOException {
+        Image mainDeckFrontPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(mainDeckCard.front.imageResource)));
+        animationMain.setImage( mainDeckFrontPNG);
+
+        TranslateTransition transition = new TranslateTransition(Duration.seconds(1),animationMain );
+        transition.setToX(0);
+        transition.setToY(160);
+        transition.setOnFinished(event -> {
+            TranslateTransition retour=new TranslateTransition(Duration.seconds(0.1),animationMain);
+            animationMain.setImage(null);
+            retour.setToX(0);
+            retour.setToY(-0);
+            retour.play();
+        });
+
+        transition.play();
+
+        player.addCard(mainDeckCard, allPlayers);
+        mainDeck.chooseCard();
+
+        countCards++;
+        if (!player.getChat()) {
+            infoBoxLabel.setText("Card Picked : "+mainDeckCard.front.cardDisplayName);
+        }
+        power = buidPiece(player.getWonderContruction(),player);
+        additionalChoice = false;
+        if (power) {
+            endButton.setDisable(true);
+            additionalChoice = buildPower(player);
+            powerChoiceBox.setValue(null);
+        }
+
+        checkChosenCard(player, mainDeckCard);
+
+        resetCardImage(2);
+
+        if ((countDraw == countCards) && (!additionalChoice)) {
+            cardDisable(true);
+            endButton.setDisable(false);
+        }
+    }
+
+
+
+    // choose progress tokens
+    public void onProgress0() {
+        player.getAllTokens().add(res.get(0));
+
+        if (res.get(0) == ProgressToken.Economy) {
+            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
+        }
+        else if (res.get(0) == ProgressToken.Tactic) {
+            player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
+        }
+
+        res.remove(0);
+        for (int i = 0; i < progressImages.size(); i++) {
+            Image resImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(res.get(i).imageResource)));
+            progressImages.get(i).setImage(resImage);
+        }
+        disableProgressChoice(true);
+        endButton.setDisable(false);
+    }
+
+    public void onProgress1() {
+        player.getAllTokens().add(res.get(1));
+        if (res.get(1) == ProgressToken.Economy) {
+            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
+        }
+        else if (res.get(1) == ProgressToken.Tactic) {
+            player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
+        }
+        res.remove(1);
+        for (int i = 0; i < progressImages.size(); i++) {
+            Image resImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(res.get(i).imageResource)));
+            progressImages.get(i).setImage(resImage);
+        }
+
+        disableProgressChoice(true);
+        endButton.setDisable(false);
+    }
+
+    public void onProgress2() {
+        player.getAllTokens().add(res.get(2));
+        if (res.get(2) == ProgressToken.Economy) {
+            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
+        }
+        else if (res.get(2) == ProgressToken.Tactic) {
+            player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
+        }
+        res.remove(2);
+        for (int i = 0; i < progressImages.size(); i++) {
+            Image resImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(res.get(i).imageResource)));
+            progressImages.get(i).setImage(resImage);
+        }
+        disableProgressChoice(true);
+        endButton.setDisable(false);
+    }
+
+    public void onProgress3() {
+        player.getAllTokens().add(res.get(3));
+        infoBoxOutline.setVisible(true);
+        infoBoxLabel.setText(res.get(3).effectDescription);
+        if (res.get(3) == ProgressToken.Economy) {
+            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
+        }
+        else if (res.get(3) == ProgressToken.Tactic) {
+            player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
+        }
+        res.remove(3);
+        disableProgressChoice(true);
+        endButton.setDisable(false);
+    }
+
+
+
+    // actions par rapport au cartes
+    public void checkChosenCard(Player player, Card card) {
+        if (player.getAllTokens().size() == 0) {
+            cardDisable(true);
+        }
+        else {
+            for (int i = 0; i < player.getAllTokens().size(); i++) {
+                ProgressToken pt = player.getAllTokens().get(i);
+                if (!player.getTokenIgnore().contains(i)) {
+                    boolean found = getScienceEffectDuringGame(pt, leftDeckCard);
+                    if (found) {
+                        player.getTokenIgnore().add(i);
+                        break;
+                    }
+                }
+            }
+        }
+
+        checkCardCorn(card.front);
+        canGetToken();
+    }
+
+    // pour guerre
+    public void checkCardCorn(CardType card) {
+        if (card.cardCategory == CardCategory.WarCard) {
+            int count = 0;
+            for (ImageView combat : combats) {
+                if (count == card.cornCount) {
+                    break;
+                }
+                if (combat.getImage() == tokenPeace) {
+                    combat.setImage(tokenWar);
+                    count++;
+                }
+
+            }
+            String warTime = "no";
+            for (int i = 0; i < combats.size(); i++) {
+                if (combats.get(i).getImage() == tokenPeace) {
+                    warTime = "false";
+                    break;
+                }
+                if (i == combats.size()-1) {
+                    warTime = "true";
+                }
+            }
+            if(warTime.equals("true")) {
+                infoBoxOutline.setVisible(true);
+                infoBoxLabel.setText("Bataille ! ");
+                battle();
+                resetTokens();
+            }
+        }
+    }
+    public void battle() {
+        if (allPlayers.size() == 2) {
+            if (allPlayers.get(0).getHand().getShieldWar() > allPlayers.get(1).getHand().getShieldWar()) {
+                infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+allPlayers.get(0).getName()+" est le gagnant");
+                if (allPlayers.get(0).getHand().getShieldWar() > 2*allPlayers.get(1).getHand().getShieldWar()) {
+                    allPlayers.get(0).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+6);
+                }
+                else {
+                    allPlayers.get(0).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+3);
+                }
+            }
+            else if (allPlayers.get(1).getHand().getShieldWar() > allPlayers.get(0).getHand().getShieldWar()) {
+                infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+allPlayers.get(1).getName()+" est le gagnant");
+                if (allPlayers.get(1).getHand().getShieldWar() > 2*allPlayers.get(0).getHand().getShieldWar()) {
+                    allPlayers.get(1).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+6);
+                }
+                else {
+                    allPlayers.get(1).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+3);
+                }
+            }
+        }
+        else {
+            for (int i = 0; i < allPlayers.size(); i++) {
+                Player playerLeft = (i==0)? allPlayers.get(allPlayers.size()-1):allPlayers.get(i-1);
+                Player interestingPlayer = allPlayers.get(i);
+                Player playerRight = (i == allPlayers.size()-1)? allPlayers.get(0):allPlayers.get(i+1);
+
+                if (interestingPlayer.getHand().getShieldWar() > playerLeft.getHand().getShieldWar()) {
+                    interestingPlayer.getHand().setMilitaryPoints(interestingPlayer.getHand().getMilitaryPoints()+3);
+                }
+                if (interestingPlayer.getHand().getShieldWar() > playerRight.getHand().getShieldWar()) {
+                    interestingPlayer.getHand().setMilitaryPoints(interestingPlayer.getHand().getMilitaryPoints()+3);
+                }
+                if ((interestingPlayer.getHand().getShieldWar() > playerLeft.getHand().getShieldWar()) || (interestingPlayer.getHand().getShieldWar() > playerRight.getHand().getShieldWar())) {
+                    infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+interestingPlayer.getName()+" est le gagnant");
+                }
+            }
+        }
+
+        for (Player allPlayer : allPlayers) {
+            allPlayer.getHand().getShieldCards()[1] = 0;
+            allPlayer.getHand().getShieldCards()[2] = 0;
+        }
+    }
+
+    //pour science
+    public void canGetToken() {
+        int count = 0;
+        for (int i = 0; i < player.getHand().getScience().length; i++) {
+            if (player.getHand().getScience()[i] == 2) {
+                player.getHand().getScience()[i] = 0;
+                infoBoxLabel.setText("Tu peux choisir un jeton progres");
+                disableProgressChoice(false);
+                endButton.setDisable(true);
+                break;
+            }
+            if (player.getHand().getScience()[i] == 1) {
+                count++;
+            }
+        }
+        if (count >= 3) {
+            for (int i = 0; i < player.getHand().getScience().length; i++) {
+                player.getHand().getScience()[i] -= 1;
+                disableProgressChoice(false);
+            }
+            infoBoxLabel.setText("Tu peux choisir un jeton progres");
+        }
+    }
+    public boolean getScienceEffectDuringGame(ProgressToken progressToken, Card cardChosen) {
+        boolean found = false;
+
+        switch (progressToken) {
+            case Science:
+                if (cardChosen.front.cardCategory == CardCategory.ProgressCard) {
+                    countDraw++;
+                    found = true;
+                    infoBoxLabel.setText("choose another card");
+                }
+                break;
+            case Jewelry:
+                if ((cardChosen.front.material == Material.Stone) || (cardChosen.front.material == Material.Gold)) {
+                    countDraw++;
+                    found = true;
+                    infoBoxLabel.setText("choose another card");
+                }
+                break;
+            case Urbanism:
+                if ((cardChosen.front.material == Material.Wood) || (cardChosen.front.material == Material.Brick)) {
+                    countDraw++;
+                    found = true;
+                    infoBoxLabel.setText("choose another card");
+                }
+                break;
+            case Propaganda:
+                if (cardChosen.front.cornCount != 0) {
+                    countDraw++;
+                    found = true;
+                    infoBoxLabel.setText("choose another card");
+                }
+                break;
+            case ArtsAndCrafts:
+                if ((cardChosen.front.material == Material.Paper) || (cardChosen.front.material == Material.Glass)) {
+                    countDraw++;
+                    found = true;
+                    infoBoxLabel.setText("choose another card");
+                }
+                break;
+        }
+        return found;
+    }
+
+    // pour construire
+    public boolean canBuildPiece(ConstructionPiece piece, Player player) {
+        int nbResources = piece.getNbPieces();
+        boolean canBuild = false;
+        boolean isEqual;
+        if (player.getAllTokens().contains(ProgressToken.Ingeniery)) {
+            int totalMaterial = 0;
+            for (int i : player.getHand().getMaterials()) {
+                totalMaterial +=i;
+
+                if (totalMaterial >= nbResources) {
+                    canBuild = true;
+                    break;
+                }
+            }
+        }
+        else {
+            isEqual = piece.isEqual();
+            if (isEqual) {
+                for (int i = 0; i < 5; i++) {
+                    int samePieces = player.getHand().getMaterials()[i] + player.getHand().getMaterials()[5];
+                    if (samePieces >= nbResources) {
+                        canBuild = true;
+                        break;
+                    }
+                }
+            }
+            else {
+                int differentPieces = 0;
+                for (int i = 0; i < 5; i++) {
+                    if(player.getHand().getMaterials()[i] != 0)
+                    {   differentPieces+=1; }
+                }
+                differentPieces += player.getHand().getMaterials()[5];
+                canBuild = differentPieces >= nbResources;
+            }
+        }
+        return canBuild;
+    }
+    public boolean buidPiece (Construction cons, Player player) throws IOException {
+        ConstructionPiece piece;
+        boolean pieceBuild = false;
+        boolean piecePower = false;
+        boolean pieceBefor;
+        for (int i=0;i<5;i++) {
+            if (i>0) {
+                piece =cons.getAllPieces().get(i);
+                pieceBefor = cons.getAllPieces().get(i-1).isComplete();
+            } else {
+                piece =cons.getAllPieces().get(i);
+                pieceBefor =true;
+            }
+
+            if (canBuildPiece(piece,player) && !piece.isComplete() && pieceBefor) {
+                switch (player.getWonder()) {
+                    case Halicarnasse:
+                    case Alexandrie:
+                    case Babylone:
+                    case Olympie:
+                    case Rhodes:
+                        piecePower = (i == 1) || (i == 3);
+                        break;
+                    case Ephese:
+                        piecePower = ((i>0)&&(i<4));
+                        break;
+                    case Gizeh:
+                        piecePower = false;
+                        break;
+                }
+
+                pieceBuild = true;
+                piece.setComplete(true);
+                boolean equal = piece.getEqual();
+                int nbRessource = piece.getNbPieces();
+                int p=0;
+                int previousElem = 10;
+
+                if (player.getAllTokens().contains(ProgressToken.Ingeniery)) {
+                    for (int k = 0; k < 6; k++) {
+                        p += player.getHand().getMaterials()[k];
+                        if (p <= nbRessource) {
+                            player.getHand().getMaterials()[k] = 0;
+                        }
+                        else {
+                            player.getHand().getMaterials()[k] -= p-nbRessource;
+                        }
+
+                        if (p>= nbRessource) {
+                            break;
+                        }
+                    }
+                }
+                else {
+                    for (int k=0;k<6;k++) {
+                        int material=  player.getHand().getMaterials()[k];
+                        if (equal) {
+                            if (material + player.getHand().getMaterials()[5] >= nbRessource) {
+                                int max = player.getHand().getMaterials()[k];
+
+                                int usedGold = nbRessource - max;
+                                int usedOther = max;
+                                if((player.getAllTokens().contains(ProgressToken.Economy)) && (usedGold%2 != 0)) {
+                                    usedGold +=1;
+                                    usedOther -=1;
+                                }
+                                for (int n = 0; n < usedGold; n++) {
+                                    player.getHand().removeMaterials(5);
+                                }
+                                for (int n = 0; n < usedOther; n++) {
+                                    player.getHand().removeMaterials(k);
+                                }
+                                break;
+                            }
+                        } else {
+                            if (material!=0) {
+                                int elemLeft = nbRessource-p;
+                                if (player.getAllTokens().contains(ProgressToken.Economy) && (k == 5)) {
+                                    player.getHand().removeMaterials(k);
+                                    if (elemLeft == 1) {
+                                        if (previousElem != 10) {
+                                            player.getHand().addMaterials(previousElem);
+                                        }
+                                    }
+                                }
+                                player.getHand().removeMaterials(k);
+                                p++;
+                                previousElem = k;
+                                if (p==nbRessource) {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        boolean buildComplete = player.getWonderContruction().getAllPieces().get(4).isComplete();
+        if (buildComplete) {
+            FXMLLoader root =  new FXMLLoader(getClass().getResource("endScreen.fxml"));
+            Stage stage = (Stage) endButton.getScene().getWindow();
+            Scene scene = new Scene(root.load());
+
+            EndScreen endScreen = root.getController();
+            endScreen.getInfo(allPlayers);
+
+            stage.setScene(scene);
+            stage.setTitle("Round");
+            stage.show();
+        }
+
+        if(pieceBuild) {
+            return piecePower;
+        }
+        else {
+            return false;
+        }
+    }
+
+    // pouvoir de construction
+    public boolean buildPower(Player player) {
+        Wonder wonder = player.getWonder();
+        infoBoxOutline.setVisible(true);
+        powerChoiceBox.setDisable(false);
+        power = false;
+        additionalChoice = false;
+        switch (wonder) {
+            case Ephese:
+                infoBoxLabel.setText("Power: t'as pris la carte "+mainDeckCard.front.cardDisplayName);
+                player.addCard(mainDeckCard, allPlayers);
+                checkChosenCard(player, mainDeckCard);
+
+                mainDeck.chooseCard();
+                resetCardImage(2);
+                endButton.setDisable(false);
+                break;
+            case Rhodes:
+                player.getHand().setShieldWar(player.getHand().getShieldWar()+1);
+                infoBoxLabel.setText("Power: Ajouter un bouclier au total");
+                endButton.setDisable(false);
+
+                break;
+            case Olympie:
+                Card cardLeft = options.get(0).getCard(0);
+                Card cardRight = options.get(1).getCard(0);
+                infoBoxOutline.setVisible(true);
+                infoBoxLabel.setText("Power: t'as pris les carte "+cardLeft.front.cardDisplayName+" et "+cardRight.front.cardDisplayName);
+                player.addCard(cardLeft, allPlayers);
+                player.addCard(cardRight, allPlayers);
+                checkChosenCard(player, cardLeft);
+                checkChosenCard(player, cardRight);
+                options.get(0).chooseCard();
+                resetCardImage(0);
+                options.get(1).chooseCard();
+                resetCardImage(1);
+                endButton.setDisable(false);
+                break;
+            case Babylone:
+                disableProgressChoice(false);
+                infoBoxOutline.setVisible(true);
+                infoBoxLabel.setText("Power: choisis un jetons progrès");
+                break;
+            case Alexandrie:
+                powerChoiceBox.setVisible(true);
+                cardDescription = new ArrayList<>();
+                for (int i = 0; i < allPlayers.size(); i++) {
+                    cardDescription.add("["+i+"]"+allPlayers.get(i).getCardDecks().getCard(0).front.cardDisplayName);
+                }
+                if (player.getChat()) {
+                    cardDescription.add("[2]"+mainDeck.getCard(0).front.cardDisplayName);
+                }
+                else {
+                    cardDescription.add("MainDeck");
+                }
+                powerChoiceBox.getItems().addAll(cardDescription);
+                powerChoiceBox.setOnAction(this::getPowerCardAlexandrie);
+                infoBoxLabel.setText("Power: choisis une des cartes de la liste: ");
+                additionalChoice = true;
+                break;
+            case Halicarnasse:
+                powerChoiceBox.setVisible(true);
+                String[] choice = {"gauche", "droite"};
+                powerChoiceBox.getItems().addAll(choice);
+                powerChoiceBox.setOnAction(this::getChoice);
+                infoBoxLabel.setText("Power: Gauche ou droite: ");
+                additionalChoice = true;
+                break;
+        }
+        return  additionalChoice;
+    }
+    //hallicarnasse extra
+    public void getChoice(Event event) {
+        if (!powerChoiceBox.getValue().equals("")) {
+            cardChoices = new ArrayList<>();
+            if (powerChoiceBox.getValue().equals("gauche")) {
+                for (int i = 0; i < 5; i++) {
+                    cardChoices.add("["+i+"]"+options.get(0).getCard(i).front.cardDisplayName);
+                }
+                choice = 0;
+            }
+            else {
+                choice = 1;
+                for (int i = 0; i < 5; i++) {
+                    cardChoices.add("["+i+"]"+options.get(1).getCard(i).front.cardDisplayName);
+                }
+            }
+            powerChoiceBox.getItems().addAll(cardChoices);
+            powerChoiceBox.getItems().remove("gauche");
+            powerChoiceBox.getItems().remove("droite");
+            powerChoiceBox.setOnAction(this::getPowerCardHalicarnasse);
+            infoBoxLabel.setText("Power: choisis une des cartes de la liste: ");
+        }
+    }
+    public void getPowerCardHalicarnasse(Event event) {
+        if (powerChoiceBox.getValue()!=null) {
+            String card = powerChoiceBox.getValue();
+            int number = Integer.parseInt(card.substring(1,2));
+            player.addCard(options.get(choice).getCard(number), allPlayers);
+            checkChosenCard(player, options.get(choice).getCard(number));
+
+            options.get(choice).shuffleDeck();
+            resetCardImage(choice);
+            powerChoiceBox.setVisible(false);
+            powerChoiceBox.getItems().removeAll(cardChoices);
+        }
+
+        cardDisable(true);
+        endButton.setDisable(false);
+    }
+    //alexandrie extra
+    public void getPowerCardAlexandrie(Event event) {
+        if (powerChoiceBox.getValue()!=null) {
+            String card = powerChoiceBox.getValue();
+            if (card.equals("MainDeck")) {
+                player.addCard(mainDeck.getCard(0), allPlayers);
+                mainDeck.chooseCard();
+            }
+            else {
+                int number = Integer.parseInt(card.substring(1,2));
+                if (number == 2) {
+                    player.addCard(mainDeck.getCard(0), allPlayers);
+                    checkChosenCard(player, mainDeck.getCard(0));
+                    mainDeck.chooseCard();
+                }
+                else {
+                    player.addCard(allPlayers.get(number).getCardDecks().getCard(0), allPlayers);
+                    checkChosenCard(player, allPlayers.get(number).getCardDecks().getCard(0));
+                    allPlayers.get(number).getCardDecks().chooseCard();
+
+                }
+                resetCardImage(number);
+                powerChoiceBox.getItems().removeAll(cardDescription);
+                powerChoiceBox.setVisible(false);
+            }
+            cardDisable(true);
+            endButton.setDisable(false);
+        }
+    }
+
+
+    // player view tab
     public void onPlayerNames(Event event) {
         if (allPlayerNames.getValue()!=null) {
             String name = allPlayerNames.getValue();
@@ -415,7 +1077,7 @@ public class GameController {
                 System.out.println("class = "+i+" = "+playerView.getWonderContruction().getAllPieces().get(i).getClass());
                 System.out.println("equal = "+i+" = "+playerView.getWonderContruction().getAllPieces().get(i).getEqual());
             }
-               Image tokenPeace = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/imagejeu/" + playerView.getWonder().displayName + "-background.png")));
+            Image tokenPeace = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/imagejeu/" + playerView.getWonder().displayName + "-background.png")));
             background.setImage(tokenPeace);
             //for wonder construction images
             switch (playerView.getWonder()){
@@ -816,85 +1478,37 @@ public class GameController {
 
         allPlayerNames.setValue(null);
     }
+    public void resetPlayerViewBlank() {
+        for (int i = 0; i < redImages.size(); i++) {
+            redImages.get(i).setVisible(false);
+            redLabels.get(i).setText("");
 
-    public void onButtonLeftDeck() throws IOException {
-        animationLeft.setImage(leftDeckCardImage.getImage());
-        TranslateTransition transition = new TranslateTransition(Duration.seconds(1),animationLeft );
-        transition.setToX(230);
-        transition.setToY(80);
-        transition.setOnFinished(event -> {
-            TranslateTransition retour = new TranslateTransition(Duration.seconds(1), animationLeft);
-            animationLeft.setImage(null);
-            retour.setToX(0);
-            retour.setToY(0);
-            retour.play();
-        });
-
-        transition.play();
-
-
-        player.addCard(leftDeckCard, allPlayers);
-        options.get(0).chooseCard();
-        countCards++;
-
-        power = buidPiece(player.getWonderContruction(),player);
-        additionalChoice = false;
-        if (power) {
-            endButton.setDisable(true);
-            additionalChoice = buildPower(player);
-            powerChoiceBox.setValue(null);
+            scienceImages.get(i).setVisible(false);
+        }
+        for (int i = 0; i < blueImages.size(); i++) {
+            blueImages.get(i).setVisible(false);
+            blueLabels.get(i).setText("");
+        }
+        for (int i = 0; i < materialImages.size(); i++) {
+            materialImages.get(i).setVisible(false);
+            materialLabels.get(i).setText("");
+        }
+        for (ImageView i : tokenImages) {
+            i.setImage(null);
         }
 
-        checkChosenCard(player, leftDeckCard);
+        construction1.setImage(null);
+        construction2.setImage(null);
+        construction3.setImage(null);
+        construction4.setImage(null);
+        construction5.setImage(null);
 
-        resetCardImage(0);
-
-        if (!additionalChoice) {
-            endButton.setDisable(false);
-        }
-        if (countDraw == countCards) {
-            cardDisable(true);
-        }
+        catImage.setImage(null);
+        militaryCount.setText("");
+        militaryImage.setImage(null);
     }
 
-    public void onButtonRightDeck() throws IOException {
-
-        animationRight.setImage(rightDeckCardImage.getImage());
-        TranslateTransition transition = new TranslateTransition(Duration.seconds(1),animationRight );
-        transition.setToX(-230);
-        transition.setToY(80);
-        transition.setOnFinished(event -> {
-            TranslateTransition retour=new TranslateTransition(Duration.seconds(0.1),animationRight);
-            animationRight.setImage(null);
-            retour.setToX(0);
-            retour.setToY(-0);
-            retour.play();
-        });
-
-        transition.play();
-
-        player.addCard(rightDeckCard, allPlayers);
-        options.get(1).chooseCard();
-        countCards++;
-
-        power = buidPiece(player.getWonderContruction(),player);
-        additionalChoice = false;
-        if (power) {
-            endButton.setDisable(true);
-            additionalChoice = buildPower(player);
-            powerChoiceBox.setValue(null);
-        }
-
-        checkChosenCard(player, rightDeckCard);
-
-        resetCardImage(1);
-
-        if ((countDraw == countCards) && (!additionalChoice)) {
-            cardDisable(true);
-            endButton.setDisable(false);
-        }
-    }
-
+    //talbe view images
     public void resetCardImage(int place) {
         if (place == 0) {
             Image leftDeckCardPNG;
@@ -935,188 +1549,6 @@ public class GameController {
             }
         }
     }
-
-    public void onButtonMainDeck() throws IOException {
-
-        Image mainDeckFrontPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream(mainDeckCard.front.imageResource)));
-        animationMain.setImage( mainDeckFrontPNG);
-
-        TranslateTransition transition = new TranslateTransition(Duration.seconds(1),animationMain );
-        transition.setToX(0);
-        transition.setToY(160);
-        transition.setOnFinished(event -> {
-            TranslateTransition retour=new TranslateTransition(Duration.seconds(0.1),animationMain);
-            animationMain.setImage(null);
-            retour.setToX(0);
-            retour.setToY(-0);
-            retour.play();
-        });
-
-        transition.play();
-
-        player.addCard(mainDeckCard, allPlayers);
-        mainDeck.chooseCard();
-
-        countCards++;
-        if (!player.getChat()) {
-            infoBoxLabel.setText("Card Picked : "+mainDeckCard.front.cardDisplayName);
-        }
-        power = buidPiece(player.getWonderContruction(),player);
-        additionalChoice = false;
-        if (power) {
-            endButton.setDisable(true);
-            additionalChoice = buildPower(player);
-            powerChoiceBox.setValue(null);
-        }
-
-        checkChosenCard(player, mainDeckCard);
-
-        resetCardImage(2);
-
-        if ((countDraw == countCards) && (!additionalChoice)) {
-            cardDisable(true);
-            endButton.setDisable(false);
-        }
-    }
-
-    public void checkChosenCard(Player player, Card card) {
-        if (player.getAllTokens().size() == 0) {
-            cardDisable(true);
-        }
-        else {
-            for (int i = 0; i < player.getAllTokens().size(); i++) {
-                ProgressToken pt = player.getAllTokens().get(i);
-                if (!player.getTokenIgnore().contains(i)) {
-                    boolean found = getScienceEffectDuringGame(pt, leftDeckCard);
-                    if (found) {
-                        player.getTokenIgnore().add(i);
-                        break;
-                    }
-                }
-            }
-        }
-
-        checkCardCorn(card.front);
-        canGetToken();
-    }
-
-    public void onProgress0() {
-        player.getAllTokens().add(res.get(0));
-
-        if (res.get(0) == ProgressToken.Economy) {
-            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
-        }
-        else if (res.get(0) == ProgressToken.Tactic) {
-            player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
-        }
-
-        res.remove(0);
-        for (int i = 0; i < progressImages.size(); i++) {
-            Image resImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(res.get(i).imageResource)));
-            progressImages.get(i).setImage(resImage);
-        }
-        disableProgressChoice(true);
-        endButton.setDisable(false);
-    }
-
-    public void onProgress1() {
-        player.getAllTokens().add(res.get(1));
-        if (res.get(1) == ProgressToken.Economy) {
-            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
-        }
-        else if (res.get(1) == ProgressToken.Tactic) {
-            player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
-        }
-        res.remove(1);
-        for (int i = 0; i < progressImages.size(); i++) {
-            Image resImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(res.get(i).imageResource)));
-            progressImages.get(i).setImage(resImage);
-        }
-
-        disableProgressChoice(true);
-        endButton.setDisable(false);
-    }
-
-    public void onProgress2() {
-        player.getAllTokens().add(res.get(2));
-        if (res.get(2) == ProgressToken.Economy) {
-            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
-        }
-        else if (res.get(2) == ProgressToken.Tactic) {
-            player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
-        }
-        res.remove(2);
-        for (int i = 0; i < progressImages.size(); i++) {
-            Image resImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(res.get(i).imageResource)));
-            progressImages.get(i).setImage(resImage);
-        }
-        disableProgressChoice(true);
-        endButton.setDisable(false);
-    }
-
-    public void onProgress3() {
-        player.getAllTokens().add(res.get(3));
-        infoBoxOutline.setVisible(true);
-        infoBoxLabel.setText(res.get(3).effectDescription);
-        if (res.get(3) == ProgressToken.Economy) {
-            player.getHand().getMaterials()[5] = player.getHand().getMaterials()[5]*2;
-        }
-        else if (res.get(3) == ProgressToken.Tactic) {
-            player.getHand().setShieldWar(player.getHand().getShieldWar()+2);
-        }
-        res.remove(3);
-        disableProgressChoice(true);
-        endButton.setDisable(false);
-    }
-
-    public void onButtonEnd() {
-
-
-        if (playerTurn == allPlayers.size()-1) {
-            playerTurn = 0;
-        }
-        else {
-            playerTurn++;
-        }
-        startTurn(allPlayers, mainDeck, res, playerTurn, "false", 0, 1, false);
-    }
-
-    public void resetPlayerViewBlank() {
-        for (int i = 0; i < redImages.size(); i++) {
-            redImages.get(i).setVisible(false);
-            redLabels.get(i).setText("");
-
-            scienceImages.get(i).setVisible(false);
-        }
-        for (int i = 0; i < blueImages.size(); i++) {
-            blueImages.get(i).setVisible(false);
-            blueLabels.get(i).setText("");
-        }
-        for (int i = 0; i < materialImages.size(); i++) {
-            materialImages.get(i).setVisible(false);
-            materialLabels.get(i).setText("");
-        }
-        for (ImageView i : tokenImages) {
-            i.setImage(null);
-        }
-
-        construction1.setImage(null);
-        construction2.setImage(null);
-        construction3.setImage(null);
-        construction4.setImage(null);
-        construction5.setImage(null);
-
-        catImage.setImage(null);
-        militaryCount.setText("");
-        militaryImage.setImage(null);
-    }
-
-    public void cardDisable(boolean disable) {
-        leftDeckCardImage.setDisable(disable);
-        rightDeckCardImage.setDisable(disable);
-        mainDeckImage.setDisable(disable);
-    }
-
     public void resetTokens() {
         combat1.setImage(tokenPeace);
         combat2.setImage(tokenPeace);
@@ -1138,452 +1570,22 @@ public class GameController {
         }
     }
 
-    public void checkCardCorn(CardType card) {
-        if (card.cardCategory == CardCategory.WarCard) {
-            int count = 0;
-            for (ImageView combat : combats) {
-                if (count == card.cornCount) {
-                    break;
-                }
-                if (combat.getImage() == tokenPeace) {
-                    combat.setImage(tokenWar);
-                    count++;
-                }
 
-            }
-            String warTime = "no";
-            for (int i = 0; i < combats.size(); i++) {
-                if (combats.get(i).getImage() == tokenPeace) {
-                    warTime = "false";
-                    break;
-                }
-                if (i == combats.size()-1) {
-                    warTime = "true";
-                }
-            }
-            if(warTime.equals("true")) {
-                infoBoxOutline.setVisible(true);
-                infoBoxLabel.setText("Bataille ! ");
-                battle();
-                resetTokens();
-            }
-        }
+
+    // user proofing
+    public void cardDisable(boolean disable) {
+        leftDeckCardImage.setDisable(disable);
+        rightDeckCardImage.setDisable(disable);
+        mainDeckImage.setDisable(disable);
     }
-
     public void disableProgressChoice(boolean disable) {
         for (ImageView progressImage : progressImages) {
             progressImage.setDisable(disable);
         }
     }
 
-    public void battle() {
-        if (allPlayers.size() == 2) {
-            if (allPlayers.get(0).getHand().getShieldWar() > allPlayers.get(1).getHand().getShieldWar()) {
-                infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+allPlayers.get(0).getName()+" est le gagnant");
-                if (allPlayers.get(0).getHand().getShieldWar() > 2*allPlayers.get(1).getHand().getShieldWar()) {
-                    allPlayers.get(0).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+6);
-                }
-                else {
-                    allPlayers.get(0).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+3);
-                }
-            }
-            else if (allPlayers.get(1).getHand().getShieldWar() > allPlayers.get(0).getHand().getShieldWar()) {
-                infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+allPlayers.get(1).getName()+" est le gagnant");
-                if (allPlayers.get(1).getHand().getShieldWar() > 2*allPlayers.get(0).getHand().getShieldWar()) {
-                    allPlayers.get(1).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+6);
-                }
-                else {
-                    allPlayers.get(1).getHand().setMilitaryPoints(allPlayers.get(0).getHand().getMilitaryPoints()+3);
-                }
-            }
-        }
-        else {
-            for (int i = 0; i < allPlayers.size(); i++) {
-                Player playerLeft = (i==0)? allPlayers.get(allPlayers.size()-1):allPlayers.get(i-1);
-                Player interestingPlayer = allPlayers.get(i);
-                Player playerRight = (i == allPlayers.size()-1)? allPlayers.get(0):allPlayers.get(i+1);
 
-                if (interestingPlayer.getHand().getShieldWar() > playerLeft.getHand().getShieldWar()) {
-                    interestingPlayer.getHand().setMilitaryPoints(interestingPlayer.getHand().getMilitaryPoints()+3);
-                }
-                if (interestingPlayer.getHand().getShieldWar() > playerRight.getHand().getShieldWar()) {
-                    interestingPlayer.getHand().setMilitaryPoints(interestingPlayer.getHand().getMilitaryPoints()+3);
-                }
-                if ((interestingPlayer.getHand().getShieldWar() > playerLeft.getHand().getShieldWar()) || (interestingPlayer.getHand().getShieldWar() > playerRight.getHand().getShieldWar())) {
-                    infoBoxLabel.setText(infoBoxLabel.getText()+"\n"+interestingPlayer.getName()+" est le gagnant");
-                }
-            }
-        }
-
-        for (Player allPlayer : allPlayers) {
-            allPlayer.getHand().getShieldCards()[1] = 0;
-            allPlayer.getHand().getShieldCards()[2] = 0;
-        }
-    }
-
-    public void canGetToken() {
-        int count = 0;
-        for (int i = 0; i < player.getHand().getScience().length; i++) {
-            if (player.getHand().getScience()[i] == 2) {
-                player.getHand().getScience()[i] = 0;
-                infoBoxLabel.setText("Tu peux choisir un jeton progres");
-                disableProgressChoice(false);
-                endButton.setDisable(true);
-                break;
-            }
-            if (player.getHand().getScience()[i] == 1) {
-                count++;
-            }
-        }
-        if (count >= 3) {
-            for (int i = 0; i < player.getHand().getScience().length; i++) {
-                player.getHand().getScience()[i] -= 1;
-                disableProgressChoice(false);
-            }
-            infoBoxLabel.setText("Tu peux choisir un jeton progres");
-        }
-    }
-
-    public boolean getScienceEffectDuringGame(ProgressToken progressToken, Card cardChosen) {
-        boolean found = false;
-
-        switch (progressToken) {
-            case Science:
-                if (cardChosen.front.cardCategory == CardCategory.ProgressCard) {
-                    countDraw++;
-                    found = true;
-                    infoBoxLabel.setText("choose another card");
-                }
-                break;
-            case Jewelry:
-                if ((cardChosen.front.material == Material.Stone) || (cardChosen.front.material == Material.Gold)) {
-                    countDraw++;
-                    found = true;
-                    infoBoxLabel.setText("choose another card");
-                }
-                break;
-            case Urbanism:
-                if ((cardChosen.front.material == Material.Wood) || (cardChosen.front.material == Material.Brick)) {
-                    countDraw++;
-                    found = true;
-                    infoBoxLabel.setText("choose another card");
-                }
-                break;
-            case Propaganda:
-                if (cardChosen.front.cornCount != 0) {
-                    countDraw++;
-                    found = true;
-                    infoBoxLabel.setText("choose another card");
-                }
-                break;
-            case ArtsAndCrafts:
-                if ((cardChosen.front.material == Material.Paper) || (cardChosen.front.material == Material.Glass)) {
-                    countDraw++;
-                    found = true;
-                    infoBoxLabel.setText("choose another card");
-                }
-                break;
-        }
-        return found;
-    }
-    public boolean canBuildPiece(ConstructionPiece piece, Player player) {
-        int nbResources = piece.getNbPieces();
-        boolean canBuild = false;
-        boolean isEqual;
-        if (player.getAllTokens().contains(ProgressToken.Ingeniery)) {
-            int totalMaterial = 0;
-            for (int i : player.getHand().getMaterials()) {
-                totalMaterial +=i;
-
-                if (totalMaterial >= nbResources) {
-                    canBuild = true;
-                    break;
-                }
-            }
-        }
-        else {
-            isEqual = piece.isEqual();
-            if (isEqual) {
-                for (int i = 0; i < 5; i++) {
-                    int samePieces = player.getHand().getMaterials()[i] + player.getHand().getMaterials()[5];
-                    if (samePieces >= nbResources) {
-                        canBuild = true;
-                        break;
-                    }
-                }
-            }
-            else {
-                int differentPieces = 0;
-                for (int i = 0; i < 5; i++) {
-                    if(player.getHand().getMaterials()[i] != 0)
-                    {   differentPieces+=1; }
-                }
-                differentPieces += player.getHand().getMaterials()[5];
-                canBuild = differentPieces >= nbResources;
-            }
-        }
-        return canBuild;
-    }
-
-    public boolean buidPiece (Construction cons, Player player) throws IOException {
-        ConstructionPiece piece;
-        boolean pieceBuild = false;
-        boolean piecePower = false;
-        boolean pieceBefor;
-        for (int i=0;i<5;i++) {
-            if (i>0) {
-                piece =cons.getAllPieces().get(i);
-                pieceBefor = cons.getAllPieces().get(i-1).isComplete();
-            } else {
-                piece =cons.getAllPieces().get(i);
-                pieceBefor =true;
-            }
-
-            if (canBuildPiece(piece,player) && !piece.isComplete() && pieceBefor) {
-                switch (player.getWonder()) {
-                    case Halicarnasse:
-                    case Alexandrie:
-                    case Babylone:
-                    case Olympie:
-                    case Rhodes:
-                        piecePower = (i == 1) || (i == 3);
-                        break;
-                    case Ephese:
-                        piecePower = ((i>0)&&(i<4));
-                        break;
-                    case Gizeh:
-                        piecePower = false;
-                        break;
-                }
-
-                pieceBuild = true;
-                piece.setComplete(true);
-                boolean equal = piece.getEqual();
-                int nbRessource = piece.getNbPieces();
-                int p=0;
-                int previousElem = 10;
-
-                if (player.getAllTokens().contains(ProgressToken.Ingeniery)) {
-                    for (int k = 0; k < 6; k++) {
-                         p += player.getHand().getMaterials()[k];
-                         if (p <= nbRessource) {
-                             player.getHand().getMaterials()[k] = 0;
-                         }
-                         else {
-                             player.getHand().getMaterials()[k] -= p-nbRessource;
-                         }
-
-                         if (p>= nbRessource) {
-                             break;
-                         }
-                    }
-                }
-                else {
-                    for (int k=0;k<6;k++) {
-                        int material=  player.getHand().getMaterials()[k];
-                        if (equal) {
-                            if (material + player.getHand().getMaterials()[5] >= nbRessource) {
-                                int max = player.getHand().getMaterials()[k];
-
-                                int usedGold = nbRessource - max;
-                                int usedOther = max;
-                                if((player.getAllTokens().contains(ProgressToken.Economy)) && (usedGold%2 != 0)) {
-                                    usedGold +=1;
-                                    usedOther -=1;
-                                }
-                                for (int n = 0; n < usedGold; n++) {
-                                    player.getHand().removeMaterials(5);
-                                }
-                                for (int n = 0; n < usedOther; n++) {
-                                    player.getHand().removeMaterials(k);
-                                }
-                                break;
-                            }
-                        } else {
-                            if (material!=0) {
-                                int elemLeft = nbRessource-p;
-                                if (player.getAllTokens().contains(ProgressToken.Economy) && (k == 5)) {
-                                    player.getHand().removeMaterials(k);
-                                    if (elemLeft == 1) {
-                                        if (previousElem != 10) {
-                                            player.getHand().addMaterials(previousElem);
-                                        }
-                                    }
-                                }
-                                player.getHand().removeMaterials(k);
-                                p++;
-                                previousElem = k;
-                                if (p==nbRessource) {
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        boolean buildComplete = player.getWonderContruction().getAllPieces().get(4).isComplete();
-        if (buildComplete) {
-            FXMLLoader root =  new FXMLLoader(getClass().getResource("endScreen.fxml"));
-            Stage stage = (Stage) endButton.getScene().getWindow();
-            Scene scene = new Scene(root.load());
-
-            EndScreen endScreen = root.getController();
-            endScreen.getInfo(allPlayers);
-
-            stage.setScene(scene);
-            stage.setTitle("Round");
-            stage.show();
-        }
-
-        if(pieceBuild) {
-            return piecePower;
-        }
-        else {
-            return false;
-        }
-    }
-
-    public boolean buildPower(Player player) {
-        Wonder wonder = player.getWonder();
-        infoBoxOutline.setVisible(true);
-        powerChoiceBox.setDisable(false);
-        power = false;
-        additionalChoice = false;
-        switch (wonder) {
-            case Ephese:
-                infoBoxLabel.setText("Power: t'as pris la carte "+mainDeckCard.front.cardDisplayName);
-                player.addCard(mainDeckCard, allPlayers);
-                checkChosenCard(player, mainDeckCard);
-
-                mainDeck.chooseCard();
-                resetCardImage(2);
-                endButton.setDisable(false);
-                break;
-            case Rhodes:
-                player.getHand().setShieldWar(player.getHand().getShieldWar()+1);
-                infoBoxLabel.setText("Power: Ajouter un bouclier au total");
-                endButton.setDisable(false);
-
-                break;
-            case Olympie:
-                Card cardLeft = options.get(0).getCard(0);
-                Card cardRight = options.get(1).getCard(0);
-                infoBoxOutline.setVisible(true);
-                infoBoxLabel.setText("Power: t'as pris les carte "+cardLeft.front.cardDisplayName+" et "+cardRight.front.cardDisplayName);
-                player.addCard(cardLeft, allPlayers);
-                player.addCard(cardRight, allPlayers);
-                checkChosenCard(player, cardLeft);
-                checkChosenCard(player, cardRight);
-                options.get(0).chooseCard();
-                resetCardImage(0);
-                options.get(1).chooseCard();
-                resetCardImage(1);
-                endButton.setDisable(false);
-                break;
-            case Babylone:
-                disableProgressChoice(false);
-                infoBoxOutline.setVisible(true);
-                infoBoxLabel.setText("Power: choisis un jetons progrès");
-                break;
-            case Alexandrie:
-                powerChoiceBox.setVisible(true);
-                cardDescription = new ArrayList<>();
-                for (int i = 0; i < allPlayers.size(); i++) {
-                    cardDescription.add("["+i+"]"+allPlayers.get(i).getCardDecks().getCard(0).front.cardDisplayName);
-                }
-                if (player.getChat()) {
-                    cardDescription.add("[2]"+mainDeck.getCard(0).front.cardDisplayName);
-                }
-                else {
-                    cardDescription.add("MainDeck");
-                }
-                powerChoiceBox.getItems().addAll(cardDescription);
-                powerChoiceBox.setOnAction(this::getPowerCardAlexandrie);
-                infoBoxLabel.setText("Power: choisis une des cartes de la liste: ");
-                additionalChoice = true;
-                break;
-            case Halicarnasse:
-                powerChoiceBox.setVisible(true);
-                String[] choice = {"gauche", "droite"};
-                powerChoiceBox.getItems().addAll(choice);
-                powerChoiceBox.setOnAction(this::getChoice);
-                infoBoxLabel.setText("Power: Gauche ou droite: ");
-                additionalChoice = true;
-                break;
-        }
-        return  additionalChoice;
-    }
-
-    public void getChoice(Event event) {
-        if (!powerChoiceBox.getValue().equals("")) {
-            cardChoices = new ArrayList<>();
-            if (powerChoiceBox.getValue().equals("gauche")) {
-                for (int i = 0; i < 5; i++) {
-                    cardChoices.add("["+i+"]"+options.get(0).getCard(i).front.cardDisplayName);
-                }
-                choice = 0;
-            }
-            else {
-                choice = 1;
-                for (int i = 0; i < 5; i++) {
-                    cardChoices.add("["+i+"]"+options.get(1).getCard(i).front.cardDisplayName);
-                }
-            }
-            powerChoiceBox.getItems().addAll(cardChoices);
-            powerChoiceBox.getItems().remove("gauche");
-            powerChoiceBox.getItems().remove("droite");
-            powerChoiceBox.setOnAction(this::getPowerCardHalicarnasse);
-            infoBoxLabel.setText("Power: choisis une des cartes de la liste: ");
-        }
-    }
-
-    public void getPowerCardHalicarnasse(Event event) {
-        if (powerChoiceBox.getValue()!=null) {
-            String card = powerChoiceBox.getValue();
-            int number = Integer.parseInt(card.substring(1,2));
-            player.addCard(options.get(choice).getCard(number), allPlayers);
-            checkChosenCard(player, options.get(choice).getCard(number));
-
-            options.get(choice).shuffleDeck();
-            resetCardImage(choice);
-            powerChoiceBox.setVisible(false);
-            powerChoiceBox.getItems().removeAll(cardChoices);
-        }
-
-        cardDisable(true);
-        endButton.setDisable(false);
-    }
-
-    public void getPowerCardAlexandrie(Event event) {
-        if (powerChoiceBox.getValue()!=null) {
-            String card = powerChoiceBox.getValue();
-            if (card.equals("MainDeck")) {
-                player.addCard(mainDeck.getCard(0), allPlayers);
-                mainDeck.chooseCard();
-            }
-            else {
-                int number = Integer.parseInt(card.substring(1,2));
-                if (number == 2) {
-                    player.addCard(mainDeck.getCard(0), allPlayers);
-                    checkChosenCard(player, mainDeck.getCard(0));
-                    mainDeck.chooseCard();
-                }
-                else {
-                    player.addCard(allPlayers.get(number).getCardDecks().getCard(0), allPlayers);
-                    checkChosenCard(player, allPlayers.get(number).getCardDecks().getCard(0));
-                    allPlayers.get(number).getCardDecks().chooseCard();
-
-                }
-                resetCardImage(number);
-                powerChoiceBox.getItems().removeAll(cardDescription);
-                powerChoiceBox.setVisible(false);
-            }
-            cardDisable(true);
-            endButton.setDisable(false);
-        }
-    }
+    // sortir du tour
     public void retour (Event event) throws  IOException {
         Stage stage;
         Scene scene;
@@ -1597,6 +1599,18 @@ public class GameController {
         menuControleur.sauvegarde(options,allPlayers,cardChoices,res,mainDeck,playerTurn,countCards,countDraw,additionalChoice);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void onButtonEnd() {
+
+
+        if (playerTurn == allPlayers.size()-1) {
+            playerTurn = 0;
+        }
+        else {
+            playerTurn++;
+        }
+        startTurn(allPlayers, mainDeck, res, playerTurn, "false", 0, 1, false);
     }
 
 }
