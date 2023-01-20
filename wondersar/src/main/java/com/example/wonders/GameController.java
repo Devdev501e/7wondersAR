@@ -1508,7 +1508,7 @@ public class GameController {
         militaryImage.setImage(null);
     }
 
-    //talbe view images
+    //table view images
     public void resetCardImage(int place) {
         if (place == 0) {
             Image leftDeckCardPNG;
