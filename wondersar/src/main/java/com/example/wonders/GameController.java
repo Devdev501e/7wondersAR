@@ -1568,12 +1568,18 @@ public class GameController {
         }
     }
     public void retour (Event event) throws  IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("Menu.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
+        Stage stage;
+        Scene scene;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+        Parent root = loader.load();
+        stage = (javafx.stage.Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
 
+
+        MenuControleur menuControleur = loader.getController();
+        menuControleur.sauvegarde(options,allPlayers,cardChoices,res,mainDeck,playerTurn,countCards,countDraw,choice);
         stage.setScene(scene);
-
         stage.show();
     }
+
 }

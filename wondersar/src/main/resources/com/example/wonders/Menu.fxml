@@ -49,5 +49,10 @@
             <Insets top="180.0" />
          </GridPane.margin>
       </Button>
+      <Button mnemonicParsing="false" onAction="#resume" text="Sauvegarde" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <GridPane.margin>
+            <Insets top="350.0" />
+         </GridPane.margin>
+      </Button>
    </children>
 </GridPane>

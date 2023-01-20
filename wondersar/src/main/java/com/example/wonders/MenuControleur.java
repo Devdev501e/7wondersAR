@@ -1,5 +1,9 @@
 package com.example.wonders;
 
+import domain.Card;
+import domain.CardDecks;
+import domain.Player;
+import domain.ProgressToken;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -9,10 +13,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -24,7 +31,61 @@ public class MenuControleur implements Initializable {
     private Button instruction;
     @FXML
     private Button exit;
+    //------------------------------------------------------------------ Sauvegarde
 
+    ArrayList<CardDecks> options;
+    CardDecks mainDeck;
+    int playerTurn;
+    ArrayList<Player> allPlayers = new ArrayList<>();
+    ArrayList<ProgressToken> res;
+    int countCards;
+    private   int countDraw;
+    private   int choice;
+    ArrayList<String> cardChoices;
+
+
+
+//---------------------------------------------------------------------------------------------
+
+    public void sauvegarde(ArrayList<CardDecks> options1,
+                            ArrayList<Player> allPlayers1,
+                            ArrayList<String> cardChoices1,
+                           ArrayList<ProgressToken> res1,
+                         CardDecks mainDeck1,
+                            int playerTurn1,
+                            int countCards1,
+                            int countDraw1,
+                            int choice1){
+        if(options!=null){
+        options.addAll(options1);
+        allPlayers.addAll(allPlayers1);
+         res.addAll(res1);
+        cardChoices.addAll(cardChoices1);
+
+        mainDeck=mainDeck1;
+        playerTurn=playerTurn1;
+        countCards =countCards1;
+        countDraw=countDraw1;
+        choice=choice1;
+       }
+
+    }
+    public void resume(Event event) throws Exception{
+        Stage stage;
+        Scene scene;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("gameView.fxml"));
+        Parent root = loader.load();
+        stage = (javafx.stage.Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+
+
+        GameController gameController = loader.getController();
+        gameController.startTurn(allPlayers,mainDeck,res,playerTurn,"save",countCards,countDraw);
+
+
+        stage.setScene(scene);
+        stage.show();
+    }
 
     public void button(Event event) throws IOException {
      Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("ChoixPerso.fxml")));
