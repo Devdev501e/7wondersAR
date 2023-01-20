@@ -1,0 +1,28 @@
+.button {
+    width:198px ;
+    height: 70px;
+
+    -fx-background-color: transparent;
+    -fx-background-image: url("images/imagejeu/Resume1.png");
+    -fx-background-size: cover;
+}
+
+.button:hover {
+
+    -fx-background-image: url("images/imagejeu/Resume2.png");
+    border: none;
+    -fx-background-size: cover;
+
+}
+
+
+.button:active{
+
+    -fx-background-image: url("images/imagejeu/startgames1.png");
+    -fx-background-size: cover;
+}
+
+.img-size img {
+    width: 30px;
+    height: 30px;
+}

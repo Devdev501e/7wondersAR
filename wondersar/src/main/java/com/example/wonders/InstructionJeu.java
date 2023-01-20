@@ -1,14 +1,16 @@
 package com.example.wonders;
 
-import domain.ProgressToken;
-import domain.ProgressTokens;
-import domain.Wonder;
+import domain.*;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
@@ -73,7 +75,46 @@ public class InstructionJeu implements Initializable {
     private final String[] images = {"images/imagejeu/alexandrie_icon.png", "images/imagejeu/halicarnasse_icon.png", "images/imagejeu/ephese_icon.png", "images/imagejeu/olympie_icon.png", "images/imagejeu/babylon_icon.png", "images/imagejeu/rhodes_icon.png", "images/imagejeu/gizeh_icon.png"};
     private int currentWonder = 0;
     private final ArrayList<Wonder> wonders = new ArrayList<>();
+    //------------------------------------------------------------------ Sauvegarde
 
+    ArrayList<CardDecks> options;
+    CardDecks mainDeck;
+    int playerTurn;
+    ArrayList<Player> allPlayers = new ArrayList<>();
+    ArrayList<ProgressToken> resPlayer;
+    int countCards;
+    private   int countDraw;
+
+    ArrayList<String> cardChoices;
+
+
+
+//---------------------------------------------------------------------------------------------
+public void sauvegarde(ArrayList<CardDecks> options1,
+                       ArrayList<Player> allPlayers1,
+                       ArrayList<String> cardChoices1,
+                       ArrayList<ProgressToken> res1,
+                       CardDecks mainDeck1,
+                       int playerTurn1,
+                       int countCards1,
+                       int countDraw1
+){
+
+    options=options1;
+    allPlayers=allPlayers1;
+    System.out.println(allPlayers);
+    resPlayer =res1;
+    cardChoices=cardChoices1;
+
+    mainDeck=mainDeck1;
+    playerTurn=playerTurn1;
+    countCards =countCards1;
+    countDraw=countDraw1;
+
+
+
+
+}
     @Override
     public void initialize (URL url, ResourceBundle resourceBundle) {
         retour.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Back.css")).toExternalForm());
@@ -187,14 +228,19 @@ public class InstructionJeu implements Initializable {
         tokenDescription.setText("");
     }
 
-    public void onRetour() throws IOException {
-        FXMLLoader root =  new FXMLLoader(getClass().getResource("menu.fxml"));
-        Stage stage = (Stage) imagePartie.getScene().getWindow();
-        Scene scene = new Scene(root.load(), 800, 550);
-        stage.setResizable(false);
+    public void onRetour(Event event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+        Parent root = loader.load();
+        Stage stage = (javafx.stage.Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+
+     if(allPlayers.size()!=0) {
+         MenuControleur menuControleur = loader.getController();
+         menuControleur.sauvegarde(options, allPlayers, cardChoices, res, mainDeck, playerTurn, countCards, countDraw);
+     }
 
         stage.setScene(scene);
-        stage.setTitle("7 Wonders: Architecture");
         stage.show();
     }
 }

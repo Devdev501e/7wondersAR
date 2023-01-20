@@ -31,6 +31,8 @@ public class MenuControleur implements Initializable {
     private Button instruction;
     @FXML
     private Button exit;
+    @FXML
+     private Button resume;
     //------------------------------------------------------------------ Sauvegarde
 
     ArrayList<CardDecks> options;
@@ -67,6 +69,7 @@ public class MenuControleur implements Initializable {
         playerTurn=playerTurn1;
         countCards =countCards1;
         countDraw=countDraw1;
+        resume.setVisible(true);
 
 
 
@@ -80,8 +83,8 @@ public class MenuControleur implements Initializable {
         scene = new Scene(root);
 
 
-        GameController gameController = loader.getController();
-        gameController.startTurn(allPlayers,mainDeck,res,playerTurn,true,countCards,countDraw);
+           GameController gameController = loader.getController();
+           gameController.startTurn(allPlayers, mainDeck, res, playerTurn, true, countCards, countDraw);
 
 
         stage.setScene(scene);
@@ -99,19 +102,28 @@ public class MenuControleur implements Initializable {
 
     }
 
-    public void onInstructions() throws IOException {
-        FXMLLoader root =  new FXMLLoader(getClass().getResource("instructionJeu.fxml"));
-        Stage stage = (Stage) instruction.getScene().getWindow();
-        Scene scene = new Scene(root.load());
+    public void onInstructions(Event event) throws IOException {
+        Stage stage;
+        Scene scene;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("instructionJeu.fxml"));
+        Parent root = loader.load();
+        stage = (javafx.stage.Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        if(allPlayers.size()!=0) {
+            InstructionJeu instructionJeu = loader.getController();
+            instructionJeu.sauvegarde(options, allPlayers, cardChoices, res, mainDeck, playerTurn, countCards, countDraw);
+        }
 
         stage.setScene(scene);
-        stage.setTitle("Règles du jeu");
         stage.show();
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        resume.setVisible(false);
+        resume.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Resume.css")).toExternalForm());
+
         exit.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Exit.css")).toExternalForm());
         button.getStylesheets().add(Objects.requireNonNull(getClass().getResource("application.css")).toExternalForm());
 
