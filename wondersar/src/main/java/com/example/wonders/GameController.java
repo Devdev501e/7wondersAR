@@ -201,6 +201,8 @@ public class GameController {
     ImageView animationRight;
     @FXML
     ImageView animationMain;
+    @FXML
+    ImageView background;
 
 
     //-------------------------------------------needed variables
@@ -380,6 +382,7 @@ public class GameController {
 
         //set up tab2
         tab2.setText("None");
+        background.setImage(null);
         playerNameTab.setText("No one selected yet ! Please use the choice box");
 
         if (countDraw == countCards) {
@@ -415,7 +418,8 @@ public class GameController {
                 System.out.println("class = "+i+" = "+playerView.getWonderContruction().getAllPieces().get(i).getClass());
                 System.out.println("equal = "+i+" = "+playerView.getWonderContruction().getAllPieces().get(i).getEqual());
             }
-
+               Image tokenPeace = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/imagejeu/" + playerView.getWonder().displayName + "-background.png")));
+            background.setImage(tokenPeace);
             //for wonder construction images
             switch (playerView.getWonder()){
                 case Alexandrie:

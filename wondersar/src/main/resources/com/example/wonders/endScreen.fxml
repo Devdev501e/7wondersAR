@@ -6,8 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wonders.EndScreen">
+<AnchorPane prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wonders.EndScreen">
    <children>
       <ImageView fx:id="imagePodium" fitHeight="125.0" fitWidth="378.0" layoutX="120.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true" />
       <Label fx:id="player1st" alignment="CENTER" layoutX="254.0" layoutY="96.0" prefHeight="39.0" prefWidth="92.0">
