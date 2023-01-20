@@ -103,7 +103,9 @@ public class EndScreen {
 
             //points vennant de construction
             for (ConstructionPiece j : i.getWonderContruction().getAllPieces()) {
-                i.setTotalPoints(i.getTotalPoints()+ j.getPoints());
+                if (j.isComplete()) {
+                    i.setTotalPoints(i.getTotalPoints()+ j.getPoints());
+                }
             }
 
             //points vennant de guerre

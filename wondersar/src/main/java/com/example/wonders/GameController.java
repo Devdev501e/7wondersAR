@@ -237,8 +237,6 @@ public class GameController {
         countCards = cardsDrawn;
         countDraw = cardsToDraw;
 
-
-
         retour.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Back.css")).toExternalForm());
         options = new ArrayList<>();
         powerChoiceBox.setVisible(false);
@@ -254,7 +252,6 @@ public class GameController {
         System.out.println(allPlayers);
 
         if (!beggining.equals("false")) {
-            players.get(turn).getAllTokens().add(ProgressToken.Ingeniery);
             allPlayerNames.getItems().addAll(playerNames);
             allPlayers.addAll(players);
             resetTokens();
@@ -1108,6 +1105,10 @@ public class GameController {
         construction3.setImage(null);
         construction4.setImage(null);
         construction5.setImage(null);
+
+        catImage.setImage(null);
+        militaryCount.setText("");
+        militaryImage.setImage(null);
     }
 
     public void cardDisable(boolean disable) {
