@@ -1577,7 +1577,7 @@ public class GameController {
 
 
         MenuControleur menuControleur = loader.getController();
-        menuControleur.sauvegarde(options,allPlayers,cardChoices,res,mainDeck,playerTurn,countCards,countDraw,choice);
+        menuControleur.sauvegarde(options,allPlayers,cardChoices,res,mainDeck,playerTurn,countCards,countDraw);
         stage.setScene(scene);
         stage.show();
     }

@@ -40,7 +40,7 @@ public class MenuControleur implements Initializable {
     ArrayList<ProgressToken> res;
     int countCards;
     private   int countDraw;
-    private   int choice;
+
     ArrayList<String> cardChoices;
 
 
@@ -54,20 +54,21 @@ public class MenuControleur implements Initializable {
                          CardDecks mainDeck1,
                             int playerTurn1,
                             int countCards1,
-                            int countDraw1,
-                            int choice1){
-        if(options!=null){
-        options.addAll(options1);
-        allPlayers.addAll(allPlayers1);
-         res.addAll(res1);
-        cardChoices.addAll(cardChoices1);
+                            int countDraw1
+                           ){
+
+        options=options1;
+        allPlayers=allPlayers1;
+        System.out.println(allPlayers);
+         res =res1;
+        cardChoices=cardChoices1;
 
         mainDeck=mainDeck1;
         playerTurn=playerTurn1;
         countCards =countCards1;
         countDraw=countDraw1;
-        choice=choice1;
-       }
+
+
 
     }
     public void resume(Event event) throws Exception{
