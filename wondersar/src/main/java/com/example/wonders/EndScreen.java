@@ -119,7 +119,7 @@ public class EndScreen {
             System.out.println(i.getName()+": "+i.getTotalPoints());
         }
 
-        Collections.sort(allPlayers, Comparator.comparing(Player::getTotalPoints));
+        allPlayers.sort(Comparator.comparing(Player::getTotalPoints));
         Collections.reverse(allPlayers);
 
         return allPlayers;

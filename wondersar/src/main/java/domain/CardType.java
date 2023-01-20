@@ -55,7 +55,7 @@ public enum CardType {
 
 	// ------------------------------------------------------------------------
 
-	private CardType(String cardDisplayName, CardCategory cardCategory, //
+	CardType(String cardDisplayName, CardCategory cardCategory, //
 					 Material material, // only when cardCategory==Material
 					 ScienceCategory scienceCategory, // only when cardCategory==Science
 					 int shieldCount, int cornCount, // only when cardCategory==War
@@ -73,56 +73,20 @@ public enum CardType {
 	}
 
 	// for Material card
-	private CardType(String cardDisplayName, Material material, String imageResource) {
+	CardType(String cardDisplayName, Material material, String imageResource) {
 		this(cardDisplayName, CardCategory.MaterialCard, material, null, 0, 0, 0, false, imageResource);
 	}
 	// for Science card
-	private CardType(String cardDisplayName, ScienceCategory scienceCategory, String imageResource) {
+	CardType(String cardDisplayName, ScienceCategory scienceCategory, String imageResource) {
 		this(cardDisplayName, CardCategory.ProgressCard, null, scienceCategory, 0, 0, 0, false, imageResource);
 	}
 	// for War card
-	private CardType(String cardDisplayName, int shieldCount, int cornCount, String imageResource) {
+	CardType(String cardDisplayName, int shieldCount, int cornCount, String imageResource) {
 		this(cardDisplayName, CardCategory.WarCard, null, null, shieldCount, cornCount, 0, false, imageResource);
 	}
 	// for Politic card
-	private CardType(String cardDisplayName, int laurelCount, boolean cat, String imageResource) {
+	CardType(String cardDisplayName, int laurelCount, boolean cat, String imageResource) {
 		this(cardDisplayName, CardCategory.PoliticCard, null, null, 0, 0, laurelCount, cat, imageResource);
 	}
-
-	public boolean isCat() {
-		return cat;
-	}
-
-	public CardCategory getCardCategory() {
-		return cardCategory;
-	}
-
-	public int getCornCount() {
-		return cornCount;
-	}
-
-	public int getLaurelCount() {
-		return laurelCount;
-	}
-
-	public int getShieldCount() {
-		return shieldCount;
-	}
-
-	public Material getMaterial() {
-		return material;
-	}
-	public ScienceCategory getScienceCategory() {
-		return scienceCategory;
-	}
-
-	public String getImageResource() {
-		return imageResource;
-	}
-
-	public String getCardDisplayName() {
-		return cardDisplayName;
-	}
-
 }
 

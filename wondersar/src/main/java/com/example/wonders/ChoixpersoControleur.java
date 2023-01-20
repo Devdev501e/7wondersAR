@@ -87,7 +87,7 @@ public class ChoixpersoControleur implements Initializable {
             labelBox.setText("You have chosen "+nombre+" players \nyou have to choose "+nombre+" more players");
             tableau.setVisible(true);
             for (Wonder wonders:Wonder.values()){
-                wonderName.add(wonders.getDisplayName());
+                wonderName.add(wonders.displayName);
             }
             nameTextField.setVisible(true);
             myChoiceBox.setValue(null);
@@ -161,7 +161,7 @@ public class ChoixpersoControleur implements Initializable {
 
 
         GameController gameController = loader.getController();
-        gameController.startTurn(players, mainDeck, res, 0, "true", 0, 1);
+        gameController.startTurn(players, mainDeck, res, 0, true, 0, 1);
 
         stage.setScene(scene);
         stage.show();

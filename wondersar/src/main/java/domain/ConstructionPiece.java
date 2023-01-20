@@ -2,7 +2,7 @@ package domain;
 
 public class ConstructionPiece {
     private final int points;
-    private boolean equal;
+    private final boolean equal;
     private final int nbPieces;
     private boolean complete;
 
@@ -26,10 +26,6 @@ public class ConstructionPiece {
 
     public boolean isEqual() {
         return equal;
-    }
-
-    public void setEqual(boolean equal) {
-        this.equal = equal;
     }
 
     public boolean isComplete() {

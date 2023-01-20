@@ -7,8 +7,8 @@ public class Player {
     private final String  name;
     private final  Wonder wonder;
     private final Construction wonderContruction;
-    private ArrayList<ProgressToken> allTokens;
-    private Hand hand;
+    private final ArrayList<ProgressToken> allTokens;
+    private final Hand hand;
     private Boolean chat;
     private int totalPoints;
     private final CardDecks cardDecks;
@@ -46,9 +46,6 @@ public class Player {
     public Boolean getChat() {
         return chat;
     }
-    public void setChat(Boolean chat) {
-        this.chat = chat;
-    }
 
     public Hand getHand() {
         return hand;
@@ -74,7 +71,7 @@ public class Player {
     }
 
     public void addCard(Card card, ArrayList<Player> players) {
-        switch (card.getFront().getCardCategory()) {
+        switch (card.front.cardCategory) {
             case WarCard:
                 this.getHand().addShield(card.front.cornCount);
                 break;
@@ -93,7 +90,7 @@ public class Player {
                 }
                 break;
             case MaterialCard:
-                switch (card.front.getMaterial()) {
+                switch (card.front.material) {
                     case Gold:
                         this.getHand().addMaterials(5);
                         if (this.getAllTokens().contains(ProgressToken.Economy)) {
@@ -118,7 +115,7 @@ public class Player {
                 }
                 break;
             case ProgressCard:
-                switch (card.getFront().getScienceCategory()) {
+                switch (card.front.scienceCategory) {
                     case Law:
                         this.getHand().addScience(0);
                         break;

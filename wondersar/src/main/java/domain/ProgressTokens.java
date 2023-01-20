@@ -11,8 +11,7 @@ public class ProgressTokens {
 	
 	// there is 1 token of each type, and 2 tokens of the same 'Culture' type
 	private static List<ProgressToken> createTokenList() {
-		List<ProgressToken> res = new ArrayList<ProgressToken>();
-		res.addAll(Arrays.asList(ProgressToken.values()));
+		List<ProgressToken> res = new ArrayList<>(Arrays.asList(ProgressToken.values()));
 		res.add(ProgressToken.Culture);
 		return res;
 	}

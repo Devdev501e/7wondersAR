@@ -8,12 +8,5 @@ public class Card {
 		this.front = front;
 		this.back = back;
 	}
-
-	public CardBack getBack() {
-		return back;
-	}
-	public CardType getFront() {
-		return front;
-	}
 }
 

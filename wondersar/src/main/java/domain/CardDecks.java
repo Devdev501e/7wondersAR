@@ -7,7 +7,7 @@ import java.util.List;
 
 public class CardDecks {
 
-	private ArrayList<Card> cardDeck = new ArrayList();
+	private final ArrayList<Card> cardDeck = new ArrayList<>();
 
 	public CardDecks(String wonder) {
 		switch (wonder) {
@@ -62,11 +62,6 @@ public class CardDecks {
 
 	public Card getCard(int position) {
 		return cardDeck.get(position);
-	}
-
-	public void removeCard(int position) {
-		Card card = this.cardDeck.get(position);
-		this.cardDeck.remove(card);
 	}
 
 	public void chooseCard() {

@@ -1,13 +1,12 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Hand {
-    private int[] science = new int[3];
-    private int[] materials = new int[6];
-    private int[] pointVictoire = new int[2];
-    private int[] shieldCards = new int[3];
+    private final int[] science = new int[3];
+    private final int[] materials = new int[6];
+    private final int[] pointVictoire = new int[2];
+    private final int[] shieldCards = new int[3];
     private int shieldWar;
     private int militaryPoints;
 

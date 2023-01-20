@@ -81,7 +81,7 @@ public class MenuControleur implements Initializable {
 
 
         GameController gameController = loader.getController();
-        gameController.startTurn(allPlayers,mainDeck,res,playerTurn,"true",countCards,countDraw);
+        gameController.startTurn(allPlayers,mainDeck,res,playerTurn,true,countCards,countDraw);
 
 
         stage.setScene(scene);

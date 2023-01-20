@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 
     public class Construction {
-        private final ArrayList<ConstructionPiece> allPieces = new ArrayList(5);
+        private final ArrayList<ConstructionPiece> allPieces = new ArrayList<>(5);
         private final int[] alexandriePoints = {4,3,6,5,7};
         private final int[] babylonPoints = {3,0,5,7,5};
         private final int[] rhodesPoints = {4,4,5,6,7};

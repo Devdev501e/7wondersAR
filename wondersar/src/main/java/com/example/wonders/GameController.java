@@ -4,9 +4,7 @@ package com.example.wonders;
 
 import domain.*;
 import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -230,10 +228,11 @@ public class GameController {
     boolean power;
 
 
-    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<ProgressToken> progressTokens, int turn, String beggining, int cardsDrawn, int cardsToDraw) {
+    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<ProgressToken> progressTokens, int turn, boolean beggining, int cardsDrawn, int cardsToDraw) {
         //initialize table game
         countCards = cardsDrawn;
         countDraw = cardsToDraw;
+
         retour.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Back.css")).toExternalForm());
         options = new ArrayList<>();
         powerChoiceBox.setVisible(false);
@@ -248,7 +247,7 @@ public class GameController {
 
         System.out.println(allPlayers);
 
-        if (beggining.equals("true")) {
+        if (beggining) {
             players.get(turn).getAllTokens().add(ProgressToken.Ingeniery);
             allPlayerNames.getItems().addAll(playerNames);
             allPlayers.addAll(players);
@@ -300,11 +299,6 @@ public class GameController {
             redLabels.add(centurionCount);
             redLabels.add(barbarianCount);
             redLabels.add(archerCount);
-        }
-        else if (beggining.equals("save")) {
-
-        }
-        else {
         }
 
         player = players.get(turn);
@@ -1069,7 +1063,7 @@ public class GameController {
         else {
             playerTurn++;
         }
-        startTurn(allPlayers, mainDeck, res, playerTurn, "false", 0, 1);
+        startTurn(allPlayers, mainDeck, res, playerTurn, false, 0, 1);
     }
 
     public void resetPlayerViewBlank() {
@@ -1291,7 +1285,6 @@ public class GameController {
         else {
             isEqual = piece.isEqual();
             if (isEqual) {
-                canBuild = false;
                 for (int i = 0; i < 5; i++) {
                     int samePieces = player.getHand().getMaterials()[i] + player.getHand().getMaterials()[5];
                     if (samePieces >= nbResources) {
@@ -1534,7 +1527,6 @@ public class GameController {
             player.addCard(options.get(choice).getCard(number), allPlayers);
             checkChosenCard(player, options.get(choice).getCard(number));
 
-            options.get(choice).removeCard(number);
             options.get(choice).shuffleDeck();
             resetCardImage(choice);
             powerChoiceBox.setVisible(false);

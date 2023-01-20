@@ -10,18 +10,18 @@ public enum ConstImage {
     Olympie( "olympie/piece-back-olympie-1.png","olympie/piece-back-olympie-3.png","olympie/piece-back-olympie-2.png","olympie/piece-back-olympie-4.png","olympie/piece-back-olympie-5.png","olympie/piece-front-olympie-1.png","olympie/piece-front-olympie-3.png","olympie/piece-front-olympie-2.png","olympie/piece-front-olympie-4.png","olympie/piece-front-olympie-5.png"),
     Rhodes("rhodes/piece-back-rhodes-2.png","rhodes/piece-back-rhodes-1.png","rhodes/piece-back-rhodes-3.png","rhodes/piece-back-rhodes-4.png","rhodes/piece-back-rhodes-5.png","rhodes/piece-front-rhodes-2.png","rhodes/piece-front-rhodes-1.png","rhodes/piece-front-rhodes-3.png","rhodes/piece-front-rhodes-4.png","rhodes/piece-front-rhodes-5.png");
 
-    public  String  construction1;
-    public String construction2;
-    public String construction3;
-    public String construction4;
-    public String construction5;
-    public String constructionFront1;
-    public String constructionFront2;
-    public String constructionFront3;
-    public String constructionFront4;
-    public String constructionFront5;
+    public final String  construction1;
+    public final String construction2;
+    public final String construction3;
+    public final String construction4;
+    public final String construction5;
+    public final String constructionFront1;
+    public final String constructionFront2;
+    public final String constructionFront3;
+    public final String constructionFront4;
+    public final String constructionFront5;
 
-    private ConstImage(String constructionBack1,String constructionBack2,String constructionBack3,String constructionBack4,String constructionBack5, String constructionFront1,String constructionFront2,String constructionFront3,String constructionFront4,String constructionFront5){
+    ConstImage(String constructionBack1,String constructionBack2,String constructionBack3,String constructionBack4,String constructionBack5, String constructionFront1,String constructionFront2,String constructionFront3,String constructionFront4,String constructionFront5){
         this.construction1= "images/wonders/" +constructionBack1;
         this.construction2=  "images/wonders/"+ constructionBack2;
         this.construction3= "images/wonders/"+ constructionBack3;

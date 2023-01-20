@@ -38,16 +38,4 @@ public enum Wonder {
 		this.frenchName = frenchName;
 		this.effectDescription = effectDescription;
 	}
-
-	public String getDisplayName() {
-		return displayName;
-	}
-
-	public String getEffectDescription() {
-		return effectDescription;
-	}
-
-	public String frenchName() {
-		return frenchName;
-	}
 }

@@ -17,7 +17,7 @@ public enum CardBack {
 	public final Wonder wonderDeck;
 	public final String imageResource;
 	
-	private CardBack(Wonder wonderDeck, String imageResource) {
+	CardBack(Wonder wonderDeck, String imageResource) {
 		this.centralDeck = (wonderDeck == null);
 		this.wonderDeck = wonderDeck;
 		this.imageResource = imageResource;

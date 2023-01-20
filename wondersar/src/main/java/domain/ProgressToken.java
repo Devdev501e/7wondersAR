@@ -83,7 +83,7 @@ public enum ProgressToken {
 	
 	// ------------------------------------------------------------------------
 	
-	private ProgressToken(String displayName, String frenchName, String effectDescription, String imageResource) {
+	ProgressToken(String displayName, String frenchName, String effectDescription, String imageResource) {
 		this.displayName = displayName;
 		this.frenchName = frenchName;
 		this.effectDescription = effectDescription;
