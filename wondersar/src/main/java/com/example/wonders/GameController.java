@@ -230,10 +230,10 @@ public class GameController {
     boolean power;
 
 
-    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<ProgressToken> progressTokens, int turn, boolean beggining) {
+    public void startTurn(ArrayList<Player> players, CardDecks mainCardDeck, ArrayList<ProgressToken> progressTokens, int turn, String beggining, int cardsDrawn, int cardsToDraw) {
         //initialize table game
-        countCards = 0;
-        countDraw = 1;
+        countCards = cardsDrawn;
+        countDraw = cardsToDraw;
         retour.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Back.css")).toExternalForm());
         options = new ArrayList<>();
         powerChoiceBox.setVisible(false);
@@ -246,7 +246,7 @@ public class GameController {
         infoBoxLabel.setText("");
         cardDisable(false);
 
-        if (beggining) {
+        if (beggining.equals("true")) {
             players.get(turn).getAllTokens().add(ProgressToken.Ingeniery);
             allPlayerNames.getItems().addAll(playerNames);
             allPlayers.addAll(players);
@@ -298,6 +298,11 @@ public class GameController {
             redLabels.add(centurionCount);
             redLabels.add(barbarianCount);
             redLabels.add(archerCount);
+        }
+        else if (beggining.equals("save")) {
+
+        }
+        else {
         }
 
         player = players.get(turn);
@@ -806,29 +811,26 @@ public class GameController {
         TranslateTransition transition = new TranslateTransition(Duration.seconds(1),animationLeft );
         transition.setToX(230);
         transition.setToY(80);
-        transition.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                TranslateTransition retour=new TranslateTransition(Duration.seconds(1),animationLeft);
-                animationLeft.setImage(null);
-                retour.setToX(0);
-                retour.setToY(0);
-                retour.play();
-            }
+        transition.setOnFinished(event -> {
+            TranslateTransition retour = new TranslateTransition(Duration.seconds(1), animationLeft);
+            animationLeft.setImage(null);
+            retour.setToX(0);
+            retour.setToY(0);
+            retour.play();
         });
 
         transition.play();
 
 
         player.addCard(leftDeckCard, allPlayers);
-
         options.get(0).chooseCard();
-
         countCards++;
 
         power = buidPiece(player.getWonderContruction(),player);
+        boolean additionalchoice = false;
         if (power) {
-            buildPower(player);
+            endButton.setDisable(true);
+            additionalchoice = buildPower(player);
             powerChoiceBox.setValue(null);
         }
 
@@ -836,11 +838,12 @@ public class GameController {
 
         resetCardImage(0);
 
+        if (!additionalchoice) {
+            endButton.setDisable(false);
+        }
         if (countDraw >= countCards) {
             cardDisable(true);
         }
-
-        endButton.setDisable(false);
     }
 
     public void onButtonRightDeck() throws IOException {
@@ -849,27 +852,25 @@ public class GameController {
         TranslateTransition transition = new TranslateTransition(Duration.seconds(1),animationRight );
         transition.setToX(-230);
         transition.setToY(80);
-        transition.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                TranslateTransition retour=new TranslateTransition(Duration.seconds(0.1),animationRight);
-                animationRight.setImage(null);
-                retour.setToX(0);
-                retour.setToY(-0);
-                retour.play();
-            }
+        transition.setOnFinished(event -> {
+            TranslateTransition retour=new TranslateTransition(Duration.seconds(0.1),animationRight);
+            animationRight.setImage(null);
+            retour.setToX(0);
+            retour.setToY(-0);
+            retour.play();
         });
 
         transition.play();
+
         player.addCard(rightDeckCard, allPlayers);
-
         options.get(1).chooseCard();
-
         countCards++;
 
         power = buidPiece(player.getWonderContruction(),player);
+        boolean additionalchoice = false;
         if (power) {
-            buildPower(player);
+            endButton.setDisable(true);
+            additionalchoice = buildPower(player);
             powerChoiceBox.setValue(null);
         }
 
@@ -877,11 +878,10 @@ public class GameController {
 
         resetCardImage(1);
 
-        if (countDraw >= countCards) {
+        if ((countDraw >= countCards) && (!additionalchoice)) {
             cardDisable(true);
+            endButton.setDisable(false);
         }
-
-        endButton.setDisable(false);
     }
 
     public void resetCardImage(int place) {
@@ -933,15 +933,12 @@ public class GameController {
         TranslateTransition transition = new TranslateTransition(Duration.seconds(1),animationMain );
         transition.setToX(0);
         transition.setToY(160);
-        transition.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                TranslateTransition retour=new TranslateTransition(Duration.seconds(0.1),animationMain);
-                animationMain.setImage(null);
-                retour.setToX(0);
-                retour.setToY(-0);
-                retour.play();
-            }
+        transition.setOnFinished(event -> {
+            TranslateTransition retour=new TranslateTransition(Duration.seconds(0.1),animationMain);
+            animationMain.setImage(null);
+            retour.setToX(0);
+            retour.setToY(-0);
+            retour.play();
         });
 
         transition.play();
@@ -954,9 +951,10 @@ public class GameController {
             infoBoxLabel.setText("Card Picked : "+mainDeckCard.front.cardDisplayName);
         }
         power = buidPiece(player.getWonderContruction(),player);
-
+        boolean additionalchoice = false;
         if (power) {
-            buildPower(player);
+            endButton.setDisable(true);
+            additionalchoice = buildPower(player);
             powerChoiceBox.setValue(null);
         }
 
@@ -964,11 +962,10 @@ public class GameController {
 
         resetCardImage(2);
 
-        if (countDraw >= countCards) {
+        if ((countDraw >= countCards) && (!additionalchoice)) {
             cardDisable(true);
+            endButton.setDisable(false);
         }
-
-        endButton.setDisable(false);
     }
 
     public void checkChosenCard(Player player, Card card) {
@@ -1008,6 +1005,7 @@ public class GameController {
             progressImages.get(i).setImage(resImage);
         }
         disableProgressChoice(true);
+        endButton.setDisable(false);
     }
 
     public void onProgress1() {
@@ -1025,6 +1023,7 @@ public class GameController {
         }
 
         disableProgressChoice(true);
+        endButton.setDisable(false);
     }
 
     public void onProgress2() {
@@ -1041,6 +1040,7 @@ public class GameController {
             progressImages.get(i).setImage(resImage);
         }
         disableProgressChoice(true);
+        endButton.setDisable(false);
     }
 
     public void onProgress3() {
@@ -1055,6 +1055,7 @@ public class GameController {
         }
         res.remove(3);
         disableProgressChoice(true);
+        endButton.setDisable(false);
     }
 
     public void onButtonEnd() {
@@ -1066,7 +1067,7 @@ public class GameController {
         else {
             playerTurn++;
         }
-        startTurn(allPlayers, mainDeck, res, playerTurn, false);
+        startTurn(allPlayers, mainDeck, res, playerTurn, "false", 0, 1);
     }
 
     public void resetPlayerViewBlank() {
@@ -1212,6 +1213,7 @@ public class GameController {
                 player.getHand().getScience()[i] = 0;
                 infoBoxLabel.setText("Tu peux choisir un jeton progres");
                 disableProgressChoice(false);
+                endButton.setDisable(true);
                 break;
             }
             if (player.getHand().getScience()[i] == 1) {
@@ -1429,11 +1431,12 @@ public class GameController {
         }
     }
 
-    public void buildPower(Player player) {
+    public boolean buildPower(Player player) {
         Wonder wonder = player.getWonder();
         infoBoxOutline.setVisible(true);
         powerChoiceBox.setDisable(false);
         power = false;
+        boolean additionalChoice = false;
         switch (wonder) {
             case Ephese:
                 infoBoxLabel.setText("Power: t'as pris la carte "+mainDeckCard.front.cardDisplayName);
@@ -1442,10 +1445,13 @@ public class GameController {
 
                 mainDeck.chooseCard();
                 resetCardImage(2);
+                endButton.setDisable(false);
                 break;
             case Rhodes:
                 player.getHand().setShieldWar(player.getHand().getShieldWar()+1);
                 infoBoxLabel.setText("Power: Ajouter un bouclier au total");
+                endButton.setDisable(false);
+
                 break;
             case Olympie:
                 Card cardLeft = options.get(0).getCard(0);
@@ -1460,6 +1466,7 @@ public class GameController {
                 resetCardImage(0);
                 options.get(1).chooseCard();
                 resetCardImage(1);
+                endButton.setDisable(false);
                 break;
             case Babylone:
                 disableProgressChoice(false);
@@ -1481,6 +1488,7 @@ public class GameController {
                 powerChoiceBox.getItems().addAll(cardDescription);
                 powerChoiceBox.setOnAction(this::getPowerCardAlexandrie);
                 infoBoxLabel.setText("Power: choisis une des cartes de la liste: ");
+                additionalChoice = true;
                 break;
             case Halicarnasse:
                 powerChoiceBox.setVisible(true);
@@ -1488,8 +1496,10 @@ public class GameController {
                 powerChoiceBox.getItems().addAll(choice);
                 powerChoiceBox.setOnAction(this::getChoice);
                 infoBoxLabel.setText("Power: Gauche ou droite: ");
+                additionalChoice = true;
                 break;
         }
+        return  additionalChoice;
     }
 
     public void getChoice(Event event) {
@@ -1525,7 +1535,7 @@ public class GameController {
             options.get(choice).removeCard(number);
             options.get(choice).shuffleDeck();
             resetCardImage(choice);
-            powerChoiceBox.setDisable(true);
+            powerChoiceBox.setVisible(false);
             powerChoiceBox.getItems().removeAll(cardChoices);
         }
     }
@@ -1552,8 +1562,9 @@ public class GameController {
                 }
                 resetCardImage(number);
                 powerChoiceBox.getItems().removeAll(cardDescription);
-                powerChoiceBox.setDisable(true);
+                powerChoiceBox.setVisible(false);
             }
+            cardDisable(true);
         }
     }
     public void retour (Event event) throws  IOException {
