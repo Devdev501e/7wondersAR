@@ -10,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
@@ -81,9 +80,9 @@ public class InstructionJeu implements Initializable {
     private Rectangle outlineExp4;
     @FXML
     private Rectangle outlineExp5;
-    private ArrayList<Label> expLabels = new ArrayList<>();
-    private ArrayList<Rectangle> expOutlines = new ArrayList<>();
-    private Image vuePNG = new Image(getClass().getResourceAsStream("images/imagejeu/game_view.png"));
+    private final ArrayList<Label> expLabels = new ArrayList<>();
+    private final ArrayList<Rectangle> expOutlines = new ArrayList<>();
+    private final Image vuePNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/imagejeu/game_view.png")));
     @FXML
     private ImageView vueJeu;
 
