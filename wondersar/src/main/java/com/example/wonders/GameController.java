@@ -246,6 +246,8 @@ public class GameController {
         infoBoxLabel.setText("");
         cardDisable(false);
 
+        System.out.println(allPlayers);
+
         if (beggining.equals("true")) {
             players.get(turn).getAllTokens().add(ProgressToken.Ingeniery);
             allPlayerNames.getItems().addAll(playerNames);
@@ -1538,6 +1540,9 @@ public class GameController {
             powerChoiceBox.setVisible(false);
             powerChoiceBox.getItems().removeAll(cardChoices);
         }
+
+        cardDisable(true);
+        endButton.setDisable(false);
     }
 
     public void getPowerCardAlexandrie(Event event) {
@@ -1565,6 +1570,7 @@ public class GameController {
                 powerChoiceBox.setVisible(false);
             }
             cardDisable(true);
+            endButton.setDisable(false);
         }
     }
     public void retour (Event event) throws  IOException {
