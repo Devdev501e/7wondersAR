@@ -2,6 +2,10 @@ package com.example.wonders;
 
 import domain.*;
 import org.junit.Test;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class GameControllerTest {
@@ -139,13 +143,24 @@ public class GameControllerTest {
 
     @Test
     public void canBuildPiece() {
+        GameController gameController = new GameController();
+        Player tester = new Player("Tester", Wonder.Babylone, new Hand(), false, new ArrayList<>());
+        tester.getHand().addMaterials(0);
+        tester.getHand().addMaterials(3);
+
+        boolean canBuild = gameController.canBuildPiece(tester.getWonderContruction().getAllPieces().get(0), tester);
+        assertTrue(canBuild);
     }
 
     @Test
-    public void buidPiece() {
-    }
+    public void buildPiece() throws IOException {
+        GameController gameController = new GameController();
+        Player tester = new Player("Tester", Wonder.Babylone, new Hand(), false, new ArrayList<>());
+        tester.getHand().addMaterials(0);
+        tester.getHand().addMaterials(3);
+        tester.getWonderContruction().getAllPieces().get(0).isComplete();
+        boolean power = gameController.buildPiece(tester.getWonderContruction(), tester);
+        assertFalse(power);
 
-    @Test
-    public void buildPower() {
     }
 }

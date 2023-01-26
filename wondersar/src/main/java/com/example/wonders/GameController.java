@@ -405,7 +405,7 @@ public class GameController {
         options.get(0).chooseCard();
         countCards++;
 
-        power = buidPiece(player.getWonderContruction(),player);
+        power = buildPiece(player.getWonderContruction(),player);
         additionalChoice = false;
         if (power) {
             endButton.setDisable(true);
@@ -445,7 +445,7 @@ public class GameController {
         options.get(1).chooseCard();
         countCards++;
 
-        power = buidPiece(player.getWonderContruction(),player);
+        power = buildPiece(player.getWonderContruction(),player);
         additionalChoice = false;
         if (power) {
             endButton.setDisable(true);
@@ -487,7 +487,7 @@ public class GameController {
         if (!player.getChat()) {
             infoBoxLabel.setText("Card Picked : "+mainDeckCard.front.cardDisplayName);
         }
-        power = buidPiece(player.getWonderContruction(),player);
+        power = buildPiece(player.getWonderContruction(),player);
         additionalChoice = false;
         if (power) {
             endButton.setDisable(true);
@@ -779,7 +779,7 @@ public class GameController {
         }
         return canBuild;
     }
-    public boolean buidPiece (Construction cons, Player player) throws IOException {
+    public boolean buildPiece (Construction cons, Player player) throws IOException {
         ConstructionPiece piece;
         boolean pieceBuild = false;
         boolean piecePower = false;
