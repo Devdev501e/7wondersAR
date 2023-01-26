@@ -24,7 +24,7 @@ public class ConstimageTest {
         assertEquals("images/wonders/olympie/piece-back-olympie-1.png", constImageO.getConstruction1(false));
         assertEquals("images/wonders/rhodes/piece-back-rhodes-2.png", constImageR.getConstruction1(false));
         assertEquals("images/wonders/alexandrie/piece-back-alexandrie-1.png", constImageA.getConstruction1(false));
-        assertEquals("images/wonders/halicarnasse/piece-back-halicarnasse-1.png", constImageH.getConstruction1(true));
+        assertEquals("images/wonders/halicarnasse/piece-front-halicarnasse-1.png", constImageH.getConstruction1(true));
         assertEquals("images/wonders/giseh/piece-front-giseh-1.png", constImageG.getConstruction1(true));
         assertEquals("images/wonders/babylon/piece-front-babylon-1.png", constImageB.getConstruction1(true));
         assertEquals("images/wonders/ephese/piece-front-ephese-1.png", constImageE.getConstruction1(true));
