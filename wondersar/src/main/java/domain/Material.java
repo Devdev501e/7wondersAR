@@ -1,5 +1,9 @@
 package domain;
 
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+
 public enum Material {
 	Wood, //0
 	Paper, //1
@@ -8,3 +12,4 @@ public enum Material {
 	Glass, //4
 	Gold; //5
 }
+
