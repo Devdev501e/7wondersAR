@@ -144,23 +144,49 @@ public class GameControllerTest {
     @Test
     public void canBuildPiece() {
         GameController gameController = new GameController();
-        Player tester = new Player("Tester", Wonder.Babylone, new Hand(), false, new ArrayList<>());
+
+        ArrayList<ProgressToken> tokens = new ArrayList<>();
+        Player tester = new Player("Tester", Wonder.Babylone, new Hand(), false, tokens);
         tester.getHand().addMaterials(0);
-        tester.getHand().addMaterials(3);
+        tester.getHand().addMaterials(0);
 
         boolean canBuild = gameController.canBuildPiece(tester.getWonderContruction().getAllPieces().get(0), tester);
+        assertFalse(canBuild);
+        tester.getHand().addMaterials(3);
+        canBuild = gameController.canBuildPiece(tester.getWonderContruction().getAllPieces().get(0), tester);
         assertTrue(canBuild);
+
+        tokens.add(ProgressToken.Ingeniery);
+        tester.getHand().addMaterials(0);
+        boolean canBuildIngeniery = gameController.canBuildPiece(tester.getWonderContruction().getAllPieces().get(0), tester);
+        assertTrue(canBuildIngeniery);
+
+        canBuild = gameController.canBuildPiece(tester.getWonderContruction().getAllPieces().get(1), tester);
+        assertTrue(canBuild);
+
     }
 
     @Test
     public void buildPiece() throws IOException {
         GameController gameController = new GameController();
-        Player tester = new Player("Tester", Wonder.Babylone, new Hand(), false, new ArrayList<>());
+        Player tester = new Player("Tester", Wonder.Halicarnasse, new Hand(), false, new ArrayList<>());
         tester.getHand().addMaterials(0);
         tester.getHand().addMaterials(3);
-        tester.getWonderContruction().getAllPieces().get(0).isComplete();
         boolean power = gameController.buildPiece(tester.getWonderContruction(), tester);
         assertFalse(power);
 
+        gameController.buildPiece(tester.getWonderContruction(), tester);
+        tester.getHand().addMaterials(0);
+        tester.getHand().addMaterials(0);
+        power = gameController.buildPiece(tester.getWonderContruction(), tester);
+        assertTrue(power);
+
+        ArrayList<ProgressToken> tokens = new ArrayList<>();
+        tokens.add(ProgressToken.Ingeniery);
+        Player tester2 = new Player("t2", Wonder.Gizeh, new Hand(), false, tokens);
+        tester2.getHand().addMaterials(0);
+        tester2.getHand().addMaterials(0);
+        power = gameController.buildPiece(tester.getWonderContruction(), tester2);
+        assertFalse(power);
     }
 }

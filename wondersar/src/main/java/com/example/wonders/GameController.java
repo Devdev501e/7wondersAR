@@ -409,6 +409,9 @@ public class GameController {
         additionalChoice = false;
         if (power) {
             endButton.setDisable(true);
+            infoBoxOutline.setVisible(true);
+            powerChoiceBox.setDisable(false);
+
             additionalChoice = buildPower(player);
             powerChoiceBox.setValue(null);
         }
@@ -449,6 +452,9 @@ public class GameController {
         additionalChoice = false;
         if (power) {
             endButton.setDisable(true);
+            infoBoxOutline.setVisible(true);
+            powerChoiceBox.setDisable(false);
+
             additionalChoice = buildPower(player);
             powerChoiceBox.setValue(null);
         }
@@ -491,6 +497,9 @@ public class GameController {
         additionalChoice = false;
         if (power) {
             endButton.setDisable(true);
+            infoBoxOutline.setVisible(true);
+            powerChoiceBox.setDisable(false);
+
             additionalChoice = buildPower(player);
             powerChoiceBox.setValue(null);
         }
@@ -902,8 +911,6 @@ public class GameController {
     // pouvoir de construction
     public boolean buildPower(Player player) {
         Wonder wonder = player.getWonder();
-        infoBoxOutline.setVisible(true);
-        powerChoiceBox.setDisable(false);
         power = false;
         additionalChoice = false;
         switch (wonder) {

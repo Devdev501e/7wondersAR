@@ -56,6 +56,8 @@ public class CardDecks {
 		return this.cardDeck.size();
 	}
 
+	public ArrayList<Card> getCardDeck(){return this.cardDeck;}
+
 	public void shuffleDeck() {
 		Collections.shuffle(cardDeck);
 	}
