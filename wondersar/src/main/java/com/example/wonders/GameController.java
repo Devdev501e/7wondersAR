@@ -591,6 +591,7 @@ public class GameController {
                     boolean found = getScienceEffectDuringGame(pt, leftDeckCard);
                     if (found) {
                         player.getTokenIgnore().add(i);
+                        infoBoxLabel.setText("choose another card");
                         break;
                     }
                 }
@@ -709,35 +710,30 @@ public class GameController {
                 if (cardChosen.front.cardCategory == CardCategory.ProgressCard) {
                     countDraw++;
                     found = true;
-                    infoBoxLabel.setText("choose another card");
                 }
                 break;
             case Jewelry:
                 if ((cardChosen.front.material == Material.Stone) || (cardChosen.front.material == Material.Gold)) {
                     countDraw++;
                     found = true;
-                    infoBoxLabel.setText("choose another card");
                 }
                 break;
             case Urbanism:
                 if ((cardChosen.front.material == Material.Wood) || (cardChosen.front.material == Material.Brick)) {
                     countDraw++;
                     found = true;
-                    infoBoxLabel.setText("choose another card");
                 }
                 break;
             case Propaganda:
                 if (cardChosen.front.cornCount != 0) {
                     countDraw++;
                     found = true;
-                    infoBoxLabel.setText("choose another card");
                 }
                 break;
             case ArtsAndCrafts:
                 if ((cardChosen.front.material == Material.Paper) || (cardChosen.front.material == Material.Glass)) {
                     countDraw++;
                     found = true;
-                    infoBoxLabel.setText("choose another card");
                 }
                 break;
         }

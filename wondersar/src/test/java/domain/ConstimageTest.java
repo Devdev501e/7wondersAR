@@ -4,12 +4,6 @@ package domain;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-
-
-
-
-import static org.junit.Assert.*;
-
 public class ConstimageTest {
 
     ConstImage constImageH = ConstImage.Halicarnasse;
