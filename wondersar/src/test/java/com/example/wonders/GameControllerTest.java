@@ -6,7 +6,8 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class GameControllerTest {
     @Test
@@ -169,6 +170,7 @@ public class GameControllerTest {
     @Test
     public void buildPiece() throws IOException {
         GameController gameController = new GameController();
+
         Player tester = new Player("Tester", Wonder.Halicarnasse, new Hand(), false, new ArrayList<>());
         tester.getHand().addMaterials(0);
         tester.getHand().addMaterials(3);

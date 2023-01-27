@@ -1042,6 +1042,7 @@ public class GameController {
                 powerChoiceBox.setVisible(false);
             }
             cardDisable(true);
+            powerChoiceBox.getItems().removeAll(cardDescription);
             endButton.setDisable(false);
         }
     }
@@ -1538,12 +1539,10 @@ public class GameController {
 
     // sortir du tour
     public void retour (Event event) throws  IOException {
-        Stage stage;
-        Scene scene;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
         Parent root = loader.load();
-        stage = (javafx.stage.Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        Stage stage = (javafx.stage.Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
 
 
         MenuControleur menuControleur = loader.getController();
