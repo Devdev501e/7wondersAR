@@ -3,17 +3,23 @@ package com.example.wonders;
 import domain.ConstructionPiece;
 import domain.Player;
 import domain.ProgressToken;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Objects;
+import java.net.URL;
+import java.util.*;
 
-public class EndScreen {
+public class EndScreen implements Initializable {
     @FXML
     private ImageView imagePodium = new ImageView();
     private final Image podiumPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/imagejeu/podium.png")));
@@ -30,6 +36,8 @@ public class EndScreen {
     private final Image medalPNG = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/imagejeu/1st_place.png")));
     @FXML
     private Label playerWinner;
+    @FXML
+    Button back;
     ArrayList<Label> playerLabels = new ArrayList<>();
 
     public void getInfo(ArrayList<Player> players) {
@@ -125,5 +133,21 @@ public class EndScreen {
         Collections.reverse(allPlayers);
 
         return allPlayers;
+    }
+    public void retour(Event event)throws Exception{
+        Stage stage;
+        Scene scene;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+        Parent root = loader.load();
+        stage = (javafx.stage.Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        back.getStylesheets().add(Objects.requireNonNull(getClass().getResource("Back.css")).toExternalForm());
     }
 }
